@@ -1,0 +1,13 @@
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Server-Test\bin\Debug\netcoreapp3.1\Server-Test.exe
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Server-Test\bin\Debug\netcoreapp3.1\Server-Test.deps.json
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Server-Test\bin\Debug\netcoreapp3.1\Server-Test.runtimeconfig.json
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Server-Test\bin\Debug\netcoreapp3.1\Server-Test.runtimeconfig.dev.json
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Server-Test\bin\Debug\netcoreapp3.1\Server-Test.dll
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Server-Test\bin\Debug\netcoreapp3.1\Server-Test.pdb
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Server-Test\obj\Debug\netcoreapp3.1\Server-Test.csprojAssemblyReference.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Server-Test\obj\Debug\netcoreapp3.1\Server-Test.AssemblyInfoInputs.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Server-Test\obj\Debug\netcoreapp3.1\Server-Test.AssemblyInfo.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Server-Test\obj\Debug\netcoreapp3.1\Server-Test.csproj.CoreCompileInputs.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Server-Test\obj\Debug\netcoreapp3.1\Server-Test.dll
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Server-Test\obj\Debug\netcoreapp3.1\Server-Test.pdb
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Server-Test\obj\Debug\netcoreapp3.1\Server-Test.genruntimeconfig.cache

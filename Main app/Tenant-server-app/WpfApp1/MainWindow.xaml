@@ -18,7 +18,7 @@
         <StackPanel
             x:Name="Auth_Panel"
             Width="400"
-            Height="250"
+            Height="Auto"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Background="AntiqueWhite">
@@ -28,10 +28,13 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <TextBlock
                     Grid.Row="0"
+                    HorizontalAlignment="Center"
                     FontSize="26"
+                    FontWeight="DemiBold"
                     Text="Форма авторизации" />
                 <GroupBox
                     Grid.Row="1"
@@ -39,7 +42,10 @@
                     BorderBrush="Black"
                     FontSize="22"
                     Header="Логин">
-                    <TextBox BorderBrush="Transparent" FontSize="22" />
+                    <TextBox
+                        Name="login_TBox"
+                        BorderBrush="Transparent"
+                        FontSize="22" />
                 </GroupBox>
                 <GroupBox
                     Grid.Row="2"
@@ -47,16 +53,28 @@
                     BorderBrush="Black"
                     FontSize="22"
                     Header="Пароль">
-                    <PasswordBox BorderBrush="Transparent" FontSize="22" />
+                    <PasswordBox
+                        Name="password_TBox"
+                        BorderBrush="Transparent"
+                        FontSize="22" />
                 </GroupBox>
                 <Button
+                    Name="send_Btn"
                     Grid.Row="3"
                     Margin="0,10"
                     Background="White"
+                    Click="Button_Click"
                     Content="Войти"
                     FontSize="22" />
+                <TextBlock
+                    Name="excepyionLabel_TB"
+                    Grid.Row="4"
+                    HorizontalAlignment="Center"
+                    FontSize="18"
+                    Foreground="Red"
+                    Text="Exception text"
+                    TextWrapping="Wrap" />
             </Grid>
-
         </StackPanel>
     </Grid>
 </Window>

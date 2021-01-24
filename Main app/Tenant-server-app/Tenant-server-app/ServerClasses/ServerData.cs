@@ -7,13 +7,11 @@ using System.Net.Sockets;
 
 namespace Tenant_server_app.ServerClasses
 {
-    public class ServerData
+    public abstract class ServerData
     {
         public static IPAddress IP = IPAddress.Parse("127.0.0.1");
         public static int PORT = 8080;
-        public static Socket Socket = new Socket(AddressFamily.InterNetwork,
-                                                 SocketType.Stream, 
-                                                 ProtocolType.Tcp); 
+        public static TcpListener server = new TcpListener(IP, PORT);
 
         public static string usersPath = "Users";
         public static FirebaseClient serverClient = null;

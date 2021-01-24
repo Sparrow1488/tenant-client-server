@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tenant_server_app.ServerClasses
 {
-    public class Treatment
+    public class DataProcessing
     {
-        
     }
 }

@@ -8,7 +8,7 @@ namespace Tenant_server_app.ServerClasses
 {
     public class MyUser
     {
-        public static MyUser Active = null;
+        
         public string Login = null;
         public string Password = null;
         public MyUser(string login, string pass)

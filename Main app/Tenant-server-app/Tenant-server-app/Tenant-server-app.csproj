@@ -111,10 +111,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ServerClasses\DataBase.cs" />
+    <Compile Include="ServerClasses\DataProcessing.cs" />
     <Compile Include="ServerClasses\MyUser.cs" />
     <Compile Include="ServerClasses\ServerData.cs" />
-    <Compile Include="ServerClasses\Treatment.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

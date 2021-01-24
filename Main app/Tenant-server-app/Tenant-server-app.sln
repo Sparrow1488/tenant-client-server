@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenant-server-app", "Tenant-server-app\Tenant-server-app.csproj", "{49AA3806-6BDC-462C-B2C6-1D3DFB7A18E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{773F32EA-420F-46B7-B9C5-41C33BB2E7B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenant-client-app", "WpfApp1\Tenant-client-app.csproj", "{773F32EA-420F-46B7-B9C5-41C33BB2E7B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

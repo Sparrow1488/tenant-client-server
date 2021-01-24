@@ -27,6 +27,7 @@ namespace Tenant_server_app
             {
                 ConnectStatusEvent += ConnectStatusBuild;
                 CreateClinet();
+                
             }
             catch(Exception ex)
             {
@@ -38,7 +39,7 @@ namespace Tenant_server_app
             }
         }
 
-        public static string testLogin = "3434";
+        public static string testLogin = "Sparrow14";
         public static string testPass = "fr56fr";
         private async void createUserBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -127,5 +128,30 @@ namespace Tenant_server_app
         }
         #endregion
 
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = (Button)sender;
+            btn.IsEnabled = false;
+            ServerData.server.Start();
+            testCommandsList.Items.Add("Server started");
+            while (true)
+            {
+                await ServerData.GetRequestsAsync(testCommandsList);
+            }
+            testCommandsList.Items.Add("Server stop");
+        }
+        private void TextBox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            var textBox = (TextBox)sender;
+            if (textBox.Text.Contains("black"))
+                textBox.Foreground = new SolidColorBrush(Colors.Black);
+            if (textBox.Text.Contains("green"))
+                textBox.Foreground = new SolidColorBrush(Colors.ForestGreen);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            serverCommands_LB.Items.Add(">" + commands_TB.Text);
+        }
     }
 }

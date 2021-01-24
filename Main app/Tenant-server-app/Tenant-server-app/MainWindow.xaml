@@ -8,12 +8,16 @@
     Title="Server logic"
     Width="900"
     Height="650"
+    MinWidth="650"
+    MinHeight="600"
     Loaded="Window_Loaded"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -31,26 +35,81 @@
                 FontSize="26"
                 FontWeight="Bold"
                 Text="Server application" />
-            <TextBlock
-                x:Name="connectStatus_TB"
-                FontSize="22"
-                Foreground="DarkOrange"
-                Text="Not connected" />
+            <WrapPanel Orientation="Horizontal">
+                <TextBlock
+                    FontSize="22"
+                    Foreground="Black"
+                    Text="FireBase: " />
+                <TextBlock
+                    x:Name="connectStatus_TB"
+                    FontSize="22"
+                    Foreground="DarkOrange"
+                    Text="Not connected" />
+            </WrapPanel>
         </StackPanel>
 
         <StackPanel
             x:Name="centerPanel"
             Grid.Row="1"
             Grid.RowSpan="2"
-            Grid.Column="1">
-            <ListView x:Name="testCommandsList" 
-                      Background="OldLace" />
+            Grid.Column="1"
+            Margin="10">
+            <TextBlock
+                HorizontalAlignment="Center"
+                FontSize="22"
+                FontWeight="DemiBold"
+                Text="Server manipulations" />
+            <ListView
+                x:Name="testCommandsList"
+                Height="Auto"
+                Background="GhostWhite"
+                FontSize="14">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" />
+            </ListView>
         </StackPanel>
 
-        <StackPanel Grid.Row="2">
+        <StackPanel
+            x:Name="commands_Panel"
+            Grid.Row="2"
+            Grid.Column="0"
+            Height="Auto"
+            Margin="10"
+            Orientation="Vertical">
+            <TextBlock
+                HorizontalAlignment="Center"
+                FontSize="22"
+                FontWeight="DemiBold"
+                Text="Console command" />
+            <TextBox
+                Name="commands_TB"
+                FontSize="22"
+                Foreground="ForestGreen"
+                PreviewKeyUp="TextBox_PreviewKeyDown"
+                Text="info" />
+            <Button
+                Background="Wheat"
+                Click="Button_Click_1"
+                Content="Write command"
+                FontSize="22" />
+            <ListBox
+                Name="serverCommands_LB"
+                Height="200"
+                FontSize="14"
+                Foreground="ForestGreen">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" />
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="10">
+            <TextBlock
+                HorizontalAlignment="Center"
+                FontSize="22"
+                FontWeight="DemiBold"
+                Text="Buttons controls" />
             <Button
                 x:Name="createUserBtn"
                 Height="30"
+                Margin="0,0,0,5"
                 Background="AliceBlue"
                 Click="createUserBtn_Click"
                 Content="Create user"
@@ -58,10 +117,23 @@
             <Button
                 x:Name="getUserBtn"
                 Height="30"
+                Margin="0,0,0,5"
                 Background="AliceBlue"
                 Click="getUserBtn_Click"
                 Content="Get user"
                 FontSize="20" />
+            <Button
+                Height="30"
+                Margin="0,0,0,5"
+                Background="AliceBlue"
+                Click="Button_Click"
+                Content="Start server"
+                FontSize="20" />
         </StackPanel>
+
+        <StackPanel
+            Grid.Row="4"
+            Grid.ColumnSpan="2"
+            Background="LightGray" />
     </Grid>
 </Window>

@@ -10,6 +10,6 @@ namespace WpfApp1.Classes
 {
     public class ClientData
     {
-        public static TcpClient client = null;
+        //public static TcpClient client = null;
     }
 }

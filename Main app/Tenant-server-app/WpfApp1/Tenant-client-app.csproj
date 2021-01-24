@@ -87,7 +87,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\ClientData.cs" />
-    <Compile Include="Classes\ServerData.cs" />
+    <Compile Include="Classes\MyServer.cs" />
+    <Compile Include="Classes\ServerConfig.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

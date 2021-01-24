@@ -15,29 +15,24 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             excepyionLabel_TB.Visibility = Visibility.Collapsed;
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        ServerConfig config = new ServerConfig(ServerConfig.HOST, ServerConfig.PORT);
+        private async void sendRequestBtn_Click(object sender, RoutedEventArgs e)
         {
             excepyionLabel_TB.Visibility = Visibility.Collapsed;
             try
             {
                 send_Btn.IsEnabled = false;
-                ClientData.client = new TcpClient();
-                await ClientData.client.ConnectAsync("127.0.0.1", 8090);
-                NetworkStream stream = ClientData.client.GetStream();
-                byte[] sendData = Encoding.UTF8.GetBytes($"login: {login_TBox.Text}; password: {password_TBox.Password}");
-                await stream.WriteAsync(sendData, 0, sendData.Length);
-
-                string response = await GetData(ClientData.client);
-                MessageBox.Show(response);
-
-                stream.Close();
+                MyServer server = new MyServer(config);
+                server.CreateClient();
+                await server.SendAsync($"Login: {login_TBox.Text}; Password: {password_TBox.Password}");
+                string response = await server.GetAsync();
+                MessageBox.Show(response, "Server response");
             }
             catch (SocketException)
             {
@@ -49,21 +44,6 @@ namespace WpfApp1
                 send_Btn.IsEnabled = true;
             }
         }
-        private async Task<string> GetData(TcpClient client)
-        {
-            StringBuilder response = new StringBuilder();
-            byte[] getData = new byte[1024];
-            await Task.Run(() =>
-            {
-                var getStream = client.GetStream();
-                do
-                {
-                    int bytesSize = getStream.Read(getData, 0, getData.Length);
-                    response.Append(Encoding.UTF8.GetString(getData, 0, bytesSize));
-                }
-                while (getStream.DataAvailable);
-            });
-            return response.ToString();
-        }
+        
     }
 }

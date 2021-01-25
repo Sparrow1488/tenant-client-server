@@ -24,11 +24,13 @@ namespace Tenant_server_app.ServerClasses
             BasePath = "https://client-server-testapp-default-rtdb.firebaseio.com/"
         };
 
-        public static async Task GetRequestsAsync(ListBox list)
+        public static async Task GetRequestsAsync(RichTextBox box)
         {
-            list.Items.Add("Wait for connecting...");
+            box.AppendText("Wait for connecting...\n");
+            //list.Items.Add("Wait for connecting...");
             TcpClient getClient = await server.AcceptTcpClientAsync();
-            list.Items.Add("Client connecting");
+            box.AppendText("Client connecting\n");
+            //list.Items.Add("Client connecting");
 
             NetworkStream stream = getClient.GetStream();
             byte[] getData = new byte[2048];
@@ -36,24 +38,25 @@ namespace Tenant_server_app.ServerClasses
 
             if (stream.CanRead)
             {
-                //do
-                //{
+                do
+                {
                     int bytes = await stream.ReadAsync(getData, 0, getData.Length);
                     response.Append(Encoding.UTF8.GetString(getData, 0, bytes));
-                //}
-                //while (stream.DataAvailable);
-                list.Items.Add("Get data: " + response);
+                }
+                while (stream.DataAvailable);
+                box.AppendText("Get data: " + response + "\n");
+                //list.Items.Add("Get data: " + response);
             }
             else
             {
-                list.Items.Add("Get stream can not read");
+                box.AppendText("Get stream can not read\n");
+                //list.Items.Add("Get stream can not read");
             }
 
             byte[] sendData = Encoding.UTF8.GetBytes("Если Вы получили это сообщение, значит сервер обработал Ваш запрос");
             await stream.WriteAsync(sendData, 0, sendData.Length);
-            Console.WriteLine("Reply sent");
+            box. AppendText("Reply sent\n");
             stream.Close();
-            //list.Items.Add("Server stop!");
         }
     }
 }

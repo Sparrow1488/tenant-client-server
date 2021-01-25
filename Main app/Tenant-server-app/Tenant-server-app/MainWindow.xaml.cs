@@ -63,7 +63,8 @@ namespace Tenant_server_app
             {
                 getUserBtn.IsEnabled = false;
                 var getUser = await GetUser(testLogin);
-                testCommandsList.Items.Add($"Login: {getUser.Login}; Password: {getUser.Password}");
+                richBox.AppendText($"Login: {getUser.Login}; Password: {getUser.Password}\n");
+                //testCommandsList.Items.Add($"Login: {getUser.Login}; Password: {getUser.Password}");
             }
             catch (Exception ex)
             {
@@ -81,7 +82,8 @@ namespace Tenant_server_app
             ServerData.serverClient = new FirebaseClient(ServerData.firebaseConfig);
             if (ServerData.serverClient != null)
             {
-                testCommandsList.Items.Add("FireBase client started work");
+                //testCommandsList.Items.Add("FireBase client started work");
+                richBox.AppendText("FireBase client started work\n");
             }
             else
             {
@@ -94,7 +96,8 @@ namespace Tenant_server_app
             {
                 ServerData.serverClient.SetAsync($"{ServerData.usersPath}/{user.Login}", user);
             });
-            testCommandsList.Items.Add($"{user.Login}; {user.Password} → is created!");
+            richBox.AppendText($"{user.Login}; {user.Password} → is created!\n");
+            //testCommandsList.Items.Add($"{user.Login}; {user.Password} → is created!");
         }
         private async Task<MyUser> GetUser(string login)
         {
@@ -111,7 +114,8 @@ namespace Tenant_server_app
         #region TREATMENT
         private void ExceptionBuild(string exMessage)
         {
-            testCommandsList.Items.Add("Обработано исключение:" + exMessage);
+            richBox.AppendText("Обработано исключение:" + exMessage + "\n");
+            //testCommandsList.Items.Add("Обработано исключение:" + exMessage);
         }
         private void ConnectStatusBuild()
         {
@@ -128,30 +132,17 @@ namespace Tenant_server_app
         }
         #endregion
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void startServer_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender;
             btn.IsEnabled = false;
             ServerData.server.Start();
-            testCommandsList.Items.Add("Server started");
+            richBox.AppendText("Server started\n");
+            //testCommandsList.Items.Add("Server started");
             while (true)
             {
-                await ServerData.GetRequestsAsync(testCommandsList);
+                await ServerData.GetRequestsAsync(richBox);
             }
-            testCommandsList.Items.Add("Server stop");
-        }
-        private void TextBox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            var textBox = (TextBox)sender;
-            if (textBox.Text.Contains("black"))
-                textBox.Foreground = new SolidColorBrush(Colors.Black);
-            if (textBox.Text.Contains("green"))
-                textBox.Foreground = new SolidColorBrush(Colors.ForestGreen);
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            serverCommands_LB.Items.Add(">" + commands_TB.Text);
         }
     }
 }

@@ -59,45 +59,19 @@
                 FontSize="22"
                 FontWeight="DemiBold"
                 Text="Server manipulations" />
-            <ListView
+            <!--<ListView
                 x:Name="testCommandsList"
                 Height="Auto"
                 Background="GhostWhite"
                 FontSize="14">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" />
-            </ListView>
-        </StackPanel>
-
-        <StackPanel
-            x:Name="commands_Panel"
-            Grid.Row="2"
-            Grid.Column="0"
-            Height="Auto"
-            Margin="10"
-            Orientation="Vertical">
-            <TextBlock
-                HorizontalAlignment="Center"
-                FontSize="22"
-                FontWeight="DemiBold"
-                Text="Console command" />
-            <TextBox
-                Name="commands_TB"
-                FontSize="22"
-                Foreground="ForestGreen"
-                PreviewKeyUp="TextBox_PreviewKeyDown"
-                Text="info" />
-            <Button
-                Background="Wheat"
-                Click="Button_Click_1"
-                Content="Write command"
-                FontSize="22" />
-            <ListBox
-                Name="serverCommands_LB"
-                Height="200"
-                FontSize="14"
-                Foreground="ForestGreen">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" />
-            </ListBox>
+            </ListView>-->
+            <RichTextBox Name="richBox"
+                         FontSize="14"
+                         Height="400"
+                         HorizontalScrollBarVisibility="Auto"
+                         Background="Black"
+                         Foreground="White"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Margin="10">
@@ -126,7 +100,7 @@
                 Height="30"
                 Margin="0,0,0,5"
                 Background="AliceBlue"
-                Click="Button_Click"
+                Click="startServer_Click"
                 Content="Start server"
                 FontSize="20" />
         </StackPanel>

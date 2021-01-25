@@ -1,7 +1,6 @@
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\Tenant-server-app\bin\Debug\Tenant-server-app.exe.config
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\Tenant-server-app\bin\Debug\Tenant-server-app.exe
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\Tenant-server-app\bin\Debug\Tenant-server-app.pdb
-C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\Tenant-server-app\obj\Debug\Tenant-server-app.csprojAssemblyReference.cache
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\Tenant-server-app\obj\Debug\MainWindow.g.cs
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\Tenant-server-app\obj\Debug\App.g.cs
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\Tenant-server-app\obj\Debug\Tenant-server-app_MarkupCompile.cache

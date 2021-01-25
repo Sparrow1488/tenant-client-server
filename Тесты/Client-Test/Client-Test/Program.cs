@@ -11,7 +11,7 @@ namespace Client_Test
         //НА КЛИЕНТЕ НЕЛЬЗЯ ОДНОВРЕМЕННО ИСПОЛЬЗОВАТЬ И TcpClient и TcpListener
         static TcpClient client = new TcpClient();
         //static TcpListener clientListener = new TcpListener(serverEndPoint);
-        static IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8090);
+        static IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8080);
         static async Task Main(string[] args)
         {
             Console.ReadKey();
@@ -19,7 +19,7 @@ namespace Client_Test
             client.Connect(serverEndPoint);
             NetworkStream stream = client.GetStream();
 
-            string request = "Hello world!!!!!!";
+            string request = "Client send DATA!!!";
             byte[] data = Encoding.UTF8.GetBytes(request);
             await stream.WriteAsync(data, 0, data.Length);
             Console.WriteLine("Write in " +  stream.WriteTimeout);
@@ -45,7 +45,7 @@ namespace Client_Test
             stream.Close();
             client.Close();
             Console.WriteLine("До свзяи...");
-
+            Console.ReadLine();
         }
     }
 }

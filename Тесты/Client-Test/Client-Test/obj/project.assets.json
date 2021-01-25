@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\Dom\\.nuget\\packages\\": {}
+    "C:\\Users\\DOM\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dom\\Desktop\\Репозитории\\tenant-client-server\\Тесты\\Client-Test\\Client-Test\\Client-Test.csproj",
+      "projectUniqueName": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Client-Test\\Client-Test.csproj",
       "projectName": "Client-Test",
-      "projectPath": "C:\\Users\\Dom\\Desktop\\Репозитории\\tenant-client-server\\Тесты\\Client-Test\\Client-Test\\Client-Test.csproj",
-      "packagesPath": "C:\\Users\\Dom\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dom\\Desktop\\Репозитории\\tenant-client-server\\Тесты\\Client-Test\\Client-Test\\obj\\",
+      "projectPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Client-Test\\Client-Test.csproj",
+      "packagesPath": "C:\\Users\\DOM\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Client-Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Dom\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\DOM\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

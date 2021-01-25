@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Server-Test\\Server-Test.csproj",
-      "projectName": "Server-Test",
-      "projectPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Server-Test\\Server-Test.csproj",
+      "projectUniqueName": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\server\\server.csproj",
+      "projectName": "server",
+      "projectPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\server\\server.csproj",
       "packagesPath": "C:\\Users\\DOM\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Server-Test\\obj\\",
+      "outputPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\DOM\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp1.Blocks;
 
 namespace WpfApp1.Classes
 {
@@ -21,14 +22,13 @@ namespace WpfApp1.Classes
         {
             client = new TcpClient();
         }
-        public async Task<bool> SendAsync(string sendData)
+        public async Task SendRequestAsync(IRequest package)
         {
             await client.ConnectAsync(ServerConfig.Host, ServerConfig.Port);
             NetworkStream stream = client.GetStream();
-            byte[] data = Encoding.UTF8.GetBytes(sendData);
+            byte[] data = Encoding.UTF8.GetBytes(package.JsonRequest);
             await stream.WriteAsync(data, 0, data.Length);
             //stream.Close();
-            return true;
         }
         public async Task<string> GetAsync()
         {
@@ -46,7 +46,6 @@ namespace WpfApp1.Classes
                         response.Append(Encoding.UTF8.GetString(getData, 0, bytesSize));
                     }
                     while (getStream.DataAvailable);
-                    //getStream.Close();
                 }
             });
             return response.ToString();

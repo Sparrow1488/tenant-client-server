@@ -6,12 +6,12 @@
     xmlns:local="clr-namespace:WpfApp1"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
-    Width="800"
-    Height="450"
+    Width="550"
+    Height="550"
     Loaded="Window_Loaded"
     mc:Ignorable="d">
     <Window.Background>
-        <ImageBrush ImageSource="refs/BG-1_1332x850.jpg" />
+        <ImageBrush ImageSource="refs/BG-1_1332x850.jpg" Stretch="UniformToFill"/>
     </Window.Background>
 
     <Grid>
@@ -20,61 +20,137 @@
             Width="400"
             Height="Auto"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Background="AntiqueWhite">
-            <Grid Margin="20">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <TextBlock
-                    Grid.Row="0"
-                    HorizontalAlignment="Center"
-                    FontSize="26"
-                    FontWeight="DemiBold"
-                    Text="Форма авторизации" />
-                <GroupBox
-                    Grid.Row="1"
-                    Background="White"
-                    BorderBrush="Black"
-                    FontSize="22"
-                    Header="Логин">
-                    <TextBox
-                        Name="login_TBox"
-                        BorderBrush="Transparent"
-                        FontSize="22" />
-                </GroupBox>
-                <GroupBox
-                    Grid.Row="2"
-                    Background="White"
-                    BorderBrush="Black"
-                    FontSize="22"
-                    Header="Пароль">
-                    <PasswordBox
-                        Name="password_TBox"
-                        BorderBrush="Transparent"
-                        FontSize="22" />
-                </GroupBox>
-                <Button
-                    Name="send_Btn"
-                    Grid.Row="3"
-                    Margin="0,10"
-                    Background="White"
-                    Click="sendRequestBtn_Click"
-                    Content="Войти"
-                    FontSize="22" />
-                <TextBlock
-                    Name="excepyionLabel_TB"
-                    Grid.Row="4"
-                    HorizontalAlignment="Center"
-                    FontSize="18"
-                    Foreground="Red"
-                    Text="Exception text"
-                    TextWrapping="Wrap" />
-            </Grid>
+            VerticalAlignment="Center">
+            <TextBlock
+                Grid.Row="0"
+                HorizontalAlignment="Center"
+                FontSize="30"
+                FontWeight="DemiBold"
+                Text="Форма авторизации" />
+            <TabControl>
+                <TabItem Header="По логину">
+                    <Grid Margin="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <GroupBox
+                                Grid.Row="1"
+                                Background="White"
+                                BorderBrush="Black"
+                                FontSize="22"
+                                Header="Логин">
+                            <TextBox
+                                Name="login_TBox"
+                                BorderBrush="Transparent"
+                                FontSize="22" />
+                        </GroupBox>
+                        <GroupBox
+                            Grid.Row="2"
+                            Background="White"
+                            BorderBrush="Black"
+                            FontSize="22"
+                            Header="Пароль">
+                            <PasswordBox
+                                Name="password_TBox"
+                                BorderBrush="Transparent"
+                                FontSize="22" />
+                        </GroupBox>
+                        <Button
+                            Name="send_Btn"
+                            Grid.Row="3"
+                            Margin="0,10"
+                            Background="White"
+                            Click="sendRequestBtn_Click"
+                            Content="Войти"
+                            FontSize="22" />
+                        <TextBlock
+                            Name="excepyionLabel_TB"
+                            Grid.Row="4"
+                            HorizontalAlignment="Center"
+                            FontSize="18"
+                            Foreground="Red"
+                            Text="Exception text"
+                            TextWrapping="Wrap" />
+                    </Grid>
+                </TabItem>
+                <TabItem Header="По ФИО">
+                    <Grid Margin="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <GroupBox
+                                Grid.Row="0"
+                                Background="White"
+                                BorderBrush="Black"
+                                FontSize="22"
+                                Header="Имя">
+                            <TextBox
+                                Name="Name_TBox"
+                                BorderBrush="Transparent"
+                                FontSize="22" />
+                        </GroupBox>
+                        <GroupBox
+                                Grid.Row="1"
+                                Background="White"
+                                BorderBrush="Black"
+                                FontSize="22"
+                                Header="Фамилия">
+                            <TextBox
+                                Name="firstName_TBox"
+                                BorderBrush="Transparent"
+                                FontSize="22" />
+                        </GroupBox>
+                        <GroupBox
+                                Grid.Row="2"
+                                Background="White"
+                                BorderBrush="Black"
+                                FontSize="22"
+                                Header="Номер квартиры">
+                            <TextBox
+                                Name="roomNum_TBox"
+                                BorderBrush="Transparent"
+                                FontSize="22" />
+                        </GroupBox>
+                        <GroupBox
+                                Grid.Row="3"
+                                Background="White"
+                                BorderBrush="Black"
+                                FontSize="22"
+                                Header="Пароль">
+                            <PasswordBox
+                                Name="password2_TBox"
+                                BorderBrush="Transparent"
+                                FontSize="22" />
+                        </GroupBox>
+                        <Button
+                            Name="send2_Btn"
+                            Grid.Row="4"
+                            Margin="0,10"
+                            Background="White"
+                            Click="sendRequestBtn_Click"
+                            Content="Войти"
+                            FontSize="22" />
+                        <TextBlock
+                            Name="excepyionLabel2_TB"
+                            Grid.Row="5"
+                            HorizontalAlignment="Center"
+                            FontSize="18"
+                            Foreground="Red"
+                            Text="Exception text"
+                            TextWrapping="Wrap" />
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            
         </StackPanel>
     </Grid>
 </Window>

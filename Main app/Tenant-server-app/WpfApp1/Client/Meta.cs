@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.Classes
 {
-    public class ClientData
+    public class Meta
     {
-        //public static TcpClient client = null;
+        public string Address { get; set; }
+        public string Action { get; set; }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using WpfApp1.Blocks;
 using WpfApp1.Classes;
+using WpfApp1.Classes.Client.Requests;
 
 namespace WpfApp1
 {
@@ -25,12 +25,13 @@ namespace WpfApp1
         private async void sendRequestBtn_Click(object sender, RoutedEventArgs e)
         {
             excepyionLabel_TB.Visibility = Visibility.Collapsed;
+            var sendPackage = CreateRequestPackage(CreatePerson(), CreateMeta());
             try
             {
                 send_Btn.IsEnabled = false;
                 MyServer server = new MyServer(config);
                 server.CreateClient();
-                await server.SendAsync($"Login: {login_TBox.Text}; Password: {password_TBox.Password}");
+                await server.SendRequestAsync(sendPackage);
                 string response = await server.GetAsync();
                 MessageBox.Show(response, "Server response");
             }
@@ -44,6 +45,26 @@ namespace WpfApp1
                 send_Btn.IsEnabled = true;
             }
         }
-        
+        private Person CreatePerson()
+        {
+            return new Person()
+            {
+                Login = login_TBox.Text,
+                Password = password_TBox.Password
+            };
+        }
+        private Meta CreateMeta()
+        {
+            return new Meta()
+            {
+                Address = "127.0.0.1",
+                Action = "auth"
+            };
+        }
+        private IRequest CreateRequestPackage(IForRequest request, Meta meta)
+        {
+            return new PersonRequest(request, meta);
+        }
+
     }
 }

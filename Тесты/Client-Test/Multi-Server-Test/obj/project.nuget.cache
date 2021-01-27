@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "2lxQHld/QWP4fOuaYlivDh8b24QPuXgN9GGvDkOfw7GaK5QWR1phDV36PWY5NDqDnPmE1nD5iELjzdna3Xrs0Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\Multi-Server-Test.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\DOM\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

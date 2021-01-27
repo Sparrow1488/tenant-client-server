@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "qc+mIPzh+Nxet0adRlIsMBRDmaTtPzbMVnpJ3eSjLD7ARgz9zR/CjPjdTZBK80EPVhPPfVTKw/vrAUPZdCyvLA==",
+  "dgSpecHash": "kw+uZSSPepYqm9xO1mMlIbyTBnKfGtw/WMvR4oFAdoGv1XX9YV6c/kNVrFNz42Z1xwoSVINrYrO2CBOe4PesQw==",
   "success": true,
   "projectFilePath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Client-Test\\Client-Test.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\DOM\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -23,3 +23,4 @@ C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Тесты\Clie
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Тесты\Client-Test\Server-Test\obj\Debug\netcoreapp3.1\Server-Test.dll
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Тесты\Client-Test\Server-Test\obj\Debug\netcoreapp3.1\Server-Test.pdb
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Тесты\Client-Test\Server-Test\obj\Debug\netcoreapp3.1\Server-Test.genruntimeconfig.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Server-Test\obj\Debug\netcoreapp3.1\Server-Test.csprojAssemblyReference.cache

@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.IO;
 using System.Net.Sockets;
 using System.Windows;
 using WpfApp1.Blocks;
 using WpfApp1.Classes;
 using WpfApp1.Classes.Client.Requests;
+using WpfApp1.Server.Packages;
+using WpfApp1.Server.UserInfo;
 
 namespace WpfApp1
 {
@@ -12,56 +16,46 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        ServerConfig config = new ServerConfig(ServerConfig.HOST, ServerConfig.PORT);
+
         public MainWindow()
         {
             InitializeComponent();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            excepyionLabel_TB.Visibility = Visibility.Collapsed;
+            exceptionLabel_TB.Visibility = Visibility.Collapsed;
         }
 
-        ServerConfig config = new ServerConfig(ServerConfig.HOST, ServerConfig.PORT);
         private async void sendRequestBtn_Click(object sender, RoutedEventArgs e)
         {
-            excepyionLabel_TB.Visibility = Visibility.Collapsed;
-            var sendPackage = CreateRequestPackage(CreatePerson(), CreateMeta());
+            exceptionLabel_TB.Visibility = Visibility.Collapsed;
+            send_Btn.IsEnabled = false;
+
+            var reqPerson = new Person(login_TBox.Text, password_TBox.Password, 67);
+            var reqTest = new Test("TEST");
+            var reqMeta = new SendMeta("127.0.0.1", "auth");
+            var package = new PersonRequest(reqTest, reqMeta);
+            
             try
             {
-                send_Btn.IsEnabled = false;
                 MyServer server = new MyServer(config);
                 server.CreateClient();
-                await server.SendRequestAsync(sendPackage);
-                string response = await server.GetAsync();
-                MessageBox.Show(response, "Server response");
+                await server.SendRequestAsync(package);
+                //string response = await server.GetAsync();
+                //MessageBox.Show(response, "Server response");
             }
             catch (SocketException)
             {
-                excepyionLabel_TB.Visibility = Visibility.Visible;
-                excepyionLabel_TB.Text = "Не удалось подключиться к серверу";
+                exceptionLabel_TB.Visibility = Visibility.Visible;
+                exceptionLabel_TB.Text = "Не удалось подключиться к серверу";
             }
             finally
             {
                 send_Btn.IsEnabled = true;
             }
         }
-        private Person CreatePerson()
-        {
-            return new Person()
-            {
-                Login = login_TBox.Text,
-                Password = password_TBox.Password
-            };
-        }
-        private Meta CreateMeta()
-        {
-            return new Meta()
-            {
-                Address = "127.0.0.1",
-                Action = "auth"
-            };
-        }
-        private IRequest CreateRequestPackage(IForRequest request, Meta meta)
+        private Package CreateRequestPackage(RequestObject request, SendMeta meta)
         {
             return new PersonRequest(request, meta);
         }

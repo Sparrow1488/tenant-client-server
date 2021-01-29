@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Multi_Server_Test.Blocks
+namespace Server_Test
 {
-    public class AuthBlock
+    public abstract class SendingPackage
     {
+
     }
 }

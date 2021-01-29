@@ -5,7 +5,6 @@ namespace WpfApp1.Classes
 {
     public class ServerConfig
     {
-
         public const string HOST = "127.0.0.1";
         public const int PORT = 8090;
         public static IPAddress IP = IPAddress.Parse(HOST);

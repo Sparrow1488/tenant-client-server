@@ -1,11 +1,16 @@
-﻿using System;
+﻿using Multi_Server_Test.Server.Packages;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Multi_Server_Test.Blocks
 {
-    public class Person
+    public class Person : RequestObject
     {
+        public Person()
+        {
+            Name = "Valya";
+        }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string ParentName { get; set; }

@@ -68,7 +68,7 @@
                             Content="Войти"
                             FontSize="22" />
                         <TextBlock
-                            Name="excepyionLabel_TB"
+                            Name="exceptionLabel_TB"
                             Grid.Row="4"
                             HorizontalAlignment="Center"
                             FontSize="18"
@@ -140,13 +140,14 @@
                             Content="Войти"
                             FontSize="22" />
                         <TextBlock
-                            Name="excepyionLabel2_TB"
+                            Name="exceptionLabel2_TB"
                             Grid.Row="5"
                             HorizontalAlignment="Center"
                             FontSize="18"
                             Foreground="Red"
                             Text="Exception text"
-                            TextWrapping="Wrap" />
+                            TextWrapping="Wrap" 
+                            Visibility="Hidden"/>
                     </Grid>
                 </TabItem>
             </TabControl>

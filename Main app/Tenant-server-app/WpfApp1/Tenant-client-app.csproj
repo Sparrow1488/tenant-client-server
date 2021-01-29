@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Server\UserInfo\Test.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -86,12 +87,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Blocks\IRequest.cs" />
-    <Compile Include="Client\Meta.cs" />
-    <Compile Include="Client\Requests\PersonRequest.cs" />
-    <Compile Include="Server\MyServer.cs" />
-    <Compile Include="Server\ServerConfig.cs" />
-    <Compile Include="Blocks\Auth\Person.cs" />
+    <Compile Include="Server\Packages\Package.cs" />
+    <Compile Include="Server\Packages\SendMeta.cs" />
+    <Compile Include="Server\Requests\PersonRequest.cs" />
+    <Compile Include="Server\Packages\RequestObject.cs" />
+    <Compile Include="Server\ServerMeta\MyServer.cs" />
+    <Compile Include="Server\ServerMeta\ServerConfig.cs" />
+    <Compile Include="Server\Person.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -129,6 +131,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="refs\BG-2_1360х800.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Server\Blocks\Auth\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />

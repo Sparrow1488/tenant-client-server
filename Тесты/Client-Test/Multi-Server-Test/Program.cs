@@ -17,7 +17,7 @@ namespace Multi_Server_Test
         {
             //TypeNameHandling = TypeNameHandling.Auto,
             Formatting = Formatting.Indented,
-            TypeNameHandling = TypeNameHandling.Objects
+            TypeNameHandling = TypeNameHandling.Auto
         };
         static async Task Main(string[] args)
         {
@@ -51,7 +51,9 @@ namespace Multi_Server_Test
                 jsonPackage.Append(Encoding.UTF8.GetString(buffer, 0, bytes));
             }
             while (stream.DataAvailable);
-
+            // "$type": "WpfApp1.Server.UserInfo.Test, WpfApp1"
+            //\"$type\": \"WpfApp1.Classes.Client.Requests.PersonRequest, WpfApp1\"
+            jsonPackage = jsonPackage.Replace("\"WpfApp1.Classes.Client.Requests.PersonRequest, WpfApp1\"", "\"Multi_Server_Test.Server.Requests.PersonRequest, Multi_Server_Test\"");
             var getPackage = JsonConvert.DeserializeObject<Package>(jsonPackage.ToString(), JsonSettings);
             //Console.WriteLine("Получена мета: {0}, {1}", getPackage.SendingMeta.Address, getPackage.SendingMeta.Action);
 

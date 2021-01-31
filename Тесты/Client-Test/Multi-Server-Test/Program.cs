@@ -25,16 +25,6 @@ namespace Multi_Server_Test
             //var meta = new SendMeta("AddressName", "auth");
             //var package = new PersonRequest(person, meta);
 
-            ////<<---!!! НАСТРОЙКИ НЕОБХОДИМЫ !!!--->>
-
-            //var stringObj = JsonConvert.SerializeObject(package, JsonSettings);
-            //var obj = JsonConvert.DeserializeObject<Package>(stringObj, JsonSettings);
-            //Console.WriteLine(obj.SendingMeta.Action);
-
-            //var personString = JsonConvert.SerializeObject(obj.SendingObject, JsonSettings);
-            //var personObj = JsonConvert.DeserializeObject<Person>(personString, JsonSettings);
-            //Console.WriteLine(personObj.Name);
-
             TcpListener server = new TcpListener(IPAddress.Parse("127.0.0.1"), 8090);
             server.Start();
 
@@ -51,18 +41,19 @@ namespace Multi_Server_Test
                 jsonPackage.Append(Encoding.UTF8.GetString(buffer, 0, bytes));
             }
             while (stream.DataAvailable);
-            // "$type": "WpfApp1.Server.UserInfo.Test, WpfApp1"
-            //\"$type\": \"WpfApp1.Classes.Client.Requests.PersonRequest, WpfApp1\"
-            jsonPackage = jsonPackage.Replace("\"WpfApp1.Classes.Client.Requests.PersonRequest, WpfApp1\"", "\"Multi_Server_Test.Server.Requests.PersonRequest, Multi_Server_Test\"");
-            var getPackage = JsonConvert.DeserializeObject<Package>(jsonPackage.ToString(), JsonSettings);
-            //Console.WriteLine("Получена мета: {0}, {1}", getPackage.SendingMeta.Address, getPackage.SendingMeta.Action);
+            var getPackage = JsonConvert.DeserializeObject<Package>(jsonPackage.ToString());
+            Console.WriteLine("Получена мета: {0}, {1}", getPackage.SendingMeta.Address, getPackage.SendingMeta.Action);
 
             ////TODO: сделать маршрутизатор запроса
-            //if (getPackage.SendingMeta.Action.Equals("auth"))
-            //{
-            //    var person = (Person)getPackage.SendingObject;
-            //    Console.WriteLine("Получен пользователь: {0}", person.Login);
-            //}
+            if (getPackage.SendingMeta.Action.Equals("auth"))
+            {
+                var jsonPerson = JsonConvert.SerializeObject(getPackage.SendingObject);
+                var getPerson = JsonConvert.DeserializeObject<Person>(jsonPerson);
+
+                var response = Encoding.UTF8.GetBytes($"Получен пользователь: {getPerson.Login}");
+                await stream.WriteAsync(response, 0, response.Length);
+                Console.WriteLine("Ответ отправлен");
+            }
         }
     }
     

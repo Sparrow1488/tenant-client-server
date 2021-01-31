@@ -7,12 +7,12 @@ namespace Multi_Server_Test.Server.Packages
 {
     public class Package
     {
-        public RequestObject SendingObject { get; set; }
-        public SendMeta SendingMeta { get; set; }
-        public Package(RequestObject request, SendMeta meta)
+        public Package(RequestObject sendObj, SendMeta meta)
         {
-            SendingObject = request;
+            SendingObject = sendObj;
             SendingMeta = meta;
         }
+        public object SendingObject { get; set; }
+        public SendMeta SendingMeta { get; set; }
     }
 }

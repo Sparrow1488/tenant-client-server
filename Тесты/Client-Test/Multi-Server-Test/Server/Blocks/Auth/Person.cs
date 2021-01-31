@@ -7,10 +7,6 @@ namespace Multi_Server_Test.Blocks
 {
     public class Person : RequestObject
     {
-        public Person()
-        {
-            Name = "Valya";
-        }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string ParentName { get; set; }

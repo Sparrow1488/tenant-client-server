@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\Multi-Server-Test.csproj": {}
+    "C:\\Users\\Dom\\Desktop\\Репозитории\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\Multi-Server-Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\Multi-Server-Test.csproj": {
+    "C:\\Users\\Dom\\Desktop\\Репозитории\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\Multi-Server-Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\Multi-Server-Test.csproj",
+        "projectUniqueName": "C:\\Users\\Dom\\Desktop\\Репозитории\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\Multi-Server-Test.csproj",
         "projectName": "Multi-Server-Test",
-        "projectPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\Multi-Server-Test.csproj",
-        "packagesPath": "C:\\Users\\DOM\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\obj\\",
+        "projectPath": "C:\\Users\\Dom\\Desktop\\Репозитории\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\Multi-Server-Test.csproj",
+        "packagesPath": "C:\\Users\\Dom\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dom\\Desktop\\Репозитории\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\DOM\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dom\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -60,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

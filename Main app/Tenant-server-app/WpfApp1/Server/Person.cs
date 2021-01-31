@@ -42,11 +42,11 @@ namespace WpfApp1.Classes
                 throw new ArgumentException("Вы ввели некорректные данные");
             }
         }
-        public string Name { get; }
+        public string Name { get; set; }
         public string LastName { get; }
-        public string ParentName { get; }
+        public string ParentName { get; set; }
         public string Login { get; }
-        public string Password { get; }
+        public string Password { get; set; }
         public int Room { get; }
         public int ID { get; }
 

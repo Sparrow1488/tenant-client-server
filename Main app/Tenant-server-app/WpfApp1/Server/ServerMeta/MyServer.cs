@@ -1,15 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Blocks;
-using WpfApp1.Classes;
-using System.Text.RegularExpressions;
 using WpfApp1.Server.Packages;
 
 namespace WpfApp1.Classes
@@ -23,6 +17,7 @@ namespace WpfApp1.Classes
         };
         //TODO: УБРАТЬ ВСЮ СТАТИКУ БЛИН БЛИНСКИЙ
         private TcpClient client = null;
+        public Person ActiveUser = null;
         private ServerConfig ServerConfig = null;
 
         public MyServer(ServerConfig config)
@@ -33,12 +28,22 @@ namespace WpfApp1.Classes
         {
             client = new TcpClient();
         }
-        public async Task SendRequestAsync(RequestObject sendObject)
+        public async Task Authorization(Person dataPerson)
+        {
+            var meta = new SendMeta(ServerConfig.Host, "auth");
+            await SendRequestAsync(dataPerson, meta);
+            var pesponse = await GetAsync();
+            ActiveUser = JsonConvert.DeserializeObject<Person>(pesponse);
+            if (ActiveUser.Equals(null))
+            {
+                throw new Exception("Данный пользователь не существует");
+            }
+        }
+        public async Task SendRequestAsync(RequestObject sendObject, SendMeta meta)
         {
             await client.ConnectAsync(ServerConfig.Host, ServerConfig.Port);
             NetworkStream stream = client.GetStream();
 
-            var meta = new SendMeta("127.0.0.1", "auth");
             var pack = new Package<RequestObject>(sendObject, meta);
             string jsonPackage = JsonConvert.SerializeObject(pack);
             byte[] data = Encoding.UTF8.GetBytes(jsonPackage);
@@ -46,7 +51,6 @@ namespace WpfApp1.Classes
         }
         public async Task<string> GetAsync()
         {
-            //await client.ConnectAsync(ServerConfig.Host, ServerConfig.Port);
             StringBuilder response = new StringBuilder();
             byte[] getData = new byte[2048];
             await Task.Run(() =>

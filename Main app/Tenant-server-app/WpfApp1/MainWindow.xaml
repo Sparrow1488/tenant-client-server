@@ -64,7 +64,7 @@
                             Grid.Row="3"
                             Margin="0,10"
                             Background="White"
-                            Click="sendRequestBtn_Click"
+                            Click="authBtn_Click"
                             Content="Войти"
                             FontSize="22" />
                         <TextBlock
@@ -136,7 +136,7 @@
                             Grid.Row="4"
                             Margin="0,10"
                             Background="White"
-                            Click="sendRequestBtn_Click"
+                            Click="authBtn_Click"
                             Content="Войти"
                             FontSize="22" />
                         <TextBlock

@@ -86,6 +86,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Client\ActiveUser.cs" />
     <Compile Include="Server\Packages\Package.cs" />
     <Compile Include="Server\Packages\SendMeta.cs" />
     <Compile Include="Server\Packages\RequestObject.cs" />

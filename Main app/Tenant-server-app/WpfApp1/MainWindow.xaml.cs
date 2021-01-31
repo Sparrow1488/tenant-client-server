@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Windows;
 using WpfApp1.Blocks;
 using WpfApp1.Classes;
+using WpfApp1.Client;
 using WpfApp1.Server.Packages;
 
 namespace WpfApp1
@@ -15,7 +16,6 @@ namespace WpfApp1
     public partial class MainWindow : Window
     {
         ServerConfig config = new ServerConfig(ServerConfig.HOST, ServerConfig.PORT);
-
         public MainWindow()
         {
             InitializeComponent();
@@ -25,19 +25,20 @@ namespace WpfApp1
             exceptionLabel_TB.Visibility = Visibility.Collapsed;
         }
 
-        private async void sendRequestBtn_Click(object sender, RoutedEventArgs e)
+        private async void authBtn_Click(object sender, RoutedEventArgs e)
         {
             exceptionLabel_TB.Visibility = Visibility.Collapsed;
             send_Btn.IsEnabled = false;
-
             try
             {
-                var reqPerson = new Person(login_TBox.Text, password_TBox.Password, 67);
+                var reqPerson = new Person(login_TBox.Text, password_TBox.Password, 67)
+                {
+                    Name = "Valentin",
+                    ParentName = "Гуркулесович"
+                };
                 MyServer server = new MyServer(config);
                 server.CreateClient();
-                await server.SendRequestAsync(reqPerson);
-                string response = await server.GetAsync();
-                MessageBox.Show(response, "Server response");
+                await server.Authorization(reqPerson);
             }
             catch (SocketException)
             {
@@ -49,6 +50,5 @@ namespace WpfApp1
                 send_Btn.IsEnabled = true;
             }
         }
-
     }
 }

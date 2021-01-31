@@ -78,7 +78,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Server\UserInfo\Test.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -89,7 +88,6 @@
     </Compile>
     <Compile Include="Server\Packages\Package.cs" />
     <Compile Include="Server\Packages\SendMeta.cs" />
-    <Compile Include="Server\Requests\PersonRequest.cs" />
     <Compile Include="Server\Packages\RequestObject.cs" />
     <Compile Include="Server\ServerMeta\MyServer.cs" />
     <Compile Include="Server\ServerMeta\ServerConfig.cs" />
@@ -133,7 +131,7 @@
     <Resource Include="refs\BG-2_1360х800.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Server\Blocks\Auth\" />
+    <Folder Include="Server\UserInfo\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />

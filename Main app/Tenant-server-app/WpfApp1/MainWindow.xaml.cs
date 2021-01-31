@@ -5,9 +5,7 @@ using System.Net.Sockets;
 using System.Windows;
 using WpfApp1.Blocks;
 using WpfApp1.Classes;
-using WpfApp1.Classes.Client.Requests;
 using WpfApp1.Server.Packages;
-using WpfApp1.Server.UserInfo;
 
 namespace WpfApp1
 {
@@ -32,18 +30,14 @@ namespace WpfApp1
             exceptionLabel_TB.Visibility = Visibility.Collapsed;
             send_Btn.IsEnabled = false;
 
-            var reqPerson = new Person(login_TBox.Text, password_TBox.Password, 67);
-            var reqTest = new Test("TEST");
-            var reqMeta = new SendMeta("127.0.0.1", "auth");
-            var package = new PersonRequest(reqTest, reqMeta);
-            
             try
             {
+                var reqPerson = new Person(login_TBox.Text, password_TBox.Password, 67);
                 MyServer server = new MyServer(config);
                 server.CreateClient();
-                await server.SendRequestAsync(package);
-                //string response = await server.GetAsync();
-                //MessageBox.Show(response, "Server response");
+                await server.SendRequestAsync(reqPerson);
+                string response = await server.GetAsync();
+                MessageBox.Show(response, "Server response");
             }
             catch (SocketException)
             {
@@ -54,10 +48,6 @@ namespace WpfApp1
             {
                 send_Btn.IsEnabled = true;
             }
-        }
-        private Package CreateRequestPackage(RequestObject request, SendMeta meta)
-        {
-            return new PersonRequest(request, meta);
         }
 
     }

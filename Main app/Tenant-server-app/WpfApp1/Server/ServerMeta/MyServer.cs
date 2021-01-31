@@ -8,12 +8,12 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Blocks;
-using WpfApp1.Server.UserInfo;
 using WpfApp1.Classes;
 using System.Text.RegularExpressions;
+using WpfApp1.Server.Packages;
 
-//namespace WpfApp1.Classes
-//{
+namespace WpfApp1.Classes
+{
     public class MyServer
     {
         private JsonSerializerSettings JsonSettings = new JsonSerializerSettings
@@ -33,19 +33,16 @@ using System.Text.RegularExpressions;
         {
             client = new TcpClient();
         }
-        public async Task SendRequestAsync(Package package)
+        public async Task SendRequestAsync(RequestObject sendObject)
         {
             await client.ConnectAsync(ServerConfig.Host, ServerConfig.Port);
             NetworkStream stream = client.GetStream();
-            string jsonPackage = JsonConvert.SerializeObject(package, typeof(Package), JsonSettings);
-            //string jsonPackage = JsonConvert.SerializeObject(new Person("asd", "asd", 31), typeof(Person), JsonSettings);
-            //jsonPackage = jsonPackage.Replace("\"$type\": \"WpfApp1.Server.UserInfo.Test, WpfApp1\"\",", ""); //"WpfApp1.Server.UserInfo.Test, WpfApp1"
-            //jsonPackage = jsonPackage.Replace("\"$type\": \"WpfApp1.Classes.Client.Requests.PersonRequest, WpfApp1\",", "");
-            //"$type": "WpfApp1.Classes.Client.Requests.PersonRequest, WpfApp1"
-            //var r = new Regex(@"^\{\s*""\$type"":\s*""([^""]+)""");
+
+            var meta = new SendMeta("127.0.0.1", "auth");
+            var pack = new Package<RequestObject>(sendObject, meta);
+            string jsonPackage = JsonConvert.SerializeObject(pack);
             byte[] data = Encoding.UTF8.GetBytes(jsonPackage);
             await stream.WriteAsync(data, 0, data.Length);
-            //stream.Close();
         }
         public async Task<string> GetAsync()
         {
@@ -68,4 +65,4 @@ using System.Text.RegularExpressions;
             return response.ToString();
         }
     }
-//}
+}

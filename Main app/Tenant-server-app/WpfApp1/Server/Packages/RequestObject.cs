@@ -8,8 +8,5 @@ using WpfApp1.Classes;
 
 namespace WpfApp1.Server.Packages
 {
-    public abstract class RequestObject
-    {
-
-    }
+    public abstract class RequestObject { }
 }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenant-server-app", "Tenant
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenant-client-app", "WpfApp1\Tenant-client-app.csproj", "{773F32EA-420F-46B7-B9C5-41C33BB2E7B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonClient", "JsonClient\JsonClient.csproj", "{D200FE69-C007-4851-9D87-717295900461}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{773F32EA-420F-46B7-B9C5-41C33BB2E7B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{773F32EA-420F-46B7-B9C5-41C33BB2E7B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{773F32EA-420F-46B7-B9C5-41C33BB2E7B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D200FE69-C007-4851-9D87-717295900461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D200FE69-C007-4851-9D87-717295900461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D200FE69-C007-4851-9D87-717295900461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D200FE69-C007-4851-9D87-717295900461}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

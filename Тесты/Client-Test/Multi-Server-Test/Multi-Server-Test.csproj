@@ -7,12 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Server\ServerMeta\**" />
-    <EmbeddedResource Remove="Server\ServerMeta\**" />
-    <None Remove="Server\ServerMeta\**" />
+    <Compile Remove="ServerData\ServerMeta\**" />
+    <EmbeddedResource Remove="ServerData\ServerMeta\**" />
+    <None Remove="ServerData\ServerMeta\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FireSharp" Version="2.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 

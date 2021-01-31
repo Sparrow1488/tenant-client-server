@@ -1,10 +1,56 @@
 {
   "version": 2,
-  "dgSpecHash": "+zbOwbLanpmRzyn5PWBeqOJCv0iRi+m+BUxFi7geR2+sgmIF5zcr5tgyjS2ZBF72Cf8tPjvdPW8X9mwFeXGqww==",
+  "dgSpecHash": "C1c83HyDYTp+yxoEaO48KCIs5HKNWJN1N6XMH+DtSuKb/6tTbIkCfKtPuwFcy/ziLnMqj8Zj7BorrnxBQSDRCA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Dom\\Desktop\\Репозитории\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\Multi-Server-Test.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Dom\\.nuget\\packages\\firesharp\\2.0.4\\firesharp.2.0.4.nupkg.sha512",
+    "C:\\Users\\Dom\\.nuget\\packages\\microsoft.bcl\\1.1.9\\microsoft.bcl.1.1.9.nupkg.sha512",
+    "C:\\Users\\Dom\\.nuget\\packages\\microsoft.bcl.async\\1.0.168\\microsoft.bcl.async.1.0.168.nupkg.sha512",
+    "C:\\Users\\Dom\\.nuget\\packages\\microsoft.bcl.build\\1.0.14\\microsoft.bcl.build.1.0.14.nupkg.sha512",
+    "C:\\Users\\Dom\\.nuget\\packages\\microsoft.net.http\\2.2.28\\microsoft.net.http.2.2.28.nupkg.sha512",
     "C:\\Users\\Dom\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"FireSharp 2.0.4\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\", а не целевой платформы проекта \".NETCoreApp,Version=v3.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "FireSharp",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"Microsoft.Bcl 1.1.9\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\", а не целевой платформы проекта \".NETCoreApp,Version=v3.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "Microsoft.Bcl",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"Microsoft.Bcl.Async 1.0.168\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\", а не целевой платформы проекта \".NETCoreApp,Version=v3.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "Microsoft.Bcl.Async",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"Microsoft.Net.Http 2.2.28\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\", а не целевой платформы проекта \".NETCoreApp,Version=v3.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "Microsoft.Net.Http",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }

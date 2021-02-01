@@ -12,7 +12,6 @@ C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Tes
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\obj\Debug\netcoreapp3.1\Multi-Server-Test.dll
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\obj\Debug\netcoreapp3.1\Multi-Server-Test.pdb
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\obj\Debug\netcoreapp3.1\Multi-Server-Test.genruntimeconfig.cache
-C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\obj\Debug\netcoreapp3.1\Multi-Server-Test.csprojAssemblyReference.cache
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\bin\Debug\netcoreapp3.1\Multi-Server-Test.exe
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\bin\Debug\netcoreapp3.1\Multi-Server-Test.deps.json
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\bin\Debug\netcoreapp3.1\Multi-Server-Test.runtimeconfig.json
@@ -40,3 +39,4 @@ C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Tes
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\bin\Debug\netcoreapp3.1\Microsoft.Threading.Tasks.dll
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\bin\Debug\netcoreapp3.1\System.Net.Http.Extensions.dll
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\bin\Debug\netcoreapp3.1\System.Net.Http.Primitives.dll
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\obj\Debug\netcoreapp3.1\Multi-Server-Test.csprojAssemblyReference.cache

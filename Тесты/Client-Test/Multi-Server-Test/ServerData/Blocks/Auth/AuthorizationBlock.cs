@@ -15,27 +15,30 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
         {
             try
             {
-                var getPerson = JsonConvert.DeserializeObject<Person>(clientJson);
-
-                var wasPerson = await ServerMethods.GetUserOutDB(getPerson);
-                if (wasPerson.Equals(null))
+                var getClientPerson = JsonConvert.DeserializeObject<Person>(clientJson);
+                var personOutDB = await ServerMethods.GetUserOutDB(getClientPerson);
+                
+                if (getClientPerson.Password.Equals(personOutDB.Password))
                 {
-                    await ServerMethods.AddInDb(getPerson);
-                    Console.WriteLine("Пользователь создан");
-
-                    var response = Encoding.UTF8.GetBytes("");
+                    var sendPerson = JsonConvert.SerializeObject(personOutDB);
+                    var response = Encoding.UTF8.GetBytes(sendPerson);
                     await stream.WriteAsync(response, 0, response.Length);
-                    Console.WriteLine("Ответ отправлен");
+                    Console.WriteLine("Успешный вход");
                 }
                 else
                 {
-                    var sendPerson = JsonConvert.SerializeObject(wasPerson);
-                    var response = Encoding.UTF8.GetBytes(sendPerson);
+                    var response = Encoding.UTF8.GetBytes("Возможно, Вы ввели неверный пароль!");
                     await stream.WriteAsync(response, 0, response.Length);
-                    Console.WriteLine("Ответ отправлен");
+                    Console.WriteLine("Ошибка авторизации");
                 }
             }
-            catch (Exception) { }
+            catch (NullReferenceException) 
+            {
+                Console.WriteLine("Ошибка авторизации");
+                var response = Encoding.UTF8.GetBytes("Ошибка авторизации");
+                await stream.WriteAsync(response, 0, response.Length);
+                Console.WriteLine("Ответ отправлен");
+            }
         }
     }
 }

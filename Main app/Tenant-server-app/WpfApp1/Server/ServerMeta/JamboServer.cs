@@ -28,10 +28,10 @@ namespace WpfApp1.Classes
         public void ShowUserInfo()
         {
             MessageBox.Show($"Login: {ActiveUser.Login};\n " +
-                $"{ActiveUser.Password};\n " +
-                $"{ActiveUser.Room};\n " +
-                $"{ActiveUser.Name}; \n " +
-                $"{ActiveUser.ParentName};", 
+                 $"Password: {ActiveUser.Password};\n " +
+                $"Room number: {ActiveUser.Room};\n " +
+                $"Name: {ActiveUser.Name}; \n " +
+                $"Parent name: {ActiveUser.ParentName};", 
                 "User information");
         }
         public bool ActiveUserCheckNull()

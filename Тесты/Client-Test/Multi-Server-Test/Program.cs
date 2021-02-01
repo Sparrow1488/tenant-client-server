@@ -23,7 +23,10 @@ namespace Multi_Server_Test
             Console.WriteLine($"Server started: {DateTime.Now}");
 
             CreateServerBlocks();
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Active blocks:");
+
             foreach (var block in ServerBlock.ExistsServerBlocks)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -60,6 +63,7 @@ namespace Multi_Server_Test
                     }
                 }
                 Console.WriteLine("Clint disconnect");
+                Console.WriteLine();
             }
             
         }

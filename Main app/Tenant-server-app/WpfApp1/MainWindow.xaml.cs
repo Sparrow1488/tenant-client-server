@@ -47,6 +47,10 @@ namespace WpfApp1
                 exceptionLabel_TB.Visibility = Visibility.Visible;
                 exceptionLabel_TB.Text = "Не удалось подключиться к серверу";
             }
+            catch (JsonReaderException)
+            {
+                MessageBox.Show("Получены нечитаемые данные!", "Exception");
+            }
             catch (IOException)
             {
                 exceptionLabel_TB.Visibility = Visibility.Visible;

@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Net;
 
 namespace Multi_Server_Test.Server.Packages
 {
@@ -10,8 +9,10 @@ namespace Multi_Server_Test.Server.Packages
         {
             Address = address;
             Action = action;
+            FromHostName = Dns.GetHostName();
         }
-        public string Address { get; set; }
-        public string Action { get; set; }
+        public string Address { get; }
+        public string Action { get; }
+        public string FromHostName { get; }
     }
 }

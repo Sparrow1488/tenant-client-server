@@ -34,3 +34,9 @@ C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Тесты\Clie
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\bin\Debug\netcoreapp3.1\Microsoft.Threading.Tasks.dll
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\bin\Debug\netcoreapp3.1\System.Net.Http.Extensions.dll
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\bin\Debug\netcoreapp3.1\System.Net.Http.Primitives.dll
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\bin\Debug\netcoreapp3.1\FireSharp.dll
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\bin\Debug\netcoreapp3.1\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\bin\Debug\netcoreapp3.1\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\bin\Debug\netcoreapp3.1\Microsoft.Threading.Tasks.dll
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\bin\Debug\netcoreapp3.1\System.Net.Http.Extensions.dll
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\bin\Debug\netcoreapp3.1\System.Net.Http.Primitives.dll

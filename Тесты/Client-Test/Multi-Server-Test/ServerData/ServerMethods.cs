@@ -29,9 +29,9 @@ namespace Multi_Server_Test.ServerData
             }
         }
 
-        public static string usersPath = "Multi-server-users";
-        public static FirebaseClient serverClient = null;
-        public static IFirebaseConfig firebaseConfig = new FirebaseConfig()
+        private static string usersPath = "Multi-server-users";
+        private static FirebaseClient serverClient = null;
+        private static IFirebaseConfig firebaseConfig = new FirebaseConfig()
         {
             AuthSecret = "6CScUkKUdSLgSDtq1QWtfY2NCPP57aa6ajBn7R4Y",
             BasePath = "https://client-server-testapp-default-rtdb.firebaseio.com/"
@@ -49,14 +49,20 @@ namespace Multi_Server_Test.ServerData
         }
         public static async Task<Person> GetUserOutDB(Person person)
         {
-            //TODO: System.NullReferenceException
-            var respose = await serverClient.GetAsync($"{usersPath}/{person.Login}");
-            var user = respose.ResultAs<Person>();
-            if (user == null)
+            try
             {
-                throw new NullReferenceException("Не найдено ни одного совпадения!");
+                serverClient = new FirebaseClient(firebaseConfig);
+                var respose = await serverClient.GetAsync($"{usersPath}/{person.Login}");
+
+                if (respose.Equals(null))
+                {
+                    throw new NullReferenceException("Данного пользователя не существует");
+                }
+
+                var user = respose.ResultAs<Person>();
+                return user;
             }
-            return user;
+            catch (NullReferenceException) { return null; }
         }
     }
 }

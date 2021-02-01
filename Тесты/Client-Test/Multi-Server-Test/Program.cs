@@ -18,51 +18,54 @@ namespace Multi_Server_Test
             TcpListener server = new TcpListener(IPAddress.Parse("127.0.0.1"), 8090);
             server.Start();
 
-            Console.WriteLine("Ожидаю запроса.......");
-            var client = server.AcceptTcpClient();
-            Console.WriteLine("Client connect");
-
-            var stream = client.GetStream();
-            byte[] buffer = new byte[1024];
-            StringBuilder jsonPackage = new StringBuilder();
-            do
+            while (true)
             {
-                int bytes = stream.Read(buffer, 0, buffer.Length);
-                jsonPackage.Append(Encoding.UTF8.GetString(buffer, 0, bytes));
-            }
-            while (stream.DataAvailable);
-            var getPackage = JsonConvert.DeserializeObject<Package>(jsonPackage.ToString());
-            Console.WriteLine("Получена мета: {0}, {1}", getPackage.SendingMeta.Address, getPackage.SendingMeta.Action);
+                Console.WriteLine("Ожидаю запроса.......");
+                var client = server.AcceptTcpClient();
+                Console.WriteLine("Client connect");
 
-            ////TODO: сделать маршрутизатор запроса
-            if (getPackage.SendingMeta.Action.Equals("auth"))
-            {
-                try
+                var stream = client.GetStream();
+                byte[] buffer = new byte[1024];
+                StringBuilder jsonPackage = new StringBuilder();
+                do
                 {
-                    var jsonPerson = JsonConvert.SerializeObject(getPackage.SendingObject);
-                    var getPerson = JsonConvert.DeserializeObject<Person>(jsonPerson);
-
-                    var wasPerson = await ServerMethods.GetUserOutDB(getPerson);
-                    if (wasPerson.Equals(null))
-                    {
-                        await ServerMethods.AddInDb(getPerson);
-                        Console.WriteLine("Пользователь создан");
-
-                        var response = Encoding.UTF8.GetBytes($"Создан пользователь: {wasPerson.Login}," +
-                        $"{wasPerson.Password}; {wasPerson.Name} {wasPerson.ParentName}");
-                        await stream.WriteAsync(response, 0, response.Length);
-                        Console.WriteLine("Ответ отправлен");
-                    }
-                    else
-                    {
-                        var response = Encoding.UTF8.GetBytes($"Получен пользователь: {wasPerson.Login}," +
-                        $"{wasPerson.Password}; {wasPerson.Name} {wasPerson.ParentName}");
-                        await stream.WriteAsync(response, 0, response.Length);
-                        Console.WriteLine("Ответ отправлен");
-                    }
+                    int bytes = stream.Read(buffer, 0, buffer.Length);
+                    jsonPackage.Append(Encoding.UTF8.GetString(buffer, 0, bytes));
                 }
-                catch (Exception) { }
+                while (stream.DataAvailable);
+                var getPackage = JsonConvert.DeserializeObject<Package>(jsonPackage.ToString());
+                Console.WriteLine("Получена мета: {0}, {1}", getPackage.SendingMeta.Address, getPackage.SendingMeta.Action);
+
+                ////TODO: сделать маршрутизатор запроса
+                if (getPackage.SendingMeta.Action.Equals("auth"))
+                {
+                    try
+                    {
+                        var jsonPerson = JsonConvert.SerializeObject(getPackage.SendingObject);
+                        var getPerson = JsonConvert.DeserializeObject<Person>(jsonPerson);
+
+                        var wasPerson = await ServerMethods.GetUserOutDB(getPerson);
+                        if (wasPerson.Equals(null))
+                        {
+                            //await ServerMethods.AddInDb(getPerson);
+                            //Console.WriteLine("Пользователь создан");
+
+                            //var response = Encoding.UTF8.GetBytes("");
+                            //await stream.WriteAsync(response, 0, response.Length);
+                            //Console.WriteLine("Ответ отправлен");
+                        }
+                        else
+                        {
+                            var sendPerson = JsonConvert.SerializeObject(wasPerson);
+                            var response = Encoding.UTF8.GetBytes(sendPerson);
+                            await stream.WriteAsync(response, 0, response.Length);
+                            Console.WriteLine("Ответ отправлен");
+                        }
+                    }
+                    catch (Exception) { }
+                }
             }
+            
         }
     }
     

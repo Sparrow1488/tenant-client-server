@@ -8,14 +8,16 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.Classes
 {
-    public class SendMeta
+    public class PackageMeta
     {
-        public SendMeta(string address, string action)
+        public PackageMeta(string address, string action)
         {
             Address = address;
             Action = action;
+            FromHostName = Dns.GetHostName();
         }
         public string Address { get; }
         public string Action { get; }
+        public string FromHostName { get; }
     }
 }

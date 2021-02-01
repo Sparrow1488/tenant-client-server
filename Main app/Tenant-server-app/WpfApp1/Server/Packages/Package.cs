@@ -8,13 +8,13 @@ namespace WpfApp1.Blocks
     public class Package<T>
         where T: RequestObject
     {
-        public Package(RequestObject sendObj, SendMeta meta)
+        public Package(RequestObject sendObj, PackageMeta meta)
         {
             SendingObject = (T)sendObj;
             SendingMeta = meta;
         }
         public T SendingObject { get; set; }
-        public SendMeta SendingMeta { get; set; }
+        public PackageMeta SendingMeta { get; set; }
     }
     
 }

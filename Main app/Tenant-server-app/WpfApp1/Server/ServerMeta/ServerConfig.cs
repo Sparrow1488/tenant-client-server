@@ -5,20 +5,22 @@ namespace WpfApp1.Classes
 {
     public class ServerConfig
     {
-        public const string HOST = "127.0.0.1";
-        public const int PORT = 8090;
-        public static IPAddress IP = IPAddress.Parse(HOST);
-        public static IPEndPoint serverEndPoint = new IPEndPoint(IP, PORT);
+        public string HOST = "127.0.0.1";
+        public int PORT = 8090;
+        public IPEndPoint serverEndPoint = null;
 
-        public string Host;
-        public int Port;
         public ServerConfig(string host, int port)
         {
             if(!string.IsNullOrWhiteSpace(host) && port > 0)
             {
-                Host = host;
-                Port = port;
+                HOST = host;
+                PORT = port;
+                serverEndPoint = new IPEndPoint(IPAddress.Parse(HOST), PORT);
             }
+        }
+        public ServerConfig()
+        {
+            serverEndPoint = new IPEndPoint(IPAddress.Parse(HOST), PORT);
         }
     }
 }

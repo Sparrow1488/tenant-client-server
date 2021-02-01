@@ -1,90 +1,83 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WpfApp1.Blocks;
 using WpfApp1.Server.Packages;
 
 namespace WpfApp1.Classes
 {
     public class Person : RequestObject
     {
-        public Person(string firstN, string lastN, string secN, int roomNum, string pass)
+        public string Name { get; }
+        public string LastName { get; }
+        public string ParentName { get; }
+        public string Login { get; }
+        public string Password { get; }
+        public int Room { get; }
+        public int ID { get; }
+
+        [JsonConstructor]
+        public Person(string login, string name, string lastName, string parentName, int room, int id, string password)
         {
-            var validName = CheckValidationFullName(firstN, lastN, secN);
-            var validOther = CheckValidationOtherInfo(pass, roomNum);
-            if (validName.Equals(true) && validOther.Equals(true))
+            var validName = CheckInputValidation(name, lastName, parentName);
+            var validAccountInfo = CheckInputValidation(login, password, room);
+
+            if (validName && validAccountInfo)
             {
-                Name = firstN;
-                LastName = lastN;
-                ParentName = secN;
-                Room = roomNum;
-                Password = pass;
+                Login = login;
+                Name = name;
+                LastName = lastName;
+                ParentName = parentName;
+                Room = room;
+                ID = id;
+                Password = password;
             }
             else
             {
                 throw new ArgumentException("Вы ввели некорректные данные");
             }
         }
+
         public Person(string login, string password, int room)
         {
-            var validAccount = CheckValidationAccount(login, password, room);
+            var validAccount = CheckInputValidation(login, password, room);
             if (validAccount)
             {
                 Login = login;
                 Password = password;
                 Room = room;
+                //TODO: наверняка это присвоение можно как то упростить
             }
             else
             {
                 throw new ArgumentException("Вы ввели некорректные данные");
             }
         }
-        public string Name { get; set; }
-        public string LastName { get; }
-        public string ParentName { get; set; }
-        public string Login { get; }
-        public string Password { get; set; }
-        public int Room { get; }
-        public int ID { get; }
 
-        private bool CheckValidationFullName(string first, string last, string second)
+        private bool CheckInputValidation(string name, string lastName, string parentName)
         {
-            if (string.IsNullOrWhiteSpace(first) ||
-                string.IsNullOrWhiteSpace(last) ||
-                string.IsNullOrWhiteSpace(second))
-            {
+            if (string.IsNullOrWhiteSpace(name) ||
+                string.IsNullOrWhiteSpace(lastName) ||
+                string.IsNullOrWhiteSpace(parentName))
                 return false;
-            }
             else
-            {
                 return true;
-            }
         }
-        private bool CheckValidationOtherInfo(string pass, int roomNum)
+        private bool CheckInputValidation(string login, string password, int room)
         {
-            if(string.IsNullOrWhiteSpace(pass) || roomNum <= 0)
-            {
+            if (string.IsNullOrWhiteSpace(login) ||
+                string.IsNullOrWhiteSpace(password) ||
+                room <= 0)
                 return false;
-            }
             else
-            {
                 return true;
-            }
         }
-        private bool CheckValidationAccount(string login, string pass, int roomNum)
+        private bool CheckInputValidation(string login, int room)
         {
-            var validOther = CheckValidationOtherInfo(pass, roomNum);
-            if(string.IsNullOrWhiteSpace(login) || validOther.Equals(false))
-            {
+            if (string.IsNullOrWhiteSpace(login) ||
+                room <= 0)
                 return false;
-            }
             else
-            {
                 return true;
-            }
         }
+
     }
 }

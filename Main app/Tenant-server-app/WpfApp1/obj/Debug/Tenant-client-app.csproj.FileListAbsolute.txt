@@ -45,12 +45,9 @@ C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-serve
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\bin\Debug\System.Net.Http.Extensions.xml
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\bin\Debug\System.Net.Http.Primitives.xml
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Tenant-client-app.csproj.App.config
-C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Tenant-client-app.csprojAssemblyReference.cache
-C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\MainWindow.g.cs
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\App.g.cs
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.cache
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.lref
-C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\MainWindow.baml
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\WpfApp1.g.resources
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\WpfApp1.Properties.Resources.resources
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Tenant-client-app.csproj.GenerateResource.cache
@@ -58,3 +55,9 @@ C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-serve
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Tenant-client-app.csproj.CopyComplete
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\WpfApp1.exe
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\WpfApp1.pdb
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\MainWindow.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\MainWindow.baml
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\HomeWindow.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\HomeWindow.baml
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Pages\HomePages\ProfilePage.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Pages\HomePages\ProfilePage.baml

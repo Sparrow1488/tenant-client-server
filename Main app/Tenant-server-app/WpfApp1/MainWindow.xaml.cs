@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.IO;
-using System.Net;
 using System.Net.Sockets;
 using System.Windows;
 using WpfApp1.Classes;
@@ -37,10 +36,10 @@ namespace WpfApp1
                 var userIsAuthorizate = await server.Authorization(sendPerson);
                 if (userIsAuthorizate)
                 {
-                    exceptionLabel_TB.Visibility = Visibility.Visible;
-                    exceptionLabel_TB.Text = "Добро пожаловать!";
+                    HomeWindow home = new HomeWindow();
+                    home.Show();
+                    Close();
                 }
-                server.ShowUserInfo();
             }
             catch (SocketException)
             {
@@ -55,6 +54,11 @@ namespace WpfApp1
             {
                 exceptionLabel_TB.Visibility = Visibility.Visible;
                 exceptionLabel_TB.Text = "Удаленный хост принудительно разорвал существующее подключение";
+            }
+            catch (ArgumentException ex)
+            {
+                exceptionLabel_TB.Visibility = Visibility.Visible;
+                exceptionLabel_TB.Text = ex.Message;
             }
             finally
             {

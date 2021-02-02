@@ -23,21 +23,29 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
                     var sendPerson = JsonConvert.SerializeObject(personOutDB);
                     var response = Encoding.UTF8.GetBytes(sendPerson);
                     await stream.WriteAsync(response, 0, response.Length);
+
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Успешный вход");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 else
                 {
                     var response = Encoding.UTF8.GetBytes("Возможно, Вы ввели неверный пароль!");
                     await stream.WriteAsync(response, 0, response.Length);
+
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Ошибка авторизации");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
             }
             catch (NullReferenceException) 
             {
-                Console.WriteLine("Ошибка авторизации");
                 var response = Encoding.UTF8.GetBytes("Ошибка авторизации");
                 await stream.WriteAsync(response, 0, response.Length);
-                Console.WriteLine("Ответ отправлен");
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ошибка авторизации");
+                Console.ForegroundColor = ConsoleColor.White;
             }
         }
     }

@@ -18,19 +18,18 @@ namespace Multi_Server_Test
         }
         static async Task Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             TcpListener server = new TcpListener(IPAddress.Parse("127.0.0.1"), 8090);
             server.Start();
             Console.WriteLine($"Server started: {DateTime.Now}");
 
             CreateServerBlocks();
-
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Active blocks:");
-
             foreach (var block in ServerBlock.ExistsServerBlocks)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(block.BlockAction);
+                Console.WriteLine(" > " + block.BlockAction);
                 Console.ForegroundColor = ConsoleColor.White;
             }
 
@@ -40,29 +39,24 @@ namespace Multi_Server_Test
                 var client = server.AcceptTcpClient();
                 Console.WriteLine("Client connect");
 
-                var stream = client.GetStream();
+                var clientStream = client.GetStream();
                 byte[] buffer = new byte[1024];
                 StringBuilder jsonPackage = new StringBuilder();
                 do
                 {
-                    int bytes = stream.Read(buffer, 0, buffer.Length);
+                    int bytes = clientStream.Read(buffer, 0, buffer.Length);
                     jsonPackage.Append(Encoding.UTF8.GetString(buffer, 0, bytes));
                 }
-                while (stream.DataAvailable);
+                while (clientStream.DataAvailable);
                 var getPackage = JsonConvert.DeserializeObject<Package>(jsonPackage.ToString());
                 Console.WriteLine("Получена мета: {0}, {1}", getPackage.SendingMeta.Address, getPackage.SendingMeta.Action);
                 var clientObject = JsonConvert.SerializeObject(getPackage.SendingObject);
 
                 ////TODO: сделать маршрутизатор запроса
-                foreach (var block in ServerBlock.ExistsServerBlocks)
-                {
-                    if (getPackage.SendingMeta.Action.Equals(block.BlockAction))
-                    {
-                        await block.CompleteAction(clientObject, stream);
-                        break;
-                    }
-                }
-                Console.WriteLine("Clint disconnect");
+                Router requestRoute = new Router(getPackage.SendingMeta.Action, clientObject, clientStream);
+                await requestRoute.CompleteRouteAsync();
+                
+                Console.WriteLine("Request processed");
                 Console.WriteLine();
             }
             

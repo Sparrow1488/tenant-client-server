@@ -9,7 +9,7 @@ using WpfApp1.Server.Packages;
 
 namespace WpfApp1.Classes
 {
-    public class JamboServer
+    public class JumboServer
     {
         //private JsonSerializerSettings JsonSettings = new JsonSerializerSettings
         //{
@@ -18,10 +18,10 @@ namespace WpfApp1.Classes
         //};
 
         private TcpClient TCPclient = null;
-        private Person ActiveUser = null;
+        public Person ActiveUser = null;
         private ServerConfig ServerConfig = null;
 
-        public JamboServer(ServerConfig config)
+        public JumboServer(ServerConfig config)
         {
             ServerConfig = config;
         }
@@ -29,10 +29,10 @@ namespace WpfApp1.Classes
         {
             MessageBox.Show($"Login: {ActiveUser.Login};\n " +
                  $"Password: {ActiveUser.Password};\n " +
-                $"Room number: {ActiveUser.Room};\n " +
-                $"Name: {ActiveUser.Name}; \n " +
-                $"Parent name: {ActiveUser.ParentName};", 
-                "User information");
+                 $"Room number: {ActiveUser.Room};\n " +
+                 $"Name: {ActiveUser.Name}; \n " +
+                 $"Parent name: {ActiveUser.ParentName};", 
+                 "User information");
         }
         public bool ActiveUserCheckNull()
         {

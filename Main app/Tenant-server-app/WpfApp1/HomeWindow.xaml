@@ -5,44 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="HomeWindow" Height="450" Width="800"
+        Title="HomeWindow" Height="800" Width="1200"
+        MinWidth="460"
         Loaded="Window_Loaded">
     <Grid>
-        <Grid.ColumnDefinitions>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        
-        <StackPanel Orientation="Vertical"
+        </Grid.ColumnDefinitions>-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    Background="LightGray">
+            <Button FontSize="30"
                     Background="AliceBlue"
-                    Grid.Column="0">
-            <StackPanel Background="#A2E8EC">
-                <TextBlock Text="MyApp"
-                           FontSize="24"
-                           HorizontalAlignment="Center"
-                           FontFamily="Comic Sans MS"
-                           Margin="3"/>
-            </StackPanel>
-            
-            <Button Content="Profile"
-                    FontSize="22"
-                    Background="AliceBlue"
+                    FontWeight="DemiBold"
                     Foreground="Black"
                     BorderBrush="Transparent"
-                    Click="profileBtn_Click"/>
-            <Button Content="Notice"
-                    FontSize="22"
+                    Click="profileBtn_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\refs\icons\profileIcon.png"
+                           VerticalAlignment="Center"
+                           Width="30"/>
+                    <TextBlock Text="Профиль"/>
+                </StackPanel>
+            </Button>
+            <Button FontSize="30"
+                    Background="AliceBlue"
+                    FontWeight="DemiBold"
+                    Foreground="Black"
+                    BorderBrush="Transparent"
+                    Click="noticeBtn_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\refs\icons\noticeIcon.png"
+                           VerticalAlignment="Center"
+                           Width="30"/>
+                    <TextBlock Text="Новости"/>
+                </StackPanel>
+            </Button>
+            <Button FontSize="30"
+                    FontWeight="DemiBold"
                     Background="AliceBlue"
                     Foreground="Black"
-                    BorderBrush="Transparent"/>
-            <Button Content="Messanger"
-                    FontSize="22"
-                    Background="AliceBlue"
-                    Foreground="Black"
-                    BorderBrush="Transparent"/>
+                    BorderBrush="Transparent">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\refs\icons\chatIcon.png"
+                           VerticalAlignment="Center"
+                           Width="30"/>
+                    <TextBlock Text="Написать"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
-        <DockPanel Grid.Column="1">
-            <Frame x:Name="ProfilePageFrame"/>
+        <DockPanel Grid.Row="1">
+            <Frame x:Name="ProfilePageFrame" NavigationUIVisibility="Hidden"/>
         </DockPanel>
     </Grid>
 </Window>

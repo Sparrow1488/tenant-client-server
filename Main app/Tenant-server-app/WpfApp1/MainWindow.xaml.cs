@@ -12,7 +12,12 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        private JamboServer server;
+        private JumboServer server;
+
+        public JumboServer GetServerInstance()
+        {
+            return server;
+        }
 
         public MainWindow()
         {
@@ -21,7 +26,7 @@ namespace WpfApp1
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             exceptionLabel_TB.Visibility = Visibility.Collapsed;
-            server = new JamboServer(new ServerConfig());
+            server = new JumboServer(new ServerConfig());
         }
 
         private async void authBtn_Click(object sender, RoutedEventArgs e)
@@ -37,6 +42,7 @@ namespace WpfApp1
                 if (userIsAuthorizate)
                 {
                     HomeWindow home = new HomeWindow();
+                    HomeWindow.Server = server;
                     home.Show();
                     Close();
                 }

@@ -12,25 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApp1.Classes;
 
 namespace WpfApp1.Pages.HomePages
 {
     /// <summary>
-    /// Логика взаимодействия для ProfilePage.xaml
+    /// Логика взаимодействия для NoticePage.xaml
     /// </summary>
-    public partial class ProfilePage : Page
+    public partial class NoticePage : Page
     {
-        public ProfilePage()
+        public NoticePage()
         {
             InitializeComponent();
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            loginInfo.Text = HomeWindow.Server.ActiveUser.Login;
-            nameInfo.Text = HomeWindow.Server.ActiveUser.Name;
-            lastNameInfo.Text = HomeWindow.Server.ActiveUser.LastName;
         }
     }
 }

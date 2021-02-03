@@ -5,23 +5,34 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp1.Pages.HomePages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ProfilePage">
+      d:DesignHeight="800" d:DesignWidth="1200"
+      Title="ProfilePage"
+      Background="#F4F6F7"
+      Loaded="Page_Loaded">
 
     <Grid>
-        <StackPanel x:Name="mainProfilePanel" 
-                    Background="#B0B4FF">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel x:Name="mainProfilePanel"
+                    Grid.Column="1">
             <StackPanel x:Name="profileInfoPanel"
                         Margin="20"
                         Width="Auto">
                 <!--<Image Source="C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\refs\BG-2_1360х800.jpg"
                        Height="150"/>-->
                 <TextBlock Text="Login"
-                       FontSize="24"/>
+                           FontSize="28"
+                           x:Name="loginInfo"/>
                 <TextBlock Text="Name"
-                       FontSize="24"/>
+                           FontSize="28"
+                           x:Name="nameInfo"/>
                 <TextBlock Text="Last name"
-                       FontSize="24"/>
+                           FontSize="28"
+                           x:Name="lastNameInfo"/>
             </StackPanel>
             
         </StackPanel>

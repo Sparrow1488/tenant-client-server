@@ -5,6 +5,9 @@ using System.Net.Sockets;
 using System.Windows;
 using WpfApp1.Classes;
 
+//TODO: сделать нормальный профиль
+//TODO: добавить возможность получать новости с сервера (и да, сделать, собественно, возможность их туда загружать)
+
 namespace WpfApp1
 {
     /// <summary>
@@ -54,7 +57,7 @@ namespace WpfApp1
             }
             catch (JsonReaderException)
             {
-                MessageBox.Show("Получены нечитаемые данные!", "Exception");
+                MessageBox.Show("Получены нечитаемые данные!", "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (IOException)
             {
@@ -70,6 +73,7 @@ namespace WpfApp1
             {
                 send_Btn.IsEnabled = true;
             }
+            //TODO: метод обработки исключений
         }
     }
 }

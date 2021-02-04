@@ -29,9 +29,9 @@
                     BorderBrush="Transparent"
                     Click="profileBtn_Click">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\refs\icons\profileIcon.png"
+                    <!--<Image Source="C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\refs\icons\profileIcon.png"
                            VerticalAlignment="Center"
-                           Width="30"/>
+                           Width="30"/>-->
                     <TextBlock Text="Профиль"/>
                 </StackPanel>
             </Button>
@@ -42,9 +42,9 @@
                     BorderBrush="Transparent"
                     Click="noticeBtn_Click">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\refs\icons\noticeIcon.png"
+                    <!--<Image Source="C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\refs\icons\noticeIcon.png"
                            VerticalAlignment="Center"
-                           Width="30"/>
+                           Width="30"/>-->
                     <TextBlock Text="Новости"/>
                 </StackPanel>
             </Button>
@@ -54,9 +54,9 @@
                     Foreground="Black"
                     BorderBrush="Transparent">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\refs\icons\chatIcon.png"
+                    <!--<Image Source="C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\refs\icons\chatIcon.png"
                            VerticalAlignment="Center"
-                           Width="30"/>
+                           Width="30"/>-->
                     <TextBlock Text="Написать"/>
                 </StackPanel>
             </Button>

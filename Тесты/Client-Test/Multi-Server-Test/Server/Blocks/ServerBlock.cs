@@ -7,22 +7,18 @@ namespace Multi_Server_Test.ServerData.Blocks
 {
     public abstract class ServerBlock
     {
-        public static List<string> ExistsActions = new List<string>();
-        public static List<ServerBlock> ExistsServerBlocks = new List<ServerBlock>();
+        public MyServer requestServer;
         public string BlockAction { get; }
-        public ServerBlock(string blockAction)
+        public ServerBlock(string blockAction, MyServer server)
         {
             if(blockAction.Length >= 4)
             {
                 BlockAction = blockAction;
-                ExistsActions.Add(BlockAction);
-                ExistsServerBlocks.Add(this);
+                requestServer = server;
             }
             else
-            {
                 throw new ArgumentException("Название блока должно быть больше 4-х символов");
-            }
         }
-        public abstract Task CompleteAction(string clientJson, NetworkStream stream);
+        public abstract void CompleteAction(string clientJson, NetworkStream stream);
     }
 }

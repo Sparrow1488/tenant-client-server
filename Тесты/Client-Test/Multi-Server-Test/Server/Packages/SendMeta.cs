@@ -9,7 +9,7 @@ namespace Multi_Server_Test.Server.Packages
         {
             Address = address;
             Action = action;
-            FromHostName = Dns.GetHostName();
+            FromHostName = Dns.GetHostName(); //TODO: зачем получаю адресс сервера?
         }
         public string Address { get; }
         public string Action { get; }

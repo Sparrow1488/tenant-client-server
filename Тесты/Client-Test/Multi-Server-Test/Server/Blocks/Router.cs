@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Multi_Server_Test.ServerData.Blocks
 {
@@ -18,13 +16,13 @@ namespace Multi_Server_Test.ServerData.Blocks
             ClientResponseStream = stream;
         }
 
-        public async Task CompleteRouteAsync()
+        public void CompleteRoute(List<ServerBlock> listServerBlocks)
         {
-            foreach (var block in ServerBlock.ExistsServerBlocks)
+            foreach (var block in listServerBlocks)
             {
                 if (RouteAction.Equals(block.BlockAction))
                 {
-                    await block.CompleteAction(JsonClinetObject, ClientResponseStream);
+                    block.CompleteAction(JsonClinetObject, ClientResponseStream);
                     break;
                 }
             }

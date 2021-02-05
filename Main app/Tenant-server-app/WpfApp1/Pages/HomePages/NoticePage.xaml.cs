@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using WpfApp1.Classes;
+using WpfApp1.Server;
 
 namespace WpfApp1.Pages.HomePages
 {
@@ -23,6 +14,18 @@ namespace WpfApp1.Pages.HomePages
         public NoticePage()
         {
             InitializeComponent();
+        }
+
+        private bool IsLoadNews = false;
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoadNews)
+            {
+                var meta = new PackageMeta("127.0.0.1", "news");
+                var nullNews = new News();
+                var jsonResponse = await HomeWindow.Server.SendAndGet(nullNews, meta);
+                IsLoadNews = true;
+            }
         }
     }
 }

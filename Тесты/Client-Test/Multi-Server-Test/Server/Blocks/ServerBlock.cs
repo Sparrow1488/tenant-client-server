@@ -7,14 +7,14 @@ namespace Multi_Server_Test.ServerData.Blocks
 {
     public abstract class ServerBlock
     {
-        public MyServer requestServer;
+        public MyServer RequestServer;
         public string BlockAction { get; }
         public ServerBlock(string blockAction, MyServer server)
         {
             if(blockAction.Length >= 4)
             {
                 BlockAction = blockAction;
-                requestServer = server;
+                RequestServer = server;
             }
             else
                 throw new ArgumentException("Название блока должно быть больше 4-х символов");

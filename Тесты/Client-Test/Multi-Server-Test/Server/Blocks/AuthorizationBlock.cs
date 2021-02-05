@@ -15,7 +15,7 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
             try
             {
                 var getClientPerson = JsonConvert.DeserializeObject<Person>(clientJson);
-                var personOutDB = await requestServer.GetUserOutDataBase(getClientPerson);
+                var personOutDB = await RequestServer.GetUser(getClientPerson);
                 
                 if (getClientPerson.Password.Equals(personOutDB.Password))
                 {

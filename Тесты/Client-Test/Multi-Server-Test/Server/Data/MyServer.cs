@@ -6,6 +6,7 @@ using Multi_Server_Test.ServerData.Blocks;
 using Multi_Server_Test.ServerData.Server;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -42,29 +43,54 @@ namespace Multi_Server_Test.ServerData
                 throw new ArgumentException("Вы передали некорректные значения");
             }
         }
-        public async Task AddInDb(Person person)
+        public async Task AddUser(Person person)
         {
             if (!person.Equals(null))
             {
                 await Task.Run(() =>
                 {
-                    Meta.serverClient.SetAsync($"{Meta.usersPath}/{person.Login}", person);
+                    Meta.firebaseClient.SetAsync($"{Meta.usersPath}/{person.Login}", person);
                 });
             }
         }
-        public async Task<Person> GetUserOutDataBase(Person person)
+        public async Task AddNews(NewsList list)
+        {
+            if (!list.Equals(null))
+            {
+                await Task.Run(() =>
+                {
+                    Meta.firebaseClient.SetAsync($"{Meta.usersPath}/{list}", list);
+                });
+            }
+        }
+        public async Task<Person> GetUser(Person person)
         {
             FirebaseResponse respose;
             try
             {
-                Meta.serverClient = new FirebaseClient(Meta.firebaseConfig);
-                respose = await Meta.serverClient.GetAsync($"{Meta.usersPath}/{person.Login}");
+                Meta.firebaseClient = new FirebaseClient(Meta.firebaseConfig);
+                respose = await Meta.firebaseClient.GetAsync($"{Meta.usersPath}/{person.Login}");
             }
             catch (NullReferenceException) { return null; }
 
             var user = respose.ResultAs<Person>();
             return user;
         }
+
+        public async Task<object> GetNews()
+        {
+            FirebaseResponse respose;
+            try
+            {
+                Meta.firebaseClient = new FirebaseClient(Meta.firebaseConfig);
+                respose = await Meta.firebaseClient.GetAsync($"{Meta.newsPath}");
+            }
+            catch (NullReferenceException) { return null; }
+
+            var news = respose.ResultAs<object>();
+            return news;
+        }
+
         public void Start()
         {
             foreach (var block in Blocks.ExistServerBlocks)
@@ -79,7 +105,7 @@ namespace Multi_Server_Test.ServerData
         {
             while (true)
             {
-                Console.WriteLine("Ожидаю запроса.......");
+                ShowReport("Ожидаю запроса.......", ConsoleColor.White);
                 var client = Listener.AcceptTcpClient();
                 Thread handleClient = new Thread(new ParameterizedThreadStart(ResponseToClient));
                 handleClient.Start(client);
@@ -111,6 +137,7 @@ namespace Multi_Server_Test.ServerData
         }
         private void ShowReport(string report, ConsoleColor color)
         {
+            Console.Write(serverName + "> ");
             Console.ForegroundColor = color;
             Console.WriteLine(report);
             Console.ForegroundColor = ConsoleColor.White;

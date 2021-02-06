@@ -13,6 +13,7 @@ namespace WpfApp1.Pages.HomePages
     /// </summary>
     public partial class NoticePage : Page
     {
+        private NewsCollection News;
         public NoticePage()
         {
             InitializeComponent();
@@ -23,11 +24,8 @@ namespace WpfApp1.Pages.HomePages
         {
             if (!IsLoadNews)
             {
-                var meta = new PackageMeta("127.0.0.1", "news");
-                var nullNews = new News();
-                var jsonResponse = await HomeWindow.Server.SendAndGet(nullNews, meta);
-                var arrayNews = JsonConvert.DeserializeObject<NewsCollection>(jsonResponse);
-                foreach (var news in arrayNews.Collection)
+                News = await HomeWindow.Server.ReceiveNewsCollection();
+                foreach (var news in News.Collection)
                 {
                     MessageBox.Show(news.Description, news.Title);
                 }

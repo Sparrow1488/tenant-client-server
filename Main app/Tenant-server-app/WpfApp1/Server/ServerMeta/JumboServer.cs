@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Multi_Server_Test.Server.Packages;
+using Newtonsoft.Json;
 using System;
 using System.Net.Sockets;
 using System.Text;
@@ -55,8 +56,19 @@ namespace WpfApp1.Classes
             
             return true;
         }
+        public async Task<NewsCollection> ReceiveNewsCollection()
+        {
+            var meta = new PackageMeta("127.0.0.1", "news");
+            var nullNews = new News(); //TODO: ИСПРАВИТЬ КАЛОВЫЙ КОНСТРУКТОР + ВОЗМОЖНОСТЬ ОТПРАВЛЯТЬ ТОЛЬКО МЕТУ НА СЕРВЕР
+            var jsonCollection = await SendAndGet(nullNews, meta);
+            var collectionResponse =  JsonConvert.DeserializeObject<NewsCollection>(jsonCollection);
+            if (collectionResponse == null)
+                throw new NullReferenceException("Получена пустая коллекция!");
+            else
+                return collectionResponse;
+        }
 
-        public async Task<string> SendAndGet(RequestObject sendObject, PackageMeta meta)
+        private async Task<string> SendAndGet(RequestObject sendObject, PackageMeta meta)
         {
             await SendRequestAsync(sendObject, meta);
             var jsonResponse = await GetResponseAsync();

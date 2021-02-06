@@ -25,6 +25,8 @@ namespace Multi_Server_Test.ServerData
         public ServerMeta Meta = null;
         public BlocksSection Blocks = null;
 
+        public NewsCollection newsCollectionOutDB = null;
+
         public MyServer(string host, int port)
         {
             if(!string.IsNullOrWhiteSpace(host) &&
@@ -43,24 +45,32 @@ namespace Multi_Server_Test.ServerData
                 throw new ArgumentException("Вы передали некорректные значения");
             }
         }
+        public async Task Start()
+        {
+            foreach (var block in Blocks.ExistServerBlocks)
+                Console.WriteLine(block.BlockAction + " is active");
+
+            newsCollectionOutDB = await SynchronizeNewsCollection();
+            foreach (var news in newsCollectionOutDB.Collection)
+                Console.Write($"\t{news.Title}: {news.Description} <{news.DateTime.ToLongDateString()}> \n");
+
+            Listener.Start();
+            ShowReport("Server started!", ConsoleColor.Green);
+        }
         public async Task AddUser(Person person)
         {
             if (!person.Equals(null))
             {
-                await Task.Run(() =>
-                {
-                    Meta.firebaseClient.SetAsync($"{Meta.usersPath}/{person.Login}", person);
-                });
+                Meta.firebaseClient = new FirebaseClient(Meta.firebaseConfig);
+                await Meta.firebaseClient.SetAsync($"{Meta.usersPath}/{person.Login}", person);
             }
         }
-        public async Task AddNews(NewsList list)
+        public async Task AddNewsCollection(NewsCollection collection)
         {
-            if (!list.Equals(null))
+            if (collection != null)
             {
-                await Task.Run(() =>
-                {
-                    Meta.firebaseClient.SetAsync($"{Meta.usersPath}/{list}", list);
-                });
+                Meta.firebaseClient = new FirebaseClient(Meta.firebaseConfig);
+                var biba = await Meta.firebaseClient.SetAsync($"{Meta.newsPath}/{NewsCollection.Name}", collection);
             }
         }
         public async Task<Person> GetUser(Person person)
@@ -76,32 +86,20 @@ namespace Multi_Server_Test.ServerData
             var user = respose.ResultAs<Person>();
             return user;
         }
-
-        public async Task<object> GetNews()
+        public async Task<NewsCollection> GetNewsCollection()
         {
             FirebaseResponse respose;
             try
             {
                 Meta.firebaseClient = new FirebaseClient(Meta.firebaseConfig);
-                respose = await Meta.firebaseClient.GetAsync($"{Meta.newsPath}");
+                respose = await Meta.firebaseClient.GetAsync($"{Meta.newsPath}/{NewsCollection.Name}");
             }
             catch (NullReferenceException) { return null; }
 
-            var news = respose.ResultAs<object>();
-            return news;
+            var getNewsCollection = respose.ResultAs<NewsCollection>();
+            return getNewsCollection;
         }
-
-        public void Start()
-        {
-            foreach (var block in Blocks.ExistServerBlocks)
-            {
-                Console.WriteLine(block.BlockAction + " is active");
-            }
-            Listener.Start();
-            ShowReport("Server started!", ConsoleColor.Green);
-        }
-
-        public void ReseveAndServeClient()
+        public void ReseveAndResponseToClient()
         {
             while (true)
             {
@@ -114,33 +112,61 @@ namespace Multi_Server_Test.ServerData
         private void ResponseToClient(object tcpClient)
         {
             var validClient = tcpClient as TcpClient;
-            Console.Write("Client ");
-            string statusConnected = "connect";
-            ShowReport(statusConnected, ConsoleColor.Green);
-
-            var clientStream = validClient.GetStream();
-            byte[] buffer = new byte[1024];
-            StringBuilder jsonPackage = new StringBuilder();
-            do
+            if (validClient.Connected)
             {
-                int bytes = clientStream.Read(buffer, 0, buffer.Length);
-                jsonPackage.Append(Encoding.UTF8.GetString(buffer, 0, bytes));
-            }
-            while (clientStream.DataAvailable);
-            var getPackage = JsonConvert.DeserializeObject<Package>(jsonPackage.ToString());
-            Console.WriteLine("Получена мета: {0}, {1}", getPackage.SendingMeta.Address, getPackage.SendingMeta.Action);
-            var clientObject = JsonConvert.SerializeObject(getPackage.SendingObject);
+                ShowReport("Client connect", ConsoleColor.Green);
+                var clientStream = validClient.GetStream();
+                byte[] buffer = new byte[1024];
+                StringBuilder jsonPackage = new StringBuilder();
+                do
+                {
+                    int bytes = clientStream.Read(buffer, 0, buffer.Length);
+                    jsonPackage.Append(Encoding.UTF8.GetString(buffer, 0, bytes));
+                }
+                while (clientStream.DataAvailable);
+                var getPackage = JsonConvert.DeserializeObject<Package>(jsonPackage.ToString());
+                Console.WriteLine("Получена мета: {0}, {1}", getPackage.SendingMeta.Address, getPackage.SendingMeta.Action);
+                var clientObject = JsonConvert.SerializeObject(getPackage.SendingObject);
 
-            ShowReport("Request processing...", ConsoleColor.Yellow);
-            Router requestRoute = new Router(getPackage.SendingMeta.Action, clientObject, clientStream);
-            requestRoute.CompleteRoute(Blocks.ExistServerBlocks);
+                ShowReport("Distribute request to handle in routing block...", ConsoleColor.Yellow);
+                Router requestRoute = new Router(getPackage.SendingMeta.Action, clientObject, clientStream);
+                requestRoute.CompleteRoute(Blocks.ExistServerBlocks);
+            }
+            else
+            {
+                ShowReport("Client not connected", ConsoleColor.Red);
+            }
+            
         }
         private void ShowReport(string report, ConsoleColor color)
         {
-            Console.Write(serverName + "> ");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write(serverName);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+
+            Console.Write("> ");
+
             Console.ForegroundColor = color;
             Console.WriteLine(report);
             Console.ForegroundColor = ConsoleColor.White;
         }
+        private async Task<NewsCollection> SynchronizeNewsCollection()
+        {
+            try
+            {
+                var newsCollectionResponse = await GetNewsCollection();
+                ShowReport("News was loaded successful", ConsoleColor.Green);
+                return newsCollectionResponse;
+            }
+            catch (NullReferenceException) 
+            {
+                //TODO: СДЕЛАТЬ РЕЗЕРВНОЕ КОПИРОВАНИЕ НОВОСТЕЙ
+                return new NewsCollection(new List<News>() 
+                { new News("RESERVER NEWS COLLECTION", 
+                "DATABASE RETURN NULL NEWS COLLECTION, PLEASE, CHECK DATABASE AND RECOVERY DATA: server exception") 
+                });
+            }
+        }
+
     }
 }

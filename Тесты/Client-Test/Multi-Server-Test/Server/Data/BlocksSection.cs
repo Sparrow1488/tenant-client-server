@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Multi_Server_Test.ServerData.Server
 {
-    public class BlocksSection
+    public class BlocksSection //TODO: а он точно нужен?
     {
         public List<ServerBlock> ExistServerBlocks = new List<ServerBlock>();
         public BlocksSection(MyServer usageServer)

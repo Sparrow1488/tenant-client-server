@@ -9,10 +9,10 @@ namespace Multi_Server_Test.ServerData.Blocks
         public string RouteAction { get; }
         public string JsonClinetObject { get; }
         public NetworkStream ClientResponseStream { get; }
-        public Router(string action, string clientObject, NetworkStream stream)
+        public Router(string action, string clientJsonObject, NetworkStream stream)
         {
             RouteAction = action;
-            JsonClinetObject = clientObject;
+            JsonClinetObject = clientJsonObject;
             ClientResponseStream = stream;
         }
 

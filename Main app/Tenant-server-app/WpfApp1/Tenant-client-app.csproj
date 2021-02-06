@@ -118,6 +118,7 @@
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Server\News.cs" />
+    <Compile Include="Server\NewsCollection.cs" />
     <Compile Include="Server\Packages\Package.cs" />
     <Compile Include="Server\Packages\PackageMeta.cs" />
     <Compile Include="Server\Packages\RequestObject.cs" />

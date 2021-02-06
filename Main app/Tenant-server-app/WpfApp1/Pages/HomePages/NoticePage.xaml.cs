@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Multi_Server_Test.Server.Packages;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using WpfApp1.Classes;
 using WpfApp1.Server;
+using Newtonsoft.Json;
 
 namespace WpfApp1.Pages.HomePages
 {
@@ -24,6 +26,11 @@ namespace WpfApp1.Pages.HomePages
                 var meta = new PackageMeta("127.0.0.1", "news");
                 var nullNews = new News();
                 var jsonResponse = await HomeWindow.Server.SendAndGet(nullNews, meta);
+                var arrayNews = JsonConvert.DeserializeObject<NewsCollection>(jsonResponse);
+                foreach (var news in arrayNews.Collection)
+                {
+                    MessageBox.Show(news.Description, news.Title);
+                }
                 IsLoadNews = true;
             }
         }

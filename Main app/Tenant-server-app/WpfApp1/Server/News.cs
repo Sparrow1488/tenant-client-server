@@ -1,28 +1,16 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using WpfApp1.Server.Packages;
 
-namespace WpfApp1.Server
+namespace Multi_Server_Test.Server.Packages
 {
     public class News : RequestObject
     {
-        public List<string> getNews = new List<string>();
-        public string Title { get; }
-        public string Description { get; }
-        public string ImageRef { get; }
-
-        [JsonConstructor]
-        public News(string title, string description, string imageRef)
-        {
-            Title = title;
-            Description = description;
-            ImageRef = imageRef;
-        }
-        public News()
-        {
-            Title = "for request constructor";
-            Description = "for request constructor";
-        }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string ImageRef { get; set; }
+        public int ID { get; set; }
+        public DateTime DateTime { get; set; }
     }
 }

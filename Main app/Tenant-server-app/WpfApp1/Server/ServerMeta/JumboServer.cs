@@ -52,6 +52,7 @@ namespace WpfApp1.Classes
             {
                 throw new Exception("Данный пользователь не существует");
             }
+            
             return true;
         }
 
@@ -59,6 +60,7 @@ namespace WpfApp1.Classes
         {
             await SendRequestAsync(sendObject, meta);
             var jsonResponse = await GetResponseAsync();
+            TCPclient.Close();
             return jsonResponse;
         }
 

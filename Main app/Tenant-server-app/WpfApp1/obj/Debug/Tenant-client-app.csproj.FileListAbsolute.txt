@@ -72,3 +72,4 @@ C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Main app\Tenant
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Tenant-client-app.csproj.CopyComplete
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\WpfApp1.exe
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\WpfApp1.pdb
+C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Main app\Tenant-server-app\WpfApp1\bin\Debug\System.Drawing.Common.dll

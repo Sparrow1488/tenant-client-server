@@ -17,7 +17,6 @@ namespace WpfApp1.Classes
         //    TypeNameHandling = TypeNameHandling.Auto,
         //    Formatting = Formatting.Indented
         //};
-
         private TcpClient TCPclient = null;
         public Person ActiveUser = null;
         private ServerConfig ServerConfig = null;

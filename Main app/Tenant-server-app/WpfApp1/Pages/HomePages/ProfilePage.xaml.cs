@@ -26,11 +26,15 @@ namespace WpfApp1.Pages.HomePages
             InitializeComponent();
         }
 
+        private bool InfoUserIsLoaded = false;
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            loginInfo.Text = HomeWindow.Server.ActiveUser.Login;
-            nameInfo.Text = HomeWindow.Server.ActiveUser.Name;
-            lastNameInfo.Text = HomeWindow.Server.ActiveUser.LastName;
+            //TODO: ошибка nullRefException
+            loginInfo.Text += HomeWindow.Server.ActiveUser.Login;
+            nameInfo.Text += HomeWindow.Server.ActiveUser.Name;
+            lastNameInfo.Text += HomeWindow.Server.ActiveUser.LastName;
+
+            InfoUserIsLoaded = true;
         }
     }
 }

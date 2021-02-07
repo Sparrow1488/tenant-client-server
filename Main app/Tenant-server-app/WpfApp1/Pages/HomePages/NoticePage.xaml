@@ -9,8 +9,8 @@
     d:DesignHeight="800"
     d:DesignWidth="1200"
     Background="GhostWhite"
-    mc:Ignorable="d"
-    Loaded="Page_Loaded">
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -18,39 +18,23 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-
-        <StackPanel
-            x:Name="actionPanel"
-            Grid.Column="1"
-            Width="600"
-            Height="Auto"
-            Margin="10"
-            Orientation="Vertical">
-            <Grid>
-                <StackPanel Background="#E9FCFF">
-                    <StackPanel
-                        Name="topPanel"
-                        Height="2"
-                        Background="Black" />
-                    <TextBlock
-                        Margin="20,5,10,0"
-                        FontFamily="Corbel"
-                        FontSize="40"
-                        FontWeight="DemiBold"
-                        Text="What is WPF?" />
-                    <TextBlock
-                        Margin="20,0,10,0"
-                        FontSize="24"
-                        Text="Windows Presentation Foundation — аналог WinForms, система для построения клиентских приложений Windows с визуально привлекательными возможностями взаимодействия с пользователем, графическая подсистема в составе .NET Framework, использующая язык XAML"
-                        TextWrapping="Wrap" />
-                    <Image Margin="10" Source="/refs/BG-2_1360х800.jpg" />
-                    <StackPanel
-                        x:Name="bottomPanel"
-                        Height="2"
-                        Background="Black" />
-                </StackPanel>
-            </Grid>
+        <StackPanel Grid.Column="0">
+            <Button
+                x:Name="addPanelBtn"
+                Width="Auto"
+                Height="40"
+                Click="addPanelBtn_Click"
+                Content="ADD"
+                FontSize="30" />
         </StackPanel>
 
+        <ScrollViewer Grid.Column="1">
+            <StackPanel
+                x:Name="contentPanel"
+                Width="600"
+                Height="Auto"
+                Margin="15"
+                CanVerticallyScroll="True" />
+        </ScrollViewer>
     </Grid>
 </Page>

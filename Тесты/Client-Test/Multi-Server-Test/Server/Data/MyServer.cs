@@ -7,6 +7,7 @@ using Multi_Server_Test.ServerData.Server;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -63,6 +64,7 @@ namespace Multi_Server_Test.ServerData
             {
                 Meta.firebaseClient = new FirebaseClient(Meta.firebaseConfig);
                 await Meta.firebaseClient.SetAsync($"{Meta.usersPath}/{person.Login}", person);
+                ShowReport("Person was loaded on server", ConsoleColor.Green);
             }
         }
         public async Task AddNewsCollection(NewsCollection collection)
@@ -70,7 +72,8 @@ namespace Multi_Server_Test.ServerData
             if (collection != null)
             {
                 Meta.firebaseClient = new FirebaseClient(Meta.firebaseConfig);
-                var biba = await Meta.firebaseClient.SetAsync($"{Meta.newsPath}/{NewsCollection.Name}", collection);
+                await Meta.firebaseClient.SetAsync($"{Meta.newsPath}/{NewsCollection.Name}", collection);
+                ShowReport("News was loaded on server", ConsoleColor.Green);
             }
         }
         public async Task<Person> GetUser(Person person)
@@ -125,7 +128,7 @@ namespace Multi_Server_Test.ServerData
                 }
                 while (clientStream.DataAvailable);
                 var getPackage = JsonConvert.DeserializeObject<Package>(jsonPackage.ToString());
-                Console.WriteLine("Получена мета: {0}, {1}", getPackage.SendingMeta.Address, getPackage.SendingMeta.Action);
+                Console.WriteLine("Получена мета:\nTo: {0},\nFrom: {1} \nAction: {2}", getPackage.SendingMeta.Address, getPackage.SendingMeta.FromHostName, getPackage.SendingMeta.Action);
                 var clientObject = JsonConvert.SerializeObject(getPackage.SendingObject);
 
                 ShowReport("Distribute request to handle in routing block...", ConsoleColor.Yellow);
@@ -156,15 +159,24 @@ namespace Multi_Server_Test.ServerData
             {
                 var newsCollectionResponse = await GetNewsCollection();
                 ShowReport("News was loaded successful", ConsoleColor.Green);
+                using (var writer = new StreamWriter($"{Meta.reservePath}/{Meta.reserveNewsCollection}"))
+                {
+                    var dataJson = JsonConvert.SerializeObject(newsCollectionResponse);
+                    await writer.WriteAsync(dataJson);
+                    ShowReport("News saved", ConsoleColor.Green);
+                }
                 return newsCollectionResponse;
             }
             catch (NullReferenceException) 
             {
-                //TODO: СДЕЛАТЬ РЕЗЕРВНОЕ КОПИРОВАНИЕ НОВОСТЕЙ
-                return new NewsCollection(new List<News>() 
-                { new News("RESERVER NEWS COLLECTION", 
-                "DATABASE RETURN NULL NEWS COLLECTION, PLEASE, CHECK DATABASE AND RECOVERY DATA: server exception") 
-                });
+                ShowReport("News cannot be retrieved from the database!", ConsoleColor.Red);
+                ShowReport($"Trying execute load from ./{Meta.reservePath}/...", ConsoleColor.Yellow);
+                using (var reader = new StreamReader($"{Meta.reservePath}/{Meta.reserveNewsCollection}"))
+                {
+                    var reserveCollectionJson = reader.ReadToEnd();
+                    var reserveCollection = JsonConvert.DeserializeObject<NewsCollection>(reserveCollectionJson);
+                    return reserveCollection;
+                }
             }
         }
 

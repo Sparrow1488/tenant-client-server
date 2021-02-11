@@ -14,41 +14,67 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition />
+            <ColumnDefinition Width="40" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="40" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel x:Name="mainProfilePanel" Grid.Column="1">
+        <StackPanel
+            x:Name="mainProfilePanel"
+            Grid.Column="1"
+            MinWidth="510">
             <StackPanel
                 x:Name="profileInfoPanel"
                 Height="Auto"
                 Margin="20"
-                Background="#B0FF99">
-                <WrapPanel
+                Background="#D9ABE1">
+                <StackPanel
                     Width="Auto"
                     Margin="20"
-                    Orientation="Vertical">
-                    <TextBlock
-                        x:Name="loginInfo"
-                        FontSize="28"
-                        Foreground="#C70039  "
-                        Text="Логин: " />
-                    <TextBlock
-                        x:Name="lastNameInfo"
-                        FontSize="28"
-                        Text="Фамилия: " />
-                    <TextBlock
-                        x:Name="nameInfo"
-                        FontSize="28"
-                        Text="Имя: " />
-                    <TextBlock
-                        x:Name="secondNameInfo"
-                        FontSize="28"
-                        Text="Отчество: " />
-                </WrapPanel>
-            </StackPanel>
+                    Orientation="Horizontal">
 
+                    <StackPanel
+                        x:Name="profileImagePanel"
+                        Margin="2,2,10,2"
+                        VerticalAlignment="Center">
+                        <Image Width="150" Source="/refs/icons/userIcon.png" />
+                    </StackPanel>
+
+                    <StackPanel x:Name="userInfo" Margin="10">
+                        <TextBlock
+                            x:Name="loginInfo"
+                            Margin="2"
+                            FontSize="28"
+                            Foreground="#C70039"
+                            Text="Логин: " />
+                        <TextBlock
+                            x:Name="fullNameInfo"
+                            Margin="2"
+                            FontSize="28"
+                            Text="ФИО: "
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            x:Name="roomNumInfo"
+                            Margin="2"
+                            FontSize="28"
+                            Text="Квартира: "
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            x:Name="phoneNumberInfo"
+                            Margin="2"
+                            FontSize="28"
+                            Text="Номер телефона: "
+                            TextWrapping="Wrap" />
+                        <Button Background="Transparent" Foreground="Black">
+                            <TextBlock
+                                Margin="5"
+                                FontSize="24"
+                                Text="Редактировать профиль" />
+                        </Button>
+                    </StackPanel>
+
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

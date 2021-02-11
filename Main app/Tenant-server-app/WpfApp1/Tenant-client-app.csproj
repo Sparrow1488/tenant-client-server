@@ -209,6 +209,7 @@
     <Resource Include="refs\icons\complaintIcon.png" />
     <Resource Include="refs\icons\offerIcon.png" />
     <Resource Include="refs\icons\questionIcon.png" />
+    <Resource Include="refs\icons\userIcon.png" />
     <Content Include="refs\TestIMG-1.jfif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,7 +8,7 @@
     Title="HomeWindow"
     Width="1200"
     Height="800"
-    MinWidth="460"
+    MinWidth="650"
     Loaded="Window_Loaded"
     mc:Ignorable="d">
     <Grid>
@@ -52,16 +52,17 @@
                         Width="30"
                         VerticalAlignment="Center"
                         Source="refs\icons\noticeIcon.png" />
-                    <TextBlock Text="Новости" />
+                    <TextBlock Text="Объявления" />
                 </StackPanel>
             </Button>
             <Button
                 Padding="5"
                 Background="AliceBlue"
                 BorderBrush="Transparent"
+                Click="letterBtn_Click"
                 FontSize="30"
                 FontWeight="DemiBold"
-                Foreground="Black" Click="letterBtn_Click">
+                Foreground="Black">
                 <StackPanel Orientation="Horizontal">
                     <Image
                         Width="30"

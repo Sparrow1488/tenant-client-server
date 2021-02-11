@@ -2,16 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WpfApp1.Classes;
 
 namespace WpfApp1.Pages.HomePages
@@ -30,11 +22,38 @@ namespace WpfApp1.Pages.HomePages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             //TODO: ошибка nullRefException
-            loginInfo.Text += HomeWindow.Server.ActiveUser.Login;
-            nameInfo.Text += HomeWindow.Server.ActiveUser.Name;
-            lastNameInfo.Text += HomeWindow.Server.ActiveUser.LastName;
+            if (InfoUserIsLoaded == false)
+            {
+                try
+                {
+                    ShowUserProfileInfo(HomeWindow.Server.ActiveUser);
+                }
+                catch (NullReferenceException)
+                {
+                    MessageBox.Show(
+                        "Ошибка авторизации: данный пользователь не может быть отображен",
+                        "Authorization exception", 
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Exclamation);
+                    Environment.Exit(1);
+                }
 
-            InfoUserIsLoaded = true;
+                InfoUserIsLoaded = true;
+            }
+        }
+
+        private void ShowUserProfileInfo(Person user)
+        {
+            var login = user.Login;
+            var name = user.Name;
+            var lastName = user.LastName;
+            var parentName = user.ParentName;
+            var roomNumber = user.Room;
+
+            loginInfo.Text += login;
+            fullNameInfo.Text += $"{lastName} {name} {parentName}";
+            roomNumInfo.Text += roomNumber;
+            phoneNumberInfo.Text += "-";
         }
     }
 }

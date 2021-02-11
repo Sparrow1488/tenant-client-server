@@ -13,7 +13,7 @@ namespace WpfApp1.Pages.HomePages
     /// </summary>
     public partial class NoticePage : Page
     {
-        private NewsCollection News;
+        private NewsCollection ReceivedNews;
         public NoticePage()
         {
             InitializeComponent();
@@ -26,13 +26,12 @@ namespace WpfApp1.Pages.HomePages
             {
                 if (!IsLoadNews)
                 {
-                    News = await HomeWindow.Server.ReceiveNewsCollection();
-                    foreach (var news in News.Collection)
+                    ReceivedNews = await HomeWindow.Server.ReceiveNewsCollection();
+                    foreach (var news in ReceivedNews.Collection)
                     {
-                        AddInPanel(news.Title, news.Description, null);
+                        AddNewsTitleAndDescription(news.Title, news.Description);
                     }
                     IsLoadNews = true;
-
                 }
             }
             catch (NullReferenceException)
@@ -44,12 +43,11 @@ namespace WpfApp1.Pages.HomePages
             }
         }
 
-        int countr = 0;
         private void addPanelBtn_Click(object sender, RoutedEventArgs e)
         {
-            AddInPanel("Пицца", "Описание пиццы", null);
+            AddNewsTitleAndDescription("Пицца", "Описание пиццы");
         }
-        private void AddInPanel(string title, string desc, byte[] image)
+        private void AddNewsTitleAndDescription(string title, string desc)
         {
             var mainPanel = new StackPanel()
             {
@@ -70,7 +68,7 @@ namespace WpfApp1.Pages.HomePages
                 TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(20, 5, 0, 5)
             };
-            var descBlock = new TextBlock()
+            var descriptionBlock = new TextBlock()
             {
                 Text = desc,
                 FontSize = 20,
@@ -80,30 +78,29 @@ namespace WpfApp1.Pages.HomePages
 
             mainPanel.Children.Add(topBorder);
             mainPanel.Children.Add(titleBlock);
-            mainPanel.Children.Add(descBlock);
+            mainPanel.Children.Add(descriptionBlock);
 
-            if (image != null)
-            {
-                MemoryStream ms = new MemoryStream(image);
-                //System.Drawing.Image returnImage = (System.Drawing.Bitmap)System.Drawing.Bitmap.FromStream(ms);
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.StreamSource = ms;
-                bitmapImage.EndInit();
+            //TODO: сделать показ картинок
 
-                var imagePanel = new Image()
-                {
-                    Source = bitmapImage,
-                    Height = 400
-                };
-                mainPanel.Children.Add(imagePanel);
-            }
+            //if (image != null)
+            //{
+            //    MemoryStream ms = new MemoryStream(image);
+            //    //System.Drawing.Image returnImage = (System.Drawing.Bitmap)System.Drawing.Bitmap.FromStream(ms);
+            //    var bitmapImage = new BitmapImage();
+            //    bitmapImage.BeginInit();
+            //    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+            //    bitmapImage.StreamSource = ms;
+            //    bitmapImage.EndInit();
+
+            //    var imagePanel = new Image()
+            //    {
+            //        Source = bitmapImage,
+            //        Height = 400
+            //    };
+            //    mainPanel.Children.Add(imagePanel);
+            //}
             
-
-            countr++;
-            contentPanel.Children
-                .Insert(0, mainPanel);
+            contentPanel.Children.Insert(0, mainPanel);
         }
     }
 }

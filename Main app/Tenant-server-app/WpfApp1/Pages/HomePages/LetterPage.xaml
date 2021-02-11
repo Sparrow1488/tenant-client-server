@@ -25,23 +25,74 @@
             <StackPanel>
                 <TextBlock
                     HorizontalAlignment="Center"
-                    FontSize="24"
-                    Text="Text" />
+                    VerticalAlignment="Center"
+                    FontSize="28"
+                    Text="Выберите способ связи" />
             </StackPanel>
-            <DockPanel Background="LightCoral">
-                <TextBlock
-                    DockPanel.Dock="Right"
-                    FontSize="22"
-                    Text="Dialog 1" />
-                <TextBlock
-                    DockPanel.Dock="Left"
-                    FontSize="22"
-                    Text="Dialog 1" />
-            </DockPanel>
-            <WrapPanel Background="Azure" Orientation="Horizontal">
-                <TextBox FontSize="20" Text="TextBox" />
-                <Button Content="Отправить" FontSize="20" />
-                <Button Content="Файл" FontSize="20" />
+            <WrapPanel HorizontalAlignment="Center" Orientation="Horizontal">
+
+                <Button Margin="5" Background="Transparent">
+                    <Button.BorderBrush>
+                        <SolidColorBrush Color="Transparent" />
+                    </Button.BorderBrush>
+
+                    <Button.ToolTip>
+                        <TextBlock FontSize="18" Text="Выберите, если у Вас есть идеи" />
+                    </Button.ToolTip>
+
+                    <StackPanel Margin="10,0,10,0" Orientation="Horizontal">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontSize="26"
+                            FontWeight="Light"
+                            Text="Предложение" />
+                        <StackPanel Width="40">
+                            <Image Source="/refs/icons/offerIcon.png" />
+                        </StackPanel>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="5" Background="Transparent">
+                    <Button.BorderBrush>
+                        <SolidColorBrush Color="Transparent" />
+                    </Button.BorderBrush>
+
+                    <Button.ToolTip>
+                        <TextBlock FontSize="18" Text="Выберите, если вы хотите оставить жалобу" />
+                    </Button.ToolTip>
+
+                    <StackPanel Margin="10,0,10,0" Orientation="Horizontal">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontSize="26"
+                            FontWeight="Light"
+                            Text="Жалоба" />
+                        <StackPanel Width="45">
+                            <Image Source="/refs/icons/complaintIcon.png" />
+                        </StackPanel>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="5" Background="Transparent">
+                    <Button.BorderBrush>
+                        <SolidColorBrush Color="Transparent" />
+                    </Button.BorderBrush>
+
+                    <Button.ToolTip>
+                        <TextBlock FontSize="18" Text="Выберите, если у Вас есть вопросы" />
+                    </Button.ToolTip>
+
+                    <StackPanel Margin="10,0,10,0" Orientation="Horizontal">
+                        <TextBlock
+                            FontSize="26"
+                            FontWeight="Light"
+                            Text="Задать вопрос" />
+                        <StackPanel Width="40">
+                            <Image Source="/refs/icons/questionIcon.png" />
+                        </StackPanel>
+                    </StackPanel>
+                </Button>
+
             </WrapPanel>
         </StackPanel>
     </Grid>

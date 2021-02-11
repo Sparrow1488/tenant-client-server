@@ -61,7 +61,7 @@
                 BorderBrush="Transparent"
                 FontSize="30"
                 FontWeight="DemiBold"
-                Foreground="Black">
+                Foreground="Black" Click="letterBtn_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image
                         Width="30"

@@ -12,7 +12,7 @@ namespace WpfApp1
     /// </summary>
     public partial class HomeWindow : Window
     {
-        public Page profilePage;
+        private Page profilePage;
         private Page noticePage;
         private Page letterPage;
         public static JumboServer Server;
@@ -37,20 +37,20 @@ namespace WpfApp1
 
         private void profileBtn_Click(object sender, RoutedEventArgs e)
         {
-            ProfilePageFrame.Content = null;
+            //ProfilePageFrame.Content = null;
             ProfilePageFrame.Content = profilePage;
         }
 
 
         private void noticeBtn_Click(object sender, RoutedEventArgs e)
         {
-            ProfilePageFrame.Content = null;
+            //ProfilePageFrame.Content = null;
             ProfilePageFrame.Content = noticePage;
         }
 
         private void letterBtn_Click(object sender, RoutedEventArgs e)
         {
-            ProfilePageFrame.Content = null;
+            //ProfilePageFrame.Content = null;
             ProfilePageFrame.Content = letterPage;
         }
     }

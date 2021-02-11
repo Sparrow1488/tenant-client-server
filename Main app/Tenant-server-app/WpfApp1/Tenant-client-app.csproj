@@ -115,6 +115,9 @@
     <Compile Include="HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\HomePages\ChildLetterPage\ComplaintPage.xaml.cs">
+      <DependentUpon>ComplaintPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HomePages\LetterPage.xaml.cs">
       <DependentUpon>LetterPage.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\HomePages\ChildLetterPage\ComplaintPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\HomePages\LetterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -210,6 +217,7 @@
     <Resource Include="refs\icons\offerIcon.png" />
     <Resource Include="refs\icons\questionIcon.png" />
     <Resource Include="refs\icons\userIcon.png" />
+    <Resource Include="refs\BG-3_1920x1080.jpg" />
     <Content Include="refs\TestIMG-1.jfif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

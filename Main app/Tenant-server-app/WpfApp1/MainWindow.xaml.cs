@@ -75,5 +75,15 @@ namespace WpfApp1
             }
             //TODO: метод обработки исключений
         }
+
+        private void iDontKnowPasswordOrLogin_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            //TODO: сделать отпарвку на воостанвление доступа
+            MessageBox.Show(
+                "Запрос полетел администратору. С Вами свяжутся",
+                "Забыли логин или пароль", 
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+        }
     }
 }

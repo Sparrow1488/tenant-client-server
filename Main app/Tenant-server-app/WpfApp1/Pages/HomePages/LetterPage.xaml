@@ -17,8 +17,13 @@
             <ColumnDefinition />
             <ColumnDefinition Width="50" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
 
         <StackPanel
+            Grid.Row="0"
             Grid.Column="1"
             Margin="20,0,20,0"
             Orientation="Vertical">
@@ -52,7 +57,10 @@
                     </StackPanel>
                 </Button>
 
-                <Button Margin="5" Background="Transparent">
+                <Button
+                    Margin="5"
+                    Background="Transparent"
+                    Click="complaintBtn_Click">
                     <Button.BorderBrush>
                         <SolidColorBrush Color="Transparent" />
                     </Button.BorderBrush>
@@ -94,6 +102,13 @@
                 </Button>
 
             </WrapPanel>
+        </StackPanel>
+
+        <StackPanel
+            x:Name="framePanel"
+            Grid.Row="1"
+            Grid.Column="1">
+            <Frame x:Name="frameBox" NavigationUIVisibility="Hidden" />
         </StackPanel>
     </Grid>
 </Page>

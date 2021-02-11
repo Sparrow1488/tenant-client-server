@@ -11,7 +11,7 @@
     Loaded="Window_Loaded"
     mc:Ignorable="d">
     <Window.Background>
-        <ImageBrush ImageSource="refs/BG-1_1332x850.jpg" Stretch="UniformToFill"/>
+        <ImageBrush ImageSource="refs/BG-3_1920x1080.jpg" Stretch="UniformToFill" />
     </Window.Background>
 
     <Grid>
@@ -36,13 +36,14 @@
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <GroupBox
-                                Grid.Row="1"
-                                Background="White"
-                                BorderBrush="Black"
-                                FontSize="22"
-                                Header="Логин">
+                            Grid.Row="1"
+                            Background="White"
+                            BorderBrush="Black"
+                            FontSize="22"
+                            Header="Логин">
                             <TextBox
                                 Name="login_TBox"
                                 BorderBrush="Transparent"
@@ -58,10 +59,16 @@
                                 Name="password_TBox"
                                 BorderBrush="Transparent"
                                 FontSize="22" />
+
                         </GroupBox>
+                        <TextBlock
+                            Grid.Row="3"
+                            Cursor="Hand"
+                            MouseLeftButtonDown="iDontKnowPasswordOrLogin_MouseLeftButtonDown"
+                            Text="Забыли логин или пароль?" />
                         <Button
                             Name="send_Btn"
-                            Grid.Row="3"
+                            Grid.Row="4"
                             Margin="0,10"
                             Background="White"
                             Click="authBtn_Click"
@@ -69,89 +76,17 @@
                             FontSize="22" />
                         <TextBlock
                             Name="exceptionLabel_TB"
-                            Grid.Row="4"
-                            HorizontalAlignment="Center"
-                            FontSize="18"
-                            Foreground="Red"
-                            Text="Exception text"
-                            TextWrapping="Wrap" />
-                    </Grid>
-                </TabItem>
-                <TabItem Header="По ФИО">
-                    <Grid Margin="20">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <GroupBox
-                                Grid.Row="0"
-                                Background="White"
-                                BorderBrush="Black"
-                                FontSize="22"
-                                Header="Имя">
-                            <TextBox
-                                Name="Name_TBox"
-                                BorderBrush="Transparent"
-                                FontSize="22" />
-                        </GroupBox>
-                        <GroupBox
-                                Grid.Row="1"
-                                Background="White"
-                                BorderBrush="Black"
-                                FontSize="22"
-                                Header="Фамилия">
-                            <TextBox
-                                Name="firstName_TBox"
-                                BorderBrush="Transparent"
-                                FontSize="22" />
-                        </GroupBox>
-                        <GroupBox
-                                Grid.Row="2"
-                                Background="White"
-                                BorderBrush="Black"
-                                FontSize="22"
-                                Header="Номер квартиры">
-                            <TextBox
-                                Name="roomNum_TBox"
-                                BorderBrush="Transparent"
-                                FontSize="22" />
-                        </GroupBox>
-                        <GroupBox
-                                Grid.Row="3"
-                                Background="White"
-                                BorderBrush="Black"
-                                FontSize="22"
-                                Header="Пароль">
-                            <PasswordBox
-                                Name="password2_TBox"
-                                BorderBrush="Transparent"
-                                FontSize="22" />
-                        </GroupBox>
-                        <Button
-                            Name="send2_Btn"
-                            Grid.Row="4"
-                            Margin="0,10"
-                            Background="White"
-                            Click="authBtn_Click"
-                            Content="Войти"
-                            FontSize="22" />
-                        <TextBlock
-                            Name="exceptionLabel2_TB"
                             Grid.Row="5"
                             HorizontalAlignment="Center"
                             FontSize="18"
                             Foreground="Red"
                             Text="Exception text"
-                            TextWrapping="Wrap" 
-                            Visibility="Hidden"/>
+                            TextWrapping="Wrap" />
+
                     </Grid>
                 </TabItem>
             </TabControl>
-            
+
         </StackPanel>
     </Grid>
 </Window>

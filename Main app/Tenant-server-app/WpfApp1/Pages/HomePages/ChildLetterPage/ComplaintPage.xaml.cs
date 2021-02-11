@@ -12,25 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApp1.Pages.HomePages.ChildLetterPage;
 
-namespace WpfApp1.Pages.HomePages
+namespace WpfApp1.Pages.HomePages.ChildLetterPage
 {
     /// <summary>
-    /// Логика взаимодействия для LetterPage.xaml
+    /// Логика взаимодействия для ComplaintPage.xaml
     /// </summary>
-    public partial class LetterPage : Page
+    public partial class ComplaintPage : Page
     {
-        private Page complaintPage = new ComplaintPage();
-        public LetterPage()
+        public ComplaintPage()
         {
             InitializeComponent();
-        }
-
-        private void complaintBtn_Click(object sender, RoutedEventArgs e)
-        {
-            frameBox.Content = null;
-            frameBox.Content = complaintPage;
         }
     }
 }

@@ -1,0 +1,4 @@
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Tests\ClientChat\ClientChat\obj\Debug\netcoreapp3.1\ClientChat.csprojAssemblyReference.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Tests\ClientChat\ClientChat\obj\Debug\netcoreapp3.1\ClientChat.AssemblyInfoInputs.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Tests\ClientChat\ClientChat\obj\Debug\netcoreapp3.1\ClientChat.AssemblyInfo.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Tests\ClientChat\ClientChat\obj\Debug\netcoreapp3.1\ClientChat.csproj.CoreCompileInputs.cache

@@ -12,20 +12,17 @@
     Loaded="Window_Loaded"
     mc:Ignorable="d">
     <Grid>
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>-->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
 
         <StackPanel
             Grid.Column="0"
             HorizontalAlignment="Center"
-            Background="LightGray"
-            Orientation="Horizontal">
+            Background="White"
+            Orientation="Vertical">
             <Button
                 Padding="5"
                 Background="AliceBlue"
@@ -74,7 +71,13 @@
                 </StackPanel>
             </Button>
         </StackPanel>
-        <DockPanel Grid.Row="1">
+
+        <StackPanel
+            Grid.Column="1"
+            Width="1"
+            Background="Black" />
+
+        <DockPanel Grid.Column="2">
             <Frame x:Name="ProfilePageFrame" NavigationUIVisibility="Hidden" />
         </DockPanel>
     </Grid>

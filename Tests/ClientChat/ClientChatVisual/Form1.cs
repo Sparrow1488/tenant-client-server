@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -10,9 +12,10 @@ namespace ClientChatVisual
 {
     public partial class Form1 : Form
     {
-        private static TcpClient clientSend;
-        private static NetworkStream getMessagesStream;
-        private static NetworkStream sendStream;
+        private static TcpClient client;
+        private static StreamReader getMessagesStream;
+        private static StreamWriter sendStream;
+        private static List<string> CHAT;
         public Form1()
         {
             InitializeComponent();
@@ -20,9 +23,7 @@ namespace ClientChatVisual
 
         private void sendBtn_Click(object sender, EventArgs e)
         {
-            sendStream = clientSend.GetStream();
-            byte[] sendMessage = Encoding.UTF8.GetBytes(textBox3.Text);
-            sendStream.Write(sendMessage, 0, sendMessage.Length);
+            sendStream.WriteLine(textBox3.Text);
         }
 
         private async void Form1_Load(object sender, EventArgs e)
@@ -31,31 +32,27 @@ namespace ClientChatVisual
         }
         private void RecieveMessages()
         {
-            while (true)
+            while (client?.Connected == true)
             {
-                getMessagesStream = clientSend.GetStream();
-                var response = new StringBuilder();
-                var getData = new byte[256];
-                do
+                var response = getMessagesStream.ReadLine();
+                if (response != null)
                 {
-                    int bytes = getMessagesStream.Read(getData, 0, getData.Length);
-                    response.Append(Encoding.UTF8.GetString(getData, 0, bytes));
+                    CHAT.Add(response);
                 }
-                while (getMessagesStream.DataAvailable);
-                textBox1.Text += response;
-                textBox1.Text += Environment.NewLine;
-                getMessagesStream.Close();
+                Task.Delay(200);
             }
+            Console.WriteLine("смэрть");
         }
 
-        private void connectBtn_Click(object sender, EventArgs e)
+        private async void connectBtn_Click(object sender, EventArgs e)
         {
-            clientSend = new TcpClient();
-            clientSend.Connect("127.0.0.1", 8080);
+            client = new TcpClient();
+            client.Connect("127.0.0.1", 8080);
             var btn = (Button)sender;
             btn.Enabled = false;
-            //Thread getMessagesThread = new Thread(new ThreadStart(RecieveMessages));
-            //getMessagesThread.Start();
+            getMessagesStream = new StreamReader(client?.GetStream());
+            sendStream = new StreamWriter(client?.GetStream());
+            await Task.Factory.StartNew(() => RecieveMessages());
         }
     }
 }

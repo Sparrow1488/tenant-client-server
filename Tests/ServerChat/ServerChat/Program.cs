@@ -1,5 +1,7 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -20,20 +22,21 @@ namespace ServerChat
             while (true)
             {
                 Console.WriteLine("Ожидаю...");
-                await Task.Run(() =>
-                {
-                    GetUsers();
-                });
+                var getClient = listener.AcceptTcpClient();
+
+                await Task.Factory.StartNew(() => GetUsers(getClient));
+                Console.WriteLine("Принял.");
             }
+            
         }
-        public static void GetUsers()
+        public static void GetUsers(TcpClient getClient)
         {
-            var getClient = listener.AcceptTcpClient();
             connectedUsers.Add(getClient);
             foreach (var user in connectedUsers)
             {
                 Console.WriteLine("User is" + user.Connected);
             }
+
             while (getClient.Connected)
             {
                 GetMessages(getClient);
@@ -42,33 +45,20 @@ namespace ServerChat
         }
         public static void GetMessages(TcpClient client)
         {
-            var stream = client.GetStream();
-            var data = new byte[256];
-            var response = new StringBuilder();
-            int bytes;
-            do
+            while (client?.Connected == true)
             {
-                bytes = stream.Read(data, 0, data.Length);
-                response.Append(Encoding.UTF8.GetString(data, 0, bytes));
-            }
-            while (stream.DataAvailable);
-            Console.WriteLine("Сообщение:" + response.ToString());
-            stream.Close();
-            chat.Add(response.ToString());
-
-            if (connectedUsers != null)
-            {
-                for (int i = 0; i < connectedUsers.Count - 1; i++)
+                if (client.Connected == true)
                 {
-                    var userStream = connectedUsers[i].GetStream();
-                    userStream.Write(data, 0, data.Length);
-                    Console.WriteLine("Сообщение отправлено");
-                    userStream.Flush();
-                    userStream.Close();
+                    var sr = new StreamReader(client.GetStream());
+                    var text = sr.ReadLine();
+                    Console.WriteLine(text);
                 }
+                else
+                {
+                    break;
+                }
+                Task.Delay(200);
             }
-            else
-                Console.WriteLine("Нет подключенных пользователей");
         }
     }
 }

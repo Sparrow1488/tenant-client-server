@@ -6,6 +6,7 @@ namespace WpfApp1.Server
 {
     public class Person : RequestObject
     {
+        //TODO: токен авторизованных пользователей (объект токена)
         public string Name { get; }
         public string LastName { get; }
         public string ParentName { get; }

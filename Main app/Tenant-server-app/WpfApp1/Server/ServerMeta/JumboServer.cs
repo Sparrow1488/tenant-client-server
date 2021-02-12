@@ -21,7 +21,7 @@ namespace WpfApp1.Server.ServerMeta
             ServerConfig = config;
             ActiveServer = this;
         }
-        public async Task<bool> AuthorizationAsync(Person dataPerson)
+        public async Task<bool> AuthorizationAsync(Person dataPerson, bool saveToken) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
         {
             PackageMeta meta = new PackageMeta(ServerConfig.HOST, "auth");
 

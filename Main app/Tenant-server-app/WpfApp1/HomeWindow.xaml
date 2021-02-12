@@ -19,58 +19,72 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel
+            x:Name="menuLeftPanel"
             Grid.Column="0"
-            HorizontalAlignment="Center"
             Background="White"
             Orientation="Vertical">
-            <Button
-                Padding="5"
-                Background="AliceBlue"
-                BorderBrush="Transparent"
-                Click="profileBtn_Click"
-                FontSize="30"
-                FontWeight="DemiBold"
-                Foreground="Black">
-                <StackPanel Orientation="Horizontal">
-                    <Image
-                        Width="30"
-                        VerticalAlignment="Center"
-                        Source="refs\icons\profileIcon.png" />
-                    <TextBlock Text="Профиль" />
-                </StackPanel>
-            </Button>
-            <Button
-                Padding="5"
-                Background="AliceBlue"
-                BorderBrush="Transparent"
-                Click="noticeBtn_Click"
-                FontSize="30"
-                FontWeight="DemiBold"
-                Foreground="Black">
-                <StackPanel Orientation="Horizontal">
-                    <Image
-                        Width="30"
-                        VerticalAlignment="Center"
-                        Source="refs\icons\noticeIcon.png" />
-                    <TextBlock Text="Объявления" />
-                </StackPanel>
-            </Button>
-            <Button
-                Padding="5"
-                Background="AliceBlue"
-                BorderBrush="Transparent"
-                Click="letterBtn_Click"
-                FontSize="30"
-                FontWeight="DemiBold"
-                Foreground="Black">
-                <StackPanel Orientation="Horizontal">
-                    <Image
-                        Width="30"
-                        VerticalAlignment="Center"
-                        Source="refs\icons\chatIcon.png" />
-                    <TextBlock Text="Написать" />
-                </StackPanel>
-            </Button>
+            <StackPanel DockPanel.Dock="Left">
+                <Button
+                    Padding="5"
+                    Background="AliceBlue"
+                    BorderBrush="Transparent"
+                    Click="ProfileBtn_Click"
+                    DockPanel.Dock="Right"
+                    FontSize="30"
+                    FontWeight="DemiBold"
+                    Foreground="Black">
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Width="30"
+                            Margin="0,0,10,0"
+                            VerticalAlignment="Center"
+                            Source="refs\icons\profileIcon.png" />
+                        <TextBlock Text="Профиль" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <StackPanel DockPanel.Dock="Top">
+                <Button
+                    Padding="5"
+                    Background="AliceBlue"
+                    BorderBrush="Transparent"
+                    Click="NoticeBtn_Click"
+                    FontSize="30"
+                    FontWeight="DemiBold"
+                    Foreground="Black">
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Width="30"
+                            Margin="0,0,10,0"
+                            VerticalAlignment="Center"
+                            Source="refs\icons\noticeIcon.png" />
+                        <TextBlock Text="Объявления" />
+                    </StackPanel>
+
+                </Button>
+            </StackPanel>
+
+            <StackPanel DockPanel.Dock="Left">
+                <Button
+                    Padding="5"
+                    Background="AliceBlue"
+                    BorderBrush="Transparent"
+                    Click="LetterBtn_Click"
+                    FontSize="30"
+                    FontWeight="DemiBold"
+                    Foreground="Black">
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Width="30"
+                            Margin="0,0,10,0"
+                            VerticalAlignment="Center"
+                            Source="refs\icons\chatIcon.png" />
+                        <TextBlock Text="Написать" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
         </StackPanel>
 
         <StackPanel

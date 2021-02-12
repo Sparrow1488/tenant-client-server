@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp1.Classes
+namespace WpfApp1.Server.Packages
 {
     public class PackageMeta
     {

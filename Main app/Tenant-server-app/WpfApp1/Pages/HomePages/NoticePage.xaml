@@ -23,7 +23,7 @@
                 x:Name="addPanelBtn"
                 Width="Auto"
                 Height="40"
-                Click="addPanelBtn_Click"
+                Click="AddPanelBtn_Click"
                 Content="ADD"
                 FontSize="30" />
         </StackPanel>

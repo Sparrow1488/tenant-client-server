@@ -1,10 +1,9 @@
-﻿using Multi_Server_Test.Server.Packages;
+﻿using Multi_Server_Test.Server;
+using WpfApp1.Server.ServerMeta;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.IO;
-using System.Windows.Media.Imaging;
 
 namespace WpfApp1.Pages.HomePages
 {
@@ -26,7 +25,7 @@ namespace WpfApp1.Pages.HomePages
             {
                 if (!IsLoadNews)
                 {
-                    ReceivedNews = await HomeWindow.Server.ReceiveNewsCollection();
+                    ReceivedNews = await JumboServer.ActiveServer.ReceiveNewsCollectionAsync();
                     foreach (var news in ReceivedNews.Collection)
                     {
                         AddNewsTitleAndDescription(news.Title, news.Description);
@@ -43,7 +42,8 @@ namespace WpfApp1.Pages.HomePages
             }
         }
 
-        private void addPanelBtn_Click(object sender, RoutedEventArgs e)
+
+        private void AddPanelBtn_Click(object sender, RoutedEventArgs e)
         {
             AddNewsTitleAndDescription("Пицца", "Описание пиццы");
         }

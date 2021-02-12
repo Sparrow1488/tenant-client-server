@@ -1,22 +1,17 @@
-﻿using Multi_Server_Test.Server.Packages;
+﻿using Multi_Server_Test.Server;
 using Newtonsoft.Json;
 using System;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using WpfApp1.Blocks;
 using WpfApp1.Server.Packages;
 
-namespace WpfApp1.Classes
+namespace WpfApp1.Server.ServerMeta
 {
     public class JumboServer
     {
-        //private JsonSerializerSettings JsonSettings = new JsonSerializerSettings
-        //{
-        //    TypeNameHandling = TypeNameHandling.Auto,
-        //    Formatting = Formatting.Indented
-        //};
+        
+        public static JumboServer ActiveServer;
         private TcpClient TCPclient = null;
         public Person ActiveUser = null;
         private ServerConfig ServerConfig = null;
@@ -24,42 +19,25 @@ namespace WpfApp1.Classes
         public JumboServer(ServerConfig config)
         {
             ServerConfig = config;
+            ActiveServer = this;
         }
-        public void ShowUserInfo()
-        {
-            MessageBox.Show($"Login: {ActiveUser.Login};\n " +
-                 $"Password: {ActiveUser.Password};\n " +
-                 $"Room number: {ActiveUser.Room};\n " +
-                 $"Name: {ActiveUser.Name}; \n " +
-                 $"Parent name: {ActiveUser.ParentName};", 
-                 "User information");
-        }
-        public bool ActiveUserCheckNull()
-        {
-            if (ActiveUser.Equals(null))
-                return false;
-            else
-                return true;
-        }
-
-        public async Task<bool> Authorization(Person dataPerson)
+        public async Task<bool> AuthorizationAsync(Person dataPerson)
         {
             PackageMeta meta = new PackageMeta(ServerConfig.HOST, "auth");
 
-            var jsonResponse = await SendAndGet(dataPerson, meta);
+            var jsonResponse = await SendAndGetAsync(dataPerson, meta);
             ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse);
             if (ActiveUser.Equals(null))
             {
                 throw new Exception("Данный пользователь не существует");
             }
-            
             return true;
         }
-        public async Task<NewsCollection> ReceiveNewsCollection()
+        public async Task<NewsCollection> ReceiveNewsCollectionAsync()
         {
             var meta = new PackageMeta("127.0.0.1", "news");
             var nullNews = new News(); //TODO: ИСПРАВИТЬ КАЛОВЫЙ КОНСТРУКТОР + ВОЗМОЖНОСТЬ ОТПРАВЛЯТЬ ТОЛЬКО МЕТУ НА СЕРВЕР
-            var jsonCollection = await SendAndGet(nullNews, meta);
+            var jsonCollection = await SendAndGetAsync(nullNews, meta);
             var collectionResponse =  JsonConvert.DeserializeObject<NewsCollection>(jsonCollection);
             if (collectionResponse == null)
                 throw new NullReferenceException("Получена пустая коллекция!");
@@ -67,7 +45,7 @@ namespace WpfApp1.Classes
                 return collectionResponse;
         }
 
-        private async Task<string> SendAndGet(RequestObject sendObject, PackageMeta meta)
+        private async Task<string> SendAndGetAsync(RequestObject sendObject, PackageMeta meta)
         {
             await SendRequestAsync(sendObject, meta);
             var jsonResponse = await GetResponseAsync();
@@ -90,7 +68,7 @@ namespace WpfApp1.Classes
         private async Task<string> GetResponseAsync()
         {
             StringBuilder response = new StringBuilder();
-            byte[] getData = new byte[2048];
+            byte[] getData = new byte[256];
             await Task.Run(() =>
             {
                 var serverStream = TCPclient.GetStream();
@@ -110,4 +88,9 @@ namespace WpfApp1.Classes
             return response.ToString();
         }
     }
+    //private JsonSerializerSettings JsonSettings = new JsonSerializerSettings
+    //{
+    //    TypeNameHandling = TypeNameHandling.Auto,
+    //    Formatting = Formatting.Indented
+    //};
 }

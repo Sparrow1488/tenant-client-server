@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Text;
 using WpfApp1.Server.Packages;
 
-namespace Multi_Server_Test.Server.Packages
+namespace Multi_Server_Test.Server
 {
     public class News : RequestObject
     {

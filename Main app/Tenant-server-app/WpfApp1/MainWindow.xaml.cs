@@ -3,7 +3,9 @@ using System;
 using System.IO;
 using System.Net.Sockets;
 using System.Windows;
-using WpfApp1.Classes;
+using WpfApp1.MyApplication;
+using WpfApp1.Server;
+using WpfApp1.Server.ServerMeta;
 
 //TODO: сделать нормальный профиль
 //TODO: добавить возможность получать новости с сервера (и да, сделать, собественно, возможность их туда загружать)
@@ -16,6 +18,7 @@ namespace WpfApp1
     public partial class MainWindow : Window
     {
         private JumboServer server;
+        private ApplicationEvents application;
 
         public JumboServer GetServerInstance()
         {
@@ -28,32 +31,32 @@ namespace WpfApp1
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            exceptionLabel_TB.Visibility = Visibility.Collapsed;
+            errorLabel.Visibility = Visibility.Collapsed;
             server = new JumboServer(new ServerConfig());
+            application = new ApplicationEvents();
         }
 
-        private async void authBtn_Click(object sender, RoutedEventArgs e)
+        private async void AuthBtn_Click(object sender, RoutedEventArgs e)
         {
-            exceptionLabel_TB.Visibility = Visibility.Collapsed;
+            errorLabel.Visibility = Visibility.Collapsed;
             send_Btn.IsEnabled = false;
 
             try
             {
                 var sendPerson = new Person(login_TBox.Text, password_TBox.Password, 67);
                 
-                var userIsAuthorizate = await server.Authorization(sendPerson);
-                if (userIsAuthorizate)
+                var userIsAuthorizate = await server.AuthorizationAsync(sendPerson);
+                if (userIsAuthorizate == true)
                 {
                     HomeWindow home = new HomeWindow();
-                    HomeWindow.Server = server;
                     home.Show();
                     Close();
                 }
             }
             catch (SocketException)
             {
-                exceptionLabel_TB.Visibility = Visibility.Visible;
-                exceptionLabel_TB.Text = "Не удалось подключиться к серверу";
+                var errorText = "Не удалось подключиться к серверу";
+                application.ShowExceptionMessage(errorText, errorLabel);
             }
             catch (JsonReaderException)
             {
@@ -61,29 +64,32 @@ namespace WpfApp1
             }
             catch (IOException)
             {
-                exceptionLabel_TB.Visibility = Visibility.Visible;
-                exceptionLabel_TB.Text = "Удаленный хост принудительно разорвал существующее подключение";
+                var errorText = "Удаленный хост принудительно разорвал существующее подключение";
+                application.ShowExceptionMessage(errorText, errorLabel);
             }
             catch (ArgumentException ex)
             {
-                exceptionLabel_TB.Visibility = Visibility.Visible;
-                exceptionLabel_TB.Text = ex.Message;
+                application.ShowExceptionMessage(ex.Message, errorLabel);
             }
             finally
             {
                 send_Btn.IsEnabled = true;
             }
-            //TODO: метод обработки исключений
         }
 
         private void iDontKnowPasswordOrLogin_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            //TODO: сделать отпарвку на воостанвление доступа
+            //TODO: сделать отправку на воостанвление доступа
             MessageBox.Show(
                 "Запрос полетел администратору. С Вами свяжутся",
                 "Забыли логин или пароль", 
                 MessageBoxButton.OK,
                 MessageBoxImage.Information);
+        }
+
+        private void HideErrorLabel_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            errorLabel.Visibility = Visibility.Collapsed;
         }
     }
 }

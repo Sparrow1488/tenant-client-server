@@ -2,7 +2,7 @@
 using System;
 using WpfApp1.Server.Packages;
 
-namespace WpfApp1.Classes
+namespace WpfApp1.Server
 {
     public class Person : RequestObject
     {
@@ -70,14 +70,14 @@ namespace WpfApp1.Classes
             else
                 return true;
         }
-        private bool CheckInputValidation(string login, int room)
-        {
-            if (string.IsNullOrWhiteSpace(login) ||
-                room <= 0)
-                return false;
-            else
-                return true;
-        }
+        //private bool CheckInputValidation(string login, int room)
+        //{
+        //    if (string.IsNullOrWhiteSpace(login) ||
+        //        room <= 0)
+        //        return false;
+        //    else
+        //        return true;
+        //}
 
     }
 }

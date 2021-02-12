@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using WpfApp1.Classes;
+using WpfApp1.Server;
+using WpfApp1.Server.ServerMeta;
 
 namespace WpfApp1.Pages.HomePages
 {
@@ -21,12 +22,11 @@ namespace WpfApp1.Pages.HomePages
         private bool InfoUserIsLoaded = false;
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            //TODO: ошибка nullRefException
             if (InfoUserIsLoaded == false)
             {
                 try
                 {
-                    ShowUserProfileInfo(HomeWindow.Server.ActiveUser);
+                    ShowUserProfileInfo(JumboServer.ActiveServer.ActiveUser);
                 }
                 catch (NullReferenceException)
                 {

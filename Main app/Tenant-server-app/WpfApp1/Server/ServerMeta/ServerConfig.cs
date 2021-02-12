@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace WpfApp1.Classes
+namespace WpfApp1.Server.ServerMeta
 {
     public class ServerConfig
     {

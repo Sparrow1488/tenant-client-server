@@ -47,7 +47,8 @@
                             <TextBox
                                 Name="login_TBox"
                                 BorderBrush="Transparent"
-                                FontSize="22" />
+                                FontSize="22"
+                                PreviewKeyDown="HideErrorLabel_PreviewKeyDown" />
                         </GroupBox>
                         <GroupBox
                             Grid.Row="2"
@@ -58,7 +59,8 @@
                             <PasswordBox
                                 Name="password_TBox"
                                 BorderBrush="Transparent"
-                                FontSize="22" />
+                                FontSize="22"
+                                PreviewKeyDown="HideErrorLabel_PreviewKeyDown" />
 
                         </GroupBox>
                         <TextBlock
@@ -71,11 +73,11 @@
                             Grid.Row="4"
                             Margin="0,10"
                             Background="White"
-                            Click="authBtn_Click"
+                            Click="AuthBtn_Click"
                             Content="Войти"
                             FontSize="22" />
                         <TextBlock
-                            Name="exceptionLabel_TB"
+                            Name="errorLabel"
                             Grid.Row="5"
                             HorizontalAlignment="Center"
                             FontSize="18"

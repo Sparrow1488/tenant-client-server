@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Multi_Server_Test.Server.Packages
+namespace Multi_Server_Test.Server
 {
     public class NewsCollection
     {

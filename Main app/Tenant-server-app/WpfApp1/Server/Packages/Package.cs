@@ -1,9 +1,8 @@
 ﻿using System;
-using WpfApp1.Classes;
 using Newtonsoft.Json;
 using WpfApp1.Server.Packages;
 
-namespace WpfApp1.Blocks
+namespace WpfApp1.Server.Packages
 {
     public class Package<T>
         where T: RequestObject
@@ -11,6 +10,11 @@ namespace WpfApp1.Blocks
         public Package(RequestObject sendObj, PackageMeta meta)
         {
             SendingObject = (T)sendObj;
+            SendingMeta = meta;
+        }
+        public Package(PackageMeta meta)
+        {
+            SendingObject = null;
             SendingMeta = meta;
         }
         public T SendingObject { get; set; }

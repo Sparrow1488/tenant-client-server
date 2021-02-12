@@ -115,6 +115,7 @@
     <Compile Include="HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyApplication\ApplicationEvents.cs" />
     <Compile Include="Pages\HomePages\ChildLetterPage\ComplaintPage.xaml.cs">
       <DependentUpon>ComplaintPage.xaml</DependentUpon>
     </Compile>
@@ -190,9 +191,7 @@
     <Resource Include="refs\BG-2_1360х800.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Project\" />
     <Folder Include="Server\UserInfo\" />
-    <Folder Include="WindowsInApp\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="cat.ico" />

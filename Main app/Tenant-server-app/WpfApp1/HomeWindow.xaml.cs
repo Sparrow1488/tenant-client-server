@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using WpfApp1.Classes;
 using WpfApp1.Pages.HomePages;
+using WpfApp1.Server;
+using WpfApp1.Server.ServerMeta;
 
 namespace WpfApp1
 {
@@ -15,12 +15,10 @@ namespace WpfApp1
         private Page profilePage;
         private Page noticePage;
         private Page letterPage;
-        public static JumboServer Server;
 
         public Person GetActiveUserInfo()
         {
-            Console.WriteLine(Server);
-            return Server.ActiveUser;
+            return JumboServer.ActiveServer.ActiveUser;
         }
 
         public HomeWindow()
@@ -35,22 +33,19 @@ namespace WpfApp1
             letterPage = new LetterPage();
         }
 
-        private void profileBtn_Click(object sender, RoutedEventArgs e)
+        private void ProfileBtn_Click(object sender, RoutedEventArgs e)
         {
-            //ProfilePageFrame.Content = null;
             ProfilePageFrame.Content = profilePage;
         }
 
 
-        private void noticeBtn_Click(object sender, RoutedEventArgs e)
+        private void NoticeBtn_Click(object sender, RoutedEventArgs e)
         {
-            //ProfilePageFrame.Content = null;
             ProfilePageFrame.Content = noticePage;
         }
 
-        private void letterBtn_Click(object sender, RoutedEventArgs e)
+        private void LetterBtn_Click(object sender, RoutedEventArgs e)
         {
-            //ProfilePageFrame.Content = null;
             ProfilePageFrame.Content = letterPage;
         }
     }

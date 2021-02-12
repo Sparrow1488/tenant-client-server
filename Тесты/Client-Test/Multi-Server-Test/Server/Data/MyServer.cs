@@ -53,7 +53,7 @@ namespace Multi_Server_Test.ServerData
 
             newsCollectionOutDB = await SynchronizeNewsCollection();
             foreach (var news in newsCollectionOutDB.Collection)
-                Console.Write($"\t{news.Title}: {news.Description} <{news.DateTime.ToLongDateString()}> \n");
+                Console.WriteLine(news + "\n");
 
             Listener.Start();
             ShowReport("Server started!", ConsoleColor.Green);
@@ -159,11 +159,25 @@ namespace Multi_Server_Test.ServerData
             {
                 var newsCollectionResponse = await GetNewsCollection();
                 ShowReport("News was loaded successful", ConsoleColor.Green);
-                using (var writer = new StreamWriter($"{Meta.reservePath}/{Meta.reserveNewsCollection}"))
+                if (File.Exists($"{Meta.reservePath}/{Meta.reserveNewsCollection}"))
                 {
-                    var dataJson = JsonConvert.SerializeObject(newsCollectionResponse);
-                    await writer.WriteAsync(dataJson);
-                    ShowReport("News saved", ConsoleColor.Green);
+                    using (var writer = new StreamWriter($"{Meta.reservePath}/{Meta.reserveNewsCollection}"))
+                    {
+                        var dataJson = JsonConvert.SerializeObject(newsCollectionResponse);
+                        await writer.WriteAsync(dataJson);
+                        ShowReport("News saved", ConsoleColor.Green);
+                    }
+                }
+                else
+                {
+                    ShowReport("Резервная папка не найдена! Создаю новую директорию...", ConsoleColor.Red);
+                    Directory.CreateDirectory(Meta.reservePath);
+                    using (var stream = File.CreateText($"{Meta.reservePath}/{Meta.reserveNewsCollection}"))
+                    {
+                        var dataJson = JsonConvert.SerializeObject(newsCollectionResponse);
+                        await stream.WriteAsync(dataJson);
+                        ShowReport("News saved", ConsoleColor.Green);
+                    }
                 }
                 return newsCollectionResponse;
             }

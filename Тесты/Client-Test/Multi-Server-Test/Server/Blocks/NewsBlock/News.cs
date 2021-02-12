@@ -17,6 +17,10 @@ namespace Multi_Server_Test.Server.Packages
             Description = desc;
             DateTime = DateTime.Now;
         }
+        public override string ToString()
+        {
+            return $"{Title}: {Description} <{DateTime.ToLongDateString()}>";
+        }
 
     }
 }

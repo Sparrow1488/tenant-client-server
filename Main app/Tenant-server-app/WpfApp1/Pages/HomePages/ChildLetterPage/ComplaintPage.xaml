@@ -19,16 +19,36 @@
                     FontWeight="DemiBold"
                     Text="Опишите вашу проблему"
                     TextWrapping="Wrap" />
-                <TextBox
-                    Padding="5"
-                    Focusable="True"
-                    FontSize="20"
-                    Text="Описание самой мощной, самой ужаснейшей и нерешаемейшей задачи, которую никто никогда не решит, сори"
-                    TextWrapping="Wrap" />
+                <GroupBox FontSize="20" Header="Заголовок">
+                    <TextBox
+                        x:Name="titleLetter"
+                        Padding="5"
+                        BorderBrush="Transparent"
+                        Focusable="True"
+                        FontSize="20"
+                        TextWrapping="Wrap" />
+                </GroupBox>
+
+                <GroupBox FontSize="20" Header="Описание">
+                    <TextBox
+                        x:Name="descriptionLetter"
+                        Padding="5"
+                        BorderBrush="Transparent"
+                        Focusable="True"
+                        FontSize="20"
+                        Text="Ваша проблема..."
+                        TextWrapping="Wrap" />
+                </GroupBox>
+
                 <Button
+                    x:Name="sendLetterBtn"
+                    Margin="0,10"
                     Padding="5"
+                    Background="Wheat"
+                    Click="sendLetterBtn_Click"
                     Content="Отправить"
-                    FontSize="24" />
+                    FontSize="24"
+                    Foreground="White" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

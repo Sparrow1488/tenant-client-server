@@ -9,8 +9,6 @@ using WpfApp1.MyApplication;
 using WpfApp1.Server;
 using WpfApp1.Server.ServerMeta;
 
-//TODO: сделать нормальный профиль
-//TODO: добавить возможность получать новости с сервера (и да, сделать, собественно, возможность их туда загружать)
 
 namespace WpfApp1
 {
@@ -40,7 +38,6 @@ namespace WpfApp1
 
         private async void AuthBtn_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: запомнить пароль
             errorLabel.Visibility = Visibility.Collapsed;
             send_Btn.IsEnabled = false;
             try

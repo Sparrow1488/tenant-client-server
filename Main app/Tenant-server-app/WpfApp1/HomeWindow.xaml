@@ -85,6 +85,25 @@
                 </Button>
             </StackPanel>
 
+            <StackPanel DockPanel.Dock="Left">
+                <Button
+                    Padding="5"
+                    Background="AliceBlue"
+                    BorderBrush="Transparent"
+                    FontSize="30"
+                    FontWeight="DemiBold"
+                    Foreground="Black">
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Width="30"
+                            Margin="0,0,10,0"
+                            VerticalAlignment="Center"
+                            Source="refs\icons\settingsIcon.png" />
+                        <TextBlock Text="Настройки" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
         </StackPanel>
 
         <StackPanel

@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Server.Packages;
+using WpfApp1.Server.Packages.Letters;
 
 namespace WpfApp1.Server.ServerMeta
 {
@@ -86,6 +87,12 @@ namespace WpfApp1.Server.ServerMeta
             });
             
             return response.ToString();
+        }
+
+        public async Task<string> SendLetter(Letter letter)
+        {
+            var meta = new PackageMeta(ServerConfig.HOST, "letter");
+            return await SendAndGetAsync(letter, meta);
         }
     }
     //private JsonSerializerSettings JsonSettings = new JsonSerializerSettings

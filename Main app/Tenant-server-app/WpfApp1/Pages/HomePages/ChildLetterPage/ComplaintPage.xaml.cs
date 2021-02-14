@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using WpfApp1.Server.Packages.Letters;
+using WpfApp1.Server.ServerMeta;
 
 namespace WpfApp1.Pages.HomePages.ChildLetterPage
 {
@@ -23,6 +17,34 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
         public ComplaintPage()
         {
             InitializeComponent();
+        }
+
+        private async void sendLetterBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = (Button)sender;
+            btn.IsEnabled = false;
+            string result = string.Empty;
+            try
+            {
+                var letterSender = JumboServer.ActiveServer.ActiveUser;
+                var sendLetter = new ComplaintLetter(null,
+                                                     descriptionLetter.Text,
+                                                     letterSender);
+                result = await JumboServer.ActiveServer.SendLetter(sendLetter);
+            }
+            catch (SocketException)
+            {
+                result = "Ошибка подключения: данные не отправлены.";
+            }
+            catch (IOException)
+            {
+                result = "Ошибка сервера: данные отправлены, но не могут быть получены.";
+            }
+            finally
+            {
+                MessageBox.Show(result, "Ответ от сервера");
+                btn.IsEnabled = true;
+            }
         }
     }
 }

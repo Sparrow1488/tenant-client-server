@@ -130,6 +130,8 @@
     </Compile>
     <Compile Include="Server\News.cs" />
     <Compile Include="Server\NewsCollection.cs" />
+    <Compile Include="Server\Packages\Letters\ComplaintLetter.cs" />
+    <Compile Include="Server\Packages\Letters\Letter.cs" />
     <Compile Include="Server\Packages\Package.cs" />
     <Compile Include="Server\Packages\PackageMeta.cs" />
     <Compile Include="Server\Packages\RequestObject.cs" />
@@ -217,6 +219,7 @@
     <Resource Include="refs\icons\questionIcon.png" />
     <Resource Include="refs\icons\userIcon.png" />
     <Resource Include="refs\BG-3_1920x1080.jpg" />
+    <Resource Include="refs\icons\settingsIcon.png" />
     <Content Include="refs\TestIMG-1.jfif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

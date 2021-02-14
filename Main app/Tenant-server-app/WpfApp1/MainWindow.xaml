@@ -80,6 +80,7 @@
                             <TextBlock VerticalAlignment="Center" Text="Запомнить выбор" />
                         </CheckBox>
 
+
                         <Button
                             Name="send_Btn"
                             Grid.Row="5"

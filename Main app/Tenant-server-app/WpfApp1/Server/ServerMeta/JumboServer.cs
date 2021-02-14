@@ -22,7 +22,7 @@ namespace WpfApp1.Server.ServerMeta
             ServerConfig = config;
             ActiveServer = this;
         }
-        public async Task<bool> AuthorizationAsync(Person dataPerson, bool saveToken) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
+        public async Task<bool> AuthorizationAsync(Person dataPerson, bool token) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
         {
             PackageMeta meta = new PackageMeta(ServerConfig.HOST, "auth");
 
@@ -37,8 +37,8 @@ namespace WpfApp1.Server.ServerMeta
         public async Task<NewsCollection> ReceiveNewsCollectionAsync()
         {
             var meta = new PackageMeta("127.0.0.1", "news");
-            var nullNews = new News(); //TODO: ИСПРАВИТЬ КАЛОВЫЙ КОНСТРУКТОР + ВОЗМОЖНОСТЬ ОТПРАВЛЯТЬ ТОЛЬКО МЕТУ НА СЕРВЕР
-            var jsonCollection = await SendAndGetAsync(nullNews, meta);
+            //var nullNews = new News(); //TODO: ИСПРАВИТЬ КАЛОВЫЙ КОНСТРУКТОР + ВОЗМОЖНОСТЬ ОТПРАВЛЯТЬ ТОЛЬКО МЕТУ НА СЕРВЕР
+            var jsonCollection = await SendAndGetAsync(null, meta);
             var collectionResponse =  JsonConvert.DeserializeObject<NewsCollection>(jsonCollection);
             if (collectionResponse == null)
                 throw new NullReferenceException("Получена пустая коллекция!");

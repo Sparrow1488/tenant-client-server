@@ -17,8 +17,8 @@ namespace WpfApp1.Server.Packages
             SendingObject = null;
             SendingMeta = meta;
         }
-        public T SendingObject { get; set; }
-        public PackageMeta SendingMeta { get; set; }
+        public T SendingObject { get; }
+        public PackageMeta SendingMeta { get; }
     }
     
 }

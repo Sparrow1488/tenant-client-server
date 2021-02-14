@@ -47,8 +47,7 @@
                     Background="Wheat"
                     Click="sendLetterBtn_Click"
                     Content="Отправить"
-                    FontSize="24"
-                    Foreground="White" />
+                    FontSize="24" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

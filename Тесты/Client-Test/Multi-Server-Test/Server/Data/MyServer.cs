@@ -6,7 +6,6 @@ using Multi_Server_Test.ServerData.Blocks;
 using Multi_Server_Test.ServerData.Server;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -119,19 +118,12 @@ namespace Multi_Server_Test.ServerData
             {
                 ShowReport("Client connect", ConsoleColor.Green);
                 var clientStream = validClient.GetStream();
-                byte[] buffer = new byte[1024];
-                StringBuilder jsonPackage = new StringBuilder();
-                do
-                {
-                    int bytes = clientStream.Read(buffer, 0, buffer.Length);
-                    jsonPackage.Append(Encoding.UTF8.GetString(buffer, 0, bytes));
-                }
-                while (clientStream.DataAvailable);
+                string jsonPackage = GetDataFromStream(clientStream);
 
                 if (!string.IsNullOrWhiteSpace(jsonPackage.ToString()))
                 {
                     var getPackage = JsonConvert.DeserializeObject<Package>(jsonPackage.ToString());
-                    Console.WriteLine("Получена мета:\nTo: {0},\nFrom: {1} \nAction: {2}", getPackage.SendingMeta.Address, getPackage.SendingMeta.FromHostName, getPackage.SendingMeta.Action);
+                    Console.WriteLine(getPackage.SendingMeta);
                     var clientObject = JsonConvert.SerializeObject(getPackage.SendingObject);
 
                     ShowReport("Distribute request to handle in routing block...", ConsoleColor.Yellow);
@@ -150,6 +142,7 @@ namespace Multi_Server_Test.ServerData
             }
             
         }
+        
         private void ShowReport(string report, ConsoleColor color)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -202,6 +195,19 @@ namespace Multi_Server_Test.ServerData
                 }
             }
         }
-
+        #region Вторичные методы
+        private string GetDataFromStream(NetworkStream clientStream)
+        {
+            byte[] buffer = new byte[1024];
+            StringBuilder jsonPackage = new StringBuilder();
+            do
+            {
+                int bytes = clientStream.Read(buffer, 0, buffer.Length);
+                jsonPackage.Append(Encoding.UTF8.GetString(buffer, 0, bytes));
+            }
+            while (clientStream.DataAvailable);
+            return jsonPackage.ToString();
+        }
+        #endregion
     }
 }

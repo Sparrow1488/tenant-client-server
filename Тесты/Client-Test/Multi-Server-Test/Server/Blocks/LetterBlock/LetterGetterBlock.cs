@@ -15,7 +15,7 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
         public override async void CompleteAction(string clientJson, NetworkStream stream)
         {
             try
-            {
+            { 
                 var getLetter = JsonConvert.DeserializeObject<Letter>(clientJson);
                 BlockReport("Письмо успешно получено", ConsoleColor.Green);
                 Console.WriteLine(getLetter); //TODO: сделать сортер по типу новости (предложение, жалоба, вопрос)

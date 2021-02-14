@@ -24,9 +24,9 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
         }
         public override string ToString()
         {
-            return $"TYPE: {LetterType}" +
-                   $"TITLE: {Title}" +
-                   $"DESCRIPTION: {Description}" +
+            return $"TYPE: {LetterType}\n" +
+                   $"TITLE: {Title}\n" +
+                   $"DESCRIPTION: {Description}\n" +
                    $"FROM: " +
                    $"{Sender.LastName} " +
                    $"{Sender.Name} " +

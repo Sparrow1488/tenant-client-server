@@ -1,14 +1,16 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 
 namespace Multi_Server_Test.Server.Packages
 {
     public class Package
     {
-        public Package(RequestObject sendObj, SendMeta meta)
-        {
-            SendingObject = sendObj;
-            SendingMeta = meta;
-        }
+        //TODO: не работает json constructor
+        //[JsonConstructor]
+        //public Package(RequestObject sendingObject, SendMeta sendingMeta)
+        //{
+        //    SendingObject = sendingObject;
+        //    SendingMeta = sendingMeta;
+        //}
         public object SendingObject { get; set; }
         public SendMeta SendingMeta { get; set; }
     }

@@ -1,4 +1,5 @@
 ﻿using Multi_Server_Test.Server.Blocks.Auth;
+using Multi_Server_Test.Server.Blocks.LetterBlock;
 using Multi_Server_Test.ServerData.Blocks;
 using Multi_Server_Test.ServerData.Blocks.Auth;
 using System;
@@ -17,6 +18,7 @@ namespace Multi_Server_Test.ServerData.Server
         {
             ExistServerBlocks.Add(new AuthorizationBlock("auth", usageServer));
             ExistServerBlocks.Add(new NewsSenderBlock("news", usageServer));
+            ExistServerBlocks.Add(new LetterGetterBlock("letter", usageServer));
 
             Console.WriteLine("Blocks created");
         }

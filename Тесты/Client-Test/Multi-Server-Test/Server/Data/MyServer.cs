@@ -127,13 +127,22 @@ namespace Multi_Server_Test.ServerData
                     jsonPackage.Append(Encoding.UTF8.GetString(buffer, 0, bytes));
                 }
                 while (clientStream.DataAvailable);
-                var getPackage = JsonConvert.DeserializeObject<Package>(jsonPackage.ToString());
-                Console.WriteLine("Получена мета:\nTo: {0},\nFrom: {1} \nAction: {2}", getPackage.SendingMeta.Address, getPackage.SendingMeta.FromHostName, getPackage.SendingMeta.Action);
-                var clientObject = JsonConvert.SerializeObject(getPackage.SendingObject);
 
-                ShowReport("Distribute request to handle in routing block...", ConsoleColor.Yellow);
-                Router requestRoute = new Router(getPackage.SendingMeta.Action, clientObject, clientStream);
-                requestRoute.CompleteRoute(Blocks.ExistServerBlocks);
+                if (!string.IsNullOrWhiteSpace(jsonPackage.ToString()))
+                {
+                    var getPackage = JsonConvert.DeserializeObject<Package>(jsonPackage.ToString());
+                    Console.WriteLine("Получена мета:\nTo: {0},\nFrom: {1} \nAction: {2}", getPackage.SendingMeta.Address, getPackage.SendingMeta.FromHostName, getPackage.SendingMeta.Action);
+                    var clientObject = JsonConvert.SerializeObject(getPackage.SendingObject);
+
+                    ShowReport("Distribute request to handle in routing block...", ConsoleColor.Yellow);
+                    Router requestRoute = new Router(getPackage.SendingMeta.Action, clientObject, clientStream);
+                    requestRoute.CompleteRoute(Blocks.ExistServerBlocks);
+                }
+                else
+                {
+                    ShowReport("Пакет данных не может быть получен!", ConsoleColor.Red);
+                }
+
             }
             else
             {

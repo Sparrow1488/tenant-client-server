@@ -39,7 +39,6 @@ namespace WpfApp1.Server.ServerMeta
         public async Task<NewsCollection> ReceiveNewsCollectionAsync()
         {
             var meta = new PackageMeta("127.0.0.1", "news");
-            //var nullNews = new News(); //TODO: ИСПРАВИТЬ КАЛОВЫЙ КОНСТРУКТОР + ВОЗМОЖНОСТЬ ОТПРАВЛЯТЬ ТОЛЬКО МЕТУ НА СЕРВЕР
             var jsonCollection = await SendAndGetAsync(null, meta);
             var collectionResponse =  JsonConvert.DeserializeObject<NewsCollection>(jsonCollection);
             if (collectionResponse == null)

@@ -1,35 +1,45 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Sockets;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using WpfApp1.Server.Packages.Letters;
 using WpfApp1.Server.ServerMeta;
 
 namespace WpfApp1.Pages.HomePages.ChildLetterPage
 {
     /// <summary>
-    /// Логика взаимодействия для ComplaintPage.xaml
+    /// Логика взаимодействия для QuestionPage.xaml
     /// </summary>
-    public partial class ComplaintPage : Page
+    public partial class QuestionPage : Page
     {
-        public ComplaintPage()
+        public QuestionPage()
         {
             InitializeComponent();
         }
 
         private async void sendLetterBtn_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: копипаст кода
             var btn = (Button)sender;
             btn.IsEnabled = false;
             string result = string.Empty;
             try
             {
                 var letterSender = JumboServer.ActiveServer.ActiveUser;
-                var sendLetter = new ComplaintLetter(titleLetter.Text,
-                                                     descriptionLetter.Text,
-                                                     letterSender);
+                var sendLetter = new QuestionLetter(titleLetter.Text,
+                                                 descriptionLetter.Text,
+                                                 letterSender);
                 result = await JumboServer.ActiveServer.SendLetter(sendLetter);
             }
             catch (SocketException)

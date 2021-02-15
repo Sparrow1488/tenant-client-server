@@ -69,7 +69,7 @@ namespace WpfApp1.Server.ServerMeta
         private async Task<string> GetResponseAsync()
         {
             StringBuilder response = new StringBuilder();
-            byte[] getData = new byte[256];
+            byte[] getData = new byte[2048];
             await Task.Run(() =>
             {
                 var serverStream = TCPclient.GetStream();

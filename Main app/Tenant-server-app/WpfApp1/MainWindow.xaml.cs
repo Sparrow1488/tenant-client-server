@@ -38,6 +38,7 @@ namespace WpfApp1
 
         private async void AuthBtn_Click(object sender, RoutedEventArgs e)
         {
+            string errorText;
             errorLabel.Visibility = Visibility.Collapsed;
             send_Btn.IsEnabled = false;
             try
@@ -55,16 +56,17 @@ namespace WpfApp1
             }
             catch (SocketException)
             {
-                var errorText = "Не удалось подключиться к серверу";
+                errorText = "Не удалось подключиться к серверу";
                 application.ShowExceptionMessage(errorText, errorLabel);
             }
             catch (JsonReaderException)
             {
-                MessageBox.Show("Получены нечитаемые данные!", "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                errorText = "Не удалось подключиться к серверу";
+                application.ShowExceptionMessage("Получены нечитаемые данные!", errorLabel);
             }
             catch (IOException)
             {
-                var errorText = "Удаленный хост принудительно разорвал существующее подключение";
+                errorText = "Удаленный хост принудительно разорвал существующее подключение";
                 application.ShowExceptionMessage(errorText, errorLabel);
             }
             catch (ArgumentException ex)

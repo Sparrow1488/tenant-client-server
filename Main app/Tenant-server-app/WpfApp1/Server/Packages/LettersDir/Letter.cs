@@ -12,6 +12,7 @@ namespace WpfApp1.Server.Packages.Letters
         public string Title { get; }
         public string Description { get; }
         public Person Sender { get; }
+        public DateTime DateCreate = DateTime.Now;
         public Letter(string title, string description, Person sender)
         {
             if (string.IsNullOrWhiteSpace(description) || sender == null)

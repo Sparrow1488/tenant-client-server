@@ -9,6 +9,7 @@
     Width="1200"
     Height="800"
     MinWidth="1050"
+    MinHeight="550"
     Loaded="Window_Loaded"
     mc:Ignorable="d">
     <Grid>

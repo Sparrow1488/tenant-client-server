@@ -82,3 +82,9 @@ C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-serve
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Pages\HomePages\ChildLetterPage\ComplaintPage.baml
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Pages\HomePages\LetterPage.baml
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Tenant-client-app.csprojAssemblyReference.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Pages\HomePages\ChildLetterPage\OfferPage.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Pages\HomePages\ChildLetterPage\OfferPage.baml
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Pages\HomePages\ChildLetterPage\InformationLetterPage.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Pages\HomePages\ChildLetterPage\InformationLetterPage.baml
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Pages\HomePages\ChildLetterPage\QuestionPage.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Pages\HomePages\ChildLetterPage\QuestionPage.baml

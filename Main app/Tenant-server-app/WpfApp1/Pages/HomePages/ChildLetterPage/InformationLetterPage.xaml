@@ -1,0 +1,24 @@
+﻿<Page
+    x:Class="WpfApp1.Pages.HomePages.ChildLetterPage.InformationLetterPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WpfApp1.Pages.HomePages.ChildLetterPage"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="InformationLetterPage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Background="White"
+    mc:Ignorable="d">
+
+    <Grid>
+        <StackPanel Margin="10" Orientation="Vertical">
+            <TextBlock FontSize="20" TextWrapping="Wrap">
+                Это информационный блок о том,<LineBreak />
+                как писать четкие и информативные письма</TextBlock>
+            <WrapPanel Margin="10">
+                <Image Height="200" Source="/refs/images/infoLetterIMG_1.jpg" />
+            </WrapPanel>
+        </StackPanel>
+    </Grid>
+</Page>

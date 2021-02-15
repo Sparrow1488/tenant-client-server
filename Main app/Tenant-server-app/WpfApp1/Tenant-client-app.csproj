@@ -119,6 +119,15 @@
     <Compile Include="Pages\HomePages\ChildLetterPage\ComplaintPage.xaml.cs">
       <DependentUpon>ComplaintPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\HomePages\ChildLetterPage\InformationLetterPage.xaml.cs">
+      <DependentUpon>InformationLetterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HomePages\ChildLetterPage\OfferPage.xaml.cs">
+      <DependentUpon>OfferPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HomePages\ChildLetterPage\QuestionPage.xaml.cs">
+      <DependentUpon>QuestionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HomePages\LetterPage.xaml.cs">
       <DependentUpon>LetterPage.xaml</DependentUpon>
     </Compile>
@@ -132,6 +141,8 @@
     <Compile Include="Server\NewsCollection.cs" />
     <Compile Include="Server\Packages\Letters\ComplaintLetter.cs" />
     <Compile Include="Server\Packages\Letters\Letter.cs" />
+    <Compile Include="Server\Packages\Letters\OfferLetter.cs" />
+    <Compile Include="Server\Packages\Letters\QuestionLetter.cs" />
     <Compile Include="Server\Packages\Package.cs" />
     <Compile Include="Server\Packages\PackageMeta.cs" />
     <Compile Include="Server\Packages\RequestObject.cs" />
@@ -143,6 +154,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\HomePages\ChildLetterPage\ComplaintPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\HomePages\ChildLetterPage\InformationLetterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\HomePages\ChildLetterPage\OfferPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\HomePages\ChildLetterPage\QuestionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -220,6 +243,7 @@
     <Resource Include="refs\icons\userIcon.png" />
     <Resource Include="refs\BG-3_1920x1080.jpg" />
     <Resource Include="refs\icons\settingsIcon.png" />
+    <Resource Include="refs\images\infoLetterIMG_1.jpg" />
     <Content Include="refs\TestIMG-1.jfif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

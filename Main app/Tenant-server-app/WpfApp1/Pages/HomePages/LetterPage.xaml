@@ -9,6 +9,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     Background="White"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
 
     <Grid>
@@ -36,7 +37,10 @@
             </StackPanel>
             <WrapPanel HorizontalAlignment="Center" Orientation="Horizontal">
 
-                <Button Margin="5" Background="Transparent">
+                <Button
+                    Margin="5"
+                    Background="Transparent"
+                    Click="SelectOfferPageBtn_Click">
                     <Button.BorderBrush>
                         <SolidColorBrush Color="Transparent" />
                     </Button.BorderBrush>
@@ -60,7 +64,7 @@
                 <Button
                     Margin="5"
                     Background="Transparent"
-                    Click="complaintBtn_Click">
+                    Click="SelectComplaintPageBtn_Click">
                     <Button.BorderBrush>
                         <SolidColorBrush Color="Transparent" />
                     </Button.BorderBrush>
@@ -81,7 +85,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Margin="5" Background="Transparent">
+                <Button Margin="5" Background="Transparent" Click="SelectQuestionPageBtn_Click">
                     <Button.BorderBrush>
                         <SolidColorBrush Color="Transparent" />
                     </Button.BorderBrush>

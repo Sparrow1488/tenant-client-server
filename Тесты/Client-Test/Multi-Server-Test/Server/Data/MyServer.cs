@@ -26,10 +26,9 @@ namespace Multi_Server_Test.ServerData
         public BlocksSection Blocks = null;
 
         public NewsCollection newsCollectionOutDB = null;
-
         public MyServer(string host, int port)
         {
-            if(!string.IsNullOrWhiteSpace(host) &&
+            if (!string.IsNullOrWhiteSpace(host) &&
                 port > 10)
             {
                 HOST = host;

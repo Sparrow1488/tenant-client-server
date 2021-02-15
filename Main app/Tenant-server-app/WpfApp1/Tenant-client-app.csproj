@@ -137,18 +137,18 @@
     <Compile Include="Pages\HomePages\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Server\News.cs" />
-    <Compile Include="Server\NewsCollection.cs" />
-    <Compile Include="Server\Packages\Letters\ComplaintLetter.cs" />
-    <Compile Include="Server\Packages\Letters\Letter.cs" />
-    <Compile Include="Server\Packages\Letters\OfferLetter.cs" />
-    <Compile Include="Server\Packages\Letters\QuestionLetter.cs" />
+    <Compile Include="Server\Packages\NewsDir\News.cs" />
+    <Compile Include="Server\Packages\NewsDir\NewsCollection.cs" />
+    <Compile Include="Server\Packages\LettersDir\ComplaintLetter.cs" />
+    <Compile Include="Server\Packages\LettersDir\Letter.cs" />
+    <Compile Include="Server\Packages\LettersDir\OfferLetter.cs" />
+    <Compile Include="Server\Packages\LettersDir\QuestionLetter.cs" />
     <Compile Include="Server\Packages\Package.cs" />
-    <Compile Include="Server\Packages\PackageMeta.cs" />
+    <Compile Include="Server\Packages\Meta\PackageMeta.cs" />
     <Compile Include="Server\Packages\RequestObject.cs" />
-    <Compile Include="Server\ServerMeta\JumboServer.cs" />
-    <Compile Include="Server\ServerMeta\ServerConfig.cs" />
-    <Compile Include="Server\Person.cs" />
+    <Compile Include="Server\JumboServer.cs" />
+    <Compile Include="Server\Configuration\ServerConfig.cs" />
+    <Compile Include="Server\Packages\PersonalDir\Person.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -215,9 +215,7 @@
   <ItemGroup>
     <Resource Include="refs\BG-2_1360х800.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Server\UserInfo\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="cat.ico" />
   </ItemGroup>

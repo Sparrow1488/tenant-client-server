@@ -82,7 +82,7 @@ namespace WpfApp1
         private void iDontKnowPasswordOrLogin_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             //TODO: сделать отправку на воостановление доступа
-            MessageBox.Show("Запрос полетел администратору. С Вами свяжутся",
+            MessageBox.Show("Запрос полетел администратору. С Вами свяжутся.",
                             "Забыли логин или пароль", 
                             MessageBoxButton.OK,
                             MessageBoxImage.Information);

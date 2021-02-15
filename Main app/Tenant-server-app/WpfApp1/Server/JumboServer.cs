@@ -3,7 +3,9 @@ using Newtonsoft.Json;
 using System;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using WpfApp1.Server.Packages;
 using WpfApp1.Server.Packages.Letters;
 
@@ -57,7 +59,7 @@ namespace WpfApp1.Server.ServerMeta
         private async Task SendRequestAsync(RequestObject sendObject, PackageMeta meta)
         {
             TCPclient = new TcpClient();
-            await TCPclient.ConnectAsync(ServerConfig.HOST, ServerConfig.PORT);
+            await TCPclient.ConnectAsync(ServerConfig.HOST, ServerConfig.PORT); //TODO: сделать таймер подключения к серверу (например 10 секунд)
             NetworkStream stream = TCPclient.GetStream();
 
             var pack = new Package<RequestObject>(sendObject, meta);

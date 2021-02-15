@@ -24,7 +24,7 @@ namespace Multi_Server_Test
             
             //TODO: сделать отправку сообщений председателю
             //TODO: сделать клиент председателя
-            myServer.ReseveAndResponseToClient();
+            myServer.ServeAndResponseToClient();
             Console.WriteLine("Server disconnect.");
         }
         

@@ -21,9 +21,15 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
                 {
                     var jsonResponsePerson = JsonConvert.SerializeObject(personOutDB);
                     var response = Encoding.UTF8.GetBytes(jsonResponsePerson);
-                    await stream.WriteAsync(response, 0, response.Length);
-
-                    BlockReport("Успешный вход", ConsoleColor.Green);
+                    if (stream.CanWrite)
+                    {
+                        await stream.WriteAsync(response, 0, response.Length);
+                        BlockReport("Успешный вход", ConsoleColor.Green);
+                    }
+                    else
+                    {
+                        BlockReport("Ошибка записи потока: не поддерживается запись", ConsoleColor.Yellow);
+                    }
                     return;
                 }
 
@@ -42,6 +48,10 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
                 await stream.WriteAsync(response, 0, response.Length);
 
                 BlockReport("Пользователь не найден в базе данных", ConsoleColor.Red);
+            }
+            finally
+            {
+
             }
         }
         private void BlockReport(string report, ConsoleColor color)

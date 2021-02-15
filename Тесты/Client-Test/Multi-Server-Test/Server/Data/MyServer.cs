@@ -6,6 +6,7 @@ using Multi_Server_Test.ServerData.Blocks;
 using Multi_Server_Test.ServerData.Server;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -100,7 +101,7 @@ namespace Multi_Server_Test.ServerData
             var getNewsCollection = respose.ResultAs<NewsCollection>();
             return getNewsCollection;
         }
-        public void ReseveAndResponseToClient()
+        public void ServeAndResponseToClient()
         {
             while (true)
             {
@@ -116,8 +117,14 @@ namespace Multi_Server_Test.ServerData
             if (validClient.Connected)
             {
                 ShowReport("Client connect", ConsoleColor.Green);
+
                 var clientStream = validClient.GetStream();
                 string jsonPackage = GetDataFromStream(clientStream);
+                if(jsonPackage == null)
+                {
+                    ShowReport("Ошибка: поток не поддерживает чтение", ConsoleColor.Red);
+                    return;
+                }
 
                 if (!string.IsNullOrWhiteSpace(jsonPackage.ToString()))
                 {
@@ -197,15 +204,22 @@ namespace Multi_Server_Test.ServerData
         #region Вторичные методы
         private string GetDataFromStream(NetworkStream clientStream)
         {
-            byte[] buffer = new byte[1024];
-            StringBuilder jsonPackage = new StringBuilder();
-            do
+            if (clientStream.CanRead)
             {
-                int bytes = clientStream.Read(buffer, 0, buffer.Length);
-                jsonPackage.Append(Encoding.UTF8.GetString(buffer, 0, bytes));
+                byte[] buffer = new byte[1024];
+                StringBuilder jsonPackage = new StringBuilder();
+                do
+                {
+                    int bytes = clientStream.Read(buffer, 0, buffer.Length);
+                    jsonPackage.Append(Encoding.UTF8.GetString(buffer, 0, bytes));
+                }
+                while (clientStream.DataAvailable);
+                return jsonPackage.ToString();
             }
-            while (clientStream.DataAvailable);
-            return jsonPackage.ToString();
+            else
+            {
+                return null;
+            }
         }
         #endregion
     }

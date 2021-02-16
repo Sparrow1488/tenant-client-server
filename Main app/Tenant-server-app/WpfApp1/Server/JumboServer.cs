@@ -13,7 +13,6 @@ namespace WpfApp1.Server.ServerMeta
 {
     public class JumboServer
     {
-        
         public static JumboServer ActiveServer;
         private TcpClient TCPclient = null;
         public Person ActiveUser = null;
@@ -47,7 +46,7 @@ namespace WpfApp1.Server.ServerMeta
                 return collectionResponse;
         }
 
-        private async Task<string> SendAndGetAsync(RequestObject sendObject, PackageMeta meta)
+        public async Task<string> SendAndGetAsync(RequestObject sendObject, PackageMeta meta)
         {
             await SendRequestAsync(sendObject, meta);
             var jsonResponse = await GetResponseAsync();
@@ -95,6 +94,7 @@ namespace WpfApp1.Server.ServerMeta
             var meta = new PackageMeta(ServerConfig.HOST, "letter");
             return await SendAndGetAsync(letter, meta);
         }
+
     }
     //private JsonSerializerSettings JsonSettings = new JsonSerializerSettings
     //{

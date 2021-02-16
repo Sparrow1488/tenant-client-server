@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Multi_Server_Test.Server.Blocks;
+using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading.Tasks;
@@ -19,6 +20,8 @@ namespace Multi_Server_Test.ServerData.Blocks
             else
                 throw new ArgumentException("Название блока должно быть больше 4-х символов");
         }
+
         public abstract void CompleteAction(string clientJson, NetworkStream stream);
+
     }
 }

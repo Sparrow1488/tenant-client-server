@@ -1,4 +1,5 @@
 ﻿using Multi_Server_Test.Blocks;
+using Multi_Server_Test.Server.Blocks;
 using Newtonsoft.Json;
 using System;
 using System.Net.Sockets;
@@ -54,12 +55,13 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
 
             }
         }
-        private void BlockReport(string report, ConsoleColor color)
+
+        private void BlockReport(string message, ConsoleColor color)
         {
             Console.Write(BlockAction + "> ");
 
             Console.ForegroundColor = color;
-            Console.WriteLine(report);
+            Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.White;
         }
     }

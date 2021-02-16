@@ -61,18 +61,22 @@ namespace Multi_Server_Test.ServerData
         {
             if (!person.Equals(null))
             {
-                Meta.firebaseClient = new FirebaseClient(Meta.firebaseConfig);
+                Meta.firebaseClient = new FirebaseClient(Meta.firebaseConfig); //TODO: клиент зачем то постоянно создается
                 await Meta.firebaseClient.SetAsync($"{Meta.usersPath}/{person.Login}", person);
                 ShowReport("Person was loaded on server", ConsoleColor.Green);
             }
         }
-        public async Task AddNewsCollection(NewsCollection collection)
+        public void AddNewsOnServer(News news) //TODO: сделать отправку в БД (через определенное время / после 5 новых новостей)
         {
-            if (collection != null)
+            if (newsCollectionOutDB.Collection != null)
             {
-                Meta.firebaseClient = new FirebaseClient(Meta.firebaseConfig);
-                await Meta.firebaseClient.SetAsync($"{Meta.newsPath}/{NewsCollection.Name}", collection);
-                ShowReport("News was loaded on server", ConsoleColor.Green);
+                newsCollectionOutDB.Collection.Add(news);
+                ShowReport("Новость успешно добавлена", ConsoleColor.Yellow);
+                //Meta.firebaseClient = new FirebaseClient(Meta.firebaseConfig);
+                //await Meta.firebaseClient.UpdateAsync($"{Meta.newsPath}/{NewsCollection.Name}", newCollection);
+                //ShowReport("Новость добавлена в базу. Выполняется синхронизация...", ConsoleColor.Yellow);
+                //newsCollectionOutDB = await SynchronizeNewsCollection();
+                //ShowReport("Новость успешно загружена.", ConsoleColor.Green);
             }
         }
         public async Task<Person> GetUser(Person person)

@@ -26,12 +26,12 @@ namespace Multi_Server_Test.Server.Blocks.Auth
             }
             catch (Exception) { }
         }
-        private void BlockReport(string report, ConsoleColor color)
+        private void BlockReport(string message, ConsoleColor color)
         {
             Console.Write(BlockAction + "> ");
 
             Console.ForegroundColor = color;
-            Console.WriteLine(report);
+            Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.White;
         }
     }

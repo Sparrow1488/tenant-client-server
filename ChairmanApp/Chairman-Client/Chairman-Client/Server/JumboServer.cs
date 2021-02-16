@@ -47,7 +47,7 @@ namespace ChairmanClient.Server.ServerMeta
                 return collectionResponse;
         }
 
-        private async Task<string> SendAndGetAsync(RequestObject sendObject, PackageMeta meta)
+        public async Task<string> SendAndGetAsync(RequestObject sendObject, PackageMeta meta)
         {
             await SendRequestAsync(sendObject, meta);
             var jsonResponse = await GetResponseAsync();

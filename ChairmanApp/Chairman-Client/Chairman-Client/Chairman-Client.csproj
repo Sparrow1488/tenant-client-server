@@ -58,6 +58,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HomeWindow.xaml.cs">
+      <DependentUpon>HomeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LetterPage.xaml.cs">
+      <DependentUpon>LetterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Server\Chairman\Functions\Functions.cs" />
     <Compile Include="Server\Configuration\ServerConfig.cs" />
     <Compile Include="Server\JumboServer.cs" />
     <Compile Include="Server\Packages\LettersDir\ComplaintLetter.cs" />
@@ -70,6 +77,10 @@
     <Compile Include="Server\Packages\Package.cs" />
     <Compile Include="Server\Packages\PersonalDir\Person.cs" />
     <Compile Include="Server\Packages\RequestObject.cs" />
+    <Page Include="HomeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -82,6 +93,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\LetterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -109,6 +124,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Server\Chairman\Packages\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

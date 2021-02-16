@@ -16,3 +16,7 @@ C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Chairman-Client.csproj.CopyComplete
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Chairman-Client.exe
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Chairman-Client.pdb
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\HomeWindow.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Pages\LetterPage.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\HomeWindow.baml
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Pages\LetterPage.baml

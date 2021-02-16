@@ -32,18 +32,25 @@ namespace Chairman_Client
             var sendBtn = (Button)sender;
             sendBtn.IsEnabled = false;
             var newPerson = new Person(loginBox.Text, passwordBox.Text, 67);
-            bool authSuccess = await JumboServer.ActiveServer.AuthorizationAsync(newPerson, false);
-            if (authSuccess)
-                MessageBox.Show("Успешно");
-            else
-                MessageBox.Show("Ошибка");
-            sendBtn.IsEnabled = true;
+            try
+            {
+                bool authSuccess = await JumboServer.ActiveServer.AuthorizationAsync(newPerson, false);
+                if (authSuccess)
+                {
+                    new HomeWindow().Show();
+                    Close();
+                }
+                else
+                    MessageBox.Show("Ошибка");
+                sendBtn.IsEnabled = true;
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Exception dialog"); }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ServerConfig config = new ServerConfig();
-            JumboServer server = new JumboServer(config);
+            new JumboServer(config);
         }
     }
 }

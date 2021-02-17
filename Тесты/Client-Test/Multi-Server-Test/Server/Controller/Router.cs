@@ -19,7 +19,7 @@ namespace Multi_Server_Test.ServerData.Blocks
             ClientResponseStream = stream;
         }
 
-        public void CompleteRoute(List<ServerBlock> listServerBlocks)
+        public void CompleteRoute(List<ViewModule> listServerBlocks)
         {
             for (int i = 0; i < listServerBlocks.Count; i++)
             {

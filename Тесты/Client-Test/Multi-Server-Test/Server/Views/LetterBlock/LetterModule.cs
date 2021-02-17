@@ -9,14 +9,18 @@ using System.Threading.Tasks;
 
 namespace Multi_Server_Test.Server.Blocks.LetterBlock
 {
-    public class LetterGetterBlock : ServerBlock
+    public class LetterModule : ViewModule
     {
-        public LetterGetterBlock(string blockAction, MyServer server) : base(blockAction, server) { }
+        public LetterModule(string blockAction, MyServer server) : base(blockAction, server) { }
 
-        public override async void CompleteAction(string clientJson, NetworkStream stream)
+        public override async void CompleteAction(string clientJson, NetworkStream stream, string[] commands)
         {
             try
             { 
+                if(commands[1] != null)
+                {
+
+                }
                 var getLetter = JsonConvert.DeserializeObject<Letter>(clientJson);
                 BlockReport("Письмо успешно получено", ConsoleColor.Green);
                 Console.WriteLine(getLetter); //TODO: сделать сортер по типу новости (предложение, жалоба, вопрос)
@@ -25,11 +29,6 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
             }
             catch (Exception) { }
         } 
-        private void SaveRecivedLetter()
-        {
-
-        }
-
         private void BlockReport(string message, ConsoleColor color)
         {
             Console.Write(BlockAction + "> ");

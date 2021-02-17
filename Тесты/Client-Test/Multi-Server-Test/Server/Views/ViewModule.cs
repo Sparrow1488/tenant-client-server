@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Multi_Server_Test.ServerData.Blocks
 {
-    public abstract class ServerBlock
+    public abstract class ViewModule
     {
         public MyServer RequestServer;
         public string BlockAction { get; }
-        public ServerBlock(string blockAction, MyServer server)
+        public ViewModule(string blockAction, MyServer server)
         {
             if(blockAction.Length >= 4)
             {
@@ -21,7 +21,7 @@ namespace Multi_Server_Test.ServerData.Blocks
                 throw new ArgumentException("Название блока должно быть больше 4-х символов");
         }
 
-        public abstract void CompleteAction(string clientJson, NetworkStream stream);
+        public abstract void CompleteAction(string clientJson, NetworkStream stream, string[] commands);
 
     }
 }

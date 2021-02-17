@@ -1,5 +1,4 @@
 ﻿using Multi_Server_Test.Blocks;
-using Multi_Server_Test.Server.Blocks;
 using Newtonsoft.Json;
 using System;
 using System.Net.Sockets;
@@ -7,11 +6,11 @@ using System.Text;
 
 namespace Multi_Server_Test.ServerData.Blocks.Auth
 {
-    public class AuthorizationBlock : ServerBlock
+    public class AuthorizationModule : ViewModule
     {
-        public AuthorizationBlock(string blockAction, MyServer server) : base(blockAction, server) { }
+        public AuthorizationModule(string blockAction, MyServer server) : base(blockAction, server) { }
 
-        public override async void CompleteAction(string clientJson, NetworkStream stream)
+        public override async void CompleteAction(string clientJson, NetworkStream stream, string[] commands)
         {
             try
             {

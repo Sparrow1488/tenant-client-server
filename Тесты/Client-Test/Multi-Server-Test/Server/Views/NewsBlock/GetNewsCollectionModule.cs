@@ -1,5 +1,4 @@
-﻿using Multi_Server_Test.Server.Packages;
-using Multi_Server_Test.ServerData;
+﻿using Multi_Server_Test.ServerData;
 using Multi_Server_Test.ServerData.Blocks;
 using Newtonsoft.Json;
 using System;
@@ -8,11 +7,11 @@ using System.Text;
 
 namespace Multi_Server_Test.Server.Blocks.Auth
 {
-    public class NewsSenderBlock : ServerBlock
+    public class GetNewsCollectionModule : ViewModule
     {
-        public NewsSenderBlock(string blockAction, MyServer server) : base(blockAction, server) { }
+        public GetNewsCollectionModule(string blockAction, MyServer server) : base(blockAction, server) { }
 
-        public override async void CompleteAction(string clientJson, NetworkStream stream)
+        public override async void CompleteAction(string clientJson, NetworkStream stream, string[] commands)
         {
             var newsCollectionToResponse = RequestServer.newsCollectionOutDB;
 

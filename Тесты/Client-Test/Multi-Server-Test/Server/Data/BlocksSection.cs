@@ -9,16 +9,16 @@ namespace Multi_Server_Test.ServerData.Server
 {
     public class BlocksSection //TODO: а он точно нужен?
     {
-        public List<ServerBlock> ExistServerBlocks = new List<ServerBlock>();
+        public List<ViewModule> ExistServerBlocks = new List<ViewModule>();
         public BlocksSection(MyServer usageServer)
         {
             Create(usageServer);
         }
         public void Create(MyServer usageServer)
         {
-            ExistServerBlocks.Add(new AuthorizationBlock("auth", usageServer));
-            ExistServerBlocks.Add(new NewsSenderBlock("news", usageServer));
-            ExistServerBlocks.Add(new LetterGetterBlock("letter", usageServer));
+            ExistServerBlocks.Add(new AuthorizationModule("auth", usageServer));
+            ExistServerBlocks.Add(new GetNewsCollectionModule("news", usageServer));
+            ExistServerBlocks.Add(new LetterModule("letter", usageServer));
 
             Console.WriteLine("Blocks created");
         }

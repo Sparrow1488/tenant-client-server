@@ -25,7 +25,7 @@ namespace WpfApp1.Server.ServerMeta
         }
         public async Task<bool> AuthorizationAsync(Person dataPerson, bool token) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
         {
-            PackageMeta meta = new PackageMeta(ServerConfig.HOST, "auth");
+            PackageMeta meta = new PackageMeta(ServerConfig.HOST, "User/auth");
 
             var jsonResponse = await SendAndGetAsync(dataPerson, meta);
             ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse);

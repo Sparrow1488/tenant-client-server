@@ -1,8 +1,10 @@
 ﻿using FireSharp;
 using FireSharp.Response;
 using Multi_Server_Test.Blocks;
+using Multi_Server_Test.Server.Controllers;
 using Multi_Server_Test.Server.Packages;
 using Multi_Server_Test.ServerData.Blocks;
+using Multi_Server_Test.ServerData.Blocks.Auth;
 using Multi_Server_Test.ServerData.Server;
 using Newtonsoft.Json;
 using System;
@@ -23,7 +25,7 @@ namespace Multi_Server_Test.ServerData
         public string serverName { get; }
 
         public TcpListener Listener = null;
-        public ServerMeta Meta = null;
+        public static ServerMeta Meta = null;
         public BlocksSection Blocks = null;
 
         public NewsCollection newsCollectionOutDB = null;
@@ -47,8 +49,8 @@ namespace Multi_Server_Test.ServerData
         }
         public async Task Start()
         {
-            foreach (var block in Blocks.ExistServerBlocks)
-                Console.WriteLine(block.BlockAction + " is active");
+            foreach (var block in Blocks.ExistServerModels)
+                Console.WriteLine(block.Action + " is active");
 
             newsCollectionOutDB = await SynchronizeNewsCollection();
             foreach (var news in newsCollectionOutDB.Collection)
@@ -136,9 +138,20 @@ namespace Multi_Server_Test.ServerData
                     Console.WriteLine(getPackage.SendingMeta);
                     var clientObject = JsonConvert.SerializeObject(getPackage.SendingObject);
 
-                    ShowReport("Distribute request to handle in routing block...", ConsoleColor.Yellow);
-                    Router requestRoute = new Router(getPackage.SendingMeta.Action, clientObject, clientStream);
-                    requestRoute.CompleteRoute(Blocks.ExistServerBlocks);
+                    ShowReport("Distribute request to handle in main routing controller...", ConsoleColor.Yellow);
+
+                    var allModels = new List<Model>()
+                    {
+                        new AuthorizationModel("auth")
+                    };
+
+                    List<Controller> newControllers = new List<Controller>()
+                    { 
+                        new UserController("User", allModels)
+                    };
+
+                    MainRouter router = new MainRouter(newControllers);
+                    router.ExecuteRouting(getPackage, validClient);
                 }
                 else
                 {

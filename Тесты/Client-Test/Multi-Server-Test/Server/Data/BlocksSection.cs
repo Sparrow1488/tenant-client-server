@@ -9,18 +9,18 @@ namespace Multi_Server_Test.ServerData.Server
 {
     public class BlocksSection //TODO: а он точно нужен?
     {
-        public List<ServerBlock> ExistServerBlocks = new List<ServerBlock>();
+        public List<Model> ExistServerModels = new List<Model>();
         public BlocksSection(MyServer usageServer)
         {
             Create(usageServer);
         }
         public void Create(MyServer usageServer)
         {
-            ExistServerBlocks.Add(new AuthorizationBlock("auth", usageServer));
-            ExistServerBlocks.Add(new NewsSenderBlock("news", usageServer));
-            ExistServerBlocks.Add(new LetterGetterBlock("letter", usageServer));
+            //ExistServerModels.Add(new AuthorizationModel("auth"));
+            //ExistServerModels.Add(new GetNewsCollectionModel("news/get"));
+            //ExistServerModels.Add(new GetLetterModel("letter/get"));
 
-            Console.WriteLine("Blocks created");
+            //Console.WriteLine("Blocks created");
         }
     }
 }

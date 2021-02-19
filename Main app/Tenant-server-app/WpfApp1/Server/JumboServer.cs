@@ -37,7 +37,7 @@ namespace WpfApp1.Server.ServerMeta
         }
         public async Task<NewsCollection> ReceiveNewsCollectionAsync()
         {
-            var meta = new PackageMeta("127.0.0.1", "news");
+            var meta = new PackageMeta("127.0.0.1", "News/get");
             var jsonCollection = await SendAndGetAsync(null, meta);
             var collectionResponse =  JsonConvert.DeserializeObject<NewsCollection>(jsonCollection);
             if (collectionResponse == null)
@@ -91,7 +91,7 @@ namespace WpfApp1.Server.ServerMeta
 
         public async Task<string> SendLetter(Letter letter)
         {
-            var meta = new PackageMeta(ServerConfig.HOST, "letter");
+            var meta = new PackageMeta(ServerConfig.HOST, "Letter/send");
             return await SendAndGetAsync(letter, meta);
         }
 

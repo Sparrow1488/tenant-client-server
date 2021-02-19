@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Multi_Server_Test
 {
-    public class ServerModelEvents
+    public class ServerModulEvents
     {
-        public ServerModelEvents()
+        public ServerModulEvents()
         {
 
         }
@@ -28,7 +28,7 @@ namespace Multi_Server_Test
         }
         public void BlockReport(ViewModule module, string message, ConsoleColor color)
         {
-            Console.Write(module + "> ");
+            Console.Write(module.ViewName + "> ");
 
             Console.ForegroundColor = color;
             Console.WriteLine(message);

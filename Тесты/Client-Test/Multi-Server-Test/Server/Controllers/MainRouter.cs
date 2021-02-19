@@ -27,6 +27,7 @@ namespace Multi_Server_Test.ServerData.Blocks
                 if (controller.ControllerName == controllerName)
                 {
                     controller.ExecuteRouting(modelAction, package, connectedClient);
+                    break;
                 }
                 if (i == allControllers.Count - 1)
                 {

@@ -1,14 +1,14 @@
-﻿using Multi_Server_Test.Server.Packages;
+﻿using Multi_Server_Test.Server.Models;
 using System;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
-namespace Multi_Server_Test.Server.Models
+namespace Multi_Server_Test.Server.Views
 {
-    public class NewsView : ViewModule
+    public class UserView : ViewModule
     {
-        ServerModulEvents serverEvents = new ServerModulEvents();
-        public NewsView(byte[] responseData, NetworkStream writeStream) : base(responseData, writeStream) { viewName = "NewsView"; }
+        private ServerModulEvents serverEvents = new ServerModulEvents();
+        public UserView(byte[] responseData, NetworkStream writeStream) : base(responseData, writeStream) { viewName = "UserView"; }
 
         public override async Task ExecuteModuleProcessing(string additionalMessage)
         {
@@ -19,7 +19,9 @@ namespace Multi_Server_Test.Server.Models
                 WriteStream.Close();
             }
             else
+            {
                 serverEvents.BlockReport(this, "Ошибка записи потока: не поддерживается запись", ConsoleColor.Yellow);
+            }
         }
     }
 }

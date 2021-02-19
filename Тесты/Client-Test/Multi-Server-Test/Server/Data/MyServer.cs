@@ -1,6 +1,7 @@
 ﻿using FireSharp;
 using FireSharp.Response;
 using Multi_Server_Test.Blocks;
+using Multi_Server_Test.Server.Blocks.Auth;
 using Multi_Server_Test.Server.Controllers;
 using Multi_Server_Test.Server.Packages;
 using Multi_Server_Test.ServerData.Blocks;
@@ -28,7 +29,7 @@ namespace Multi_Server_Test.ServerData
         public static ServerMeta Meta = null;
         public BlocksSection Blocks = null;
 
-        public NewsCollection newsCollectionOutDB = null;
+        public static NewsCollection newsCollectionOutDB = null;
         public MyServer(string host, int port)
         {
             if (!string.IsNullOrWhiteSpace(host) &&
@@ -113,8 +114,9 @@ namespace Multi_Server_Test.ServerData
             {
                 ShowReport("Ожидаю запроса.......", ConsoleColor.White);
                 var client = Listener.AcceptTcpClient();
-                Thread handleClient = new Thread(new ParameterizedThreadStart(ResponseToClient));
-                handleClient.Start(client);
+                //Thread handleClient = new Thread(new ParameterizedThreadStart(ResponseToClient));
+                //handleClient.Start(client);
+                Task.Factory.StartNew(() => ResponseToClient(client));
             }
         }
         private void ResponseToClient(object tcpClient)
@@ -140,14 +142,16 @@ namespace Multi_Server_Test.ServerData
 
                     ShowReport("Distribute request to handle in main routing controller...", ConsoleColor.Yellow);
 
-                    var allModels = new List<Model>()
-                    {
-                        new AuthorizationModel("auth")
-                    };
+                    var userModels = new List<Model>()
+                    { new AuthorizationModel("auth") };
+
+                    var newsModels = new List<Model>()
+                    { new GetNewsCollectionModel("get") };
 
                     List<Controller> newControllers = new List<Controller>()
-                    { 
-                        new UserController("User", allModels)
+                    {
+                        new UserController("User", userModels),
+                        new NewsController("News", newsModels)
                     };
 
                     MainRouter router = new MainRouter(newControllers);

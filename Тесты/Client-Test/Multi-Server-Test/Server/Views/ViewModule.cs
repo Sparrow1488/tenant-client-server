@@ -1,17 +1,22 @@
-﻿using Multi_Server_Test.Server.Packages;
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
+using System.Threading.Tasks;
 
 namespace Multi_Server_Test.Server.Models
 {
     public abstract class ViewModule
     {
-        public RequestObject ResponseObject { get; }
-        public TcpClient ConnectedClient { get; }
-        public ViewModule(RequestObject responseObject, TcpClient client)
+        protected string viewName = "view_module";
+        public string ViewName 
+        { 
+            get { return viewName; } 
+        } 
+        public NetworkStream WriteStream { get; }
+        public byte[] ResponseData { get; }
+        public ViewModule(byte[] responseData, NetworkStream writeStream) //первый агрумент byte[] с уже закодированным объектом
         {
-            ResponseObject = responseObject;
-            ConnectedClient = client;
+            ResponseData = responseData;
+            WriteStream = writeStream;
         }
-        public abstract string ExecuteModuleProcessing();
+        public abstract Task ExecuteModuleProcessing(string additionalMessage);
     }
 }

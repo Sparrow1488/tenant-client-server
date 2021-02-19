@@ -1,7 +1,7 @@
 ﻿using FireSharp;
 using FireSharp.Response;
 using Multi_Server_Test.Blocks;
-using Multi_Server_Test.Server.Packages;
+using Multi_Server_Test.Server.Views;
 using Newtonsoft.Json;
 using System;
 using System.Net.Sockets;
@@ -13,7 +13,7 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
     public class AuthorizationModel : Model
     {
         public AuthorizationModel(string blockAction) : base(blockAction) { }
-        private ServerModelEvents serverEvents = new ServerModelEvents();
+        private ServerModulEvents serverEvents = new ServerModulEvents();
         public override async void CompleteAction(object reqObj, NetworkStream stream)
         {
             try
@@ -26,22 +26,14 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
                 {
                     var jsonResponsePerson = JsonConvert.SerializeObject(personOutDB);
                     var response = Encoding.UTF8.GetBytes(jsonResponsePerson);
-                    if (stream.CanWrite)
-                    {
-                        await stream.WriteAsync(response, 0, response.Length);
-                        serverEvents.BlockReport(this, "Успешный вход", ConsoleColor.Green);
-                    }
-                    else
-                    {
-                        serverEvents.BlockReport(this, "Ошибка записи потока: не поддерживается запись", ConsoleColor.Yellow);
-                    }
+                    await new UserView(response, stream).ExecuteModuleProcessing("Успешно");
                     return;
                 }
 
                 if(!getJsonPerson.Password.Equals(personOutDB.Password))
                 {
                     var response = Encoding.UTF8.GetBytes("Не найдено ни одного совпадения");
-                    await stream.WriteAsync(response, 0, response.Length);
+                    await new UserView(response, stream).ExecuteModuleProcessing("Ошибка");
 
                     serverEvents.BlockReport(this, "Ошибка авторизации. Неверный пароль", ConsoleColor.Red);
                     return;
@@ -50,16 +42,12 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
             catch (NullReferenceException) 
             {
                 var response = Encoding.UTF8.GetBytes("Ошибка авторизации");
-                await stream.WriteAsync(response, 0, response.Length);
+                await new UserView(response, stream).ExecuteModuleProcessing("");
 
                 serverEvents.BlockReport(this, "Пользователь не найден в базе данных", ConsoleColor.Red);
             }
-            finally
-            {
-
-            }
         }
-        public async Task<Person> GetUser(Person person)
+        private async Task<Person> GetUser(Person person)
         {
             FirebaseResponse respose;
             try

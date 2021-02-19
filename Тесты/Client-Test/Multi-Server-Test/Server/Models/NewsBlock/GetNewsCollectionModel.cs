@@ -1,4 +1,5 @@
-﻿using Multi_Server_Test.ServerData;
+﻿using Multi_Server_Test.Server.Models;
+using Multi_Server_Test.ServerData;
 using Multi_Server_Test.ServerData.Blocks;
 using Newtonsoft.Json;
 using System;
@@ -9,30 +10,19 @@ namespace Multi_Server_Test.Server.Blocks.Auth
 {
     public class GetNewsCollectionModel : Model
     {
-        public GetNewsCollectionModel(string modelAction) : base(modelAction)
+        private ServerModulEvents serverEvents = new ServerModulEvents();
+        public GetNewsCollectionModel(string modelAction) : base(modelAction) { }
+
+        public override async void CompleteAction(object reqObject, NetworkStream stream)
         {
-        }
-
-        //private ServerModelEvents serverEvents = new ServerModelEvents();
-        //public GetNewsCollectionModel(string blockAction) : base(blockAction) { }
-
-        //public override async void CompleteAction(string clientJson, NetworkStream stream)
-        //{
-        //    var newsCollectionToResponse = ResponseStream.newsCollectionOutDB;
-
-        //    try
-        //    {
-        //        var jsonNewsCollection = JsonConvert.SerializeObject(newsCollectionToResponse);
-        //        var response = Encoding.UTF8.GetBytes(jsonNewsCollection);
-        //        await stream.WriteAsync(response, 0, response.Length);
-
-        //        serverEvents.BlockReport(this, "Коллекция новостей отправлена", ConsoleColor.Green);
-        //    }
-        //    catch (Exception) { }
-        //}
-        public override void CompleteAction(object reqObject, NetworkStream stream)
-        {
-            throw new NotImplementedException();
+            var newsCollectionToResponse =  MyServer.newsCollectionOutDB;
+            try
+            {
+                var jsonNewsCollection = JsonConvert.SerializeObject(newsCollectionToResponse);
+                var response = Encoding.UTF8.GetBytes(jsonNewsCollection);
+                await new NewsView(response, stream).ExecuteModuleProcessing("");
+            }
+            catch (Exception) { }
         }
     }
 }

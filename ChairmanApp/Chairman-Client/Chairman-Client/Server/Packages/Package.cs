@@ -1,7 +1,8 @@
 ﻿using System;
 using Newtonsoft.Json;
+using WpfApp1.Server.Packages;
 
-namespace ChairmanClient.Server.Packages
+namespace WpfApp1.Server.Packages
 {
     public class Package<T>
         where T: RequestObject

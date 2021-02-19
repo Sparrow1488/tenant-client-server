@@ -3,7 +3,6 @@ C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\bin\Debug\Chairman-Client.pdb
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\bin\Debug\Newtonsoft.Json.dll
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\bin\Debug\Newtonsoft.Json.xml
-C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Chairman-Client.csprojAssemblyReference.cache
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\MainWindow.g.cs
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\App.g.cs
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Chairman-Client_MarkupCompile.cache
@@ -20,3 +19,4 @@ C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Pages\LetterPage.g.cs
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\HomeWindow.baml
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Pages\LetterPage.baml
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Chairman-Client.csprojAssemblyReference.cache

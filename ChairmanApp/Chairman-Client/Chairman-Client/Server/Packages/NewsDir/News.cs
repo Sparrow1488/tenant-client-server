@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
-using ChairmanClient.Server.Packages;
+using WpfApp1.Server.Packages;
 
 namespace Multi_Server_Test.Server
 {

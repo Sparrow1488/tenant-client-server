@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChairmanClient.Server.Packages.Letters
+namespace WpfApp1.Server.Packages.Letters
 {
     public class QuestionLetter : Letter
     {

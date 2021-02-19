@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ChairmanClient.Server.Packages
+namespace WpfApp1.Server.Packages
 {
     public abstract class RequestObject { }
 }

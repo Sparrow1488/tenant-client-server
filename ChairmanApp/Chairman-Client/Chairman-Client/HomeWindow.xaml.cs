@@ -1,8 +1,8 @@
 ﻿using Chairman_Client.Pages;
 using Chairman_Client.Server.Chairman.Functions;
-using ChairmanClient.Server.ServerMeta;
 using System.Windows;
 using System.Windows.Controls;
+using WpfApp1.Server.ServerMeta;
 
 namespace Chairman_Client
 {
@@ -25,7 +25,7 @@ namespace Chairman_Client
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var func = new Functions("secret", JumboServer.ActiveServer);
-            MessageBox.Show("Welcome, " + func.ShowChairmanLogin());
+            MessageBox.Show("Welcome!");
         }
     }
 }

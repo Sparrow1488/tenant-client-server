@@ -69,6 +69,7 @@
     <Compile Include="Server\JumboServer.cs" />
     <Compile Include="Server\Packages\LettersDir\ComplaintLetter.cs" />
     <Compile Include="Server\Packages\LettersDir\Letter.cs" />
+    <Compile Include="Server\Packages\LettersDir\LettersCollection.cs" />
     <Compile Include="Server\Packages\LettersDir\OfferLetter.cs" />
     <Compile Include="Server\Packages\LettersDir\QuestionLetter.cs" />
     <Compile Include="Server\Packages\Meta\PackageMeta.cs" />

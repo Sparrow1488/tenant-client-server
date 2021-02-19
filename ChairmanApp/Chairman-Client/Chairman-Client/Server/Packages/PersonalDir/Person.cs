@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
-using ChairmanClient.Server.Packages;
+using WpfApp1.Server.Packages;
 
-namespace ChairmanClient.Server
+namespace WpfApp1.Server
 {
     public class Person : RequestObject
     {

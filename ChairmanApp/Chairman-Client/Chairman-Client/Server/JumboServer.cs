@@ -1,4 +1,5 @@
-﻿using Multi_Server_Test.Server;
+﻿using Chairman_Client.Server.Packages.LettersDir;
+using Multi_Server_Test.Server;
 using Newtonsoft.Json;
 using System;
 using System.Net.Sockets;
@@ -6,14 +7,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using ChairmanClient.Server.Packages;
-using ChairmanClient.Server.Packages.Letters;
+using WpfApp1.Server.Packages;
+using WpfApp1.Server.Packages.Letters;
 
-namespace ChairmanClient.Server.ServerMeta
+namespace WpfApp1.Server.ServerMeta
 {
     public class JumboServer
     {
-        
         public static JumboServer ActiveServer;
         private TcpClient TCPclient = null;
         public Person ActiveUser = null;
@@ -26,7 +26,7 @@ namespace ChairmanClient.Server.ServerMeta
         }
         public async Task<bool> AuthorizationAsync(Person dataPerson, bool token) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
         {
-            PackageMeta meta = new PackageMeta(ServerConfig.HOST, "auth");
+            PackageMeta meta = new PackageMeta(ServerConfig.HOST, "User/auth");
 
             var jsonResponse = await SendAndGetAsync(dataPerson, meta);
             ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse);
@@ -38,13 +38,26 @@ namespace ChairmanClient.Server.ServerMeta
         }
         public async Task<NewsCollection> ReceiveNewsCollectionAsync()
         {
-            var meta = new PackageMeta("127.0.0.1", "news");
+            var meta = new PackageMeta("127.0.0.1", "News/get");
             var jsonCollection = await SendAndGetAsync(null, meta);
             var collectionResponse =  JsonConvert.DeserializeObject<NewsCollection>(jsonCollection);
             if (collectionResponse == null)
                 throw new NullReferenceException("Получена пустая коллекция!");
             else
                 return collectionResponse;
+        }
+
+        public async Task<LettersCollection> ReceiveLettersCollectionAsync()
+        {
+            var meta = new PackageMeta("127.0.0.1", "Letter/get");
+            var jsonResponse = await SendAndGetAsync(null, meta);
+            LettersCollection collectionResponse;
+            try
+            {
+                collectionResponse = JsonConvert.DeserializeObject<LettersCollection>(jsonResponse);
+                return collectionResponse;
+            }
+            catch (JsonReaderException) { return null; }
         }
 
         public async Task<string> SendAndGetAsync(RequestObject sendObject, PackageMeta meta)
@@ -92,9 +105,10 @@ namespace ChairmanClient.Server.ServerMeta
 
         public async Task<string> SendLetter(Letter letter)
         {
-            var meta = new PackageMeta(ServerConfig.HOST, "letter");
+            var meta = new PackageMeta(ServerConfig.HOST, "Letter/send");
             return await SendAndGetAsync(letter, meta);
         }
+
     }
     //private JsonSerializerSettings JsonSettings = new JsonSerializerSettings
     //{

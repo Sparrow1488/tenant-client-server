@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ChairmanClient.Server.Packages.Letters
+namespace WpfApp1.Server.Packages.Letters
 {
     public class ComplaintLetter : Letter
     {

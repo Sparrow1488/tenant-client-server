@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Multi_Server_Test.Server.Views
 {
-    public class UserView : ViewModule
+    public class LetterView : ViewModule
     {
         private ServerModulEvents serverEvents = new ServerModulEvents();
-        public UserView(byte[] responseData, NetworkStream writeStream) : base(responseData, writeStream) { viewName = "UserView"; }
+        public LetterView(byte[] responseData, NetworkStream writeStream) : base(responseData, writeStream) { viewName = "LetterView"; }
 
         public override async Task ExecuteModuleProcessing(string additionalMessage)
         {
@@ -19,9 +19,7 @@ namespace Multi_Server_Test.Server.Views
                 WriteStream.Close();
             }
             else
-            {
                 serverEvents.BlockReport(this, "Ошибка записи в поток: не поддерживается запись", ConsoleColor.Yellow);
-            }
         }
     }
 }

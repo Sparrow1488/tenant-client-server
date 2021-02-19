@@ -2,7 +2,9 @@
 using FireSharp.Response;
 using Multi_Server_Test.Blocks;
 using Multi_Server_Test.Server.Blocks.Auth;
+using Multi_Server_Test.Server.Blocks.LetterBlock;
 using Multi_Server_Test.Server.Controllers;
+using Multi_Server_Test.Server.Models.LetterBlock;
 using Multi_Server_Test.Server.Packages;
 using Multi_Server_Test.ServerData.Blocks;
 using Multi_Server_Test.ServerData.Blocks.Auth;
@@ -27,9 +29,9 @@ namespace Multi_Server_Test.ServerData
 
         public TcpListener Listener = null;
         public static ServerMeta Meta = null;
-        public BlocksSection Blocks = null;
 
         public static NewsCollection newsCollectionOutDB = null;
+        public static LettersCollection allLetters = null;
         public MyServer(string host, int port)
         {
             if (!string.IsNullOrWhiteSpace(host) &&
@@ -37,11 +39,10 @@ namespace Multi_Server_Test.ServerData
             {
                 HOST = host;
                 PORT = port;
-                serverName = "MyServer";
+                serverName = "JumboServer";
 
                 Listener = new TcpListener(IPAddress.Parse(HOST), PORT);
                 Meta = new ServerMeta();
-                Blocks = new BlocksSection(this); //передаем объект сервера для возможности использовать его методы
             }
             else
             {
@@ -50,12 +51,17 @@ namespace Multi_Server_Test.ServerData
         }
         public async Task Start()
         {
-            foreach (var block in Blocks.ExistServerModels)
-                Console.WriteLine(block.Action + " is active");
-
             newsCollectionOutDB = await SynchronizeNewsCollection();
             foreach (var news in newsCollectionOutDB.Collection)
                 Console.WriteLine(news + "\n");
+
+            allLetters = await SynchronizeLettersCollection();
+            if (allLetters != null)
+            {
+                foreach (var letter in allLetters.Collection)
+                    Console.WriteLine(letter + "\n");
+            }
+            
 
             Listener.Start();
             ShowReport("Server started!", ConsoleColor.Green);
@@ -108,6 +114,23 @@ namespace Multi_Server_Test.ServerData
             var getNewsCollection = respose.ResultAs<NewsCollection>();
             return getNewsCollection;
         }
+        public async Task<LettersCollection> GetLettersCollection()
+        {
+            FirebaseResponse respose;
+            try
+            {
+                Meta.firebaseClient = new FirebaseClient(Meta.firebaseConfig);
+                respose = await Meta.firebaseClient.GetAsync($"{Meta.lettersPath}/{LettersCollection.Name}");
+            }
+            catch (NullReferenceException) 
+            {
+                ShowReport("Папка в БД пуста", ConsoleColor.Red);
+                return null; 
+            }
+
+            var getNewsCollection = respose.ResultAs<LettersCollection>();
+            return getNewsCollection;
+        }
         public void ServeAndResponseToClient()
         {
             while (true)
@@ -142,6 +165,12 @@ namespace Multi_Server_Test.ServerData
 
                     ShowReport("Distribute request to handle in main routing controller...", ConsoleColor.Yellow);
 
+                    var letterModels = new List<Model>()
+                    { 
+                        new SendLetterModel("send"),
+                        new GetLetterModel("get"),
+                    };
+
                     var userModels = new List<Model>()
                     { new AuthorizationModel("auth") };
 
@@ -151,7 +180,8 @@ namespace Multi_Server_Test.ServerData
                     List<Controller> newControllers = new List<Controller>()
                     {
                         new UserController("User", userModels),
-                        new NewsController("News", newsModels)
+                        new NewsController("News", newsModels),
+                        new LettersController("Letter", letterModels)
                     };
 
                     MainRouter router = new MainRouter(newControllers);
@@ -187,6 +217,9 @@ namespace Multi_Server_Test.ServerData
             try
             {
                 var newsCollectionResponse = await GetNewsCollection();
+                if (newsCollectionResponse == null)
+                    return null;
+
                 ShowReport("News was loaded successful", ConsoleColor.Green);
                 if (File.Exists($"{Meta.reservePath}/{Meta.reserveNewsCollection}"))
                 {
@@ -218,6 +251,49 @@ namespace Multi_Server_Test.ServerData
                 {
                     var reserveCollectionJson = reader.ReadToEnd();
                     var reserveCollection = JsonConvert.DeserializeObject<NewsCollection>(reserveCollectionJson);
+                    return reserveCollection;
+                }
+            }
+        }
+        private async Task<LettersCollection> SynchronizeLettersCollection() //TODO: метод повторяется дважды - переделать
+        {
+            try
+            {
+                var lettersCollectionOutDB = await GetLettersCollection();
+                if (lettersCollectionOutDB == null)
+                    return null;
+
+                ShowReport("Letters was loaded successful", ConsoleColor.Green);
+                if (File.Exists($"{Meta.reservePath}/{Meta.reserveLetters}"))
+                {
+                    using (var writer = new StreamWriter($"{Meta.reservePath}/{Meta.reserveLetters}"))
+                    {
+                        var dataJson = JsonConvert.SerializeObject(lettersCollectionOutDB);
+                        await writer.WriteAsync(dataJson);
+                        ShowReport("Letters saved", ConsoleColor.Green);
+                    }
+                }
+                else
+                {
+                    ShowReport("Резервная папка не найдена! Создаю новую директорию...", ConsoleColor.Red);
+                    Directory.CreateDirectory(Meta.reservePath);
+                    using (var stream = File.CreateText($"{Meta.reservePath}/{Meta.reserveLetters}"))
+                    {
+                        var dataJson = JsonConvert.SerializeObject(lettersCollectionOutDB);
+                        await stream.WriteAsync(dataJson);
+                        ShowReport("Letters saved", ConsoleColor.Green);
+                    }
+                }
+                return lettersCollectionOutDB;
+            }
+            catch (NullReferenceException)
+            {
+                ShowReport("News cannot be retrieved from the database!", ConsoleColor.Red);
+                ShowReport($"Trying execute load from ./{Meta.reservePath}/...", ConsoleColor.Yellow);
+                using (var reader = new StreamReader($"{Meta.reservePath}/{Meta.reserveNewsCollection}"))
+                {
+                    var reserveCollectionJson = reader.ReadToEnd();
+                    var reserveCollection = JsonConvert.DeserializeObject<LettersCollection>(reserveCollectionJson);
                     return reserveCollection;
                 }
             }

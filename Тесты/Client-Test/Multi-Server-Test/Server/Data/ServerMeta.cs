@@ -13,9 +13,11 @@ namespace Multi_Server_Test.ServerData.Server
         }
         public string usersPath = "Multi-server-users";
         public string newsPath = "Multi-server-news";
+        public string lettersPath = "Multi-server-letters"; 
 
         public string reservePath = "reserve_data";
         public string reserveNewsCollection = "NEWS_COLLECTION.txt";
+        public string reserveLetters = "LETTERS_ALL.txt";
         public FirebaseClient firebaseClient = null;
         public IFirebaseConfig firebaseConfig = new FirebaseConfig()
         {

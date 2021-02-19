@@ -29,12 +29,12 @@ namespace Multi_Server_Test.ServerData.Blocks
                     controller.ExecuteRouting(modelAction, package, connectedClient);
                     break;
                 }
-                if (i == allControllers.Count - 1)
+                else if (i == allControllers.Count - 1)
                 {
-                    Console.WriteLine("Не найдено модели под запрос");
-                    break;
+                    Console.WriteLine("MainRouter> Не найдено модели под запрос");
                 }
             }
+            
         }
     }
 }

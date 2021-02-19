@@ -17,17 +17,22 @@ namespace Multi_Server_Test.Server.Controllers
             ControllerModels = controllerModel;
         }
         public abstract void ExecuteRouting(string requestCommand, Package package, TcpClient sender);
-        public Model ExecuteModelAction(string modelAction)
+        public void ExecuteModelAction(string modelAction, Package package, TcpClient sender)
         {
             for (int j = 0; j < ControllerModels.Count; j++)
             {
                 var model = ControllerModels[j];
                 if (model.Action == modelAction)
                 {
-                    return model;
+                    var clientStream = sender.GetStream();
+                    model.CompleteAction(package.SendingObject, clientStream);
+                    break;
+                }
+                else if (j == ControllerModels.Count - 1)
+                {
+                    Console.WriteLine(ControllerName + "> Не найдено модели под запрос");
                 }
             }
-            return null;
         }
     }
 }

@@ -7,9 +7,10 @@ using System.Text;
 
 namespace Multi_Server_Test.Server.Controllers
 {
-    public class NewsController : Controller
+    public class LettersController : Controller
     {
-        public NewsController(string name, List<Model> controllerModel) : base(name, controllerModel) { }
+        public LettersController(string name, List<Model> controllerModel) : base(name, controllerModel) { }
+
         public override void ExecuteRouting(string requestCommand, Package package, TcpClient sender)
         {
             ExecuteModelAction(requestCommand, package, sender);

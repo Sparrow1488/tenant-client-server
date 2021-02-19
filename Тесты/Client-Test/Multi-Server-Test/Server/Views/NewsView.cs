@@ -19,7 +19,7 @@ namespace Multi_Server_Test.Server.Models
                 WriteStream.Close();
             }
             else
-                serverEvents.BlockReport(this, "Ошибка записи потока: не поддерживается запись", ConsoleColor.Yellow);
+                serverEvents.BlockReport(this, "Ошибка записи в поток: не поддерживается запись", ConsoleColor.Yellow);
         }
     }
 }

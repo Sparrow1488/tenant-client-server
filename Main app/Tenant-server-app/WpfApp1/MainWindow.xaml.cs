@@ -54,15 +54,14 @@ namespace WpfApp1
                     Close();
                 }
             }
+            catch (JsonReaderException)
+            {
+                application.ShowExceptionMessage("Получены нечитаемые данные!", errorLabel);
+            }
             catch (SocketException)
             {
                 errorText = "Не удалось подключиться к серверу";
                 application.ShowExceptionMessage(errorText, errorLabel);
-            }
-            catch (JsonReaderException)
-            {
-                errorText = "Не удалось подключиться к серверу";
-                application.ShowExceptionMessage("Получены нечитаемые данные!", errorLabel);
             }
             catch (IOException)
             {
@@ -70,6 +69,10 @@ namespace WpfApp1
                 application.ShowExceptionMessage(errorText, errorLabel);
             }
             catch (ArgumentException ex)
+            {
+                application.ShowExceptionMessage(ex.Message, errorLabel);
+            }
+            catch(Exception ex)
             {
                 application.ShowExceptionMessage(ex.Message, errorLabel);
             }
@@ -83,7 +86,7 @@ namespace WpfApp1
         {
             //TODO: сделать отправку на воостановление доступа
             MessageBox.Show("Запрос полетел администратору. С Вами свяжутся.",
-                            "Забыли логин или пароль", 
+                            "Восстановление логина и пароля", 
                             MessageBoxButton.OK,
                             MessageBoxImage.Information);
         }

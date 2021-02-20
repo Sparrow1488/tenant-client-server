@@ -15,7 +15,7 @@ namespace WpfApp1.Server.ServerMeta
     public class JumboServer
     {
         public static JumboServer ActiveServer;
-        private TcpClient TCPclient = null;
+        private TcpClient TCPclient = null; //TODO: убрать лишнее
         public Person ActiveUser = null;
         private ServerConfig ServerConfig = null;
 
@@ -29,9 +29,9 @@ namespace WpfApp1.Server.ServerMeta
             var authPack = new AuthorizationPackage(dataPerson);
             var jsonResponse = await SendAndGetAsync(authPack);
             ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse);
-            if (ActiveUser.Equals(null))
+            if (ActiveUser == null)
             {
-                throw new Exception("Данный пользователь не существует");
+                throw new NullReferenceException("Данный пользователь не существует");
             }
             return true;
         }
@@ -56,13 +56,21 @@ namespace WpfApp1.Server.ServerMeta
 
         private async Task SendRequestAsync(Package package)
         {
-            TCPclient = new TcpClient();
-            await TCPclient.ConnectAsync(ServerConfig.HOST, ServerConfig.PORT); //TODO: сделать таймер подключения к серверу (например 10 секунд)
-            NetworkStream stream = TCPclient.GetStream();
+            try
+            {
+                TCPclient = new TcpClient();
+                await TCPclient.ConnectAsync(ServerConfig.HOST, ServerConfig.PORT); //TODO: сделать таймер подключения к серверу (например 10 секунд)
+                if (TCPclient.Connected == false)
+                    throw new SocketException(/*"Ошибка подключения к серверу"*/);
+                NetworkStream stream = TCPclient.GetStream();
 
-            string jsonPackage = JsonConvert.SerializeObject(package); /*new Package<RequestObject>(sendObject, meta);*/
-            byte[] data = Encoding.UTF8.GetBytes(jsonPackage);
-            await stream.WriteAsync(data, 0, data.Length);
+                string jsonPackage = JsonConvert.SerializeObject(package); /*new Package<RequestObject>(sendObject, meta);*/
+                byte[] data = Encoding.UTF8.GetBytes(jsonPackage);
+                await stream.WriteAsync(data, 0, data.Length);
+            }
+            catch (SocketException)
+            {
+            }
         }
 
         private async Task<string> GetResponseAsync()
@@ -71,7 +79,10 @@ namespace WpfApp1.Server.ServerMeta
             byte[] getData = new byte[2048];
             await Task.Run(() =>
             {
-                var serverStream = TCPclient.GetStream();
+                if(TCPclient.Connected == false || TCPclient == null)
+                    throw new SocketException();
+
+                var serverStream = TCPclient?.GetStream();
                 if (serverStream.CanRead)
                 {
                     do
@@ -84,7 +95,6 @@ namespace WpfApp1.Server.ServerMeta
                 serverStream.Close();
                 TCPclient.Close();
             });
-            
             return response.ToString();
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Server.Packages.Letters;
+using WpfApp1.Server.ServerMeta;
 
 namespace WpfApp1.Server.Packages.LettersDir
 {
@@ -11,7 +12,7 @@ namespace WpfApp1.Server.Packages.LettersDir
     {
         public SendLetterPackage(Letter sendObj) : base(sendObj)
         {
-            SendingMeta = new PackageMeta("уууу, письма", "Letter/send");
+            SendingMeta = new PackageMeta(new ServerConfig().HOST, "Letter/send");
         }
     }
 }

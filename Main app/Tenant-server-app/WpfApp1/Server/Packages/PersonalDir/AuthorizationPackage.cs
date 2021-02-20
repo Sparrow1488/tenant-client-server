@@ -11,7 +11,7 @@ namespace WpfApp1.Server.Packages.PersonalDir
     {
         public AuthorizationPackage(RequestObject sendObj) : base(sendObj)
         {
-            SendingMeta = new PackageMeta("неважно", "User/auth");
+            SendingMeta = new PackageMeta(new ServerConfig().HOST, "User/auth");
         }
     }
 }

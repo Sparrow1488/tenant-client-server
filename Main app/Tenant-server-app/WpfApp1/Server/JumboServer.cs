@@ -3,11 +3,12 @@ using Newtonsoft.Json;
 using System;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using WpfApp1.Server.Packages;
 using WpfApp1.Server.Packages.Letters;
+using WpfApp1.Server.Packages.LettersDir;
+using WpfApp1.Server.Packages.NewsDir;
+using WpfApp1.Server.Packages.PersonalDir;
 
 namespace WpfApp1.Server.ServerMeta
 {
@@ -25,9 +26,8 @@ namespace WpfApp1.Server.ServerMeta
         }
         public async Task<bool> AuthorizationAsync(Person dataPerson, bool token) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
         {
-            PackageMeta meta = new PackageMeta(ServerConfig.HOST, "User/auth");
-
-            var jsonResponse = await SendAndGetAsync(dataPerson, meta);
+            var authPack = new AuthorizationPackage(dataPerson);
+            var jsonResponse = await SendAndGetAsync(authPack);
             ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse);
             if (ActiveUser.Equals(null))
             {
@@ -37,8 +37,8 @@ namespace WpfApp1.Server.ServerMeta
         }
         public async Task<NewsCollection> ReceiveNewsCollectionAsync()
         {
-            var meta = new PackageMeta("127.0.0.1", "News/get");
-            var jsonCollection = await SendAndGetAsync(null, meta);
+            var pack = new RecieveNewsPackage();
+            var jsonCollection = await SendAndGetAsync(pack);
             var collectionResponse =  JsonConvert.DeserializeObject<NewsCollection>(jsonCollection);
             if (collectionResponse == null)
                 throw new NullReferenceException("Получена пустая коллекция!");
@@ -46,22 +46,21 @@ namespace WpfApp1.Server.ServerMeta
                 return collectionResponse;
         }
 
-        public async Task<string> SendAndGetAsync(RequestObject sendObject, PackageMeta meta)
+        public async Task<string> SendAndGetAsync(Package package)
         {
-            await SendRequestAsync(sendObject, meta);
+            await SendRequestAsync(package);
             var jsonResponse = await GetResponseAsync();
             TCPclient.Close();
             return jsonResponse;
         }
 
-        private async Task SendRequestAsync(RequestObject sendObject, PackageMeta meta)
+        private async Task SendRequestAsync(Package package)
         {
             TCPclient = new TcpClient();
             await TCPclient.ConnectAsync(ServerConfig.HOST, ServerConfig.PORT); //TODO: сделать таймер подключения к серверу (например 10 секунд)
             NetworkStream stream = TCPclient.GetStream();
 
-            var pack = new Package<RequestObject>(sendObject, meta);
-            string jsonPackage = JsonConvert.SerializeObject(pack);
+            string jsonPackage = JsonConvert.SerializeObject(package); /*new Package<RequestObject>(sendObject, meta);*/
             byte[] data = Encoding.UTF8.GetBytes(jsonPackage);
             await stream.WriteAsync(data, 0, data.Length);
         }
@@ -91,8 +90,8 @@ namespace WpfApp1.Server.ServerMeta
 
         public async Task<string> SendLetter(Letter letter)
         {
-            var meta = new PackageMeta(ServerConfig.HOST, "Letter/send");
-            return await SendAndGetAsync(letter, meta);
+            var pack = new SendLetterPackage(letter);
+            return await SendAndGetAsync(pack);
         }
 
     }

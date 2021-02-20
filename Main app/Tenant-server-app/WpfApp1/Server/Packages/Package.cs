@@ -4,21 +4,16 @@ using WpfApp1.Server.Packages;
 
 namespace WpfApp1.Server.Packages
 {
-    public class Package<T>
-        where T: RequestObject
+    public abstract class Package
     {
-        public Package(RequestObject sendObj, PackageMeta meta)
+        public Package(RequestObject sendObj)
         {
-            SendingObject = (T)sendObj;
-            SendingMeta = meta;
+            SendingObject = sendObj;
         }
-        public Package(PackageMeta meta)
-        {
-            SendingObject = null;
-            SendingMeta = meta;
-        }
-        public T SendingObject { get; }
-        public PackageMeta SendingMeta { get; }
+        public Package() { }
+
+        public object SendingObject { get; }
+        public PackageMeta SendingMeta { get; protected set; }
     }
     
 }

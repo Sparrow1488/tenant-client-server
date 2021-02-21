@@ -16,7 +16,6 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Multi_Server_Test.ServerData
@@ -188,15 +187,10 @@ namespace Multi_Server_Test.ServerData
                     router.ExecuteRouting(getPackage, validClient);
                 }
                 else
-                {
                     ShowReport("Пакет данных не может быть получен!", ConsoleColor.Red);
-                }
-
             }
             else
-            {
                 ShowReport("Client not connected", ConsoleColor.Red);
-            }
             
         }
         
@@ -314,9 +308,7 @@ namespace Multi_Server_Test.ServerData
                 return jsonPackage.ToString();
             }
             else
-            {
                 return null;
-            }
         }
         #endregion
     }

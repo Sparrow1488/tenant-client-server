@@ -14,7 +14,7 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
     {
         public AuthorizationModel(string blockAction) : base(blockAction) { }
         private ServerModulEvents serverEvents = new ServerModulEvents();
-        public override async void CompleteAction(object reqObj, NetworkStream stream)
+        public override async Task<byte[]>CompleteAction(object reqObj)
         {
             try
             {
@@ -25,26 +25,23 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
                 if (getJsonPerson.Password.Equals(personOutDB.Password))
                 {
                     var jsonResponsePerson = JsonConvert.SerializeObject(personOutDB);
-                    var response = Encoding.UTF8.GetBytes(jsonResponsePerson);
-                    await new UserView(response, stream).ExecuteModuleProcessing("Успешно");
-                    return;
+                    byte[] response = Encoding.UTF8.GetBytes(jsonResponsePerson);
+                    serverEvents.BlockReport(this, "Успешный вход", ConsoleColor.Green);
+                    return response;
                 }
-
-                if(!getJsonPerson.Password.Equals(personOutDB.Password))
+                else
                 {
-                    var response = Encoding.UTF8.GetBytes("Не найдено ни одного совпадения");
-                    await new UserView(response, stream).ExecuteModuleProcessing("Ошибка");
-
+                    byte[] response = Encoding.UTF8.GetBytes("Не найдено ни одного совпадения");
                     serverEvents.BlockReport(this, "Ошибка авторизации. Неверный пароль", ConsoleColor.Red);
-                    return;
+                    return response;
                 }
             }
-            catch (NullReferenceException) 
+            catch (NullReferenceException)
             {
-                var response = Encoding.UTF8.GetBytes("Ошибка авторизации");
-                await new UserView(response, stream).ExecuteModuleProcessing("");
-
+                byte[] response = Encoding.UTF8.GetBytes("Ошибка авторизации");
                 serverEvents.BlockReport(this, "Пользователь не найден в базе данных", ConsoleColor.Red);
+                return response;
+                //await new UserView(response, stream).ExecuteModuleProcessing("");
             }
         }
         private async Task<Person> GetUser(Person person)

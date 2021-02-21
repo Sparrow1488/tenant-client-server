@@ -16,7 +16,7 @@ namespace Multi_Server_Test.ServerData.Blocks
             Action = modelAction;
         }
 
-        public abstract void CompleteAction(object reqObject, NetworkStream stream);
+        public abstract Task<byte[]> CompleteAction(object reqObject);
 
     }
 }

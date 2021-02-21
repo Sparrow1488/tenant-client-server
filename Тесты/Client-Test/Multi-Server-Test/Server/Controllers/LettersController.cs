@@ -1,4 +1,5 @@
 ﻿using Multi_Server_Test.Server.Packages;
+using Multi_Server_Test.Server.Views;
 using Multi_Server_Test.ServerData.Blocks;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,9 @@ namespace Multi_Server_Test.Server.Controllers
 
         public override void ExecuteRouting(string requestCommand, Package package, TcpClient sender)
         {
-            ExecuteModelAction(requestCommand, package, sender);
+            var responseData = ExecuteModelAction(requestCommand, package);
+            var clientStream = sender.GetStream();
+            new LetterView(responseData, clientStream).ExecuteModuleProcessing("");
         }
     }
 }

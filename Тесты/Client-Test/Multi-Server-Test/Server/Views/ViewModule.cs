@@ -17,6 +17,6 @@ namespace Multi_Server_Test.Server.Models
             ResponseData = responseData;
             WriteStream = writeStream;
         }
-        public abstract Task ExecuteModuleProcessing(string additionalMessage);
+        public abstract void ExecuteModuleProcessing(string additionalMessage);
     }
 }

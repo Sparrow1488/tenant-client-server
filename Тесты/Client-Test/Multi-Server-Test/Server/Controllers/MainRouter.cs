@@ -31,7 +31,7 @@ namespace Multi_Server_Test.ServerData.Blocks
                 }
                 else if (i == allControllers.Count - 1)
                 {
-                    Console.WriteLine("MainRouter> Не найдено модели под запрос");
+                    Console.WriteLine("MainRouter> Ошибка: Не найдено модели под запрос");
                 }
             }
             

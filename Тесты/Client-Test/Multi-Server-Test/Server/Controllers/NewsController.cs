@@ -1,4 +1,5 @@
-﻿using Multi_Server_Test.Server.Packages;
+﻿using Multi_Server_Test.Server.Models;
+using Multi_Server_Test.Server.Packages;
 using Multi_Server_Test.ServerData.Blocks;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,9 @@ namespace Multi_Server_Test.Server.Controllers
         public NewsController(string name, List<Model> controllerModel) : base(name, controllerModel) { }
         public override void ExecuteRouting(string requestCommand, Package package, TcpClient sender)
         {
-            ExecuteModelAction(requestCommand, package, sender);
+            var reponseData = ExecuteModelAction(requestCommand, package);
+            var clientStream = sender.GetStream();
+            new NewsView(reponseData, clientStream).ExecuteModuleProcessing("");
         }
     }
 }

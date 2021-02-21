@@ -10,12 +10,12 @@ namespace Multi_Server_Test.Server.Views
         private ServerModulEvents serverEvents = new ServerModulEvents();
         public LetterView(byte[] responseData, NetworkStream writeStream) : base(responseData, writeStream) { viewName = "LetterView"; }
 
-        public override async Task ExecuteModuleProcessing(string additionalMessage)
+        public override void ExecuteModuleProcessing(string additionalMessage)
         {
             if (WriteStream.CanWrite)
             {
                 serverEvents.BlockReport(this, "Данные отправлены", ConsoleColor.Green);
-                await WriteStream.WriteAsync(ResponseData, 0, ResponseData.Length);
+                WriteStream.Write(ResponseData, 0, ResponseData.Length);
                 WriteStream.Close();
             }
             else

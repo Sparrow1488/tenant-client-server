@@ -41,7 +41,7 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
             }
             finally
             {
-                MessageBox.Show(result, "Ответ от сервера");
+                LetterPage.ShowExceptionText(result);
                 btn.IsEnabled = true;
             }
         }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.MyApplication;
 using WpfApp1.Pages.HomePages.ChildLetterPage;
 
 namespace WpfApp1.Pages.HomePages
@@ -21,6 +22,9 @@ namespace WpfApp1.Pages.HomePages
     /// </summary>
     public partial class LetterPage : Page
     {
+        public static TextBlock ExceptionText;
+        private static ApplicationEvents applicationEvents = new ApplicationEvents();
+
         private Page complaintPage = new ComplaintPage();
         private Page offerPage = new OfferPage();
         private Page questionPage = new QuestionPage();
@@ -28,6 +32,12 @@ namespace WpfApp1.Pages.HomePages
         public LetterPage()
         {
             InitializeComponent();
+            ExceptionText = exceptionText;
+        }
+
+        public static void ShowExceptionText(string text)
+        {
+            applicationEvents.ShowExceptionMessage(text, ExceptionText);
         }
 
         private void SelectComplaintPageBtn_Click(object sender, RoutedEventArgs e)

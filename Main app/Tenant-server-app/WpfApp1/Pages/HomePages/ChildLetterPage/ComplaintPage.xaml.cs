@@ -3,6 +3,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls;
+using WpfApp1.MyApplication;
 using WpfApp1.Server.Packages.Letters;
 using WpfApp1.Server.ServerMeta;
 
@@ -42,7 +43,7 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
             }
             finally
             {
-                MessageBox.Show(result, "Ответ от сервера");
+                LetterPage.ShowExceptionText(result);
                 btn.IsEnabled = true;
             }
         }

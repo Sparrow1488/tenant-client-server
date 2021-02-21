@@ -20,7 +20,8 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel
@@ -85,7 +86,10 @@
                     </StackPanel>
                 </Button>
 
-                <Button Margin="5" Background="Transparent" Click="SelectQuestionPageBtn_Click">
+                <Button
+                    Margin="5"
+                    Background="Transparent"
+                    Click="SelectQuestionPageBtn_Click">
                     <Button.BorderBrush>
                         <SolidColorBrush Color="Transparent" />
                     </Button.BorderBrush>
@@ -113,6 +117,22 @@
             Grid.Row="1"
             Grid.Column="1">
             <Frame x:Name="frameBox" NavigationUIVisibility="Hidden" />
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="1"
+            MaxWidth="500"
+            Background="AliceBlue"
+            Orientation="Vertical">
+            <TextBlock
+                x:Name="exceptionText"
+                Margin="10"
+                HorizontalAlignment="Center"
+                FontSize="20"
+                Text="Exception or notice text and it's very long long long notice text"
+                TextWrapping="Wrap"
+                Visibility="Collapsed" />
         </StackPanel>
     </Grid>
 </Page>

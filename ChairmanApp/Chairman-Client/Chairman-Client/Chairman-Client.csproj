@@ -58,13 +58,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Chairman\Packages\AddNewsPackage.cs" />
+    <Compile Include="Chairman\Packages\GetLettersPackage.cs" />
     <Compile Include="HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LetterPage.xaml.cs">
       <DependentUpon>LetterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Server\Chairman\Functions\Functions.cs" />
+    <Compile Include="Chairman\Functions\Functions.cs" />
     <Compile Include="Server\Configuration\ServerConfig.cs" />
     <Compile Include="Server\JumboServer.cs" />
     <Compile Include="Server\Packages\LettersDir\ComplaintLetter.cs" />
@@ -72,10 +74,13 @@
     <Compile Include="Server\Packages\LettersDir\LettersCollection.cs" />
     <Compile Include="Server\Packages\LettersDir\OfferLetter.cs" />
     <Compile Include="Server\Packages\LettersDir\QuestionLetter.cs" />
+    <Compile Include="Server\Packages\LettersDir\SendLetterPackage.cs" />
     <Compile Include="Server\Packages\Meta\PackageMeta.cs" />
     <Compile Include="Server\Packages\NewsDir\News.cs" />
     <Compile Include="Server\Packages\NewsDir\NewsCollection.cs" />
+    <Compile Include="Server\Packages\NewsDir\RecieveNewsPackage.cs" />
     <Compile Include="Server\Packages\Package.cs" />
+    <Compile Include="Server\Packages\PersonalDir\AuthorizationPackage.cs" />
     <Compile Include="Server\Packages\PersonalDir\Person.cs" />
     <Compile Include="Server\Packages\RequestObject.cs" />
     <Page Include="HomeWindow.xaml">
@@ -126,8 +131,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Server\Chairman\Packages\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

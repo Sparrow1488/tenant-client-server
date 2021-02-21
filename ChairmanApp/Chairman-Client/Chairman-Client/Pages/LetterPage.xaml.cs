@@ -1,5 +1,4 @@
 ﻿using Chairman_Client.Server.Chairman.Functions;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using WpfApp1.Server.ServerMeta;
@@ -12,6 +11,7 @@ namespace Chairman_Client.Pages
     public partial class LetterPage : Page
     {
         private bool lettersWasLoaded = false;
+        private Functions serverFunctions = new Functions("secret", JumboServer.ActiveServer);
         public LetterPage()
         {
             InitializeComponent();
@@ -19,9 +19,18 @@ namespace Chairman_Client.Pages
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            var getLetters = await JumboServer.ActiveServer.ReceiveLettersCollectionAsync();
-            if (getLetters == null)
-                MessageBox.Show("Список писем пуст");
+            if (lettersWasLoaded == false)
+            {
+                var getLetters = await serverFunctions.GetLetters();
+                if (string.IsNullOrEmpty(getLetters))
+                    MessageBox.Show("Список писем пуст");
+                else
+                {
+                    lettersWasLoaded = true;
+                    MessageBox.Show(getLetters);
+                }
+            }
+            
         }
     }
 }

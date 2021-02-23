@@ -1,0 +1,15 @@
+INSERT [таблица], (стобец1, столбец2) VALUES (N'value1', N'value2')
+-----------------------------------------
+
+SELECT ячейка(столбец)1, ячейка2 FROM таблица [WHERE выражение](логическое условие)
+прим.: логическое выражение не обязательно и вместо названий ячеек можно написать * - выборка всех ячеек
+
+SELECT ProductName, UnitPrice, ProductID FROM [Products] WHERE UnitPrice > 10 AND ProductID = 10 //выбор товаров, где цена > 10 и ID = 10
+
+SELECT ProductName, UnitPrice * UnitsInStock AS N'Товаров на сумму', UnitPrice, UnitsInStock FROM [Products] WHERE UnitsInStock > 0 //перемножение цены товара с его количеством, где количество товаров больше 0
+-----------------------------------------
+
+//DISTINCT - ключевое слово, которое используется при задании уникального критерия поиска (т.е. ищутся названия, которые не повторяются)
+SELECT DISTINCT CustomerID FROM [Orders] //поиск заказчиков с уникальными именами
+
+SELECT COUNT(DISTINCT CustomerID)  FROM [Orders] //посчитать количество заказчиков с уникльными именами

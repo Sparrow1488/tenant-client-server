@@ -24,22 +24,20 @@ namespace WpfApp1.Server.ServerMeta
             ServerConfig = config;
             ActiveServer = this;
         }
-        public async Task<bool> AuthorizationAsync(Person dataPerson, bool token) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
+        public async Task<bool> AuthorizationAsync(Person dataPerson, bool saveToken) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
         {
             var authPack = new AuthorizationPackage(dataPerson);
             var jsonResponse = await SendAndGetAsync(authPack);
             ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse);
             if (ActiveUser == null)
-            {
                 throw new NullReferenceException("Данный пользователь не существует");
-            }
             return true;
         }
         public async Task<NewsCollection> ReceiveNewsCollectionAsync()
         {
             var pack = new RecieveNewsPackage();
-            var jsonCollection = await SendAndGetAsync(pack);
-            var collectionResponse =  JsonConvert.DeserializeObject<NewsCollection>(jsonCollection);
+            string jsonCollection = await SendAndGetAsync(pack);
+            NewsCollection collectionResponse = JsonConvert.DeserializeObject<NewsCollection>(jsonCollection);
             if (collectionResponse == null)
                 throw new NullReferenceException("Получена пустая коллекция!");
             else

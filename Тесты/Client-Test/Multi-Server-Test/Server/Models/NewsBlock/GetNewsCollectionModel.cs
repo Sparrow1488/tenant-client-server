@@ -1,11 +1,8 @@
-﻿using Multi_Server_Test.Server.Models;
-using Multi_Server_Test.ServerData;
+﻿using Multi_Server_Test.ServerData;
 using Multi_Server_Test.ServerData.Blocks;
 using Newtonsoft.Json;
 using System;
-using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Multi_Server_Test.Server.Blocks.Auth
 {
@@ -14,15 +11,14 @@ namespace Multi_Server_Test.Server.Blocks.Auth
         //private ServerModulEvents serverEvents = new ServerModulEvents();
         public GetNewsCollectionModel(string modelAction) : base(modelAction) { }
 
-        public override async Task<byte[]> CompleteAction(object reqObject)
+        public override byte[] CompleteAction(object reqObject)
         {
-            var newsCollectionToResponse =  MyServer.newsCollectionOutDB;
+            var newsCollectionToResponse = MyServer.newsCollectionOutDB;
             byte[] response;
             try
             {
                 var jsonNewsCollection = JsonConvert.SerializeObject(newsCollectionToResponse);
                 response = Encoding.UTF8.GetBytes(jsonNewsCollection);
-                //await new NewsView(response, stream).ExecuteModuleProcessing("");
                 return response;
             }
             catch (Exception) 

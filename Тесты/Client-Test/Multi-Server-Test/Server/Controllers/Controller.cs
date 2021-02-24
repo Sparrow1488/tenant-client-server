@@ -25,7 +25,7 @@ namespace Multi_Server_Test.Server.Controllers
                 var model = ControllerModels[j];
                 if (model.Action == modelAction)
                 {
-                    modelResponseData = model.CompleteAction(package.SendingObject).Result;
+                    modelResponseData = model.CompleteAction(package.SendingObject);
                     return modelResponseData;
                 }
                 else if (j == ControllerModels.Count - 1)

@@ -1,12 +1,8 @@
-﻿using FireSharp;
-using FireSharp.Response;
-using Multi_Server_Test.Blocks;
-using Multi_Server_Test.Server.Views;
+﻿using Multi_Server_Test.Blocks;
 using Newtonsoft.Json;
 using System;
-using System.Net.Sockets;
+using System.Data.SqlClient;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Multi_Server_Test.ServerData.Blocks.Auth
 {
@@ -14,17 +10,17 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
     {
         public AuthorizationModel(string blockAction) : base(blockAction) { }
         private ServerModulEvents serverEvents = new ServerModulEvents();
-        public override async Task<byte[]>CompleteAction(object reqObj)
+        public override byte[] CompleteAction(object reqObj)
         {
             try
             {
                 var convertJsonPerson = JsonConvert.SerializeObject(reqObj);
-                var getJsonPerson = JsonConvert.DeserializeObject<Person>(convertJsonPerson); // ПРОБОВАЛ ЧЕРЕЗ НЕЯВНОЕ ПРИВЕДЕНИЕ - НЕ РОБИТ
-                var personOutDB = await GetUser(getJsonPerson);
-                
-                if (getJsonPerson.Password.Equals(personOutDB.Password))
+                var getInputPersonData = JsonConvert.DeserializeObject<Person>(convertJsonPerson); // ПРОБОВАЛ ЧЕРЕЗ НЕЯВНОЕ ПРИВЕДЕНИЕ - НЕ РОБИТ
+                var authorizatePerson = GetAndAuthUser(getInputPersonData);
+
+                if (authorizatePerson != null)
                 {
-                    var jsonResponsePerson = JsonConvert.SerializeObject(personOutDB);
+                    var jsonResponsePerson = JsonConvert.SerializeObject(authorizatePerson);
                     byte[] response = Encoding.UTF8.GetBytes(jsonResponsePerson);
                     serverEvents.BlockReport(this, "Успешный вход", ConsoleColor.Green);
                     return response;
@@ -41,21 +37,30 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
                 byte[] response = Encoding.UTF8.GetBytes("Ошибка авторизации");
                 serverEvents.BlockReport(this, "Пользователь не найден в базе данных", ConsoleColor.Red);
                 return response;
-                //await new UserView(response, stream).ExecuteModuleProcessing("");
             }
         }
-        private async Task<Person> GetUser(Person person)
+        private Person GetAndAuthUser(Person person)
         {
-            FirebaseResponse respose;
-            try
+            string sCommand = $"SELECT * FROM Users WHERE Login=N'{person.Login}' AND Password=N'{person.Password}'";
+            using (var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
             {
-                MyServer.Meta.firebaseClient = new FirebaseClient(MyServer.Meta.firebaseConfig);
-                respose = await MyServer.Meta.firebaseClient.GetAsync($"{MyServer.Meta.usersPath}/{person.Login}");
+                var reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var login      = Convert.ToString(reader.GetValue(1)); //TODO: ИСПРАВИТЬ КАЛ
+                        var password   = Convert.ToString(reader.GetValue(2));
+                        var name       = Convert.ToString(reader.GetValue(3));
+                        var lastName   = Convert.ToString(reader.GetValue(4));
+                        var parentName = Convert.ToString(reader.GetValue(5));
+                        var roomNum    = Convert.ToInt32(reader.GetValue(6));
+                        return new Person(name, lastName, parentName, login, password, roomNum);
+                    }
+                }
+                reader.Close();
             }
-            catch (NullReferenceException) { return null; }
-
-            var user = respose.ResultAs<Person>();
-            return user;
+            return null;
         }
     }
 }

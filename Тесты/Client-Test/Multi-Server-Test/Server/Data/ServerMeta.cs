@@ -2,14 +2,30 @@
 using FireSharp.Config;
 using FireSharp.Interfaces;
 using System;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Multi_Server_Test.ServerData.Server
 {
     public class ServerMeta
     {
+        public SqlConnection sqlConnection = null;
+        private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\JumboDataBase.mdf;Integrated Security=True";
         public ServerMeta()
         {
+            Console.WriteLine("Meta creating...");
+            CreateSqlConnection();
             Console.WriteLine("Meta created");
+        }
+        
+        private void CreateSqlConnection()
+        {
+            sqlConnection = new SqlConnection(connectionString);
+            sqlConnection.Open();
+            if(sqlConnection.State == ConnectionState.Open)
+                Console.WriteLine("Успешное подключение к СУБД");
+            else
+                Console.WriteLine("ОШИБКА ПОДКЛЮЧЕНИЯ К СУБД");
         }
         public string usersPath = "Multi-server-users";
         public string newsPath = "Multi-server-news";

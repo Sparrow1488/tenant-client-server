@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using System;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Multi_Server_Test.Server.Blocks.LetterBlock
 {
@@ -10,7 +9,7 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
     {
         private ServerModulEvents serverEvents = new ServerModulEvents();
         public SendLetterModel(string modelAction) : base(modelAction) { }
-        public override async Task<byte[]> CompleteAction(object reqObject)
+        public override byte[] CompleteAction(object reqObject)
         {
             byte[] response;
             try
@@ -20,7 +19,6 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
                 serverEvents.BlockReport(this, "Письмо успешно получено", ConsoleColor.Green);
                 Console.WriteLine(getLetter); //TODO: сделать сортер по типу новости (предложение, жалоба, вопрос)
                 response = Encoding.UTF8.GetBytes("Письмо получено");
-                //await new LetterView(data, stream).ExecuteModuleProcessing("");
                 return response;
             }
             catch (Exception) 

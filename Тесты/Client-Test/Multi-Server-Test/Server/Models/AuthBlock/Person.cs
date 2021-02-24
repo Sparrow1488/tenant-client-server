@@ -16,11 +16,20 @@ namespace Multi_Server_Test.Blocks
         public int Room { get; set; }
         public int ID { get; set; }
 
-        //[JsonConstructor]
-        //public Person(string login, string password)
-        //{
-        //    Login = login;
-        //    Password = password;
-        //}
+        [JsonConstructor]
+        public Person(string login, string password)
+        {
+            Login = login;
+            Password = password;
+        }
+        public Person(string name, string lastName, string parentName, string login, string password, int room)
+        {
+            Name = name;
+            LastName = lastName;
+            ParentName = parentName;
+            Login = login;
+            Password = password;
+            Room = room;
+        }
     }
 }

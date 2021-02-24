@@ -12,6 +12,8 @@ using Multi_Server_Test.ServerData.Server;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -29,8 +31,8 @@ namespace Multi_Server_Test.ServerData
         public TcpListener Listener = null;
         public static ServerMeta Meta = null;
 
-        public static NewsCollection newsCollectionOutDB = null;
-        public static LettersCollection allLetters = null;
+        public static List<News> newsCollectionOutDB = null;
+        public static List<Letter> allLetters = null;
         public MyServer(string host, int port)
         {
             if (!string.IsNullOrWhiteSpace(host) &&
@@ -48,21 +50,20 @@ namespace Multi_Server_Test.ServerData
                 throw new ArgumentException("Вы передали некорректные значения");
             }
         }
-        public async Task Start()
+        
+        public async void Start()
         {
-            newsCollectionOutDB = await SynchronizeNewsCollection();
-            foreach (var news in newsCollectionOutDB.Collection)
+            Listener.Start();
+            await SynchronizeNewsCollection();
+            foreach (var news in newsCollectionOutDB)
                 Console.WriteLine(news + "\n");
 
-            allLetters = await SynchronizeLettersCollection();
-            if (allLetters != null)
-            {
-                foreach (var letter in allLetters.Collection)
-                    Console.WriteLine(letter + "\n");
-            }
-            
-
-            Listener.Start();
+            //allLetters = await SynchronizeLettersCollection();
+            //if (allLetters != null)
+            //{
+            //    foreach (var letter in allLetters)
+            //        Console.WriteLine(letter + "\n");
+            //}
             ShowReport("Server started!", ConsoleColor.Green);
         }
         public async Task AddUser(Person person)
@@ -76,9 +77,9 @@ namespace Multi_Server_Test.ServerData
         }
         public void AddNewsOnServer(News news) //TODO: сделать отправку в БД (через определенное время / после 5 новых новостей)
         {
-            if (newsCollectionOutDB.Collection != null)
+            if (newsCollectionOutDB != null)
             {
-                newsCollectionOutDB.Collection.Add(news);
+                newsCollectionOutDB.Add(news);
                 ShowReport("Новость успешно добавлена", ConsoleColor.Yellow);
                 //Meta.firebaseClient = new FirebaseClient(Meta.firebaseConfig);
                 //await Meta.firebaseClient.UpdateAsync($"{Meta.newsPath}/{NewsCollection.Name}", newCollection);
@@ -100,18 +101,31 @@ namespace Multi_Server_Test.ServerData
             var user = respose.ResultAs<Person>();
             return user;
         }
-        public async Task<NewsCollection> GetNewsCollection()
+        public List<News> GetNewsCollection()
         {
-            FirebaseResponse respose;
-            try
+            var listNews = new List<News>();
+            //try
+            //{
+            var command = new SqlCommand("SELECT * FROM News", Meta.sqlConnection);
+            var reader = command.ExecuteReader();
+            if (reader.HasRows)
             {
-                Meta.firebaseClient = new FirebaseClient(Meta.firebaseConfig);
-                respose = await Meta.firebaseClient.GetAsync($"{Meta.newsPath}/{NewsCollection.Name}");
+                while (reader.Read())
+                {
+                    string title = reader.GetString(1);
+                    string description = reader.GetString(2);
+                    DateTime date = reader.GetDateTime(4);
+                    string sender = reader.GetString(5);
+                    var news = new News(title, description, date);
+                    listNews.Add(news);
+                }
+                reader.Close();
+                return listNews;
             }
-            catch (NullReferenceException) { return null; }
-
-            var getNewsCollection = respose.ResultAs<NewsCollection>();
-            return getNewsCollection;
+            return null;
+            //    else { return null; }
+            //}
+            //catch (SqlNullValueException) { return null; }
         }
         public async Task<LettersCollection> GetLettersCollection()
         {
@@ -206,13 +220,13 @@ namespace Multi_Server_Test.ServerData
             Console.WriteLine(report);
             Console.ForegroundColor = ConsoleColor.White;
         }
-        private async Task<NewsCollection> SynchronizeNewsCollection()
+        private async Task<List<News>> SynchronizeNewsCollection()
         {
             try
             {
-                var newsCollectionResponse = await GetNewsCollection();
-                if (newsCollectionResponse == null)
-                    return null;
+                var newsCollectionResponse = GetNewsCollection();
+                if (newsCollectionResponse != null)
+                    newsCollectionOutDB = newsCollectionResponse;
 
                 ShowReport("News was loaded successful", ConsoleColor.Green);
                 if (File.Exists($"{Meta.reservePath}/{Meta.reserveNewsCollection}"))
@@ -237,49 +251,6 @@ namespace Multi_Server_Test.ServerData
                 }
                 return newsCollectionResponse;
             }
-            catch (NullReferenceException) 
-            {
-                ShowReport("News cannot be retrieved from the database!", ConsoleColor.Red);
-                ShowReport($"Trying execute load from ./{Meta.reservePath}/...", ConsoleColor.Yellow);
-                using (var reader = new StreamReader($"{Meta.reservePath}/{Meta.reserveNewsCollection}"))
-                {
-                    var reserveCollectionJson = reader.ReadToEnd();
-                    var reserveCollection = JsonConvert.DeserializeObject<NewsCollection>(reserveCollectionJson);
-                    return reserveCollection;
-                }
-            }
-        }
-        private async Task<LettersCollection> SynchronizeLettersCollection() //TODO: метод повторяется дважды - переделать
-        {
-            try
-            {
-                var lettersCollectionOutDB = await GetLettersCollection();
-                if (lettersCollectionOutDB == null)
-                    return null;
-
-                ShowReport("Letters was loaded successful", ConsoleColor.Green);
-                if (File.Exists($"{Meta.reservePath}/{Meta.reserveLetters}"))
-                {
-                    using (var writer = new StreamWriter($"{Meta.reservePath}/{Meta.reserveLetters}"))
-                    {
-                        var dataJson = JsonConvert.SerializeObject(lettersCollectionOutDB);
-                        await writer.WriteAsync(dataJson);
-                        ShowReport("Letters saved", ConsoleColor.Green);
-                    }
-                }
-                else
-                {
-                    ShowReport("Резервная папка не найдена! Создаю новую директорию...", ConsoleColor.Red);
-                    Directory.CreateDirectory(Meta.reservePath);
-                    using (var stream = File.CreateText($"{Meta.reservePath}/{Meta.reserveLetters}"))
-                    {
-                        var dataJson = JsonConvert.SerializeObject(lettersCollectionOutDB);
-                        await stream.WriteAsync(dataJson);
-                        ShowReport("Letters saved", ConsoleColor.Green);
-                    }
-                }
-                return lettersCollectionOutDB;
-            }
             catch (NullReferenceException)
             {
                 ShowReport("News cannot be retrieved from the database!", ConsoleColor.Red);
@@ -287,11 +258,54 @@ namespace Multi_Server_Test.ServerData
                 using (var reader = new StreamReader($"{Meta.reservePath}/{Meta.reserveNewsCollection}"))
                 {
                     var reserveCollectionJson = reader.ReadToEnd();
-                    var reserveCollection = JsonConvert.DeserializeObject<LettersCollection>(reserveCollectionJson);
+                    var reserveCollection = JsonConvert.DeserializeObject<List<News>>(reserveCollectionJson);
                     return reserveCollection;
                 }
             }
         }
+        //private async Task<LettersCollection> SynchronizeLettersCollection() //TODO: метод повторяется дважды - переделать
+        //{
+        //    try
+        //    {
+        //        var lettersCollectionOutDB = await GetLettersCollection();
+        //        if (lettersCollectionOutDB == null)
+        //            return null;
+
+        //        ShowReport("Letters was loaded successful", ConsoleColor.Green);
+        //        if (File.Exists($"{Meta.reservePath}/{Meta.reserveLetters}"))
+        //        {
+        //            using (var writer = new StreamWriter($"{Meta.reservePath}/{Meta.reserveLetters}"))
+        //            {
+        //                var dataJson = JsonConvert.SerializeObject(lettersCollectionOutDB);
+        //                await writer.WriteAsync(dataJson);
+        //                ShowReport("Letters saved", ConsoleColor.Green);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            ShowReport("Резервная папка не найдена! Создаю новую директорию...", ConsoleColor.Red);
+        //            Directory.CreateDirectory(Meta.reservePath);
+        //            using (var stream = File.CreateText($"{Meta.reservePath}/{Meta.reserveLetters}"))
+        //            {
+        //                var dataJson = JsonConvert.SerializeObject(lettersCollectionOutDB);
+        //                await stream.WriteAsync(dataJson);
+        //                ShowReport("Letters saved", ConsoleColor.Green);
+        //            }
+        //        }
+        //        return lettersCollectionOutDB;
+        //    }
+        //    catch (NullReferenceException)
+        //    {
+        //        ShowReport("News cannot be retrieved from the database!", ConsoleColor.Red);
+        //        ShowReport($"Trying execute load from ./{Meta.reservePath}/...", ConsoleColor.Yellow);
+        //        using (var reader = new StreamReader($"{Meta.reservePath}/{Meta.reserveNewsCollection}"))
+        //        {
+        //            var reserveCollectionJson = reader.ReadToEnd();
+        //            var reserveCollection = JsonConvert.DeserializeObject<LettersCollection>(reserveCollectionJson);
+        //            return reserveCollection;
+        //        }
+        //    }
+        //}
         #region Вторичные методы
         private string GetDataFromStream(NetworkStream clientStream)
         {

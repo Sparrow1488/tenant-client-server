@@ -42,19 +42,19 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
         private Person GetAndAuthUser(Person person)
         {
             string sCommand = $"SELECT * FROM Users WHERE Login=N'{person.Login}' AND Password=N'{person.Password}'";
-            using (var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
+            var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
+            using (var reader = command.ExecuteReader())
             {
-                var reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        var login      = Convert.ToString(reader.GetValue(1)); //TODO: ИСПРАВИТЬ КАЛ
-                        var password   = Convert.ToString(reader.GetValue(2));
-                        var name       = Convert.ToString(reader.GetValue(3));
-                        var lastName   = Convert.ToString(reader.GetValue(4));
+                        var login = Convert.ToString(reader.GetValue(1)); //TODO: ИСПРАВИТЬ КАЛ
+                        var password = Convert.ToString(reader.GetValue(2));
+                        var name = Convert.ToString(reader.GetValue(3));
+                        var lastName = Convert.ToString(reader.GetValue(4));
                         var parentName = Convert.ToString(reader.GetValue(5));
-                        var roomNum    = Convert.ToInt32(reader.GetValue(6));
+                        var roomNum = Convert.ToInt32(reader.GetValue(6));
                         return new Person(name, lastName, parentName, login, password, roomNum);
                     }
                 }

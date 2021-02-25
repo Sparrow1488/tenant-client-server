@@ -1,6 +1,8 @@
-﻿using Multi_Server_Test.ServerData.Blocks;
+﻿using Multi_Server_Test.ServerData;
+using Multi_Server_Test.ServerData.Blocks;
 using Newtonsoft.Json;
 using System;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace Multi_Server_Test.Server.Blocks.LetterBlock
@@ -16,14 +18,32 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
             {
                 var getJsonLetter = JsonConvert.SerializeObject(reqObject);
                 var getLetter = JsonConvert.DeserializeObject<Letter>(getJsonLetter);
-                serverEvents.BlockReport(this, "Письмо успешно получено", ConsoleColor.Green);
+                serverEvents.BlockReport(this, "Письмо успешно получено", ConsoleColor.Yellow);
                 Console.WriteLine(getLetter); //TODO: сделать сортер по типу новости (предложение, жалоба, вопрос)
+                int successInsert = AddLetterInDB(getLetter);
+                Console.WriteLine("Успешно добавлено писем: " + successInsert);
                 response = Encoding.UTF8.GetBytes("Письмо получено");
                 return response;
-            }
+        }
             catch (Exception) 
             {
-                return Encoding.UTF8.GetBytes("Неизвестная ошибка");
+                var exMessage = "Неизвестная ошибка";
+                serverEvents.BlockReport(this, exMessage, ConsoleColor.Red);
+                return Encoding.UTF8.GetBytes(exMessage);
+            }
+}
+        private int AddLetterInDB(Letter newLetter)
+        {
+            string sCommand = "INSERT INTO [Letters] (Title, Description, Type, Sender) VALUES (@title, @desc, @type, @sender)";
+            using (var command1 = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
+            {
+                Console.WriteLine(MyServer.Meta.sqlConnection.State);
+                command1.Parameters.AddWithValue("title", newLetter.Title);
+                command1.Parameters.AddWithValue("desc", newLetter.Description);
+                command1.Parameters.AddWithValue("type", newLetter.LetterType);
+                command1.Parameters.AddWithValue("sender", newLetter.Sender.Login);
+                var successCount = command1.ExecuteNonQuery();
+                return successCount;
             }
         }
     }

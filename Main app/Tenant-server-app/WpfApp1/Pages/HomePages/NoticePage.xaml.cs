@@ -4,6 +4,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Collections.Generic;
 
 namespace WpfApp1.Pages.HomePages
 {
@@ -12,7 +13,7 @@ namespace WpfApp1.Pages.HomePages
     /// </summary>
     public partial class NoticePage : Page
     {
-        private NewsCollection ReceivedNews;
+        private List<News> ReceivedNews;
         public NoticePage()
         {
             InitializeComponent();
@@ -26,7 +27,7 @@ namespace WpfApp1.Pages.HomePages
                 if (!IsLoadNews)
                 {
                     ReceivedNews = await JumboServer.ActiveServer.ReceiveNewsCollectionAsync();
-                    foreach (var news in ReceivedNews.Collection)
+                    foreach (var news in ReceivedNews)
                     {
                         AddNewsTitleAndDescription(news.Title, news.Description);
                     }

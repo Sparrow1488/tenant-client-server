@@ -41,18 +41,20 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
                                                  descriptionLetter.Text,
                                                  letterSender);
                 result = await JumboServer.ActiveServer.SendLetter(sendLetter);
+                LetterPage.ShowMessage(result);
             }
             catch (SocketException)
             {
                 result = "Ошибка подключения: данные не отправлены.";
+                LetterPage.ShowExceptionMessage(result);
             }
             catch (IOException)
             {
                 result = "Ошибка сервера: данные отправлены, но не могут быть получены.";
+                LetterPage.ShowExceptionMessage(result);
             }
             finally
             {
-                LetterPage.ShowExceptionText(result);
                 btn.IsEnabled = true;
             }
         }

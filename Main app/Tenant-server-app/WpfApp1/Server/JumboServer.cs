@@ -1,6 +1,7 @@
 ﻿using Multi_Server_Test.Server;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,11 +34,11 @@ namespace WpfApp1.Server.ServerMeta
                 throw new NullReferenceException("Данный пользователь не существует");
             return true;
         }
-        public async Task<NewsCollection> ReceiveNewsCollectionAsync()
+        public async Task<List<News>> ReceiveNewsCollectionAsync()
         {
             var pack = new RecieveNewsPackage();
             string jsonCollection = await SendAndGetAsync(pack);
-            NewsCollection collectionResponse = JsonConvert.DeserializeObject<NewsCollection>(jsonCollection);
+            var collectionResponse = JsonConvert.DeserializeObject<List<News>>(jsonCollection);
             if (collectionResponse == null)
                 throw new NullReferenceException("Получена пустая коллекция!");
             else

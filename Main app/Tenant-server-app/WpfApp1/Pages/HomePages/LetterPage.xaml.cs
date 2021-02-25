@@ -35,7 +35,11 @@ namespace WpfApp1.Pages.HomePages
             ExceptionText = exceptionText;
         }
 
-        public static void ShowExceptionText(string text)
+        public static void ShowMessage(string text)
+        {
+            applicationEvents.ShowEventMessage(text, ExceptionText);
+        }
+        public static void ShowExceptionMessage(string text)
         {
             applicationEvents.ShowExceptionMessage(text, ExceptionText);
         }

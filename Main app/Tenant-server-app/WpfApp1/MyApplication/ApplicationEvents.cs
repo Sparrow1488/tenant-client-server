@@ -18,7 +18,7 @@ namespace WpfApp1.MyApplication
             displayElem.Foreground = new SolidColorBrush(Colors.Red);
             displayElem.Text = errorText;
         }
-        public void ShowNoticeMessage(string errorText, TextBlock displayElem)
+        public void ShowEventMessage(string errorText, TextBlock displayElem)
         {
             displayElem.Visibility = Visibility.Visible;
             displayElem.Background = new SolidColorBrush(Colors.AliceBlue);

@@ -31,9 +31,9 @@ namespace Chairman_Client
         {
             var sendBtn = (Button)sender;
             sendBtn.IsEnabled = false;
-            var newPerson = new Person(loginBox.Text, passwordBox.Text, 67);
             try
             {
+                var newPerson = new Person(loginBox.Text, passwordBox.Text, 67);
                 bool authSuccess = await JumboServer.ActiveServer.AuthorizationAsync(newPerson, false);
                 if (authSuccess)
                 {
@@ -42,9 +42,9 @@ namespace Chairman_Client
                 }
                 else
                     MessageBox.Show("Ошибка");
-                sendBtn.IsEnabled = true;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Exception dialog"); }
+            finally { sendBtn.IsEnabled = true; }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

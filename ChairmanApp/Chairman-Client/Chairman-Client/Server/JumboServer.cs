@@ -1,6 +1,7 @@
 ﻿using Multi_Server_Test.Server;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,22 +25,20 @@ namespace WpfApp1.Server.ServerMeta
             ServerConfig = config;
             ActiveServer = this;
         }
-        public async Task<bool> AuthorizationAsync(Person dataPerson, bool token) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
+        public async Task<bool> AuthorizationAsync(Person dataPerson, bool saveToken) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
         {
             var authPack = new AuthorizationPackage(dataPerson);
             var jsonResponse = await SendAndGetAsync(authPack);
             ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse);
             if (ActiveUser == null)
-            {
                 throw new NullReferenceException("Данный пользователь не существует");
-            }
             return true;
         }
-        public async Task<NewsCollection> ReceiveNewsCollectionAsync()
+        public async Task<List<News>> ReceiveNewsCollectionAsync()
         {
             var pack = new RecieveNewsPackage();
-            var jsonCollection = await SendAndGetAsync(pack);
-            var collectionResponse =  JsonConvert.DeserializeObject<NewsCollection>(jsonCollection);
+            string jsonCollection = await SendAndGetAsync(pack);
+            var collectionResponse = JsonConvert.DeserializeObject<List<News>>(jsonCollection);
             if (collectionResponse == null)
                 throw new NullReferenceException("Получена пустая коллекция!");
             else

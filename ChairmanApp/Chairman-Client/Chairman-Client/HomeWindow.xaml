@@ -18,6 +18,7 @@
 
         <StackPanel x:Name="leftMenuPanel">
             <Button
+                HorizontalContentAlignment="Left"
                 Background="White"
                 BorderBrush="Transparent"
                 Click="SelectLetterPageBtn_Click">
@@ -26,7 +27,10 @@
                 </StackPanel>
             </Button>
 
-            <Button Background="White" BorderBrush="Transparent">
+            <Button
+                HorizontalContentAlignment="Left"
+                Background="White"
+                BorderBrush="Transparent">
                 <StackPanel>
                     <TextBlock FontSize="24" Text="Объявления" />
                 </StackPanel>

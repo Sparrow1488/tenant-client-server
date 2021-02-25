@@ -1,7 +1,10 @@
 ﻿using Chairman_Client.Chairman.Packages;
 using Multi_Server_Test.Server;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using WpfApp1.Server.Packages.Letters;
 using WpfApp1.Server.ServerMeta;
 
 namespace Chairman_Client.Server.Chairman.Functions
@@ -23,10 +26,12 @@ namespace Chairman_Client.Server.Chairman.Functions
             var addNewsPackage = new AddNewsPackage(news);
             return await JumboServer.ActiveServer.SendAndGetAsync(addNewsPackage);
         }
-        public async Task<string> GetLetters()
+        public async Task<List<Letter>> GetLetters()
         {
             var requestPackage = new GetLettersPackage();
-            return await JumboServer.ActiveServer.SendAndGetAsync(requestPackage);
+            var jsonListLetters = await JumboServer.ActiveServer.SendAndGetAsync(requestPackage);
+            var listLetters = JsonConvert.DeserializeObject<List<Letter>>(jsonListLetters);
+            return listLetters;
         }
     }
 }

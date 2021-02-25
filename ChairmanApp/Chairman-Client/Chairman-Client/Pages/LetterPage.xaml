@@ -11,8 +11,8 @@
     Background="White"
     Loaded="Page_Loaded"
     mc:Ignorable="d">
-
     <Grid>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
@@ -25,10 +25,29 @@
                 Grid.Column="0"
                 Margin="10"
                 Orientation="Vertical">
-                <StackPanel>
-                    <TextBlock FontSize="18" Text="Заголовок" />
-                    <TextBlock FontSize="15" Text="Текс письма" />
+                <Button Click="addNewTestLetter_Click" Content="ADD" />
+                <StackPanel
+                    MaxWidth="120"
+                    Background="AliceBlue"
+                    MouseDown="StackPanel_MouseDown">
+                    <TextBlock
+                        Margin="5"
+                        FontSize="15"
+                        Text="→ Что вообще происходит?"
+                        TextDecorations="Underline"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Margin="5,0,5,0"
+                        FontSize="12"
+                        Text="TYPE: вопрос"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Margin="5,0,5,0"
+                        FontSize="12"
+                        Text="DESC: У нас произошло нечно необычное и длинное длинное длинное длинное происшествие"
+                        TextWrapping="Wrap" />
                 </StackPanel>
+
             </StackPanel>
         </ScrollViewer>
 

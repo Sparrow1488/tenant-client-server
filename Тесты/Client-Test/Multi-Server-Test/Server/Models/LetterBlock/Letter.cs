@@ -1,5 +1,6 @@
 ﻿using Multi_Server_Test.Server.Packages;
 using Newtonsoft.Json;
+using System;
 
 namespace Multi_Server_Test.Server.Blocks.LetterBlock
 {
@@ -9,14 +10,17 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
         public string Title { get; }
         public string Description { get; }
         public string SenderLogin { get; }
+        public DateTime DateCreate { get; }
 
         [JsonConstructor]
-        public Letter(string title, string description, string sender, string letterType)
+        public Letter(string title, string description, string sender, string letterType, DateTime dateCreate)
         {
             Title = title;
             Description = description;
             SenderLogin = sender;
             LetterType = letterType;
+            if (dateCreate == null)
+                DateCreate = DateTime.Now;
         }
         public override string ToString()
         {

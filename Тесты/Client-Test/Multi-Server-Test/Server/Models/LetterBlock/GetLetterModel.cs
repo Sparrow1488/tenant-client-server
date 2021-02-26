@@ -51,7 +51,8 @@ namespace Multi_Server_Test.Server.Models.LetterBlock
                         var desc = reader.GetString(2);
                         var type = reader.GetString(3);
                         var sender = reader.GetString(4);
-                        selectLetters.Add(new Letter(title, desc, sender, type));
+                        var date = reader.GetDateTime(5);
+                        selectLetters.Add(new Letter(title, desc, sender, type, date));
                     }
                 }
                 reader.Close();

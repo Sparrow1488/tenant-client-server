@@ -49,11 +49,11 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
                 {
                     while (reader.Read())
                     {
-                        var login = Convert.ToString(reader.GetValue(1)); //TODO: ИСПРАВИТЬ КАЛ
-                        var password = Convert.ToString(reader.GetValue(2));
-                        var name = Convert.ToString(reader.GetValue(3));
-                        var lastName = Convert.ToString(reader.GetValue(4));
-                        var parentName = Convert.ToString(reader.GetValue(5));
+                        var login = reader.GetString(1);
+                        var password = reader.GetString(2);
+                        var name = reader.GetString(3);
+                        var lastName = reader.GetString(4);
+                        var parentName = reader.GetString(5);
                         var roomNum = Convert.ToInt32(reader.GetValue(6));
                         return new Person(name, lastName, parentName, login, password, roomNum);
                     }

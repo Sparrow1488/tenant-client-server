@@ -4,6 +4,7 @@ using Multi_Server_Test.ServerData.Blocks;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace Multi_Server_Test.Server.Models.LetterBlock
@@ -17,9 +18,9 @@ namespace Multi_Server_Test.Server.Models.LetterBlock
         {
             try
             {
+                byte[] response;
                 serverEvents.BlockReport(this, "Запрос на получение новостей", ConsoleColor.Green);
                 List<Letter> lettersOutDB = GetLettersCollection();
-                byte[] response;
 
                 if (lettersOutDB == null)
                     response = Encoding.UTF8.GetBytes("Список писем пока пуст");
@@ -37,7 +38,25 @@ namespace Multi_Server_Test.Server.Models.LetterBlock
         }
         private List<Letter> GetLettersCollection()
         {
-            return MyServer.allLetters; // TODO: сделать дичь с доставанием новостей с сервера
+            var selectLetters = new List<Letter>();
+            string sCommand = "SELECT * FROM Letters";
+            var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var title = reader.GetString(1);
+                        var desc = reader.GetString(2);
+                        var type = reader.GetString(3);
+                        var sender = reader.GetString(4);
+                        selectLetters.Add(new Letter(title, desc, sender, type));
+                    }
+                }
+                reader.Close();
+            }
+            return selectLetters;
         }
     }
 }

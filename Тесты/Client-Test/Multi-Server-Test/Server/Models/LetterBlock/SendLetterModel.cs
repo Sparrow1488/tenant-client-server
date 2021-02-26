@@ -1,4 +1,5 @@
-﻿using Multi_Server_Test.ServerData;
+﻿using Multi_Server_Test.Blocks;
+using Multi_Server_Test.ServerData;
 using Multi_Server_Test.ServerData.Blocks;
 using Newtonsoft.Json;
 using System;
@@ -41,7 +42,7 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
                 command1.Parameters.AddWithValue("title", newLetter.Title);
                 command1.Parameters.AddWithValue("desc", newLetter.Description);
                 command1.Parameters.AddWithValue("type", newLetter.LetterType);
-                command1.Parameters.AddWithValue("sender", newLetter.Sender.Login);
+                command1.Parameters.AddWithValue("sender", newLetter.SenderLogin);
                 var successCount = command1.ExecuteNonQuery();
                 return successCount;
             }

@@ -67,6 +67,9 @@
       <DependentUpon>LetterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Chairman\Functions\Functions.cs" />
+    <Compile Include="Pages\LetterPageChildren\ReadLettersPage.xaml.cs">
+      <DependentUpon>ReadLettersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Server\Configuration\ServerConfig.cs" />
     <Compile Include="Server\JumboServer.cs" />
     <Compile Include="Server\Packages\LettersDir\ComplaintLetter.cs" />
@@ -100,6 +103,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\LetterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LetterPageChildren\ReadLettersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

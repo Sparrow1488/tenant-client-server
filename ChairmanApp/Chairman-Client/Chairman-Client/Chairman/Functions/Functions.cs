@@ -28,10 +28,17 @@ namespace Chairman_Client.Server.Chairman.Functions
         }
         public async Task<List<Letter>> GetLetters()
         {
-            var requestPackage = new GetLettersPackage();
-            var jsonListLetters = await JumboServer.ActiveServer.SendAndGetAsync(requestPackage);
-            var listLetters = JsonConvert.DeserializeObject<List<Letter>>(jsonListLetters);
-            return listLetters;
+            try
+            {
+                var requestPackage = new GetLettersPackage();
+                var jsonListLetters = await JumboServer.ActiveServer.SendAndGetAsync(requestPackage);
+                var listLetters = JsonConvert.DeserializeObject<List<Letter>>(jsonListLetters);
+                return listLetters;
+            }
+            catch (JsonReaderException)
+            {
+                return null;
+            }
         }
     }
 }

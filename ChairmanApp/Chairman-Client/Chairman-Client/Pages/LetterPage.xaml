@@ -27,7 +27,7 @@
                 Orientation="Vertical">
                 <Button Click="addNewTestLetter_Click" Content="ADD" />
                 <StackPanel
-                    MaxWidth="120"
+                    MaxWidth="250"
                     Background="AliceBlue"
                     MouseDown="StackPanel_MouseDown">
                     <TextBlock
@@ -40,11 +40,6 @@
                         Margin="5,0,5,0"
                         FontSize="12"
                         Text="TYPE: вопрос"
-                        TextWrapping="Wrap" />
-                    <TextBlock
-                        Margin="5,0,5,0"
-                        FontSize="12"
-                        Text="DESC: У нас произошло нечно необычное и длинное длинное длинное длинное происшествие"
                         TextWrapping="Wrap" />
                 </StackPanel>
 

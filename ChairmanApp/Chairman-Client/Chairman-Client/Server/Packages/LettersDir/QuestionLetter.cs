@@ -8,7 +8,7 @@ namespace WpfApp1.Server.Packages.Letters
 {
     public class QuestionLetter : Letter
     {
-        public QuestionLetter(string title, string description, Person sender) : base(title, description, sender)
+        public QuestionLetter(string title, string description, string sender) : base(title, description, sender)
         {
             LetterType = "question";
         }

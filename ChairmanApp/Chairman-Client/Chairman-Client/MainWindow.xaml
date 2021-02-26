@@ -10,6 +10,12 @@
     Height="450"
     Loaded="Window_Loaded"
     mc:Ignorable="d">
+    <Window.Resources>
+        <Style x:Key="letterButtons">
+            <Setter Property="ItemsControl.BorderBrush" Value="Transparent" />
+            <Setter Property="ItemsControl.Background" Value="Transparent" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <StackPanel Margin="10">
             <TextBlock FontSize="22" TextWrapping="Wrap">
@@ -17,17 +23,24 @@
                 Войдите в систему</TextBlock>
             <GroupBox FontSize="20" Header="Логин">
                 <StackPanel Orientation="Vertical">
-                    <TextBox x:Name="loginBox" BorderBrush="Transparent" />
+                    <TextBox
+                        x:Name="loginBox"
+                        BorderBrush="Transparent"
+                        BorderThickness="0" />
                 </StackPanel>
             </GroupBox>
 
             <GroupBox FontSize="20" Header="Пароль">
                 <StackPanel Orientation="Vertical">
-                    <TextBox x:Name="passwordBox" BorderBrush="Transparent" />
+                    <PasswordBox
+                        x:Name="passwordBox"
+                        BorderBrush="Transparent"
+                        BorderThickness="0" />
                 </StackPanel>
             </GroupBox>
 
             <TextBlock
+                x:Name="exceptionBlock"
                 HorizontalAlignment="Center"
                 FontSize="20"
                 Foreground="Red"
@@ -36,6 +49,7 @@
 
             <Button
                 Margin="0,10"
+                Background="Transparent"
                 Click="Button_Click"
                 Content="Войти"
                 FontSize="20" />

@@ -25,8 +25,9 @@ namespace Chairman_Client.Pages.LetterPageChildren
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             topTitle.Text = ReadLetter.Title;
-            typeLetter.Text = ReadLetter.LetterType;
-            senderLetter.Text = ReadLetter.SenderLogin;
+            typeLetter.Text = "Тип письма: " + ReadLetter.LetterType;
+            senderLetter.Text = "Отправитель (логин): " +  ReadLetter.SenderLogin;
+            dateSend.Text = $"Дата создания: {ReadLetter.DateCreate.Day}/{ReadLetter.DateCreate.Month}/{ReadLetter.DateCreate.Year}";
 
             mainTitle.Text = ReadLetter.Title;
             descLetter.Text = ReadLetter.Description;

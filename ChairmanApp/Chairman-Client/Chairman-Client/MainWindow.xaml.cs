@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WpfApp1.Server;
 using WpfApp1.Server.ServerMeta;
 
@@ -33,7 +23,7 @@ namespace Chairman_Client
             sendBtn.IsEnabled = false;
             try
             {
-                var newPerson = new Person(loginBox.Text, passwordBox.Text, 67);
+                var newPerson = new Person(loginBox.Text, passwordBox.Password, 67);
                 bool authSuccess = await JumboServer.ActiveServer.AuthorizationAsync(newPerson, false);
                 if (authSuccess)
                 {
@@ -43,14 +33,20 @@ namespace Chairman_Client
                 else
                     MessageBox.Show("Ошибка");
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "Exception dialog"); }
+            catch (SocketException) { ShowExceptionBlock(exceptionBlock, "Ошибка подключения к серверу"); }
+            catch (Exception ex) { ShowExceptionBlock(exceptionBlock, ex.Message); }
             finally { sendBtn.IsEnabled = true; }
         }
-
+        void ShowExceptionBlock(TextBlock block, string message)
+        {
+            block.Visibility = Visibility.Visible;
+            block.Text = message;
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ServerConfig config = new ServerConfig();
             new JumboServer(config);
+            exceptionBlock.Visibility = Visibility.Collapsed;
         }
     }
 }

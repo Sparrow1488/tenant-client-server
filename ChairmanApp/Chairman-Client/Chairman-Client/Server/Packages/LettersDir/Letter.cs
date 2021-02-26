@@ -26,7 +26,7 @@ namespace WpfApp1.Server.Packages.Letters
             }
         }
         [JsonConstructor]
-        public Letter(string title, string description, string senderLogin, string letterType)
+        public Letter(string title, string description, string senderLogin, string letterType, DateTime dateCreate)
         {
             if (string.IsNullOrWhiteSpace(description) || senderLogin == null)
                 throw new ArgumentNullException("Вы не можете отправить письмо без описания или не авторизовавались");
@@ -36,6 +36,7 @@ namespace WpfApp1.Server.Packages.Letters
                 Description = description;
                 SenderLogin = senderLogin;
                 LetterType = letterType;
+                DateCreate = dateCreate;
             }
         }
     }

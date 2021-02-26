@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationService\CreatorLetterPanel.cs" />
     <Compile Include="Chairman\Packages\AddNewsPackage.cs" />
     <Compile Include="Chairman\Packages\GetLettersPackage.cs" />
     <Compile Include="HomeWindow.xaml.cs">

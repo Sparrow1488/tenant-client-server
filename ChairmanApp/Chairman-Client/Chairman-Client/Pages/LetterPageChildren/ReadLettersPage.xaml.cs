@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Chairman_Client.ApplicationService;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WpfApp1.Server.Packages.Letters;
 
 namespace Chairman_Client.Pages.LetterPageChildren
@@ -21,20 +11,25 @@ namespace Chairman_Client.Pages.LetterPageChildren
     /// </summary>
     public partial class ReadLettersPage : Page
     {
-        private static Letter ReadLetter = null;
+        private Letter ReadLetter = null;
         public ReadLettersPage(Letter readLetter)
         {
             InitializeComponent();
             ReadLetter = readLetter;
         }
-        public static void ShowPage(Letter letter)
+        public void ShowDefaultPanel()
         {
             
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(ReadLetter.Description, ReadLetter.Title);
+            topTitle.Text = ReadLetter.Title;
+            typeLetter.Text = ReadLetter.LetterType;
+            senderLetter.Text = ReadLetter.SenderLogin;
+
+            mainTitle.Text = ReadLetter.Title;
+            descLetter.Text = ReadLetter.Description;
         }
     }
 }

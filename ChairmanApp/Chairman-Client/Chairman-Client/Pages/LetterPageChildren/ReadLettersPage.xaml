@@ -16,6 +16,20 @@
             <Setter Property="ItemsControl.BorderBrush" Value="Transparent" />
             <Setter Property="ItemsControl.Background" Value="Transparent" />
         </Style>
+        <Style x:Key="offBorderLights" TargetType="{x:Type TextBox}">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="IsReadOnly" Value="true" />
+            <Style.Triggers>
+                <Trigger Property="TextBox.IsMouseOver" Value="True">
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="BorderBrush" Value="Transparent" />
+                </Trigger>
+                <Trigger Property="TextBox.IsFocused" Value="True">
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="BorderBrush" Value="Transparent" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Page.Resources>
 
     <Grid Margin="20,0,20,0" Background="White">
@@ -28,12 +42,22 @@
             Grid.Row="0"
             Margin="50,0,50,0"
             VerticalAlignment="Center">
-            <TextBlock
+            <TextBox
+                Name="topTitle"
                 FontSize="24"
+                Style="{StaticResource offBorderLights}"
                 Text="Заголовок письма"
                 TextWrapping="Wrap" />
-            <TextBlock FontSize="16" Text="Тип: тип_письма" />
-            <TextBlock FontSize="16" Text="От кого: asd" />
+            <TextBox
+                Name="typeLetter"
+                FontSize="16"
+                Style="{StaticResource offBorderLights}"
+                Text="Тип: тип_письма" />
+            <TextBox
+                Name="senderLetter"
+                FontSize="16"
+                Style="{StaticResource offBorderLights}"
+                Text="От кого: asd" />
         </StackPanel>
         <!--  СОНОВНОЙ КОНТЕНТ  -->
         <StackPanel
@@ -41,13 +65,18 @@
             Margin="50,0,50,0"
             Orientation="Vertical">
             <StackPanel Height="1" Background="Black" />
-            <TextBlock
+            <TextBox
+                Name="mainTitle"
                 FontSize="24"
                 FontWeight="DemiBold"
+                Style="{StaticResource offBorderLights}"
                 Text="Очередной заголовок письма аряяя" />
             <TextBox
+                Name="descLetter"
                 BorderBrush="Transparent"
                 FontSize="20"
+                IsReadOnly="True"
+                Style="{StaticResource offBorderLights}"
                 Text="Самое длинное в мире письмо которое вообще вообще вообще вообще вообще вообще вообще вообще не хочется читать!"
                 TextWrapping="Wrap" />
             <StackPanel

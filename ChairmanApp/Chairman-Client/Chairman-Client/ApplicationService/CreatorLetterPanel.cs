@@ -9,7 +9,6 @@ namespace Chairman_Client.ApplicationService
     public class CreatorLetterPanel
     {
         public Letter ActiveLetter = null;
-        //public StackPanel ParentPanel = null;
         public Frame parentDefaultFrame = null;
         public CreatorLetterPanel(Letter letter, Frame frameForDefaultPanel)
         {
@@ -61,7 +60,6 @@ namespace Chairman_Client.ApplicationService
             var title = (TextBlock)sender;
             title.FontWeight = FontWeights.DemiBold;
             parentDefaultFrame.Content = new ReadLettersPage(ActiveLetter);
-
         }
     }
 }

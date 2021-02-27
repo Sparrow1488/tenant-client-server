@@ -29,7 +29,7 @@ namespace WpfApp1.Pages.HomePages
                     ReceivedNews = await JumboServer.ActiveServer.ReceiveNewsCollectionAsync();
                     foreach (var news in ReceivedNews)
                     {
-                        AddNewsTitleAndDescription(news.Title, news.Description);
+                        AddNewsPanel(news);
                     }
                     IsLoadNews = true;
                 }
@@ -46,9 +46,10 @@ namespace WpfApp1.Pages.HomePages
 
         private void AddPanelBtn_Click(object sender, RoutedEventArgs e)
         {
-            AddNewsTitleAndDescription("Пицца", "Описание пиццы");
+            var testNews = new News("Пицца", "Описание пиццы", JumboServer.ActiveServer.ActiveUser.Login);
+            AddNewsPanel(testNews);
         }
-        private void AddNewsTitleAndDescription(string title, string desc)
+        private void AddNewsPanel(News news)
         {
             var mainPanel = new StackPanel()
             {
@@ -65,13 +66,13 @@ namespace WpfApp1.Pages.HomePages
             {
                 FontSize = 24,
                 FontWeight = FontWeights.DemiBold,
-                Text = title,
+                Text = news.Title,
                 TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(20, 5, 0, 5)
             };
             var descriptionBlock = new TextBlock()
             {
-                Text = desc,
+                Text = news.Description,
                 FontSize = 20,
                 TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(5, 0, 5, 5)

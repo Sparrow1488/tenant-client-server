@@ -27,7 +27,7 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
             string result = string.Empty;
             try
             {
-                var letterSender = JumboServer.ActiveServer.ActiveUser;
+                var letterSender = JumboServer.ActiveServer.ActiveUser.Login;
                 var sendLetter = new ComplaintLetter(titleLetter.Text,
                                                      descriptionLetter.Text,
                                                      letterSender);

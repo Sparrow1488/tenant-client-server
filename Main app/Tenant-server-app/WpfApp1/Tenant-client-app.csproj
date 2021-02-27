@@ -137,7 +137,9 @@
     <Compile Include="Pages\HomePages\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Server\Packages\LettersDir\LettersCollection.cs" />
     <Compile Include="Server\Packages\LettersDir\SendLetterPackage.cs" />
+    <Compile Include="Server\Packages\NewsDir\AddNewsPackage.cs" />
     <Compile Include="Server\Packages\NewsDir\News.cs" />
     <Compile Include="Server\Packages\NewsDir\NewsCollection.cs" />
     <Compile Include="Server\Packages\LettersDir\ComplaintLetter.cs" />

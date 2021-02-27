@@ -10,8 +10,8 @@ namespace Multi_Server_Test.Server
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Image { get; set; }
-        public int ID { get; set; }
-        public DateTime DateTime { get; set; }
+        public string Source { get; set; }
+        public string Sender { get; set; }
+        public DateTime DateTime { get; set; } = DateTime.Now;
     }
 }

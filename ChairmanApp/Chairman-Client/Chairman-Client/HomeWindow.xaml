@@ -30,7 +30,8 @@
             <Button
                 HorizontalContentAlignment="Left"
                 Background="White"
-                BorderBrush="Transparent">
+                BorderBrush="Transparent"
+                Click="NewsPageOpenBtn_Click">
                 <StackPanel>
                     <TextBlock FontSize="24" Text="Объявления" />
                 </StackPanel>

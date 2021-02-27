@@ -12,6 +12,7 @@ namespace Chairman_Client
     public partial class HomeWindow : Window
     {
         private Page letterPage = new LetterPage();
+        private Page newsPage = new NewsPage();
         public HomeWindow()
         {
             InitializeComponent();
@@ -26,6 +27,11 @@ namespace Chairman_Client
         {
             var func = new Functions("secret", JumboServer.ActiveServer);
             MessageBox.Show("Welcome!");
+        }
+
+        private void NewsPageOpenBtn_Click(object sender, RoutedEventArgs e)
+        {
+            homeContentFrame.Content = newsPage;
         }
     }
 }

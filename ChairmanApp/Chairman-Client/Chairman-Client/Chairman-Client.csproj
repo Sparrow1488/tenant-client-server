@@ -71,6 +71,9 @@
     <Compile Include="Pages\LetterPageChildren\ReadLettersPage.xaml.cs">
       <DependentUpon>ReadLettersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\NewsPage.xaml.cs">
+      <DependentUpon>NewsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Server\Configuration\ServerConfig.cs" />
     <Compile Include="Server\JumboServer.cs" />
     <Compile Include="Server\Packages\LettersDir\ComplaintLetter.cs" />
@@ -80,6 +83,7 @@
     <Compile Include="Server\Packages\LettersDir\QuestionLetter.cs" />
     <Compile Include="Server\Packages\LettersDir\SendLetterPackage.cs" />
     <Compile Include="Server\Packages\Meta\PackageMeta.cs" />
+    <Compile Include="Server\Packages\NewsDir\AddNewsPackage.cs" />
     <Compile Include="Server\Packages\NewsDir\News.cs" />
     <Compile Include="Server\Packages\NewsDir\NewsCollection.cs" />
     <Compile Include="Server\Packages\NewsDir\RecieveNewsPackage.cs" />
@@ -108,6 +112,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\LetterPageChildren\ReadLettersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\NewsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

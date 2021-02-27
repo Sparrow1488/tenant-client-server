@@ -21,11 +21,6 @@ namespace Chairman_Client.Server.Chairman.Functions
             else
                 throw new NullReferenceException("Вам отказано в доступе");
         }
-        public async Task<string> AddNews(News news) //return string изменить на соответствующий запросу
-        {
-            var addNewsPackage = new AddNewsPackage(news);
-            return await JumboServer.ActiveServer.SendAndGetAsync(addNewsPackage);
-        }
         public async Task<List<Letter>> GetLetters()
         {
             try
@@ -39,6 +34,12 @@ namespace Chairman_Client.Server.Chairman.Functions
             {
                 return null;
             }
+        }
+        public async Task<string> AddNews(News news)
+        {
+            var pack = new AddNewsPackage(news);
+            var response = await JumboServer.ActiveServer.SendAndGetAsync(pack);
+            return response;
         }
     }
 }

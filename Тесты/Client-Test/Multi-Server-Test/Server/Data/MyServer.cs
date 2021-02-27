@@ -5,6 +5,7 @@ using Multi_Server_Test.Server.Blocks.Auth;
 using Multi_Server_Test.Server.Blocks.LetterBlock;
 using Multi_Server_Test.Server.Controllers;
 using Multi_Server_Test.Server.Models.LetterBlock;
+using Multi_Server_Test.Server.Models.NewsBlock;
 using Multi_Server_Test.Server.Packages;
 using Multi_Server_Test.ServerData.Blocks;
 using Multi_Server_Test.ServerData.Blocks.Auth;
@@ -104,28 +105,27 @@ namespace Multi_Server_Test.ServerData
         public List<News> GetNewsCollection()
         {
             var listNews = new List<News>();
-            //try
-            //{
+            
             var command = new SqlCommand("SELECT * FROM News", Meta.sqlConnection);
-            var reader = command.ExecuteReader();
-            if (reader.HasRows)
+            using (var reader = command.ExecuteReader())
             {
-                while (reader.Read())
+                if (reader.HasRows)
                 {
-                    string title = reader.GetString(1);
-                    string description = reader.GetString(2);
-                    DateTime date = reader.GetDateTime(4);
-                    string sender = reader.GetString(5);
-                    var news = new News(title, description, date);
-                    listNews.Add(news);
+                    while (reader.Read())
+                    {
+                        string title = reader.GetString(1);
+                        string description = reader.GetString(2);
+                        DateTime date = reader.IsDBNull(4) ? DateTime.MinValue : reader.GetDateTime(4);
+                        string sender = reader.IsDBNull(5) ? null :  reader.GetString(5);
+                        var news = new News(title, description, date);
+                        listNews.Add(news);
+                    }
+                    //reader.Close();
+                    return listNews;
                 }
-                reader.Close();
-                return listNews;
+                return null;
             }
-            return null;
-            //    else { return null; }
-            //}
-            //catch (SqlNullValueException) { return null; }
+            
         }
         public async Task<LettersCollection> GetLettersCollection()
         {
@@ -188,7 +188,10 @@ namespace Multi_Server_Test.ServerData
                     { new AuthorizationModel("auth") };
 
                     var newsModels = new List<Model>()
-                    { new GetNewsCollectionModel("get") };
+                    { 
+                        new GetNewsCollectionModel("get"),
+                        new AddNewsModel("add")
+                    };
 
                     List<Controller> newControllers = new List<Controller>()
                     {

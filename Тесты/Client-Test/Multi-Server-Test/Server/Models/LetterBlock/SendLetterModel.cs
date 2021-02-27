@@ -25,7 +25,7 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
                 Console.WriteLine("Успешно добавлено писем: " + successInsert);
                 response = Encoding.UTF8.GetBytes("Письмо получено");
                 return response;
-        }
+            }
             catch (Exception) 
             {
                 var exMessage = "Неизвестная ошибка";
@@ -35,17 +35,35 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
 }
         private int AddLetterInDB(Letter newLetter)
         {
-            string sCommand = "INSERT INTO [Letters] (Title, Description, Type, Sender) VALUES (@title, @desc, @type, @sender)";
+            string sCommand = "INSERT INTO [Letters] (Title, Description, Type, Sender, DateCreate) VALUES (@title, @desc, @type, @sender, @date)";
             using (var command1 = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
             {
-                Console.WriteLine(MyServer.Meta.sqlConnection.State);
-                command1.Parameters.AddWithValue("title", newLetter.Title);
-                command1.Parameters.AddWithValue("desc", newLetter.Description);
-                command1.Parameters.AddWithValue("type", newLetter.LetterType);
-                command1.Parameters.AddWithValue("sender", newLetter.SenderLogin);
+                var validLetter = CheckValidation(newLetter);
+                Console.WriteLine("Letter: " + MyServer.Meta.sqlConnection.State);
+                command1.Parameters.AddWithValue("title", validLetter.Title);
+                command1.Parameters.AddWithValue("desc", validLetter.Description);
+                command1.Parameters.AddWithValue("type", validLetter.LetterType);
+                command1.Parameters.AddWithValue("sender", validLetter.SenderLogin);
+                command1.Parameters.AddWithValue("date", validLetter.DateCreate);
                 var successCount = command1.ExecuteNonQuery();
                 return successCount;
             }
+        }
+        private Letter CheckValidation(Letter letter)
+        {
+            string validTitle = "", validDesc = "", validType = "";
+            DateTime validDate = DateTime.Now;
+            string validSender = "noname";
+            if (!string.IsNullOrWhiteSpace(letter.Title))
+                validTitle = letter.Title;
+            if (!string.IsNullOrWhiteSpace(letter.Description))
+                validDesc = letter.Description;
+            if (!string.IsNullOrWhiteSpace(letter.LetterType))
+                validType = letter.LetterType;
+            if (!string.IsNullOrWhiteSpace(letter.SenderLogin))
+                validSender = letter.SenderLogin;
+            var validLetter = new Letter(validTitle, validDesc, validSender, validType, validDate);
+            return validLetter;
         }
     }
 }

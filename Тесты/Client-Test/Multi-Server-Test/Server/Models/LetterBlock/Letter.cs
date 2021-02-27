@@ -13,14 +13,15 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
         public DateTime DateCreate { get; }
 
         [JsonConstructor]
-        public Letter(string title, string description, string sender, string letterType, DateTime dateCreate)
+        public Letter(string title, string description, string senderLogin, string letterType, DateTime dateCreate)
         {
             Title = title;
             Description = description;
-            SenderLogin = sender;
+            SenderLogin = senderLogin;
             LetterType = letterType;
             if (dateCreate == null)
                 DateCreate = DateTime.Now;
+            else DateCreate = dateCreate;
         }
         public override string ToString()
         {

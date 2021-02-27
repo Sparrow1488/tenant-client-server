@@ -50,11 +50,11 @@ namespace Multi_Server_Test.Server.Models.NewsBlock
                 }
             }
             catch(Exception) { return -1; }
-        }
+}
         private News CheckValidation(News checkNews)
         {
             string validTitle = "", validDesc = "", validSource = "", validType = "";
-            DateTime validDate = DateTime.MinValue;
+            DateTime validDate = Convert.ToDateTime("1/1/1900 12:00:00 ");
             string validSender = "noname";
             if (!string.IsNullOrWhiteSpace(checkNews.Title))
                 validTitle = checkNews.Title;

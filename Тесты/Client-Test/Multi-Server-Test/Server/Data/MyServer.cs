@@ -115,9 +115,11 @@ namespace Multi_Server_Test.ServerData
                     {
                         string title = reader.GetString(1);
                         string description = reader.GetString(2);
+                        string source = reader.IsDBNull(3) ? null : reader.GetString(3);
                         DateTime date = reader.IsDBNull(4) ? DateTime.MinValue : reader.GetDateTime(4);
                         string sender = reader.IsDBNull(5) ? null :  reader.GetString(5);
-                        var news = new News(title, description, date);
+                        string type = reader.IsDBNull(6) ? null :  reader.GetString(6);
+                        var news = new News(title, description, source, sender, type, date);
                         listNews.Add(news);
                     }
                     //reader.Close();

@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.IO;
-using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using WpfApp1.MyApplication;
 using WpfApp1.Server;
+using WpfApp1.Server.ServerExceptions;
 using WpfApp1.Server.ServerMeta;
 
 
@@ -56,12 +56,7 @@ namespace WpfApp1
             }
             catch (JsonReaderException)
             {
-                application.ShowExceptionMessage("Получены нечитаемые данные!", errorLabel);
-            }
-            catch (SocketException)
-            {
-                errorText = "Не удалось подключиться к серверу";
-                application.ShowExceptionMessage(errorText, errorLabel);
+                application.ShowExceptionMessage("Не верный логин или пароль", errorLabel);
             }
             catch (IOException)
             {
@@ -69,6 +64,10 @@ namespace WpfApp1
                 application.ShowExceptionMessage(errorText, errorLabel);
             }
             catch (ArgumentException ex)
+            {
+                application.ShowExceptionMessage(ex.Message, errorLabel);
+            }
+            catch(JumboServerException ex)
             {
                 application.ShowExceptionMessage(ex.Message, errorLabel);
             }

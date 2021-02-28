@@ -10,6 +10,7 @@ using WpfApp1.Server.Packages.Letters;
 using WpfApp1.Server.Packages.LettersDir;
 using WpfApp1.Server.Packages.NewsDir;
 using WpfApp1.Server.Packages.PersonalDir;
+using WpfApp1.Server.ServerExceptions;
 
 namespace WpfApp1.Server.ServerMeta
 {
@@ -47,29 +48,50 @@ namespace WpfApp1.Server.ServerMeta
 
         public async Task<string> SendAndGetAsync(Package package)
         {
-            await SendRequestAsync(package);
-            var jsonResponse = await GetResponseAsync();
-            TCPclient.Close();
+            string jsonResponse = null;
+            var canSendRequest = await TrySendRequestAsync(package);
+            if (canSendRequest)
+            {
+                jsonResponse = await GetResponseAsync();
+                TCPclient.Close();
+            }
             return jsonResponse;
         }
 
-        private async Task SendRequestAsync(Package package)
+        private async Task<bool> TrySendRequestAsync(Package package)
         {
-            try
+            TCPclient = new TcpClient();
+            if (!TCPclient.Connected)
             {
                 TCPclient = new TcpClient();
-                await TCPclient.ConnectAsync(ServerConfig.HOST, ServerConfig.PORT); //TODO: сделать таймер подключения к серверу (например 10 секунд)
-                if (TCPclient.Connected == false)
-                    throw new SocketException(/*"Ошибка подключения к серверу"*/);
-                NetworkStream stream = TCPclient.GetStream();
-
-                string jsonPackage = JsonConvert.SerializeObject(package); /*new Package<RequestObject>(sendObject, meta);*/
-                byte[] data = Encoding.UTF8.GetBytes(jsonPackage);
-                await stream.WriteAsync(data, 0, data.Length);
+                var isConnect = await TryConnect();
+                if (isConnect)
+                {
+                    NetworkStream stream = TCPclient.GetStream();
+                    string jsonPackage = JsonConvert.SerializeObject(package);
+                    byte[] data = Encoding.UTF8.GetBytes(jsonPackage);
+                    await stream.WriteAsync(data, 0, data.Length);
+                }
+                else throw new ConnectionException("Ошибка подключения к серверу");
             }
-            catch (SocketException)
+            return true;
+        }
+        private async Task<bool> TryConnect()
+        {
+            int connectCounter = 0;
+            do
             {
+                try{
+                    await TCPclient.ConnectAsync(ServerConfig.HOST, ServerConfig.PORT); //TODO: сделать таймер подключения к серверу (например 10 секунд)
+                }
+                catch (SocketException) { }
+
+                connectCounter++;
+                if (connectCounter == 3)
+                    return false;
             }
+            while (TCPclient.Connected != true);
+            return true;
         }
 
         private async Task<string> GetResponseAsync()
@@ -78,8 +100,8 @@ namespace WpfApp1.Server.ServerMeta
             byte[] getData = new byte[2048];
             await Task.Run(() =>
             {
-                if(TCPclient.Connected == false || TCPclient == null)
-                    throw new SocketException();
+                if (!TCPclient.Connected || TCPclient == null)
+                    throw new ConnectionException("Ошибка подключения к серверу");
 
                 var serverStream = TCPclient?.GetStream();
                 if (serverStream.CanRead)

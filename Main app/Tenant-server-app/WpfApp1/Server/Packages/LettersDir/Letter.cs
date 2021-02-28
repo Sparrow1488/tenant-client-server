@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WpfApp1.Server.Packages.Letters
 {
@@ -16,9 +12,7 @@ namespace WpfApp1.Server.Packages.Letters
         public DateTime DateCreate = DateTime.Now;
         public Letter(string title, string description, string senderLogin)
         {
-            if (string.IsNullOrWhiteSpace(description) || senderLogin == null)
-                throw new ArgumentNullException("Вы не можете отправить письмо без описания или не авторизовавались");
-            else
+            if(CheckValidation(title, description, senderLogin))
             {
                 Title = title;
                 Description = description;
@@ -28,9 +22,7 @@ namespace WpfApp1.Server.Packages.Letters
         [JsonConstructor]
         public Letter(string title, string description, string senderLogin, string letterType, DateTime dateCreate)
         {
-            if (string.IsNullOrWhiteSpace(description) || senderLogin == null)
-                throw new ArgumentNullException("Вы не можете отправить письмо без описания или не авторизовавались");
-            else
+            if (CheckValidation(title, description, senderLogin))
             {
                 Title = title;
                 Description = description;
@@ -38,6 +30,12 @@ namespace WpfApp1.Server.Packages.Letters
                 LetterType = letterType;
                 DateCreate = dateCreate;
             }
+        }
+        private bool CheckValidation(string title, string desc, string senderLogin)
+        {
+            if (string.IsNullOrWhiteSpace(desc) || senderLogin == null || string.IsNullOrWhiteSpace(title))
+                throw new ArgumentException("Вы не можете отправить пустое письмо");
+            return true;
         }
     }
 }

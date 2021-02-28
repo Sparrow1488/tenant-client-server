@@ -9,7 +9,7 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
     public class AuthorizationModel : Model
     {
         public AuthorizationModel(string blockAction) : base(blockAction) { }
-        private ServerModulEvents serverEvents = new ServerModulEvents();
+        private ServerReportsModule serverEvents = new ServerReportsModule();
         public override byte[] CompleteAction(object reqObj)
         {
             try

@@ -7,7 +7,7 @@ namespace Multi_Server_Test.Server.Models
 {
     public class NewsView : ViewModule
     {
-        ServerModulEvents serverEvents = new ServerModulEvents();
+        ServerReportsModule serverEvents = new ServerReportsModule();
         public NewsView(byte[] responseData, NetworkStream writeStream) : base(responseData, writeStream) { viewName = "NewsView"; }
 
         public override void ExecuteModuleProcessing(string additionalMessage)

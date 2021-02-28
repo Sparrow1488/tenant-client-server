@@ -27,7 +27,8 @@
     <Grid
         x:Name="mainProfilePanel"
         Grid.ColumnSpan="3"
-        MinWidth="510">
+        MinWidth="510"
+        Margin="20,2">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />

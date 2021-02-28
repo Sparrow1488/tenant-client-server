@@ -52,7 +52,7 @@ namespace WpfApp1.Pages.HomePages
                 loginInfo.Text = "Логин: " + login;
                 fullNameInfo.Text = "ФИО: " + $"{lastName} {name} {parentName}";
                 roomNumInfo.Text = "Квартира: " + roomNumber;
-                phoneNumberInfo.Text += "свойства не существует";
+                phoneNumberInfo.Text = "Номер телефона: " + "свойства не существует";
             }
             else
                 throw new UserNotExist("Данные пользователя не могут быть отображены: возможно ошибка авторизации");

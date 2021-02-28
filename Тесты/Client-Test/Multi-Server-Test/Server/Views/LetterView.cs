@@ -7,7 +7,7 @@ namespace Multi_Server_Test.Server.Views
 {
     public class LetterView : ViewModule
     {
-        private ServerModulEvents serverEvents = new ServerModulEvents();
+        private ServerReportsModule serverEvents = new ServerReportsModule();
         public LetterView(byte[] responseData, NetworkStream writeStream) : base(responseData, writeStream) { viewName = "LetterView"; }
 
         public override void ExecuteModuleProcessing(string additionalMessage)

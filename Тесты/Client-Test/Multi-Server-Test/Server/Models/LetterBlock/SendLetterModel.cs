@@ -10,7 +10,7 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
 {
     public class SendLetterModel : Model
     {
-        private ServerModulEvents serverEvents = new ServerModulEvents();
+        private ServerReportsModule serverEvents = new ServerReportsModule();
         public SendLetterModel(string modelAction) : base(modelAction) { }
         public override byte[] CompleteAction(object reqObject)
         {

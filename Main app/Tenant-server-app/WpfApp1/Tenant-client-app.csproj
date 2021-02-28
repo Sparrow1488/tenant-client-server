@@ -100,6 +100,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Server\Packages\PersonalDir\UserToken.cs" />
     <Compile Include="Server\ServerExceptions\ConnectionException.cs" />
     <Compile Include="Server\ServerExceptions\GetResponseException.cs" />
     <Compile Include="Server\ServerExceptions\JumboServerException.cs" />

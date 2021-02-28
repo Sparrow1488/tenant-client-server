@@ -18,7 +18,7 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
+        <!--<StackPanel Grid.Column="0">
             <Button
                 x:Name="addPanelBtn"
                 Width="Auto"
@@ -26,12 +26,12 @@
                 Click="AddPanelBtn_Click"
                 Content="ADD"
                 FontSize="30" />
-        </StackPanel>
+        </StackPanel>-->
 
         <ScrollViewer Grid.Column="1">
             <StackPanel
                 x:Name="contentPanel"
-                Width="600"
+                Width="800"
                 Height="Auto"
                 Margin="15"
                 CanVerticallyScroll="True" />

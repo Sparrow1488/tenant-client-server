@@ -23,17 +23,21 @@ namespace Chairman_Client.Pages
         {
             if (lettersWasLoaded == false)
             {
-                var getLetters = await serverFunctions.GetLetters();
-                if (getLetters == null)
-                    MessageBox.Show("Список писем пуст");
-                else
+                LoadLetters();
+            }
+        }
+        private async void LoadLetters()
+        {
+            var getLetters = await serverFunctions.GetLetters();
+            if (getLetters == null)
+                MessageBox.Show("Список писем пуст");
+            else
+            {
+                lettersWasLoaded = true;
+                foreach (var letter in getLetters)
                 {
-                    lettersWasLoaded = true;
-                    foreach (var letter in getLetters)
-                    {
-                        var panel = new CreatorLetterPanel(letter, letterReaderFrame).CreateSmallMenuPanel();
-                        leftLettersList.Children.Add(panel);
-                    }
+                    var panel = new CreatorLetterPanel(letter, letterReaderFrame).CreateSmallMenuPanel();
+                    leftLettersList.Children.Add(panel);
                 }
             }
         }
@@ -48,6 +52,12 @@ namespace Chairman_Client.Pages
             var testLetter = new ComplaintLetter("Проблемка образовалась", "Хочу помощи Хочу помощи Хочу помощи Хочу помощи", tenant);
             var newPanel = new CreatorLetterPanel(testLetter, letterReaderFrame).CreateSmallMenuPanel();
             leftLettersList.Children.Add(newPanel);
+        }
+
+        private void ReloadBtn_Click(object sender, RoutedEventArgs e)
+        {
+            leftLettersList.Children.Clear();
+            LoadLetters();
         }
     }
 }

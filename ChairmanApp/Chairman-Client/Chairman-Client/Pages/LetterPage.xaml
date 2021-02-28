@@ -26,6 +26,7 @@
                 Margin="10"
                 Orientation="Vertical">
                 <Button Click="addNewTestLetter_Click" Content="ADD" />
+                <Button Click="ReloadBtn_Click" Content="RELOAD" />
                 <StackPanel
                     MaxWidth="250"
                     Background="AliceBlue"

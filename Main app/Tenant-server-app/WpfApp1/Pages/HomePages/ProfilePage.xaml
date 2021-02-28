@@ -19,62 +19,74 @@
             <ColumnDefinition Width="40" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel
+
+        <Grid
             x:Name="mainProfilePanel"
             Grid.Column="1"
             MinWidth="510">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <WrapPanel
+                x:Name="profileImagePanel"
+                Grid.Column="0"
+                Margin="2,2,10,2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Image Width="200" Source="/refs/icons/userIcon.png" />
+            </WrapPanel>
             <StackPanel
-                x:Name="profileInfoPanel"
-                Height="Auto"
+                Grid.Column="1"
+                Width="Auto"
                 Margin="20"
-                Background="#D9ABE1">
-                <StackPanel
-                    Width="Auto"
-                    Margin="20"
-                    Orientation="Horizontal">
-
-                    <StackPanel
-                        x:Name="profileImagePanel"
-                        Margin="2,2,10,2"
-                        VerticalAlignment="Center">
-                        <Image Width="150" Source="/refs/icons/userIcon.png" />
-                    </StackPanel>
-
-                    <StackPanel x:Name="userInfo" Margin="10">
+                Orientation="Horizontal">
+                <StackPanel x:Name="userInfo" Margin="10">
+                    <TextBlock
+                        x:Name="loginInfo"
+                        Margin="2"
+                        FontSize="28"
+                        Foreground="#C70039"
+                        Text="Логин: " />
+                    <TextBlock
+                        x:Name="fullNameInfo"
+                        Margin="2"
+                        FontSize="28"
+                        Text="ФИО: "
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        x:Name="roomNumInfo"
+                        Margin="2"
+                        FontSize="28"
+                        Text="Квартира: "
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        x:Name="phoneNumberInfo"
+                        Margin="2"
+                        FontSize="28"
+                        Text="Номер телефона: "
+                        TextWrapping="Wrap" />
+                    <Button Background="Transparent" Foreground="Black">
                         <TextBlock
-                            x:Name="loginInfo"
-                            Margin="2"
-                            FontSize="28"
-                            Foreground="#C70039"
-                            Text="Логин: " />
-                        <TextBlock
-                            x:Name="fullNameInfo"
-                            Margin="2"
-                            FontSize="28"
-                            Text="ФИО: "
-                            TextWrapping="Wrap" />
-                        <TextBlock
-                            x:Name="roomNumInfo"
-                            Margin="2"
-                            FontSize="28"
-                            Text="Квартира: "
-                            TextWrapping="Wrap" />
-                        <TextBlock
-                            x:Name="phoneNumberInfo"
-                            Margin="2"
-                            FontSize="28"
-                            Text="Номер телефона: "
-                            TextWrapping="Wrap" />
-                        <Button Background="Transparent" Foreground="Black">
-                            <TextBlock
-                                Margin="5"
-                                FontSize="24"
-                                Text="Редактировать профиль" />
-                        </Button>
-                    </StackPanel>
-
+                            Margin="5"
+                            FontSize="24"
+                            Text="Редактировать профиль" />
+                    </Button>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
+            <WrapPanel Grid.Row="1" Grid.Column="0">
+                <StackPanel>
+                    <Button Content="Отправленные письма" FontSize="24" />
+                    <Button Content="Избранное" FontSize="24" />
+                </StackPanel>
+            </WrapPanel>
+        </Grid>
+
     </Grid>
 </Page>

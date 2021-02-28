@@ -57,6 +57,31 @@ namespace WpfApp1.Pages.HomePages
                 Orientation = Orientation.Vertical,
                 Margin = new Thickness(0, 10, 0, 0)
             };
+            var infoPanel = new StackPanel()
+            {
+                Margin = new Thickness(10, 0, 0, 0)
+            };
+            var typeNews = new TextBlock()
+            {
+                Text = "Type: " + news.Type,
+                FontSize = 18,
+                FontStyle = FontStyles.Italic
+            };
+            var authorNews = new TextBlock()
+            {
+                Text = "Author: " + news.Sender,
+                FontSize = 18,
+                FontStyle = FontStyles.Italic
+            };
+            var dateCreateNews = new TextBlock()
+            {
+                Text = "Date create: " + $"{news.DateTime.Day}/{news.DateTime.Month}/{news.DateTime.Year}",
+                FontSize = 18,
+                FontStyle = FontStyles.Italic
+            };
+            infoPanel.Children.Add(typeNews);
+            infoPanel.Children.Add(authorNews);
+            infoPanel.Children.Add(dateCreateNews);
             var topBorder = new StackPanel()
             {
                 Background = new SolidColorBrush(Colors.Black),
@@ -78,8 +103,9 @@ namespace WpfApp1.Pages.HomePages
                 Margin = new Thickness(5, 0, 5, 5)
             };
 
-            mainPanel.Children.Add(topBorder);
             mainPanel.Children.Add(titleBlock);
+            mainPanel.Children.Add(infoPanel);
+            mainPanel.Children.Add(topBorder);
             mainPanel.Children.Add(descriptionBlock);
 
             //TODO: сделать показ картинок

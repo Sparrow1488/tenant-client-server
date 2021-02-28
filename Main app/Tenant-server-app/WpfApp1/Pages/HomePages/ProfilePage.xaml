@@ -11,82 +11,86 @@
     Background="#F4F6F7"
     Loaded="Page_Loaded"
     mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="btnStyle">
+            <Setter Property="ItemsControl.Background" Value="Transparent" />
+            <Setter Property="ItemsControl.Padding" Value="10 2 10 2" />
+            <Setter Property="ItemsControl.BorderThickness" Value="4 0 0 0" />
+            <Setter Property="ItemsControl.Margin" Value="0 2" />
+        </Style>
+        <Style x:Key="textBlockStyle">
+            <Setter Property="ItemsControl.Margin" Value="2" />
+            <Setter Property="ItemsControl.FontSize" Value="24" />
+        </Style>
+    </Page.Resources>
 
-    <Grid>
+    <Grid
+        x:Name="mainProfilePanel"
+        Grid.ColumnSpan="3"
+        MinWidth="510">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="40" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-
-        <Grid
-            x:Name="mainProfilePanel"
+        <WrapPanel
+            x:Name="profileImagePanel"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <Image
+                Width="200"
+                Margin="5"
+                Source="/refs/icons/userIcon2.png" />
+        </WrapPanel>
+        <StackPanel
             Grid.Column="1"
-            MinWidth="510">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <WrapPanel
-                x:Name="profileImagePanel"
-                Grid.Column="0"
-                Margin="2,2,10,2"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-                <Image Width="200" Source="/refs/icons/userIcon.png" />
-            </WrapPanel>
-            <StackPanel
-                Grid.Column="1"
-                Width="Auto"
-                Margin="20"
-                Orientation="Horizontal">
-                <StackPanel x:Name="userInfo" Margin="10">
-                    <TextBlock
-                        x:Name="loginInfo"
-                        Margin="2"
-                        FontSize="28"
-                        Foreground="#C70039"
-                        Text="Логин: " />
-                    <TextBlock
-                        x:Name="fullNameInfo"
-                        Margin="2"
-                        FontSize="28"
-                        Text="ФИО: "
-                        TextWrapping="Wrap" />
-                    <TextBlock
-                        x:Name="roomNumInfo"
-                        Margin="2"
-                        FontSize="28"
-                        Text="Квартира: "
-                        TextWrapping="Wrap" />
-                    <TextBlock
-                        x:Name="phoneNumberInfo"
-                        Margin="2"
-                        FontSize="28"
-                        Text="Номер телефона: "
-                        TextWrapping="Wrap" />
-                    <Button Background="Transparent" Foreground="Black">
-                        <TextBlock
-                            Margin="5"
-                            FontSize="24"
-                            Text="Редактировать профиль" />
-                    </Button>
-                </StackPanel>
+            Grid.ColumnSpan="2"
+            Width="Auto"
+            Orientation="Horizontal">
+            <StackPanel x:Name="userInfo" Margin="10">
+                <TextBlock
+                    x:Name="loginInfo"
+                    Style="{StaticResource textBlockStyle}"
+                    Text="Логин: " />
+                <TextBlock
+                    x:Name="fullNameInfo"
+                    Style="{StaticResource textBlockStyle}"
+                    Text="ФИО: "
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    x:Name="roomNumInfo"
+                    Style="{StaticResource textBlockStyle}"
+                    Text="Квартира: "
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    x:Name="phoneNumberInfo"
+                    Style="{StaticResource textBlockStyle}"
+                    Text="Номер телефона: "
+                    TextWrapping="Wrap" />
+                <Button
+                    Content="Редактировать профиль"
+                    FontSize="24"
+                    Foreground="Black"
+                    Style="{StaticResource btnStyle}" />
             </StackPanel>
-            <WrapPanel Grid.Row="1" Grid.Column="0">
-                <StackPanel>
-                    <Button Content="Отправленные письма" FontSize="24" />
-                    <Button Content="Избранное" FontSize="24" />
-                </StackPanel>
-            </WrapPanel>
-        </Grid>
-
+        </StackPanel>
+        <WrapPanel Grid.Row="1" Grid.Column="0">
+            <StackPanel>
+                <Button
+                    Content="Отправленные письма"
+                    FontSize="24"
+                    Style="{StaticResource btnStyle}" />
+                <Button
+                    Content="Избранное"
+                    FontSize="24"
+                    Style="{StaticResource btnStyle}" />
+            </StackPanel>
+        </WrapPanel>
     </Grid>
 </Page>

@@ -13,10 +13,9 @@ namespace WpfApp1.Server
         public string Login { get; }
         public string Password { get; }
         public int Room { get; }
-        public int ID { get; }
 
         [JsonConstructor]
-        public Person(string login, string name, string lastName, string parentName, int room, int id, string password)
+        public Person(string login, string name, string lastName, string parentName, int room, string password)
         {
             var validName = CheckInputValidation(name, lastName, parentName);
             var validAccountInfo = CheckInputValidation(login, password, room);
@@ -28,7 +27,6 @@ namespace WpfApp1.Server
                 LastName = lastName;
                 ParentName = parentName;
                 Room = room;
-                ID = id;
                 Password = password;
             }
             else

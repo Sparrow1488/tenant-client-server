@@ -247,6 +247,7 @@
     <Resource Include="refs\BG-3_1920x1080.jpg" />
     <Resource Include="refs\icons\settingsIcon.png" />
     <Resource Include="refs\images\infoLetterIMG_1.jpg" />
+    <Resource Include="refs\icons\userIcon2.png" />
     <Content Include="refs\TestIMG-1.jfif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

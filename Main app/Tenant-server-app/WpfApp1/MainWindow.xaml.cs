@@ -54,16 +54,12 @@ namespace WpfApp1
                     Close();
                 }
             }
-            catch (JsonReaderException)
-            {
-                application.ShowExceptionMessage("Не верный логин или пароль", errorLabel);
-            }
             catch (IOException)
             {
                 errorText = "Удаленный хост принудительно разорвал существующее подключение";
                 application.ShowExceptionMessage(errorText, errorLabel);
             }
-            catch (ArgumentException ex)
+            catch (UserNotExist ex)
             {
                 application.ShowExceptionMessage(ex.Message, errorLabel);
             }

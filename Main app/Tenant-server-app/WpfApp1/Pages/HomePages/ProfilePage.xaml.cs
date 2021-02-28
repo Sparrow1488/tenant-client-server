@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using WpfApp1.Server;
+using WpfApp1.Server.ServerExceptions;
 using WpfApp1.Server.ServerMeta;
 
 namespace WpfApp1.Pages.HomePages
@@ -27,33 +25,37 @@ namespace WpfApp1.Pages.HomePages
                 try
                 {
                     ShowUserProfileInfo(JumboServer.ActiveServer.ActiveUser);
+                    InfoUserIsLoaded = true;
                 }
-                catch (NullReferenceException)
+                catch (UserNotExist ex)
                 {
                     MessageBox.Show(
-                        "Ошибка авторизации: данный пользователь не может быть отображен",
-                        "Authorization exception", 
+                        ex.Message.ToString(),
+                        "Ошибка авторизации", 
                         MessageBoxButton.OK,
                         MessageBoxImage.Exclamation);
                     Environment.Exit(1);
                 }
-
-                InfoUserIsLoaded = true;
             }
         }
 
         private void ShowUserProfileInfo(Person user)
         {
-            var login = user.Login;
-            var name = user.Name;
-            var lastName = user.LastName;
-            var parentName = user.ParentName;
-            var roomNumber = user.Room;
+            if (user != null)
+            {
+                var login = user.Login;
+                var name = user.Name;
+                var lastName = user.LastName;
+                var parentName = user.ParentName;
+                var roomNumber = user.Room;
 
-            loginInfo.Text += login;
-            fullNameInfo.Text += $"{lastName} {name} {parentName}";
-            roomNumInfo.Text += roomNumber;
-            phoneNumberInfo.Text += "-";
+                loginInfo.Text = "Логин: " + login;
+                fullNameInfo.Text = "ФИО: " + $"{lastName} {name} {parentName}";
+                roomNumInfo.Text = "Квартира: " + roomNumber;
+                phoneNumberInfo.Text += "свойства не существует";
+            }
+            else
+                throw new UserNotExist("Данные пользователя не могут быть отображены: возможно ошибка авторизации");
         }
     }
 }

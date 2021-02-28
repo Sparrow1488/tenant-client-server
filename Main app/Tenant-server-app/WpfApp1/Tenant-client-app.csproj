@@ -101,8 +101,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Server\ServerExceptions\ConnectionException.cs" />
+    <Compile Include="Server\ServerExceptions\GetResponseException.cs" />
     <Compile Include="Server\ServerExceptions\JumboServerException.cs" />
     <Compile Include="Server\ServerExceptions\SendRequestException.cs" />
+    <Compile Include="Server\ServerExceptions\UserNotExist.cs" />
     <Page Include="HomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

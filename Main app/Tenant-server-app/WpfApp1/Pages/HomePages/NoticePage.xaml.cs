@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Collections.Generic;
+using WpfApp1.Server.ServerExceptions;
 
 namespace WpfApp1.Pages.HomePages
 {
@@ -34,12 +35,12 @@ namespace WpfApp1.Pages.HomePages
                     IsLoadNews = true;
                 }
             }
-            catch (NullReferenceException)
+            catch (JumboServerException ex)
             {
-                MessageBox.Show("Возникли проблемы в ходе подключения к серверу", 
-                    "Ошибка подключения",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                MessageBox.Show(ex.Message.ToString(),
+                                "Внутреннее исключение",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
             }
         }
 

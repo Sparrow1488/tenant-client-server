@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using WpfApp1.MyApplication;
 using WpfApp1.Server.Packages.Letters;
 using WpfApp1.Server.Packages.LettersDir;
+using WpfApp1.Server.ServerExceptions;
 using WpfApp1.Server.ServerMeta;
 
 namespace WpfApp1.Pages.HomePages.ChildLetterPage
@@ -47,8 +48,11 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
             }
             catch (ArgumentException ex)
             {
-                result = ex.Message;
-                LetterPage.ShowExceptionMessage(result);
+                LetterPage.ShowExceptionMessage(ex.Message);
+            }
+            catch (JumboServerException ex)
+            {
+                LetterPage.ShowExceptionMessage(ex.Message);
             }
             finally
             {

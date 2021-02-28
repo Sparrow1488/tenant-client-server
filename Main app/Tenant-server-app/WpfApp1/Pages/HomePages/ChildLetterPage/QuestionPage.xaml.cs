@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Server.Packages.Letters;
+using WpfApp1.Server.ServerExceptions;
 using WpfApp1.Server.ServerMeta;
 
 namespace WpfApp1.Pages.HomePages.ChildLetterPage
@@ -52,6 +53,14 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
             {
                 result = "Ошибка сервера: данные отправлены, но не могут быть получены.";
                 LetterPage.ShowExceptionMessage(result);
+            }
+            catch (ArgumentException ex)
+            {
+                LetterPage.ShowExceptionMessage(ex.Message);
+            }
+            catch (JumboServerException ex)
+            {
+                LetterPage.ShowExceptionMessage(ex.Message);
             }
             finally
             {

@@ -1,4 +1,6 @@
-﻿using Multi_Server_Test.Server.Blocks.LetterBlock;
+﻿using Multi_Server_Test.Blocks;
+using Multi_Server_Test.Server.Blocks.LetterBlock;
+using Multi_Server_Test.Server.Models.AuthBlock;
 using Multi_Server_Test.Server.Packages;
 using Multi_Server_Test.ServerData;
 using System;
@@ -95,6 +97,38 @@ namespace Multi_Server_Test.Server.Functions
                 validSender = checkNews.Sender;
             var validNews = new News(validTitle, validDesc, validSource, validSender, validType, validDate);
             return validNews;
+        }
+        public Person GetAndAuthUser(Person person)
+        {
+            string sCommand = $"SELECT * FROM Users WHERE Login=N'{person.Login}' AND Password=N'{person.Password}'";
+            var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var login = reader.GetString(1);
+                        var password = reader.GetString(2);
+                        var name = reader.GetString(3);
+                        var lastName = reader.GetString(4);
+                        var parentName = reader.GetString(5);
+                        var roomNum = Convert.ToInt32(reader.GetValue(6));
+                        return new Person(name, lastName, parentName, login, password, roomNum, null);
+                    }
+                }
+                reader.Close();
+            }
+            return null;
+        }
+        public Person AuthUserByToken(UserToken token)
+        {
+            foreach (var item in MyServer.tokensDictionary)
+            {
+                if (item.Key == token)
+                    return item.Value;
+            }
+            return null;
         }
     }
 }

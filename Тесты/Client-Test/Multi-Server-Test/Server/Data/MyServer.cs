@@ -5,6 +5,7 @@ using Multi_Server_Test.Server.Blocks.Auth;
 using Multi_Server_Test.Server.Blocks.LetterBlock;
 using Multi_Server_Test.Server.Controllers;
 using Multi_Server_Test.Server.Functions;
+using Multi_Server_Test.Server.Models.AuthBlock;
 using Multi_Server_Test.Server.Models.LetterBlock;
 using Multi_Server_Test.Server.Models.NewsBlock;
 using Multi_Server_Test.Server.Packages;
@@ -35,10 +36,10 @@ namespace Multi_Server_Test.ServerData
 
         public static List<News> newsCollectionOutDB = null;
         public static List<Letter> allLetters = null;
+        public static Dictionary<UserToken, Person> tokensDictionary = new Dictionary<UserToken, Person>();
         public MyServer(string host, int port)
         {
-            if (!string.IsNullOrWhiteSpace(host) &&
-                port > 10)
+            if (!string.IsNullOrWhiteSpace(host) && port > 10)
             {
                 HOST = host;
                 PORT = port;
@@ -107,7 +108,10 @@ namespace Multi_Server_Test.ServerData
                     };
 
                     var userModels = new List<Model>()
-                    { new AuthorizationModel("auth") };
+                    { 
+                        new AuthorizationModel("auth"),
+                        new AuthorizationForTokenModel("auth-token")
+                    };
 
                     var newsModels = new List<Model>()
                     { 

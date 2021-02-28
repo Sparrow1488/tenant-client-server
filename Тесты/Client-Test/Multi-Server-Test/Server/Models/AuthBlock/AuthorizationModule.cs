@@ -23,10 +23,11 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
 
                 if (authorizatePerson != null)
                 {
+                    var userToken = UserToken.GenerateToken(authorizatePerson);
+                    authorizatePerson.Token = userToken;
                     var jsonResponsePerson = JsonConvert.SerializeObject(authorizatePerson);
                     byte[] response = Encoding.UTF8.GetBytes(jsonResponsePerson);
                     serverEvents.BlockReport(this, "Успешный вход", ConsoleColor.Green);
-                    var userToken = UserToken.GenerateToken(authorizatePerson);
                     MyServer.tokensDictionary.Add(userToken, authorizatePerson);
                     return response;
                 }

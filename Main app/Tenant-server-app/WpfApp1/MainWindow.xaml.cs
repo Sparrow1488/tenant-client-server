@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using WpfApp1.MyApplication;
 using WpfApp1.Server;
+using WpfApp1.Server.Packages.PersonalDir;
 using WpfApp1.Server.ServerExceptions;
 using WpfApp1.Server.ServerMeta;
 
@@ -29,13 +30,36 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             errorLabel.Visibility = Visibility.Collapsed;
             server = new JumboServer(new ServerConfig());
             application = new ApplicationEvents();
-        }
 
+            if (File.Exists("token-auth.txt"))
+            {
+                bool authResult = false;
+                try
+                {
+                    using (var sr = File.OpenText("token-auth.txt"))
+                    {
+                        string jsonToken = sr.ReadToEnd();
+                        var token = JsonConvert.DeserializeObject<UserToken>(jsonToken);
+                        authResult = await JumboServer.ActiveServer.AuthorizationByTokenAsync(token);
+                    }
+                    if (authResult)
+                        OpenHomeWindow();
+                }
+                catch (Exception) { }
+            }
+            
+        }
+        private void OpenHomeWindow()
+        {
+            HomeWindow home = new HomeWindow();
+            home.Show();
+            Close();
+        }
         private async void AuthBtn_Click(object sender, RoutedEventArgs e)
         {
             string errorText;
@@ -49,9 +73,7 @@ namespace WpfApp1
                 var userIsAuthorizate = await server.AuthorizationAsync(sendPerson, userSaveToken);
                 if (userIsAuthorizate == true)
                 {
-                    HomeWindow home = new HomeWindow();
-                    home.Show();
-                    Close();
+                    OpenHomeWindow();
                 }
             }
             catch (IOException)

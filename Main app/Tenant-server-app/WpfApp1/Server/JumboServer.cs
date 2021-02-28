@@ -36,6 +36,26 @@ namespace WpfApp1.Server.ServerMeta
             catch(JsonReaderException) { }
             if (ActiveUser == null)
                 throw new UserNotExist("Данный пользователь не существует. Возможно, вы ввели не верный логин или пароль");
+            if (saveToken && ActiveUser.Token != null)
+            {
+                using (var sw = File.CreateText("token-auth.txt"))
+                {
+                    var userToken = ActiveUser.Token;
+                    var jsonToken = JsonConvert.SerializeObject(userToken);
+                    sw.WriteLine(jsonToken);
+                }
+            }
+            return true;
+        }
+        public async Task<bool> AuthorizationByTokenAsync(UserToken token)
+        {
+            var authPack = new AuthorizationByTokenPackage(token);
+            var jsonResponse = await SendAndGetAsync(authPack);
+
+            try { ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse); }
+            catch (JsonReaderException) { }
+            if (ActiveUser == null)
+                throw new UserNotExist("Данный пользователь не существует. Возможно, отправленный Вами токен не действителен");
             return true;
         }
         public async Task<List<News>> ReceiveNewsCollectionAsync()

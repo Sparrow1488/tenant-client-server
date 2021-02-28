@@ -1,18 +1,20 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace WpfApp1.Server.Packages.PersonalDir
 {
-    public class UserToken
+    public class UserToken : RequestObject
     {
-        public UserToken ActiveToken = null;
-        private string SynchronizationPassword { get; }
-        private string EncodedLogin { get; }
-        public UserToken(string jsonToken)
+        //public UserToken ActiveToken = null;
+        public string SynchronizationPassword { get; }
+        public string EncodedLogin { get; }
+        [JsonConstructor]
+        public UserToken(string synchronizationPassword, string encodedLogin)
         {
-            var token = TryDeserializeToken(jsonToken);
-            ActiveToken = token;
+            SynchronizationPassword = synchronizationPassword;
+            EncodedLogin = encodedLogin;
         }
-        private UserToken TryDeserializeToken(string jsonToken)
+        public static UserToken TryDeserializeToken(string jsonToken)
         {
             try
             {

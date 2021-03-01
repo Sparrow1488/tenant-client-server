@@ -9,10 +9,11 @@ namespace Multi_Server_Test.Server.Models.AuthBlock
     {
         public string SynchronizationPassword { get; private set; }
         public string EncodedLogin { get; private set; }
-        public UserToken(string synchPass, string encodLogin)
+        [JsonConstructor]
+        public UserToken(string synchronizationPassword, string encodedLogin)
         {
-            SynchronizationPassword = synchPass;
-            EncodedLogin = encodLogin;
+            SynchronizationPassword = synchronizationPassword;
+            EncodedLogin = encodedLogin;
         }
         public static UserToken GenerateToken()
         {

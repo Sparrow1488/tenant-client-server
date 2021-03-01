@@ -125,7 +125,7 @@ namespace Multi_Server_Test.Server.Functions
         {
             foreach (var item in MyServer.tokensDictionary)
             {
-                if (item.Key == token)
+                if (item.Key.SynchronizationPassword == token.SynchronizationPassword)
                     return item.Value;
             }
             return null;

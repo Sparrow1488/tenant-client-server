@@ -5,54 +5,80 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Chairman_Client"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="MainWindow"
+    Title="Форма авторизации"
     Width="350"
     Height="450"
+    MinWidth="350"
+    MinHeight="450"
+    MaxWidth="350"
+    MaxHeight="450"
     Loaded="Window_Loaded"
     mc:Ignorable="d">
     <Window.Resources>
         <Style x:Key="letterButtons">
             <Setter Property="ItemsControl.BorderBrush" Value="Transparent" />
             <Setter Property="ItemsControl.Background" Value="Transparent" />
+            <Setter Property="ItemsControl.FontFamily" Value="Calibri Light" />
+        </Style>
+        <Style x:Key="textStyle">
+            <Setter Property="ItemsControl.FontFamily" Value="Calibri Light" />
+            <Setter Property="ItemsControl.FontSize" Value="22" />
+        </Style>
+        <Style x:Key="headerGroupBox">
+            <Setter Property="ItemsControl.FontFamily" Value="Calibri Light" />
+            <Setter Property="ItemsControl.FontSize" Value="16" />
         </Style>
     </Window.Resources>
-    <Grid>
+    <Window.Background>
+        <ImageBrush ImageSource="./refs1/poleIMG1_1920x1080.jpg" />
+    </Window.Background>
+
+    <Grid Margin="10" Background="White">
         <StackPanel Margin="10">
-            <TextBlock FontSize="22" TextWrapping="Wrap">
-                Клиент председателя<LineBreak />
-                Войдите в систему</TextBlock>
-            <GroupBox FontSize="20" Header="Логин">
+            <TextBlock
+                Style="{StaticResource textStyle}"
+                Text="Клиент председателя"
+                TextDecorations="Underline"
+                TextWrapping="Wrap" />
+            <TextBlock
+                Style="{StaticResource textStyle}"
+                Text="Войдите в систему"
+                TextWrapping="Wrap" />
+            <GroupBox Header="Логин" Style="{StaticResource headerGroupBox}">
                 <StackPanel Orientation="Vertical">
                     <TextBox
                         x:Name="loginBox"
                         BorderBrush="Transparent"
-                        BorderThickness="0" />
+                        BorderThickness="0"
+                        Style="{StaticResource textStyle}" />
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox FontSize="20" Header="Пароль">
+            <GroupBox Header="Пароль" Style="{StaticResource headerGroupBox}">
                 <StackPanel Orientation="Vertical">
                     <PasswordBox
                         x:Name="passwordBox"
                         BorderBrush="Transparent"
-                        BorderThickness="0" />
+                        BorderThickness="0"
+                        Style="{StaticResource textStyle}" />
                 </StackPanel>
             </GroupBox>
 
             <TextBlock
                 x:Name="exceptionBlock"
                 HorizontalAlignment="Center"
-                FontSize="20"
                 Foreground="Red"
+                Style="{StaticResource textStyle}"
                 Text="Exception block"
                 TextWrapping="Wrap" />
 
             <Button
                 Margin="0,10"
                 Background="Transparent"
-                Click="Button_Click"
-                Content="Войти"
-                FontSize="20" />
+                Click="AuthBtn_Click"
+                FontSize="20">
+                <TextBlock Style="{StaticResource textStyle}" Text="Войти" />
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

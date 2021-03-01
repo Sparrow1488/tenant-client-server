@@ -157,5 +157,8 @@
   <ItemGroup>
     <Resource Include="refs1\poleIMG1_1920x1080.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="refs1\whiteBackground.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

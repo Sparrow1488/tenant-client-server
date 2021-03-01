@@ -21,6 +21,7 @@ namespace WpfApp1.Server.ServerMeta
         private TcpClient TCPclient = null; //TODO: убрать лишнее
         public Person ActiveUser = null;
         private ServerConfig ServerConfig = null;
+        public string tokenFileName = "token-auth";
 
         public JumboServer(ServerConfig config)
         {
@@ -38,7 +39,7 @@ namespace WpfApp1.Server.ServerMeta
                 throw new UserNotExist("Данный пользователь не существует. Возможно, вы ввели не верный логин или пароль");
             if (saveToken && ActiveUser.Token != null)
             {
-                using (var sw = File.CreateText("token-auth.txt"))
+                using (var sw = File.CreateText(tokenFileName + ".txt"))
                 {
                     var userToken = ActiveUser.Token;
                     var jsonToken = JsonConvert.SerializeObject(userToken);
@@ -113,6 +114,23 @@ namespace WpfApp1.Server.ServerMeta
             }
             while (TCPclient.Connected != true);
             return true;
+        }
+        public UserToken DeserializeTokenByFileName(string tokenName)
+        {
+            UserToken token = null;
+            if (File.Exists(tokenName + ".txt")) 
+            {
+                try
+                {
+                    using (var sr = File.OpenText(tokenName + ".txt"))
+                    {
+                        string jsonToken = sr.ReadToEnd();
+                        token = JsonConvert.DeserializeObject<UserToken>(jsonToken);
+                    }
+                }
+                catch (Exception) { }
+            }
+            return token;
         }
 
         private async Task<string> GetResponseAsync()

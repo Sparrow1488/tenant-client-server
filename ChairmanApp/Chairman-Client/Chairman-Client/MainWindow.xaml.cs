@@ -3,6 +3,8 @@ using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls;
 using WpfApp1.Server;
+using WpfApp1.Server.Packages.PersonalDir;
+using WpfApp1.Server.ServerExceptions;
 using WpfApp1.Server.ServerMeta;
 
 namespace Chairman_Client
@@ -17,19 +19,16 @@ namespace Chairman_Client
             InitializeComponent();
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void AuthBtn_Click(object sender, RoutedEventArgs e)
         {
             var sendBtn = (Button)sender;
             sendBtn.IsEnabled = false;
             try
             {
                 var newPerson = new Person(loginBox.Text, passwordBox.Password, 67);
-                bool authSuccess = await JumboServer.ActiveServer.AuthorizationAsync(newPerson, false);
+                bool authSuccess = await JumboServer.ActiveServer.AuthorizationAsync(newPerson, true);
                 if (authSuccess)
-                {
-                    new HomeWindow().Show();
-                    Close();
-                }
+                    OpenHomeWindow();
                 else
                     MessageBox.Show("Ошибка");
             }
@@ -37,16 +36,33 @@ namespace Chairman_Client
             catch (Exception ex) { ShowExceptionBlock(exceptionBlock, ex.Message); }
             finally { sendBtn.IsEnabled = true; }
         }
+        private void OpenHomeWindow()
+        {
+            new HomeWindow().Show();
+            Close();
+        }
         void ShowExceptionBlock(TextBlock block, string message)
         {
             block.Visibility = Visibility.Visible;
             block.Text = message;
         }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ServerConfig config = new ServerConfig();
-            new JumboServer(config);
+            var server = new JumboServer(config);
             exceptionBlock.Visibility = Visibility.Collapsed;
+
+            UserToken token = null;
+            bool authResult = false;
+            token = server.DeserializeTokenByFileName(server.tokenFileName);
+            try
+            {
+                if (token != null)
+                    authResult = await JumboServer.ActiveServer.AuthorizationByTokenAsync(token);
+                if (authResult)
+                    OpenHomeWindow();
+            }
+            catch (JumboServerException) { }
         }
     }
 }

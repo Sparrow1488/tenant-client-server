@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("refs1/56cdae63c14b6153137135d0.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("refs1/icons/free-icon-megaphone-4265763.png")]
 
 

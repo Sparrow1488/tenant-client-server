@@ -10,6 +10,16 @@
     Height="450"
     Loaded="Window_Loaded"
     mc:Ignorable="d">
+    <Window.Resources>
+        <Style x:Key="menuTextStyle">
+            <Setter Property="ItemsControl.FontFamily" Value="Calibri Light" />
+            <Setter Property="ItemsControl.FontSize" Value="24" />
+        </Style>
+        <Style x:Key="menuIconsStyler">
+            <Setter Property="ItemsControl.Width" Value="30" />
+            <Setter Property="ItemsControl.Margin" Value="0 0 5 0" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -22,8 +32,9 @@
                 Background="White"
                 BorderBrush="Transparent"
                 Click="SelectLetterPageBtn_Click">
-                <StackPanel>
-                    <TextBlock FontSize="24" Text="Письма" />
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/refs1/icons/letterIcons.png" Style="{StaticResource menuIconsStyler}" />
+                    <TextBlock Style="{StaticResource menuTextStyle}" Text="Письма" />
                 </StackPanel>
             </Button>
 
@@ -32,8 +43,9 @@
                 Background="White"
                 BorderBrush="Transparent"
                 Click="NewsPageOpenBtn_Click">
-                <StackPanel>
-                    <TextBlock FontSize="24" Text="Объявления" />
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="refs1/icons/newsIcon.png" Style="{StaticResource menuIconsStyler}" />
+                    <TextBlock Style="{StaticResource menuTextStyle}" Text="Объявления" />
                 </StackPanel>
             </Button>
         </StackPanel>

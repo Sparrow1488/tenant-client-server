@@ -44,6 +44,7 @@
                 Style="{StaticResource textStyle}"
                 Text="Войдите в систему"
                 TextWrapping="Wrap" />
+
             <GroupBox Header="Логин" Style="{StaticResource headerGroupBox}">
                 <StackPanel Orientation="Vertical">
                     <TextBox
@@ -80,5 +81,6 @@
                 <TextBlock Style="{StaticResource textStyle}" Text="Войти" />
             </Button>
         </StackPanel>
+
     </Grid>
 </Window>

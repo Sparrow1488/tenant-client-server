@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -36,23 +37,12 @@ namespace WpfApp1
             server = new JumboServer(new ServerConfig());
             application = new ApplicationEvents();
 
-            if (File.Exists("token-auth.txt"))
-            {
-                bool authResult = false;
-                try
-                {
-                    using (var sr = File.OpenText("token-auth.txt"))
-                    {
-                        string jsonToken = sr.ReadToEnd();
-                        var token = JsonConvert.DeserializeObject<UserToken>(jsonToken);
-                        authResult = await JumboServer.ActiveServer.AuthorizationByTokenAsync(token);
-                    }
-                    if (authResult)
-                        OpenHomeWindow();
-                }
-                catch (Exception) { }
-            }
-            
+            var token = server.DeserializeTokenByFileName("token-auth");
+            bool authResult = false;
+            if (token != null)
+                authResult = await server.AuthorizationByTokenAsync(token);
+            if (authResult)
+                OpenHomeWindow();
         }
         private void OpenHomeWindow()
         {

@@ -38,36 +38,40 @@ namespace Chairman_Client.Pages
         }
         private StackPanel CreateNewsPanel(News news)
         {
-            var mainPanel = new StackPanel() { Margin = new Thickness(0, 10, 0, 0)};
+            var mainPanel = new StackPanel() { Margin = new Thickness(0, 10, 0, 0) };
             var titleBlock = new TextBlock()
             {
-                FontSize = 22, 
+                FontSize = 30, 
                 FontWeight = FontWeights.DemiBold,
                 TextWrapping = TextWrapping.Wrap,
-                Text = news.Title
+                Text = news.Title,
+                FontFamily = new FontFamily("Calibri"),
             };
 
             var infoNewsPanel = new StackPanel();
             var authorBlock = new TextBlock()
             {
-                FontSize = 16,
+                FontSize = 22,
                 FontStyle = FontStyles.Italic,
-                Text = "Author: " + news.Sender
+                Text = "Author: " + news.Sender,
+                FontFamily = new FontFamily("Calibri")
             };
             var typeBlock = new TextBlock()
             {
-                FontSize = 16,
+                FontSize = 22,
                 FontStyle = FontStyles.Italic,
-                Text = "Type: " + news.Type
+                Text = "Type: " + news.Type,
+                FontFamily = new FontFamily("Calibri")
             };
             infoNewsPanel.Children.Add(authorBlock);
             infoNewsPanel.Children.Add(typeBlock);
 
             var descBlock = new TextBlock()
             {
-                FontSize = 18,
+                FontSize = 28,
                 TextWrapping = TextWrapping.Wrap,
-                Text = news.Description
+                Text = news.Description,
+                FontFamily = new FontFamily("Calibri Light")
             };
             mainPanel.Children.Add(titleBlock);
             mainPanel.Children.Add(infoNewsPanel);

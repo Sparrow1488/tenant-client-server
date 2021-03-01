@@ -125,10 +125,42 @@ namespace Multi_Server_Test.Server.Functions
         {
             foreach (var item in MyServer.tokensDictionary)
             {
-                if (item.Key.SynchronizationPassword == token.SynchronizationPassword)
+                if (UserTokenIsExist(token) &&
+                    item.Key.SynchronizationPassword == token.SynchronizationPassword &&
+                    item.Key.EncodedLogin == token.EncodedLogin)
                     return item.Value;
             }
             return null;
+        }
+        public UserToken GetUserTokenOrDefault(Person user)
+        {
+            foreach (var item in MyServer.tokensDictionary)
+            {
+                if (item.Value.Login == user.Login &&
+                    item.Value.Password == user.Password)
+                    return item.Key;
+            }
+            return null;
+        }
+        public bool UserTokenIsExist(Person user)
+        {
+            foreach (var item in MyServer.tokensDictionary)
+            {
+                if (item.Value.Login == user.Login &&
+                    item.Value.Password == user.Password)
+                    return true;
+            }
+            return false;
+        }
+        public bool UserTokenIsExist(UserToken token)
+        {
+            foreach (var item in MyServer.tokensDictionary)
+            {
+                if (item.Key.SynchronizationPassword == token.SynchronizationPassword &&
+                    item.Key.EncodedLogin == token.EncodedLogin)
+                    return true;
+            }
+            return false;
         }
     }
 }

@@ -98,7 +98,7 @@ namespace Multi_Server_Test.Server.Functions
             var validNews = new News(validTitle, validDesc, validSource, validSender, validType, validDate);
             return validNews;
         }
-        public Person GetAndAuthUser(Person person)
+        public Person GetUserOrDefault(Person person)
         {
             string sCommand = $"SELECT * FROM Users WHERE Login=N'{person.Login}' AND Password=N'{person.Password}'";
             var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
@@ -121,7 +121,7 @@ namespace Multi_Server_Test.Server.Functions
             }
             return null;
         }
-        public Person AuthUserByToken(UserToken token)
+        public Person GetUserByTokenOrDefault(UserToken token)
         {
             foreach (var item in MyServer.tokensDictionary)
             {

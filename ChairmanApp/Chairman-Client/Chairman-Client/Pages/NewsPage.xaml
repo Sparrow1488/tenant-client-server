@@ -11,48 +11,52 @@
     Background="White"
     Loaded="Page_Loaded"
     mc:Ignorable="d">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <WrapPanel>
-            <Button
-                Click="AddNewsBtn_Click"
-                Content="Новая публикация"
-                FontSize="20" />
-        </WrapPanel>
+            <WrapPanel>
+                <Button
+                    Click="AddNewsBtn_Click"
+                    Content="Новая публикация"
+                    FontSize="20" />
+            </WrapPanel>
+            <StackPanel
+                Name="newsMainPanel"
+                Grid.Row="1"
+                MaxWidth="500"
+                HorizontalAlignment="Center">
 
-        <StackPanel
-            Name="newsMainPanel"
-            Grid.Row="1"
-            MaxWidth="500"
-            HorizontalAlignment="Center">
-            <StackPanel>
-                <TextBlock
-                    FontSize="26"
-                    FontWeight="DemiBold"
-                    Text="Заголовок"
-                    TextWrapping="Wrap" />
-                <StackPanel Margin="10,0">
+                <StackPanel>
                     <TextBlock
-                        FontSize="16"
-                        FontStyle="Italic"
-                        Text="Author: name" />
+                        FontSize="26"
+                        FontWeight="DemiBold"
+                        Text="Заголовок"
+                        TextWrapping="Wrap" />
+                    <StackPanel Margin="10,0">
+                        <TextBlock
+                            FontSize="16"
+                            FontStyle="Italic"
+                            Text="Author: name" />
+                        <TextBlock
+                            FontSize="16"
+                            FontStyle="Italic"
+                            Text="Type: type" />
+                    </StackPanel>
+
                     <TextBlock
-                        FontSize="16"
-                        FontStyle="Italic"
-                        Text="Type: type" />
+                        Margin="0,10"
+                        FontSize="20"
+                        Text="Мега длинный длинный длинный длинный текст"
+                        TextWrapping="Wrap" />
                 </StackPanel>
-
-                <TextBlock
-                    Margin="0,10"
-                    FontSize="20"
-                    Text="Мега длинный длинный длинный длинный текст"
-                    TextWrapping="Wrap" />
             </StackPanel>
-        </StackPanel>
-    </Grid>
+
+        </Grid>
+    </ScrollViewer>
+
 </Page>

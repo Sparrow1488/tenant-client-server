@@ -19,11 +19,12 @@ namespace Chairman_Client.Pages
             InitializeComponent();
         }
 
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             if (lettersWasLoaded == false)
             {
                 LoadLetters();
+                lettersWasLoaded = true;
             }
         }
         private async void LoadLetters()

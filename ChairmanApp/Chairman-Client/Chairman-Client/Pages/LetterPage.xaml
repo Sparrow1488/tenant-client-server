@@ -12,7 +12,6 @@
     Loaded="Page_Loaded"
     mc:Ignorable="d">
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />

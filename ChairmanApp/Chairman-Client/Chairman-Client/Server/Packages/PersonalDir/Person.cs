@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using WpfApp1.Server.Packages;
+using WpfApp1.Server.Packages.PersonalDir;
 
 namespace WpfApp1.Server
 {
@@ -13,10 +14,10 @@ namespace WpfApp1.Server
         public string Login { get; }
         public string Password { get; }
         public int Room { get; }
-        public int ID { get; }
+        public UserToken Token { get; set; }
 
         [JsonConstructor]
-        public Person(string login, string name, string lastName, string parentName, int room, int id, string password)
+        public Person(string login, string name, string lastName, string parentName, int room, string password, UserToken token)
         {
             var validName = CheckInputValidation(name, lastName, parentName);
             var validAccountInfo = CheckInputValidation(login, password, room);
@@ -28,8 +29,8 @@ namespace WpfApp1.Server
                 LastName = lastName;
                 ParentName = parentName;
                 Room = room;
-                ID = id;
                 Password = password;
+                Token = token;
             }
             else
             {

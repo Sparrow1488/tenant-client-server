@@ -16,7 +16,7 @@ namespace Multi_Server_Test.Server.Models.AuthBlock
         {
             var convertJsonToken = JsonConvert.SerializeObject(reqObject);
             var getInputToken = JsonConvert.DeserializeObject<UserToken>(convertJsonToken);
-            var authUser = serverFunctions.AuthUserByToken(getInputToken);
+            var authUser = serverFunctions.GetUserByTokenOrDefault(getInputToken);
 
             if(authUser != null)
             {

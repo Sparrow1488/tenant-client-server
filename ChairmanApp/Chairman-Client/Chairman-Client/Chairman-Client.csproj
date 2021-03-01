@@ -88,9 +88,16 @@
     <Compile Include="Server\Packages\NewsDir\NewsCollection.cs" />
     <Compile Include="Server\Packages\NewsDir\RecieveNewsPackage.cs" />
     <Compile Include="Server\Packages\Package.cs" />
+    <Compile Include="Server\Packages\PersonalDir\AuthorizationByTokenPackage.cs" />
     <Compile Include="Server\Packages\PersonalDir\AuthorizationPackage.cs" />
     <Compile Include="Server\Packages\PersonalDir\Person.cs" />
+    <Compile Include="Server\Packages\PersonalDir\UserToken.cs" />
     <Compile Include="Server\Packages\RequestObject.cs" />
+    <Compile Include="Server\ServerExceptions\ConnectionException.cs" />
+    <Compile Include="Server\ServerExceptions\GetResponseException.cs" />
+    <Compile Include="Server\ServerExceptions\JumboServerException.cs" />
+    <Compile Include="Server\ServerExceptions\SendRequestException.cs" />
+    <Compile Include="Server\ServerExceptions\UserNotExist.cs" />
     <Page Include="HomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

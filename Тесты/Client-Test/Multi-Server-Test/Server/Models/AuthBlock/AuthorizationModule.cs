@@ -19,7 +19,7 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
             {
                 var convertJsonPerson = JsonConvert.SerializeObject(reqObj);
                 var getInputPersonData = JsonConvert.DeserializeObject<Person>(convertJsonPerson);
-                var authorizatePerson = serverFunctions.GetAndAuthUser(getInputPersonData);
+                var authorizatePerson = serverFunctions.GetUserOrDefault(getInputPersonData);
 
                 if (authorizatePerson != null)
                 {

@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using WpfApp1.Server.Packages.Letters;
 using WpfApp1.Server.Packages.LettersDir;
 using WpfApp1.Server.Packages.NewsDir;
 using WpfApp1.Server.Packages.PersonalDir;
+using WpfApp1.Server.ServerExceptions;
 
 namespace WpfApp1.Server.ServerMeta
 {
@@ -29,9 +31,31 @@ namespace WpfApp1.Server.ServerMeta
         {
             var authPack = new AuthorizationPackage(dataPerson);
             var jsonResponse = await SendAndGetAsync(authPack);
-            ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse);
+
+            try { ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse); }
+            catch(JsonReaderException) { }
             if (ActiveUser == null)
-                throw new NullReferenceException("Данный пользователь не существует");
+                throw new UserNotExist("Данный пользователь не существует. Возможно, вы ввели не верный логин или пароль");
+            if (saveToken && ActiveUser.Token != null)
+            {
+                using (var sw = File.CreateText("token-auth.txt"))
+                {
+                    var userToken = ActiveUser.Token;
+                    var jsonToken = JsonConvert.SerializeObject(userToken);
+                    sw.WriteLine(jsonToken);
+                }
+            }
+            return true;
+        }
+        public async Task<bool> AuthorizationByTokenAsync(UserToken token)
+        {
+            var authPack = new AuthorizationByTokenPackage(token);
+            var jsonResponse = await SendAndGetAsync(authPack);
+
+            try { ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse); }
+            catch (JsonReaderException) { }
+            if (ActiveUser == null)
+                throw new UserNotExist("Данный пользователь не существует. Возможно, отправленный Вами токен не действителен");
             return true;
         }
         public async Task<List<News>> ReceiveNewsCollectionAsync()
@@ -47,54 +71,84 @@ namespace WpfApp1.Server.ServerMeta
 
         public async Task<string> SendAndGetAsync(Package package)
         {
-            await SendRequestAsync(package);
-            var jsonResponse = await GetResponseAsync();
-            TCPclient.Close();
+            string jsonResponse = null;
+            var canSendRequest = await TrySendRequestAsync(package);
+            if (canSendRequest)
+            {
+                jsonResponse = await GetResponseAsync();
+                TCPclient.Close();
+            }
             return jsonResponse;
         }
 
-        private async Task SendRequestAsync(Package package)
+        private async Task<bool> TrySendRequestAsync(Package package)
         {
-            try
+            TCPclient = new TcpClient();
+            if (!TCPclient.Connected)
             {
                 TCPclient = new TcpClient();
-                await TCPclient.ConnectAsync(ServerConfig.HOST, ServerConfig.PORT); //TODO: сделать таймер подключения к серверу (например 10 секунд)
-                if (TCPclient.Connected == false)
-                    throw new SocketException(/*"Ошибка подключения к серверу"*/);
-                NetworkStream stream = TCPclient.GetStream();
-
-                string jsonPackage = JsonConvert.SerializeObject(package); /*new Package<RequestObject>(sendObject, meta);*/
-                byte[] data = Encoding.UTF8.GetBytes(jsonPackage);
-                await stream.WriteAsync(data, 0, data.Length);
+                var isConnect = await TryConnect();
+                if (isConnect)
+                {
+                    NetworkStream stream = TCPclient.GetStream();
+                    string jsonPackage = JsonConvert.SerializeObject(package);
+                    byte[] data = Encoding.UTF8.GetBytes(jsonPackage);
+                    await stream.WriteAsync(data, 0, data.Length);
+                }
+                else throw new ConnectionException("Ошибка подключения к серверу");
             }
-            catch (SocketException)
+            return true;
+        }
+        private async Task<bool> TryConnect()
+        {
+            int connectCounter = 0;
+            do
             {
+                try{ await TCPclient.ConnectAsync(ServerConfig.HOST, ServerConfig.PORT); }
+                catch (SocketException) { }
+
+                connectCounter++;
+                if (connectCounter == 3)
+                    return false;
             }
+            while (TCPclient.Connected != true);
+            return true;
         }
 
         private async Task<string> GetResponseAsync()
         {
             StringBuilder response = new StringBuilder();
             byte[] getData = new byte[2048];
-            await Task.Run(() =>
+            bool breakConnection = false;
+            try
             {
-                if(TCPclient.Connected == false || TCPclient == null)
-                    throw new SocketException();
-
-                var serverStream = TCPclient?.GetStream();
-                if (serverStream.CanRead)
+                await Task.Run(() =>
                 {
-                    do
-                    {
-                        int bytesSize = serverStream.Read(getData, 0, getData.Length);
-                        response.Append(Encoding.UTF8.GetString(getData, 0, bytesSize));
-                    }
-                    while (serverStream.DataAvailable);
-                }
-                serverStream.Close();
-                TCPclient.Close();
-            });
+                    if (!TCPclient.Connected || TCPclient == null)
+                        throw new ConnectionException("Ошибка подключения к серверу");
+
+                    var serverStream = TCPclient.GetStream();
+                    ReadStreamData(serverStream, ref getData, ref response);
+                    serverStream.Close();
+                    TCPclient.Close();
+                });
+            }
+            catch (IOException) { breakConnection = true; }
+            if (breakConnection)
+                throw new GetResponseException("Удаленный хост принудительно разорвал существующее подключение");
             return response.ToString();
+        }
+        private void ReadStreamData(NetworkStream readStream, ref byte[] buffer, ref StringBuilder builder)
+        {
+            if (readStream.CanRead)
+            {
+                do
+                {
+                    int bytesSize = readStream.Read(buffer, 0, buffer.Length);
+                    builder.Append(Encoding.UTF8.GetString(buffer, 0, bytesSize));
+                }
+                while (readStream.DataAvailable);
+            }
         }
 
         public async Task<string> SendLetter(Letter letter)

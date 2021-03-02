@@ -18,6 +18,7 @@
             <Setter Property="ItemsControl.BorderBrush" Value="Transparent" />
             <Setter Property="ItemsControl.Padding" Value="5" />
             <Setter Property="ItemsControl.FontSize" Value="25" />
+            <Setter Property="ItemsControl.FontFamily" Value="Fonts/OpenSans-Bold.ttf" />
         </Style>
         <Style x:Key="iconLeftMenu">
             <Setter Property="ItemsControl.Width" Value="35" />
@@ -34,9 +35,39 @@
         <StackPanel
             x:Name="menuLeftPanel"
             Grid.Column="0"
-            Background="White"
+            Width="230"
+            HorizontalAlignment="Left"
             Orientation="Vertical">
-
+            <StackPanel.Style>
+                <Style TargetType="{x:Type StackPanel}">
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="Width"
+                                            To="50"
+                                            Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="Width"
+                                            To="230"
+                                            Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Style>
             <Button
                 HorizontalContentAlignment="Left"
                 Click="ProfileBtn_Click"
@@ -47,11 +78,13 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <Image
-                        Grid.Column="0"
-                        Source="refs\icons\profileIcon.png"
-                        Style="{StaticResource iconLeftMenu}" />
-                    <TextBlock Grid.Column="1" Text="Профиль" />
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Grid.Column="0"
+                            Source="refs\icons\profileIcon.png"
+                            Style="{StaticResource iconLeftMenu}" />
+                        <TextBlock Grid.Column="1" Text="Профиль" />
+                    </StackPanel>
                 </Grid>
             </Button>
 

@@ -37,12 +37,16 @@ namespace WpfApp1
             server = new JumboServer(new ServerConfig());
             application = new ApplicationEvents();
 
-            var token = server.DeserializeTokenByFileName("token-auth");
-            bool authResult = false;
-            if (token != null)
-                authResult = await server.AuthorizationByTokenAsync(token);
-            if (authResult)
-                OpenHomeWindow();
+            try
+            {
+                var token = server.DeserializeTokenByFileName("token-auth");
+                bool authResult = false;
+                if (token != null)
+                    authResult = await server.AuthorizationByTokenAsync(token);
+                if (authResult)
+                    OpenHomeWindow();
+            }
+            catch (JumboServerException) { }
         }
         private void OpenHomeWindow()
         {

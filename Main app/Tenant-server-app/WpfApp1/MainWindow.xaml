@@ -6,15 +6,31 @@
     xmlns:local="clr-namespace:WpfApp1"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Войдите в систему"
-    Width="550"
+    Width="420"
     Height="550"
     Loaded="Window_Loaded"
+    ResizeMode="NoResize"
     mc:Ignorable="d">
     <Window.Background>
         <ImageBrush ImageSource="refs/BG-3_1920x1080.jpg" Stretch="UniformToFill" />
     </Window.Background>
-
+    <Window.Resources>
+        <Style x:Key="defaultTextStyle">
+            <Setter Property="ItemsControl.FontFamily" Value="Calibri Light" />
+        </Style>
+        <Style x:Key="defaultTextBoxStyle">
+            <Setter Property="ItemsControl.BorderThickness" Value="0" />
+        </Style>
+    </Window.Resources>
     <Grid>
+        <Border CornerRadius="20">
+            <!--<Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Offset="0.0" Color="#E735A4" />
+                    <GradientStop Offset="0.7" Color="#AE35E7" />
+                </LinearGradientBrush>
+            </Border.Background>-->
+        </Border>
         <StackPanel
             x:Name="Auth_Panel"
             Width="400"
@@ -28,7 +44,10 @@
                 FontWeight="DemiBold"
                 Text="Форма авторизации" />
             <TabControl>
-                <TabItem FontSize="16" Header="По логину">
+                <TabItem
+                    FontSize="16"
+                    Header="По логину"
+                    Style="{StaticResource defaultTextStyle}">
                     <Grid Margin="20">
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -49,7 +68,8 @@
                                 Name="login_TBox"
                                 BorderBrush="Transparent"
                                 FontSize="22"
-                                PreviewKeyDown="HideErrorLabel_PreviewKeyDown" />
+                                PreviewKeyDown="HideErrorLabel_PreviewKeyDown"
+                                Style="{StaticResource defaultTextBoxStyle}" />
                         </GroupBox>
                         <GroupBox
                             Grid.Row="2"
@@ -59,9 +79,9 @@
                             Header="Пароль">
                             <PasswordBox
                                 Name="password_TBox"
-                                BorderBrush="Transparent"
                                 FontSize="22"
-                                PreviewKeyDown="HideErrorLabel_PreviewKeyDown" />
+                                PreviewKeyDown="HideErrorLabel_PreviewKeyDown"
+                                Style="{StaticResource defaultTextBoxStyle}" />
                         </GroupBox>
                         <TextBlock
                             Grid.Row="3"
@@ -69,6 +89,7 @@
                             MouseLeave="MouseHoverTextBlock_MouseLeave"
                             MouseLeftButtonDown="iDontKnowPasswordOrLogin_MouseLeftButtonDown"
                             MouseMove="MouseHoverTextBlock_MouseMove"
+                            Style="{StaticResource defaultTextStyle}"
                             Text="Забыли логин или пароль?" />
 
                         <CheckBox
@@ -95,6 +116,7 @@
                             HorizontalAlignment="Center"
                             FontSize="18"
                             Foreground="Red"
+                            Style="{StaticResource defaultTextStyle}"
                             Text="Exception text"
                             TextWrapping="Wrap" />
 

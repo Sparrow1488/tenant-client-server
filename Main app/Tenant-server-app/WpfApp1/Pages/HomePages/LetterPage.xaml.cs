@@ -66,5 +66,10 @@ namespace WpfApp1.Pages.HomePages
             frameBox.Content = null;
             frameBox.Content = questionPage;
         }
+
+        private void bottomPanel_MouseEnter(object sender, MouseEventArgs e)
+        {
+            
+        }
     }
 }

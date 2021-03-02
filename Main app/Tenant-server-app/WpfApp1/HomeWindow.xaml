@@ -18,7 +18,7 @@
             <Setter Property="ItemsControl.BorderBrush" Value="Transparent" />
             <Setter Property="ItemsControl.Padding" Value="5" />
             <Setter Property="ItemsControl.FontSize" Value="25" />
-            <Setter Property="ItemsControl.FontFamily" Value="Fonts/OpenSans-Bold.ttf" />
+            <Setter Property="ItemsControl.FontFamily" Value="Calibri Light" />
         </Style>
         <Style x:Key="iconLeftMenu">
             <Setter Property="ItemsControl.Width" Value="35" />
@@ -35,8 +35,10 @@
         <StackPanel
             x:Name="menuLeftPanel"
             Grid.Column="0"
-            Width="230"
+            Width="50"
             HorizontalAlignment="Left"
+            MouseEnter="menuLeftPanel_MouseEnter"
+            MouseLeave="menuLeftPanel_MouseLeave"
             Orientation="Vertical">
             <StackPanel.Style>
                 <Style TargetType="{x:Type StackPanel}">
@@ -68,6 +70,12 @@
                     </Style.Triggers>
                 </Style>
             </StackPanel.Style>
+            <StackPanel Height="80">
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="refs/BG-4_1920x1080.jpg" Stretch="UniformToFill" />
+                </StackPanel.Background>
+            </StackPanel>
+
             <Button
                 HorizontalContentAlignment="Left"
                 Click="ProfileBtn_Click"
@@ -87,7 +95,6 @@
                     </StackPanel>
                 </Grid>
             </Button>
-
 
             <Button
                 HorizontalContentAlignment="Left"

@@ -14,19 +14,16 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50" />
             <ColumnDefinition />
-            <ColumnDefinition Width="50" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
-
         <StackPanel
             Grid.Row="0"
-            Grid.Column="1"
             Margin="20,0,20,0"
             Orientation="Vertical">
             <StackPanel>
@@ -37,7 +34,6 @@
                     Text="Выберите способ связи" />
             </StackPanel>
             <WrapPanel HorizontalAlignment="Center" Orientation="Horizontal">
-
                 <Button
                     Margin="5"
                     Background="Transparent"
@@ -121,7 +117,6 @@
 
         <StackPanel
             Grid.Row="2"
-            Grid.Column="1"
             MaxWidth="500"
             Background="AliceBlue"
             Orientation="Vertical">
@@ -134,5 +129,63 @@
                 TextWrapping="Wrap"
                 Visibility="Collapsed" />
         </StackPanel>
+
+        <DockPanel
+            Grid.Row="3"
+            Height="20"
+            VerticalAlignment="Bottom"
+            Background="#FDA491">
+            <DockPanel.Style>
+                <Style TargetType="{x:Type DockPanel}">
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="Height"
+                                            To="80"
+                                            Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="Height"
+                                            To="20"
+                                            Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DockPanel.Style>
+            <WrapPanel
+                Name="bottomPanel"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                MouseEnter="bottomPanel_MouseEnter">
+                <Button
+                    Margin="10,20"
+                    Padding="10,2"
+                    Content="Мы VK"
+                    FontSize="24" />
+                <Button
+                    Margin="10,20"
+                    Padding="10,2"
+                    Content="Мы на TouTube"
+                    FontSize="24" />
+                <Button
+                    Margin="10,20"
+                    Padding="10,2"
+                    Content="Мы в Tweeter"
+                    FontSize="24" />
+            </WrapPanel>
+        </DockPanel>
     </Grid>
 </Page>

@@ -48,5 +48,15 @@ namespace WpfApp1
         {
             ProfilePageFrame.Content = letterPage;
         }
+
+        private void menuLeftPanel_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ProfilePageFrame.Opacity = 0.4;
+        }
+
+        private void menuLeftPanel_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ProfilePageFrame.Opacity = 1;
+        }
     }
 }

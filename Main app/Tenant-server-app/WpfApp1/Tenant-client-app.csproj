@@ -212,7 +212,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="Fonts\OpenSans-Light.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -228,7 +227,9 @@
   <ItemGroup>
     <Resource Include="refs\BG-2_1360х800.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Fonts\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="cat.ico" />
   </ItemGroup>
@@ -256,6 +257,7 @@
     <Resource Include="refs\icons\settingsIcon.png" />
     <Resource Include="refs\images\infoLetterIMG_1.jpg" />
     <Resource Include="refs\icons\userIcon2.png" />
+    <Resource Include="refs\BG-4_1920x1080.jpg" />
     <Content Include="refs\TestIMG-1.jfif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

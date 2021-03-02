@@ -26,7 +26,37 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <StackPanel x:Name="leftMenuPanel">
+        <StackPanel x:Name="leftMenuPanel" Width="35">
+            <StackPanel.Style>
+                <Style TargetType="{x:Type StackPanel}">
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="Width"
+                                            To="35"
+                                            Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="Width"
+                                            To="165"
+                                            Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Style>
             <Button
                 HorizontalContentAlignment="Left"
                 Background="White"

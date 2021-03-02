@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Server.ServerExceptions;
 using WpfApp1.Server.ServerMeta;
 
 namespace Chairman_Client.Pages
@@ -32,7 +33,7 @@ namespace Chairman_Client.Pages
 
         private async void AddNewsBtn_Click(object sender, RoutedEventArgs e)
         {
-            var test = new News("Тестоый заголовок", "Описание", JumboServer.ActiveServer.ActiveUser.Login);
+            var test = new News("Тестовый заголовок", "Описание", JumboServer.ActiveServer.ActiveUser.Login);
             var response = await functions.AddNews(test);
             MessageBox.Show(response);
         }
@@ -54,6 +55,7 @@ namespace Chairman_Client.Pages
                 FontSize = 22,
                 FontStyle = FontStyles.Italic,
                 Text = "Author: " + news.Sender,
+                TextWrapping = TextWrapping.Wrap,
                 FontFamily = new FontFamily("Calibri")
             };
             var typeBlock = new TextBlock()
@@ -84,14 +86,22 @@ namespace Chairman_Client.Pages
         {
             if(newsIsLoaded == false)
             {
-                var recivedNews = await JumboServer.ActiveServer.ReceiveNewsCollectionAsync();
-                foreach (var news in recivedNews)
+                List<News> recivedNews = null;
+                try
                 {
-                    var newsPanel = CreateNewsPanel(news);
-                    newsMainPanel.Children.Add(newsPanel);
+                    recivedNews = await JumboServer.ActiveServer.ReceiveNewsCollectionAsync();
                 }
-                newsIsLoaded = true;
-                MessageBox.Show("Все новости успешно получены!", "Отчет о загрузке");
+                catch (JumboServerException) { }
+                if (recivedNews != null)
+                {
+                    foreach (var news in recivedNews)
+                    {
+                        var newsPanel = CreateNewsPanel(news);
+                        newsMainPanel.Children.Add(newsPanel);
+                    }
+                    newsIsLoaded = true;
+                    MessageBox.Show("Все новости успешно получены!", "Отчет о загрузке");
+                }
             }
         }
     }

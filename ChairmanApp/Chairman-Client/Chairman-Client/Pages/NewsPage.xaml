@@ -11,6 +11,7 @@
     Background="White"
     Loaded="Page_Loaded"
     mc:Ignorable="d">
+
     <ScrollViewer HorizontalScrollBarVisibility="Auto">
 
         <Grid>
@@ -19,7 +20,7 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <WrapPanel HorizontalAlignment="Center">
+            <WrapPanel Grid.Row="0" HorizontalAlignment="Center">
                 <Button
                     Padding="10,2"
                     Background="Transparent"
@@ -29,10 +30,12 @@
                     Content="Добавить публикацию"
                     FontSize="22" />
             </WrapPanel>
+
             <StackPanel
                 Name="newsMainPanel"
                 Grid.Row="1"
-                MinWidth="500"
+                Width="600"
+                Margin="40,0"
                 HorizontalAlignment="Center">
 
                 <StackPanel>
@@ -63,7 +66,6 @@
                         TextWrapping="Wrap" />
                 </StackPanel>
             </StackPanel>
-
         </Grid>
     </ScrollViewer>
 

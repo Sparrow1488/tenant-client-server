@@ -50,7 +50,6 @@
                         Text="TYPE: вопрос"
                         TextWrapping="Wrap" />
                 </StackPanel>
-
             </StackPanel>
         </ScrollViewer>
 

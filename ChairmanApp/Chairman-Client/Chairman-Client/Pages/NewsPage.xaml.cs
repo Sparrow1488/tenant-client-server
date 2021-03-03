@@ -1,4 +1,5 @@
-﻿using Chairman_Client.Server.Chairman.Functions;
+﻿using Chairman_Client.Pages.NewsPageChildren;
+using Chairman_Client.Server.Chairman.Functions;
 using Multi_Server_Test.Server;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace Chairman_Client.Pages
     {
         private Functions functions = new Functions("secret", JumboServer.ActiveServer);
         private bool newsIsLoaded = false;
+        private Page newsWritePage = new NewsWriterPage();
         public NewsPage()
         {
             InitializeComponent();
@@ -33,54 +35,9 @@ namespace Chairman_Client.Pages
 
         private async void AddNewsBtn_Click(object sender, RoutedEventArgs e)
         {
-            var test = new News("Тестовый заголовок", "Описание", JumboServer.ActiveServer.ActiveUser.Login);
-            var response = await functions.AddNews(test);
-            MessageBox.Show(response);
+            moreActionsFrame.Content = newsWritePage;
         }
-        private StackPanel CreateNewsPanel(News news)
-        {
-            var mainPanel = new StackPanel() { Margin = new Thickness(0, 10, 0, 0) };
-            var titleBlock = new TextBlock()
-            {
-                FontSize = 30, 
-                FontWeight = FontWeights.DemiBold,
-                TextWrapping = TextWrapping.Wrap,
-                Text = news.Title,
-                FontFamily = new FontFamily("Calibri"),
-            };
-
-            var infoNewsPanel = new StackPanel();
-            var authorBlock = new TextBlock()
-            {
-                FontSize = 22,
-                FontStyle = FontStyles.Italic,
-                Text = "Author: " + news.Sender,
-                TextWrapping = TextWrapping.Wrap,
-                FontFamily = new FontFamily("Calibri")
-            };
-            var typeBlock = new TextBlock()
-            {
-                FontSize = 22,
-                FontStyle = FontStyles.Italic,
-                Text = "Type: " + news.Type,
-                FontFamily = new FontFamily("Calibri")
-            };
-            infoNewsPanel.Children.Add(authorBlock);
-            infoNewsPanel.Children.Add(typeBlock);
-
-            var descBlock = new TextBlock()
-            {
-                FontSize = 28,
-                TextWrapping = TextWrapping.Wrap,
-                Text = news.Description,
-                FontFamily = new FontFamily("Calibri Light")
-            };
-            mainPanel.Children.Add(titleBlock);
-            mainPanel.Children.Add(infoNewsPanel);
-            mainPanel.Children.Add(descBlock);
-
-            return mainPanel;
-        }
+        
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -92,13 +49,11 @@ namespace Chairman_Client.Pages
                     recivedNews = await JumboServer.ActiveServer.ReceiveNewsCollectionAsync();
                 }
                 catch (JumboServerException) { }
+
                 if (recivedNews != null)
                 {
-                    foreach (var news in recivedNews)
-                    {
-                        var newsPanel = CreateNewsPanel(news);
-                        newsMainPanel.Children.Add(newsPanel);
-                    }
+                    moreActionsFrame.Content = new NewsCollectionPage(recivedNews);
+                    
                     newsIsLoaded = true;
                     MessageBox.Show("Все новости успешно получены!", "Отчет о загрузке");
                 }

@@ -13,10 +13,10 @@
     <Window.Resources>
         <Style x:Key="menuTextStyle">
             <Setter Property="ItemsControl.FontFamily" Value="Calibri Light" />
-            <Setter Property="ItemsControl.FontSize" Value="24" />
+            <Setter Property="ItemsControl.FontSize" Value="26" />
         </Style>
         <Style x:Key="menuIconsStyler">
-            <Setter Property="ItemsControl.Width" Value="30" />
+            <Setter Property="ItemsControl.Width" Value="40" />
             <Setter Property="ItemsControl.Margin" Value="0 0 5 0" />
         </Style>
     </Window.Resources>
@@ -26,7 +26,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <StackPanel x:Name="leftMenuPanel" Width="35">
+        <StackPanel x:Name="leftMenuPanel" Width="50">
             <StackPanel.Style>
                 <Style TargetType="{x:Type StackPanel}">
                     <Style.Triggers>
@@ -36,7 +36,7 @@
                                     <Storyboard>
                                         <DoubleAnimation
                                             Storyboard.TargetProperty="Width"
-                                            To="35"
+                                            To="50"
                                             Duration="0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -48,7 +48,7 @@
                                     <Storyboard>
                                         <DoubleAnimation
                                             Storyboard.TargetProperty="Width"
-                                            To="165"
+                                            To="190"
                                             Duration="0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>

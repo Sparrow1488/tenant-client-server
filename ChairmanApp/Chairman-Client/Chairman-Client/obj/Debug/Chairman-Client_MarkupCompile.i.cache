@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\App.xaml
-5-1492579903
+71257407250
 
-381915609366
+40-1063835681
 14-659727361
-HomeWindow.xaml;MainWindow.xaml;Pages\LetterPage.xaml;Pages\LetterPageChildren\ReadLettersPage.xaml;Pages\NewsPage.xaml;
+HomeWindow.xaml;MainWindow.xaml;Pages\LetterPage.xaml;Pages\LetterPageChildren\ReadLettersPage.xaml;Pages\NewsPage.xaml;Pages\NewsPageChildren\NewsCollectionPage.xaml;Pages\NewsPageChildren\NewsWriterPage.xaml;
 
-True
+False
 

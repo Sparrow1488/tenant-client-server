@@ -74,6 +74,12 @@
     <Compile Include="Pages\NewsPage.xaml.cs">
       <DependentUpon>NewsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\NewsPageChildren\NewsCollectionPage.xaml.cs">
+      <DependentUpon>NewsCollectionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\NewsPageChildren\NewsWriterPage.xaml.cs">
+      <DependentUpon>NewsWriterPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Server\Configuration\ServerConfig.cs" />
     <Compile Include="Server\JumboServer.cs" />
     <Compile Include="Server\Packages\LettersDir\ComplaintLetter.cs" />
@@ -126,6 +132,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\NewsPageChildren\NewsCollectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\NewsPageChildren\NewsWriterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -165,6 +179,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="refs1\icons\newsIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="refs1\icons\writing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="refs1\icons\sendIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="refs1\icons\blog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="refs1\icons\goBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="refs1\icons\attachFile.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

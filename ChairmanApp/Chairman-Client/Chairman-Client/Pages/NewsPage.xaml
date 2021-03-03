@@ -13,7 +13,6 @@
     mc:Ignorable="d">
 
     <ScrollViewer HorizontalScrollBarVisibility="Auto">
-
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -27,45 +26,20 @@
                     BorderBrush="Orange"
                     BorderThickness="2,0"
                     Click="AddNewsBtn_Click"
-                    Content="Добавить публикацию"
-                    FontSize="22" />
+                    FontSize="22">
+                    <WrapPanel>
+                        <Image Width="30" Source="/refs1/icons/writing.png" />
+                        <TextBlock FontFamily="Calibri Light" Text="Добавить запись" />
+                    </WrapPanel>
+                </Button>
+
             </WrapPanel>
 
-            <StackPanel
-                Name="newsMainPanel"
+            <Frame
+                x:Name="moreActionsFrame"
                 Grid.Row="1"
-                Width="600"
-                Margin="40,0"
-                HorizontalAlignment="Center">
-
-                <StackPanel>
-                    <TextBlock
-                        FontFamily="Calibri"
-                        FontSize="26"
-                        FontWeight="DemiBold"
-                        Text="Заголовок"
-                        TextWrapping="Wrap" />
-                    <StackPanel Margin="10,0">
-                        <TextBlock
-                            FontFamily="Calibri"
-                            FontSize="16"
-                            FontStyle="Italic"
-                            Text="Author: name" />
-                        <TextBlock
-                            FontFamily="Calibri"
-                            FontSize="16"
-                            FontStyle="Italic"
-                            Text="Type: type" />
-                    </StackPanel>
-
-                    <TextBlock
-                        Margin="0,10"
-                        FontFamily="Calibri Light"
-                        FontSize="20"
-                        Text="Мега длинный длинный длинный длинный текст"
-                        TextWrapping="Wrap" />
-                </StackPanel>
-            </StackPanel>
+                Background="Black"
+                NavigationUIVisibility="Hidden" />
         </Grid>
     </ScrollViewer>
 

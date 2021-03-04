@@ -3,6 +3,9 @@ using Multi_Server_Test.ServerData.Blocks;
 using Newtonsoft.Json;
 using System;
 using System.Text;
+using System.Linq;
+using Multi_Server_Test.Server.Packages;
+using System.Collections.Generic;
 
 namespace Multi_Server_Test.Server.Blocks.Auth
 {
@@ -13,11 +16,18 @@ namespace Multi_Server_Test.Server.Blocks.Auth
 
         public override byte[] CompleteAction(object reqObject)
         {
-            var newsCollectionToResponse = MyServer.newsCollectionOutDB;
+            List<News> responseNewsCollection = new List<News>();
+            var newsCollectionToResponse = from news in MyServer.newsCollectionOutDB 
+                                           orderby news.DateTime descending
+                                           select news;
+            foreach (var news in newsCollectionToResponse)
+            {
+                responseNewsCollection.Add(news);
+            }
             byte[] response;
             try
             {
-                var jsonNewsCollection = JsonConvert.SerializeObject(newsCollectionToResponse);
+                var jsonNewsCollection = JsonConvert.SerializeObject(responseNewsCollection);
                 response = Encoding.UTF8.GetBytes(jsonNewsCollection);
                 return response;
             }

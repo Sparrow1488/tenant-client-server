@@ -6,8 +6,8 @@
     xmlns:local="clr-namespace:WpfApp1"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Войдите в систему"
-    Width="420"
-    Height="550"
+    Width="440"
+    Height="500"
     Loaded="Window_Loaded"
     ResizeMode="NoResize"
     mc:Ignorable="d">
@@ -23,7 +23,7 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Border CornerRadius="20">
+        <Border CornerRadius="1">
             <!--<Border.Background>
                 <LinearGradientBrush>
                     <GradientStop Offset="0.0" Color="#E735A4" />
@@ -97,7 +97,8 @@
                             Grid.Row="4"
                             Margin="0,5,0,0"
                             VerticalAlignment="Center"
-                            FontSize="16">
+                            FontSize="16"
+                            IsChecked="True">
                             <TextBlock VerticalAlignment="Center" Text="Запомнить выбор" />
                         </CheckBox>
 

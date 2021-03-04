@@ -21,7 +21,7 @@ namespace WpfApp1.Server.ServerMeta
         private TcpClient TCPclient = null; //TODO: убрать лишнее
         public Person ActiveUser = null;
         private ServerConfig ServerConfig = null;
-        private string tokenFileName = "token-auth";
+        public string tokenFileName = "token-auth";
 
         public JumboServer(ServerConfig config)
         {
@@ -73,12 +73,16 @@ namespace WpfApp1.Server.ServerMeta
         public async Task<string> SendAndGetAsync(Package package)
         {
             string jsonResponse = null;
-            var canSendRequest = await TrySendRequestAsync(package);
-            if (canSendRequest)
+            try
             {
-                jsonResponse = await GetResponseAsync();
-                TCPclient.Close();
+                var canSendRequest = await TrySendRequestAsync(package);
+                if (canSendRequest)
+                {
+                    jsonResponse = await GetResponseAsync();
+                    TCPclient.Close();
+                }
             }
+            catch (InvalidOperationException) { }
             return jsonResponse;
         }
 

@@ -73,6 +73,7 @@ namespace Multi_Server_Test.Server.Functions
                     command.Parameters.AddWithValue("sender", validNews.Sender);
                     command.Parameters.AddWithValue("type",   validNews.Type);
                     var successInsert = command.ExecuteNonQuery();
+                    MyServer.newsCollectionOutDB.Add(validNews);
                     return successInsert;
                 }
             }

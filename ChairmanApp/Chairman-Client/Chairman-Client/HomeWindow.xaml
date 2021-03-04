@@ -57,9 +57,13 @@
                     </Style.Triggers>
                 </Style>
             </StackPanel.Style>
+            <StackPanel.Background>
+                <ImageBrush ImageSource="refs1/oblaka_1920x1080.jpg" Stretch="UniformToFill" />
+            </StackPanel.Background>
+
             <Button
                 HorizontalContentAlignment="Left"
-                Background="White"
+                Background="Transparent"
                 BorderBrush="Transparent"
                 Click="SelectLetterPageBtn_Click">
                 <StackPanel Orientation="Horizontal">
@@ -70,7 +74,7 @@
 
             <Button
                 HorizontalContentAlignment="Left"
-                Background="White"
+                Background="Transparent"
                 BorderBrush="Transparent"
                 Click="NewsPageOpenBtn_Click">
                 <StackPanel Orientation="Horizontal">

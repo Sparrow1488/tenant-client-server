@@ -198,5 +198,14 @@
   <ItemGroup>
     <Resource Include="refs1\icons\reload.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="refs1\gifs\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="refs1\gifs\loading1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="refs1\oblaka_1920x1080.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

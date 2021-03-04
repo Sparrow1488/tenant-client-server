@@ -2,6 +2,7 @@
 using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using WpfApp1.Server;
 using WpfApp1.Server.Packages.PersonalDir;
 using WpfApp1.Server.ServerExceptions;
@@ -19,9 +20,10 @@ namespace Chairman_Client
             InitializeComponent();
         }
 
-        private async void AuthBtn_Click(object sender, RoutedEventArgs e)
+        private async void AuthPanel_Click(object sender, RoutedEventArgs e)
         {
-            var sendBtn = (Button)sender;
+            ShowMessageBlock(exceptionBlock, "Отправка...");
+            var sendBtn = (Border)sender;
             sendBtn.IsEnabled = false;
             try
             {
@@ -43,6 +45,13 @@ namespace Chairman_Client
         }
         void ShowExceptionBlock(TextBlock block, string message)
         {
+            block.Foreground = new SolidColorBrush(Colors.Red);
+            block.Visibility = Visibility.Visible;
+            block.Text = message;
+        }
+        void ShowMessageBlock(TextBlock block, string message)
+        {
+            block.Foreground = new SolidColorBrush(Colors.Black);
             block.Visibility = Visibility.Visible;
             block.Text = message;
         }
@@ -63,6 +72,7 @@ namespace Chairman_Client
                     OpenHomeWindow();
             }
             catch (JumboServerException) { }
+            catch { }
         }
     }
 }

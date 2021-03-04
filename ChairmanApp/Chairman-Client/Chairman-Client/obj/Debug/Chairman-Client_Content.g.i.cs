@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("refs1/icons/reload.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("refs1/oblaka_1920x1080.jpg")]
 
 

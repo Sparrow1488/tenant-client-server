@@ -39,9 +39,18 @@ namespace Chairman_Client.Pages.NewsPageChildren
                 }
             }
         }
-        private StackPanel CreateNewsPanel(News news)
+        private Border CreateNewsPanel(News news)
         {
+            var mainBorder = new Border()
+            {
+                BorderThickness = new Thickness(0.4),
+                BorderBrush = new SolidColorBrush(Colors.DarkGray),
+                CornerRadius = new CornerRadius(10),
+                Padding = new Thickness(10, 5, 10, 5),
+                Margin = new Thickness(0, 10, 0, 0)
+            };
             var mainPanel = new StackPanel() { Margin = new Thickness(0, 10, 0, 0) };
+            mainBorder.Child = mainPanel;
             var titleBlock = new TextBlock()
             {
                 FontSize = 30,
@@ -81,7 +90,7 @@ namespace Chairman_Client.Pages.NewsPageChildren
             mainPanel.Children.Add(infoNewsPanel);
             mainPanel.Children.Add(descBlock);
 
-            return mainPanel;
+            return mainBorder;
         }
     }
 }

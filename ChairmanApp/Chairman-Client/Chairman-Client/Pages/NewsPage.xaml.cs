@@ -68,13 +68,17 @@ namespace Chairman_Client.Pages
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if(newsIsLoaded == false)
+            try
             {
-                var recivedNews = await LoadNewsCollection();
+                if (newsIsLoaded == false)
+                {
+                    var recivedNews = await LoadNewsCollection();
 
-                if (recivedNews != null)
-                    ShowRecivedNewsCollection(recivedNews);
+                    if (recivedNews != null)
+                        ShowRecivedNewsCollection(recivedNews);
+                }
             }
+            catch { }
         }
         private async void ReloadNews_Click(object sender, RoutedEventArgs e)
         {

@@ -27,10 +27,10 @@ namespace Chairman_Client.Pages.NewsPageChildren
             InitializeComponent();
             NewsCollection = showCollection;
         }
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if(NewsCollection != null)
+            newsMainPanel.Children.Clear();
+            if (NewsCollection != null)
             {
                 foreach (var news in NewsCollection)
                 {

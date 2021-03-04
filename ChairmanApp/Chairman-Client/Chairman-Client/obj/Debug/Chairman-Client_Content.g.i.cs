@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("refs1/icons/free-icon-attach-paperclip-symbol-54719.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("refs1/icons/reload.png")]
 
 

@@ -21,6 +21,7 @@
 
             <WrapPanel Grid.Row="0" HorizontalAlignment="Center">
                 <Button
+                    Margin="0,0,10,0"
                     Padding="10,2"
                     Background="Transparent"
                     BorderBrush="Orange"
@@ -32,13 +33,23 @@
                         <TextBlock FontFamily="Calibri Light" Text="Добавить запись" />
                     </WrapPanel>
                 </Button>
-
+                <Button
+                    Padding="10,2"
+                    Background="Transparent"
+                    BorderBrush="BlueViolet"
+                    BorderThickness="2,0"
+                    Click="ReloadNews_Click"
+                    FontSize="22">
+                    <WrapPanel>
+                        <Image Width="30" Source="/refs1/icons/reload.png" />
+                        <TextBlock FontFamily="Calibri Light" Text="Обновить ленту" />
+                    </WrapPanel>
+                </Button>
             </WrapPanel>
 
             <Frame
                 x:Name="moreActionsFrame"
                 Grid.Row="1"
-                Background="Black"
                 NavigationUIVisibility="Hidden" />
         </Grid>
     </ScrollViewer>

@@ -17,11 +17,6 @@ namespace Chairman_Client.Pages.LetterPageChildren
             InitializeComponent();
             ReadLetter = readLetter;
         }
-        public void ShowDefaultPanel()
-        {
-            
-        }
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             topTitle.Text = ReadLetter.Title;

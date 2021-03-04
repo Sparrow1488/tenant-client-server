@@ -53,3 +53,4 @@ C:\Users\Dom\Desktop\Репозитории\tenant-client-server\ChairmanApp\Cha
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Pages\NewsPageChildren\NewsWriterPage.baml
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Pages\NewsPageChildren\NewsCollectionPage.g.cs
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Pages\NewsPageChildren\NewsCollectionPage.baml
+C:\Users\Dom\Desktop\Репозитории\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Chairman-Client.csprojAssemblyReference.cache

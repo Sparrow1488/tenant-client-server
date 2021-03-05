@@ -19,8 +19,7 @@ namespace Multi_Server_Test.Server.Models.LetterBlock
             try
             {
                 byte[] response;
-                string replyJson = JsonConvert.SerializeObject(reqObject);
-                var replyObj = JsonConvert.DeserializeObject<ReplyLetter>(replyJson);
+                var replyObj = JsonConvert.DeserializeObject<ReplyLetter>(reqObject.ToString());
                 serverEvents.BlockReport(this, "Запрос на добавление ответа письму", ConsoleColor.Yellow);
                 int successCompl = serverFunctions.ReplyToTheLetter(replyObj);
                 if(successCompl > 0)

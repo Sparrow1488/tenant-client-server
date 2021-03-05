@@ -14,8 +14,7 @@ namespace Multi_Server_Test.Server.Models.AuthBlock
 
         public override byte[] CompleteAction(object reqObject)
         {
-            var convertJsonToken = JsonConvert.SerializeObject(reqObject);
-            var getInputToken = JsonConvert.DeserializeObject<UserToken>(convertJsonToken);
+            var getInputToken = JsonConvert.DeserializeObject<UserToken>(reqObject.ToString());
             var authUser = serverFunctions.GetUserByTokenOrDefault(getInputToken);
 
             if(authUser != null)

@@ -17,8 +17,7 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
             byte[] response;
             try
             {
-                var getJsonLetter = JsonConvert.SerializeObject(reqObject);
-                var getLetter = JsonConvert.DeserializeObject<Letter>(getJsonLetter);
+                var getLetter = JsonConvert.DeserializeObject<Letter>(reqObject.ToString());
                 serverEvents.BlockReport(this, "Письмо успешно получено", ConsoleColor.Yellow);
                 Console.WriteLine(getLetter); //TODO: сделать сортер по типу новости (предложение, жалоба, вопрос)
                 int successInsert = AddLetterInDB(getLetter);

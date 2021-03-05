@@ -81,7 +81,7 @@ namespace Multi_Server_Test.Server.Functions
             }
             catch (Exception) { return -1; }
         }
-        private News CheckNewsValidation(News checkNews)
+        private News CheckNewsValidation(News checkNews) //каловая дичь
         {
             string validTitle = "", validDesc = "", validSource = "", validType = "";
             DateTime validDate = Convert.ToDateTime("1/1/1900 12:00:00 ");
@@ -173,9 +173,9 @@ namespace Multi_Server_Test.Server.Functions
                 command.Parameters.AddWithValue("answer", reply.Answer);
                 command.Parameters.AddWithValue("letterId", reply.LetterId);
                 string validSource = "";
-                if (reply.Source != null)
+                if (reply.Source != null) //TODO: попробовать при != null добавлять параметр, иначе нет
                     validSource = reply.Source;
-                command.Parameters.AddWithValue("source", validSource);
+                command.Parameters.AddWithValue("source", validSource); 
                 command.Parameters.AddWithValue("sender", reply.Responder);
                 var successInsert = command.ExecuteNonQuery();
                 return successInsert;

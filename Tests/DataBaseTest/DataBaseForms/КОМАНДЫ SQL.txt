@@ -1,4 +1,5 @@
-INSERT [таблица], (стобец1, столбец2) VALUES (N'value1', N'value2')
+INSERT INTO [таблица], (стобец1, столбец2) VALUES (N'value1', N'value2')
+INSERT INTO [News] (Title, Description, DateCreate, Sender, Type) VALUES (@title, @desc, @date, @sender, @type)
 -----------------------------------------
 
 SELECT ячейка(столбец)1, ячейка2 FROM таблица [WHERE выражение](логическое условие)

@@ -12,6 +12,7 @@ using WpfApp1.Server.Packages.LettersDir;
 using WpfApp1.Server.Packages.NewsDir;
 using WpfApp1.Server.Packages.PersonalDir;
 using WpfApp1.Server.ServerExceptions;
+using System.Linq;
 
 namespace WpfApp1.Server.ServerMeta
 {
@@ -66,8 +67,13 @@ namespace WpfApp1.Server.ServerMeta
             var collectionResponse = JsonConvert.DeserializeObject<List<News>>(jsonCollection);
             if (collectionResponse == null)
                 throw new NullReferenceException("Получена пустая коллекция!");
-            else
-                return collectionResponse;
+            var toOrderbyDateCreateNews = from news in collectionResponse
+                                          orderby news.DateTime
+                                          select news;
+            List<News> responseNewsCollection = new List<News>();
+            foreach (var news in toOrderbyDateCreateNews)
+                responseNewsCollection.Add(news);
+            return collectionResponse;
         }
 
         public async Task<string> SendAndGetAsync(Package package)

@@ -52,12 +52,21 @@ namespace WpfApp1.Pages.HomePages
         }
         private void AddNewsPanel(News news)
         {
+            var mainBorder = new Border()
+            {
+                BorderBrush = new SolidColorBrush(Colors.Gray),
+                BorderThickness = new Thickness(1),
+                Padding = new Thickness(5, 10, 5, 10),
+                CornerRadius = new CornerRadius(5),
+                Margin = new Thickness(0, 0, 0 ,5)
+            };
             var mainPanel = new StackPanel()
             {
-                Background = new SolidColorBrush(Color.FromRgb(238, 234, 233)),
+                //Background = new SolidColorBrush(Color.FromRgb(238, 234, 233)),
                 Orientation = Orientation.Vertical,
                 Margin = new Thickness(0, 10, 0, 0)
             };
+            mainBorder.Child = mainPanel;
             var infoPanel = new StackPanel()
             {
                 Margin = new Thickness(10, 0, 0, 0)
@@ -85,8 +94,9 @@ namespace WpfApp1.Pages.HomePages
             infoPanel.Children.Add(dateCreateNews);
             var topBorder = new StackPanel()
             {
-                Background = new SolidColorBrush(Colors.Black),
-                Height = 2,
+                Background = new SolidColorBrush(Colors.DarkGray),
+                Height = 1,
+                Margin = new Thickness(5, 0, 5, 0)
             };
             var titleBlock = new TextBlock()
             {
@@ -109,27 +119,8 @@ namespace WpfApp1.Pages.HomePages
             mainPanel.Children.Add(topBorder);
             mainPanel.Children.Add(descriptionBlock);
 
-            //TODO: сделать показ картинок
-
-            //if (image != null)
-            //{
-            //    MemoryStream ms = new MemoryStream(image);
-            //    //System.Drawing.Image returnImage = (System.Drawing.Bitmap)System.Drawing.Bitmap.FromStream(ms);
-            //    var bitmapImage = new BitmapImage();
-            //    bitmapImage.BeginInit();
-            //    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-            //    bitmapImage.StreamSource = ms;
-            //    bitmapImage.EndInit();
-
-            //    var imagePanel = new Image()
-            //    {
-            //        Source = bitmapImage,
-            //        Height = 400
-            //    };
-            //    mainPanel.Children.Add(imagePanel);
-            //}
-            
-            contentPanel.Children.Insert(0, mainPanel);
+            contentPanel.Children.Add(mainBorder);
+            //contentPanel.Children.Insert(0, mainPanel);
         }
     }
 }

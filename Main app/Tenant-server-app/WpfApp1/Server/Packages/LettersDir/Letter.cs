@@ -6,6 +6,7 @@ namespace WpfApp1.Server.Packages.Letters
     public class Letter : RequestObject
     {
         public string LetterType { get; protected set; }
+        public int Id { get; }
         public string Title { get; }
         public string Description { get; }
         public string SenderLogin { get; }
@@ -20,7 +21,7 @@ namespace WpfApp1.Server.Packages.Letters
             }
         }
         [JsonConstructor]
-        public Letter(string title, string description, string senderLogin, string letterType, DateTime dateCreate)
+        public Letter(string title, string description, string senderLogin, string letterType, DateTime dateCreate, int id)
         {
             if (!string.IsNullOrWhiteSpace(senderLogin))
             {
@@ -29,6 +30,7 @@ namespace WpfApp1.Server.Packages.Letters
                 SenderLogin = senderLogin;
                 LetterType = letterType;
                 DateCreate = dateCreate;
+                Id = id;
             }
         }
     }

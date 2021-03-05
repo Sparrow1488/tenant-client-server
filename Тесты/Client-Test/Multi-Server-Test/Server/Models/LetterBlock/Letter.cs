@@ -8,12 +8,13 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
     {
         public string LetterType { get; }
         public string Title { get; }
+        public int Id { get; }
         public string Description { get; }
         public string SenderLogin { get; }
         public DateTime DateCreate { get; }
 
         [JsonConstructor]
-        public Letter(string title, string description, string senderLogin, string letterType, DateTime dateCreate)
+        public Letter(string title, string description, string senderLogin, string letterType, DateTime dateCreate, int id)
         {
             Title = title;
             Description = description;
@@ -22,6 +23,7 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
             if (dateCreate == null)
                 DateCreate = DateTime.Now;
             else DateCreate = dateCreate;
+            Id = id;
         }
         public override string ToString()
         {

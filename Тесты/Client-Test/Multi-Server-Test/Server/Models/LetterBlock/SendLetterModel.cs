@@ -62,7 +62,7 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
                 validType = letter.LetterType;
             if (!string.IsNullOrWhiteSpace(letter.SenderLogin))
                 validSender = letter.SenderLogin;
-            var validLetter = new Letter(validTitle, validDesc, validSender, validType, validDate);
+            var validLetter = new Letter(validTitle, validDesc, validSender, validType, validDate, letter.Id);
             return validLetter;
         }
     }

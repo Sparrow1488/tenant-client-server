@@ -105,6 +105,7 @@ namespace Multi_Server_Test.ServerData
                     { 
                         new SendLetterModel("send"),
                         new GetLetterModel("get"),
+                        new LettersReplyModel("reply")
                     };
 
                     var userModels = new List<Model>()

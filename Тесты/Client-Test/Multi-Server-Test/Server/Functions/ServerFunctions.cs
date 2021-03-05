@@ -1,6 +1,7 @@
 ﻿using Multi_Server_Test.Blocks;
 using Multi_Server_Test.Server.Blocks.LetterBlock;
 using Multi_Server_Test.Server.Models.AuthBlock;
+using Multi_Server_Test.Server.Models.LetterBlock;
 using Multi_Server_Test.Server.Packages;
 using Multi_Server_Test.ServerData;
 using System;
@@ -47,12 +48,13 @@ namespace Multi_Server_Test.Server.Functions
                 {
                     while (reader.Read())
                     {
+                        var id = reader.GetInt32(0);
                         var title = reader.GetString(1);
                         var desc = reader.GetString(2);
                         var type = reader.GetString(3);
                         var sender = reader.GetString(4);
                         var date = reader.GetDateTime(5);
-                        selectLetters.Add(new Letter(title, desc, sender, type, date));
+                        selectLetters.Add(new Letter(title, desc, sender, type, date, id));
                     }
                 }
                 reader.Close();
@@ -163,5 +165,30 @@ namespace Multi_Server_Test.Server.Functions
             }
             return false;
         }
+        public int ReplyToTheLetter(ReplyLetter reply)
+        {
+            string sCommand = $"INSERT INTO [ResponsesToLetters] (answerText, letterId, source, responder) VALUES (@answer, @letterId, @source, @sender)";
+            using (var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
+            {
+                command.Parameters.AddWithValue("answer", reply.Answer);
+                command.Parameters.AddWithValue("letterId", reply.LetterId);
+                string validSource = "";
+                if (reply.Source != null)
+                    validSource = reply.Source;
+                command.Parameters.AddWithValue("source", validSource);
+                command.Parameters.AddWithValue("sender", reply.Responder);
+                var successInsert = command.ExecuteNonQuery();
+                return successInsert;
+            }
+        }
+        //private ReplyLetter CheckAnswerValidation(ReplyLetter answer)
+        //{
+        //    ReplyLetter validReply;
+        //    string validAnswer;
+        //    int letterId;
+        //    string validSender;
+        //    if (!string.IsNullOrWhiteSpace(answer.Answer))
+        //        validAnswer = answer
+        //}
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Chairman_Client.Chairman.Packages;
+using Chairman_Client.Server.Packages.LettersDir;
 using Multi_Server_Test.Server;
 using Newtonsoft.Json;
 using System;
@@ -40,6 +41,17 @@ namespace Chairman_Client.Server.Chairman.Functions
             var pack = new AddNewsPackage(news);
             var response = await JumboServer.ActiveServer.SendAndGetAsync(pack);
             return response;
+        }
+        public async Task<string> SendReplyToLetter(ReplyLetter answer)
+        {
+            try
+            {
+                var package = new SendAnswerToLetterPackage(answer);
+                var answerawait = await JumboServer.ActiveServer.SendAndGetAsync(package);
+                return answerawait;
+            }
+            catch { }
+            return "Неизвестная ошибка";
         }
     }
 }

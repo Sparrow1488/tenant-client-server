@@ -1,8 +1,11 @@
 ﻿using Chairman_Client.ApplicationService;
+using Chairman_Client.Server.Chairman.Functions;
+using Chairman_Client.Server.Packages.LettersDir;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using WpfApp1.Server.Packages.Letters;
+using WpfApp1.Server.ServerMeta;
 
 namespace Chairman_Client.Pages.LetterPageChildren
 {
@@ -12,6 +15,7 @@ namespace Chairman_Client.Pages.LetterPageChildren
     public partial class ReadLettersPage : Page
     {
         private Letter ReadLetter = null;
+        private Functions serverFunctions = new Functions("secret", JumboServer.ActiveServer);
         public ReadLettersPage(Letter readLetter)
         {
             InitializeComponent();
@@ -26,6 +30,13 @@ namespace Chairman_Client.Pages.LetterPageChildren
 
             mainTitle.Text = ReadLetter.Title;
             descLetter.Text = ReadLetter.Description;
+        }
+
+        private async void replyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var reply = new ReplyLetter("Тестовый ответ", null, JumboServer.ActiveServer.ActiveUser.Login, ReadLetter.Id);
+            var response = await serverFunctions.SendReplyToLetter(reply);
+            MessageBox.Show(response);
         }
     }
 }

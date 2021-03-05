@@ -61,6 +61,7 @@
     <Compile Include="ApplicationService\CreatorLetterPanel.cs" />
     <Compile Include="Chairman\Packages\AddNewsPackage.cs" />
     <Compile Include="Chairman\Packages\GetLettersPackage.cs" />
+    <Compile Include="Chairman\Packages\SendAnswerToLetterPackage.cs" />
     <Compile Include="HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
@@ -87,6 +88,7 @@
     <Compile Include="Server\Packages\LettersDir\LettersCollection.cs" />
     <Compile Include="Server\Packages\LettersDir\OfferLetter.cs" />
     <Compile Include="Server\Packages\LettersDir\QuestionLetter.cs" />
+    <Compile Include="Server\Packages\LettersDir\ReplyToLetter.cs" />
     <Compile Include="Server\Packages\LettersDir\SendLetterPackage.cs" />
     <Compile Include="Server\Packages\Meta\PackageMeta.cs" />
     <Compile Include="Server\Packages\NewsDir\AddNewsPackage.cs" />

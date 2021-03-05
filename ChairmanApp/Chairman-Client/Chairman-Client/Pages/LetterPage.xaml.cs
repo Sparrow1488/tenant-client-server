@@ -1,5 +1,6 @@
 ﻿using Chairman_Client.ApplicationService;
 using Chairman_Client.Server.Chairman.Functions;
+using Chairman_Client.Server.Packages.LettersDir;
 using System.Windows;
 using System.Windows.Controls;
 using WpfApp1.Server.Packages.Letters;
@@ -47,12 +48,9 @@ namespace Chairman_Client.Pages
         {
         }
 
-        private void addNewTestLetter_Click(object sender, RoutedEventArgs e)
+        private async void addNewTestLetter_Click(object sender, RoutedEventArgs e)
         {
-            var tenant = "asd";
-            var testLetter = new ComplaintLetter("Проблемка образовалась", "Хочу помощи Хочу помощи Хочу помощи Хочу помощи", tenant);
-            var newPanel = new CreatorLetterPanel(testLetter, letterReaderFrame).CreateSmallMenuPanel();
-            leftLettersList.Children.Add(newPanel);
+            
         }
 
         private void ReloadBtn_Click(object sender, RoutedEventArgs e)

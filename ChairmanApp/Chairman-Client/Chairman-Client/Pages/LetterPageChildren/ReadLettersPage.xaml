@@ -95,8 +95,10 @@
                 HorizontalAlignment="Center"
                 Orientation="Horizontal">
                 <Button
+                    Name="replyBtn"
                     Padding="10,0"
                     HorizontalAlignment="Left"
+                    Click="replyBtn_Click"
                     Content="Ответить"
                     FontSize="18"
                     Style="{StaticResource letterButtons}" />

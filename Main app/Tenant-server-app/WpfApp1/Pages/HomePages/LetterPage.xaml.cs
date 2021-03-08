@@ -29,6 +29,7 @@ namespace WpfApp1.Pages.HomePages
         private Page offerPage = new OfferPage();
         private Page questionPage = new QuestionPage();
         private Page infoPage = new InformationLetterPage();
+        private Page universalPage = new UniversalLetterPage();
         public LetterPage()
         {
             InitializeComponent();
@@ -70,6 +71,12 @@ namespace WpfApp1.Pages.HomePages
         private void bottomPanel_MouseEnter(object sender, MouseEventArgs e)
         {
             
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            frameBox.Content = null;
+            frameBox.Content = universalPage;
         }
     }
 }

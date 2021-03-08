@@ -33,7 +33,12 @@
                     FontSize="28"
                     Text="Выберите способ связи" />
             </StackPanel>
-            <WrapPanel HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button
+                Background="Transparent"
+                Click="Button_Click"
+                Content="Написать"
+                FontSize="24" />
+            <!--<WrapPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button
                     Margin="5"
                     Background="Transparent"
@@ -105,13 +110,14 @@
                     </StackPanel>
                 </Button>
 
-            </WrapPanel>
+            </WrapPanel>-->
         </StackPanel>
 
         <StackPanel
             x:Name="framePanel"
             Grid.Row="1"
-            Grid.Column="1">
+            Grid.Column="1"
+            Margin="0,10,0,0">
             <Frame x:Name="frameBox" NavigationUIVisibility="Hidden" />
         </StackPanel>
 
@@ -130,6 +136,6 @@
                 Visibility="Collapsed" />
         </StackPanel>
 
-        
+
     </Grid>
 </Page>

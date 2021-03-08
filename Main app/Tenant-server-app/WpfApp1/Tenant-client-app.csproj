@@ -100,6 +100,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\HomePages\ChildLetterPage\UniversalLetterPage.xaml.cs">
+      <DependentUpon>UniversalLetterPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Server\Packages\LettersDir\ReplyToLetter.cs" />
     <Compile Include="Server\Packages\PersonalDir\AuthorizationByTokenPackage.cs" />
     <Compile Include="Server\Packages\PersonalDir\UserToken.cs" />
@@ -182,6 +185,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\HomePages\ChildLetterPage\UniversalLetterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\HomePages\LetterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -259,6 +266,8 @@
     <Resource Include="refs\images\infoLetterIMG_1.jpg" />
     <Resource Include="refs\icons\userIcon2.png" />
     <Resource Include="refs\BG-4_1920x1080.jpg" />
+    <Resource Include="refs\icons\send.png" />
+    <Resource Include="refs\icons\attach.png" />
     <Content Include="refs\TestIMG-1.jfif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

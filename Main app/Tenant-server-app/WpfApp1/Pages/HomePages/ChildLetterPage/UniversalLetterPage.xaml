@@ -35,22 +35,42 @@
                     HorizontalAlignment="Center"
                     Style="{StaticResource defTextStyle}"
                     Text="Форма заполнения письма" />
-                <TextBox
-                    x:Name="titleBox"
-                    BorderThickness="0"
-                    Style="{StaticResource defTextStyle}"
-                    Text="Заголовок"
-                    TextWrapping="Wrap" />
+                <Border
+                    Margin="0,5"
+                    Padding="2"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    CornerRadius="2">
+                    <Border.ToolTip>
+                        <TextBlock FontSize="18" Text="Заголовок" />
+                    </Border.ToolTip>
+                    <TextBox
+                        x:Name="titleBox"
+                        BorderThickness="0"
+                        Style="{StaticResource defTextStyle}"
+                        TextWrapping="Wrap" />
+                </Border>
+
                 <StackPanel
                     Height="1"
                     Margin="2,0"
                     Background="Black" />
-                <TextBox
-                    x:Name="descBox"
-                    BorderThickness="0"
-                    Style="{StaticResource defTextStyle}"
-                    Text="Описание"
-                    TextWrapping="Wrap" />
+                <Border
+                    Margin="0,5"
+                    Padding="2"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    CornerRadius="2">
+                    <Border.ToolTip>
+                        <TextBlock FontSize="18" Text="Описание" />
+                    </Border.ToolTip>
+                    <TextBox
+                        x:Name="descBox"
+                        BorderThickness="0"
+                        Style="{StaticResource defTextStyle}"
+                        TextWrapping="Wrap" />
+                </Border>
+
                 <GroupBox
                     Margin="0,10"
                     Padding="5"
@@ -65,6 +85,7 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <RadioButton
+                            ToolTip="Выберите, если хотите пожаловаться"
                             x:Name="complaintType"
                             Grid.Column="0"
                             Margin="5,0,0,0"
@@ -73,6 +94,7 @@
                             IsChecked="True"
                             Style="{StaticResource additionalTextStyle}" />
                         <RadioButton
+                            ToolTip="Выберите, если у Вас есть к нам предложение"
                             x:Name="offerType"
                             Grid.Column="1"
                             Margin="5,0,0,0"
@@ -80,6 +102,7 @@
                             Content="Предложение"
                             Style="{StaticResource additionalTextStyle}" />
                         <RadioButton
+                            ToolTip="Выберите, если хотите задать вопрос"
                             x:Name="questionType"
                             Grid.Column="2"
                             Margin="5,0,0,0"

@@ -70,5 +70,18 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
                 return new QuestionLetter(title, desc, sender);
             return null;
         }
+        private void descBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var textBox = (Border)sender;
+            textBox.BorderThickness = new Thickness(1, 0, 1, 0);
+            textBox.BorderBrush = new SolidColorBrush(Colors.Purple);
+        }
+
+        private void Border_MouseLeave(object sender, MouseEventArgs e)
+        {
+            var textBox = (Border)sender;
+            textBox.BorderThickness = new Thickness(0);
+        }
+
     }
 }

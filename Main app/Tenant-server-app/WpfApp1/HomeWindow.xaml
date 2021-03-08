@@ -26,17 +26,20 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>-->
+        <DockPanel Margin="50,0,0,0">
+            <Frame x:Name="ProfilePageFrame" NavigationUIVisibility="Hidden" />
+        </DockPanel>
 
         <StackPanel
             x:Name="menuLeftPanel"
-            Grid.Column="0"
             Width="50"
             HorizontalAlignment="Left"
+            Background="White"
             MouseEnter="menuLeftPanel_MouseEnter"
             MouseLeave="menuLeftPanel_MouseLeave"
             Orientation="Vertical">
@@ -155,14 +158,8 @@
 
         </StackPanel>
 
-        <StackPanel
-            Grid.Column="1"
-            Width="1"
-            Background="Black" />
 
-        <DockPanel Grid.Column="2">
-            <Frame x:Name="ProfilePageFrame" NavigationUIVisibility="Hidden" />
-        </DockPanel>
+
 
         <DockPanel
             Grid.Column="2"

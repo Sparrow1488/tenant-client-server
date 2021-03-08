@@ -39,7 +39,7 @@
             x:Name="menuLeftPanel"
             Width="50"
             HorizontalAlignment="Left"
-            Background="White"
+            Background="AliceBlue"
             MouseEnter="menuLeftPanel_MouseEnter"
             MouseLeave="menuLeftPanel_MouseLeave"
             Orientation="Vertical">

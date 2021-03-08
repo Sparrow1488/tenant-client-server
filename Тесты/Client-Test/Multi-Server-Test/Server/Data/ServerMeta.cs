@@ -10,7 +10,7 @@ namespace Multi_Server_Test.ServerData.Server
     public class ServerMeta
     {
         public SqlConnection sqlConnection = null;
-        private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\JumboDataBase.mdf;Integrated Security=True";
+        private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\JumboDataBase.mdf;Integrated Security=True";
         public ServerMeta()
         {
             Console.WriteLine("Meta creating...");

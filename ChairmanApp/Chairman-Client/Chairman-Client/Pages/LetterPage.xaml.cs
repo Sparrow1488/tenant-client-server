@@ -1,9 +1,7 @@
 ﻿using Chairman_Client.ApplicationService;
 using Chairman_Client.Server.Chairman.Functions;
-using Chairman_Client.Server.Packages.LettersDir;
 using System.Windows;
 using System.Windows.Controls;
-using WpfApp1.Server.Packages.Letters;
 using WpfApp1.Server.ServerMeta;
 
 namespace Chairman_Client.Pages
@@ -43,16 +41,6 @@ namespace Chairman_Client.Pages
                 }
             }
         }
-        
-        private void StackPanel_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-        }
-
-        private async void addNewTestLetter_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
         private void ReloadBtn_Click(object sender, RoutedEventArgs e)
         {
             leftLettersList.Children.Clear();

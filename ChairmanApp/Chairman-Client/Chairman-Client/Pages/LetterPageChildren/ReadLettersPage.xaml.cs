@@ -34,9 +34,7 @@ namespace Chairman_Client.Pages.LetterPageChildren
 
         private async void replyBtn_Click(object sender, RoutedEventArgs e)
         {
-            var reply = new ReplyLetter("Тестовый ответ", null, JumboServer.ActiveServer.ActiveUser.Login, ReadLetter.Id);
-            var response = await serverFunctions.SendReplyToLetter(reply);
-            MessageBox.Show(response);
+            responseFrame.Content = new ResponseToLetterPage(ReadLetter);
         }
     }
 }

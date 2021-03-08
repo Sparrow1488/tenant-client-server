@@ -17,50 +17,51 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
 
-        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <StackPanel Grid.Column="0" VerticalAlignment="Top">
+            <Button
+                Background="Transparent"
+                BorderThickness="0"
+                Click="ReloadBtn_Click"
+                Content="Обновить" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
             <StackPanel
                 x:Name="leftLettersList"
                 Grid.Column="0"
                 Margin="10"
                 Orientation="Vertical">
-                <Button
-                    Background="Violet"
-                    BorderThickness="0"
-                    Click="addNewTestLetter_Click"
-                    Content="ADD" />
-                <Button
-                    Background="Violet"
-                    BorderThickness="0"
-                    Click="ReloadBtn_Click"
-                    Content="RELOAD" />
-                <StackPanel
-                    MaxWidth="250"
-                    Background="AliceBlue"
-                    MouseDown="StackPanel_MouseDown">
+
+                <StackPanel MaxWidth="200" Background="AliceBlue">
                     <TextBlock
                         Margin="5"
-                        FontSize="15"
+                        FontSize="14"
                         Text="→ Что вообще происходит?"
                         TextDecorations="Underline"
                         TextWrapping="Wrap" />
                     <TextBlock
                         Margin="5,0,5,0"
-                        FontSize="12"
+                        FontSize="10"
                         Text="TYPE: вопрос"
                         TextWrapping="Wrap" />
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
 
-
         <StackPanel
+            Grid.RowSpan="2"
             Grid.Column="1"
             Width="1"
             Background="Gray" />
 
         <Frame
             x:Name="letterReaderFrame"
+            Grid.RowSpan="2"
             Grid.Column="2"
             Background="AliceBlue"
             NavigationUIVisibility="Hidden" />

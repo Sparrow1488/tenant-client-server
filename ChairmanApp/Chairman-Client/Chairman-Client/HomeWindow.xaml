@@ -6,8 +6,10 @@
     xmlns:local="clr-namespace:Chairman_Client"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="HomeWindow"
-    Width="800"
-    Height="450"
+    Width="1100"
+    Height="550"
+    MinWidth="1100"
+    MinHeight="500"
     Loaded="Window_Loaded"
     mc:Ignorable="d">
     <Window.Resources>
@@ -21,12 +23,16 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+        <Frame
+            x:Name="homeContentFrame"
+            Margin="50,0,0,0"
+            NavigationUIVisibility="Hidden" />
 
-        <StackPanel x:Name="leftMenuPanel" Width="50">
+        <StackPanel
+            x:Name="leftMenuPanel"
+            Width="50"
+            HorizontalAlignment="Left"
+            Background="AliceBlue">
             <StackPanel.Style>
                 <Style TargetType="{x:Type StackPanel}">
                     <Style.Triggers>
@@ -57,9 +63,6 @@
                     </Style.Triggers>
                 </Style>
             </StackPanel.Style>
-            <StackPanel.Background>
-                <ImageBrush ImageSource="refs1/oblaka_1920x1080.jpg" Stretch="UniformToFill" />
-            </StackPanel.Background>
 
             <Button
                 HorizontalContentAlignment="Left"
@@ -84,9 +87,6 @@
             </Button>
         </StackPanel>
 
-        <Frame
-            x:Name="homeContentFrame"
-            Grid.Column="1"
-            NavigationUIVisibility="Hidden" />
+
     </Grid>
 </Window>

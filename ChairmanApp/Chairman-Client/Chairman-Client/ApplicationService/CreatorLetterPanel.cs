@@ -19,33 +19,33 @@ namespace Chairman_Client.ApplicationService
         {
             var letterSmallPanel = new StackPanel()
             {
-                MaxWidth = 280,
+                MaxWidth = 200,
                 Background = new SolidColorBrush(Colors.AliceBlue),
             };
             var title = new TextBlock()
             {
-                Text = "→ " + ActiveLetter.Title,
+                Text = "→" + ActiveLetter.Title,
                 Margin = new Thickness(5),
-                FontSize = 20,
+                FontSize = 15,
                 TextDecorations = TextDecorations.Underline,
                 TextWrapping = TextWrapping.Wrap,
-                FontFamily = new FontFamily("Calibri")
+                FontFamily = new FontFamily("Calibri Light")
             };
             var typeLetter = new TextBlock()
             {
                 Margin = new Thickness(5, 0, 5, 0),
-                FontSize = 16,
+                FontSize = 12,
                 Text = "TYPE: " + ActiveLetter.LetterType,
                 TextWrapping = TextWrapping.Wrap,
-                FontFamily = new FontFamily("Calibri")
+                FontFamily = new FontFamily("Calibri Light")
             };
             var sender = new TextBlock()
             {
                 Margin = new Thickness(5, 0, 5, 0),
-                FontSize = 16,
+                FontSize = 12,
                 Text = "SENDER: " + ActiveLetter.SenderLogin,
                 TextWrapping = TextWrapping.Wrap,
-                FontFamily = new FontFamily("Calibri")
+                FontFamily = new FontFamily("Calibri Light")
             };
             letterSmallPanel.Children.Add(title);
             letterSmallPanel.Children.Add(typeLetter);

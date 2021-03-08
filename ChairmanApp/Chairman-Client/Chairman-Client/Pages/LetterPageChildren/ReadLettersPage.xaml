@@ -59,68 +59,71 @@
                 Text="Дата: 26/02/21" />
         </StackPanel>
         <!--  СОНОВНОЙ КОНТЕНТ  -->
-        <StackPanel
-            Grid.Row="1"
-            Margin="50,0,50,0"
-            Orientation="Vertical">
-            <StackPanel Height="1" Background="Black" />
-            <GroupBox
-                BorderThickness="1"
-                FontSize="12"
-                Header="Письмо">
-                <StackPanel>
-                    <TextBox
-                        Name="mainTitle"
-                        IsReadOnly="True"
-                        Style="{StaticResource titleTextStyle}"
-                        Text="Очередной заголовок письма аряяя"
-                        TextWrapping="Wrap" />
+        <ScrollViewer Grid.Row="1">
+            <StackPanel>
+                <StackPanel Margin="50,0,50,0" Orientation="Vertical">
+                    <StackPanel Height="1" Background="Black" />
 
-                    <TextBox
-                        Name="descLetter"
-                        BorderBrush="Transparent"
-                        BorderThickness="0"
-                        FontSize="20"
-                        IsReadOnly="True"
-                        Text="Самое длинное в мире письмо которое вообще вообще вообще вообще вообще вообще вообще вообще не хочется читать!"
-                        TextWrapping="Wrap" />
+                    <GroupBox
+                        BorderThickness="1"
+                        FontSize="12"
+                        Header="Письмо">
+                        <StackPanel>
+                            <TextBox
+                                Name="mainTitle"
+                                IsReadOnly="True"
+                                Style="{StaticResource titleTextStyle}"
+                                Text="Очередной заголовок письма аряяя"
+                                TextWrapping="Wrap" />
+
+                            <TextBox
+                                Name="descLetter"
+                                BorderBrush="Transparent"
+                                BorderThickness="0"
+                                FontSize="20"
+                                IsReadOnly="True"
+                                Text="Самое длинное в мире письмо которое вообще вообще вообще вообще вообще вообще вообще вообще не хочется читать!"
+                                TextWrapping="Wrap" />
+                        </StackPanel>
+                    </GroupBox>
+                    <StackPanel
+                        Height="1"
+                        Margin="100,0"
+                        Background="Black" />
+                    <WrapPanel
+                        Margin="0,10"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Button
+                            Name="replyBtn"
+                            Padding="10,0"
+                            HorizontalAlignment="Left"
+                            Click="replyBtn_Click"
+                            Content="Ответить"
+                            FontSize="18"
+                            Style="{StaticResource letterButtons}" />
+                        <Button
+                            Padding="10,0"
+                            HorizontalAlignment="Left"
+                            Content="Удалить"
+                            FontSize="18"
+                            Style="{StaticResource letterButtons}" />
+                        <Button
+                            Padding="10,0"
+                            HorizontalAlignment="Left"
+                            Content="Оставить непрочитанным"
+                            FontSize="18"
+                            Style="{StaticResource letterButtons}" />
+                        <Button
+                            Padding="10,0"
+                            HorizontalAlignment="Left"
+                            Content="Важное"
+                            FontSize="18"
+                            Style="{StaticResource letterButtons}" />
+                    </WrapPanel>
+                    <Frame x:Name="responseFrame" NavigationUIVisibility="Hidden" />
                 </StackPanel>
-            </GroupBox>
-            <StackPanel
-                Height="1"
-                Margin="100,0"
-                Background="Black" />
-            <WrapPanel
-                Margin="0,10"
-                HorizontalAlignment="Center"
-                Orientation="Horizontal">
-                <Button
-                    Name="replyBtn"
-                    Padding="10,0"
-                    HorizontalAlignment="Left"
-                    Click="replyBtn_Click"
-                    Content="Ответить"
-                    FontSize="18"
-                    Style="{StaticResource letterButtons}" />
-                <Button
-                    Padding="10,0"
-                    HorizontalAlignment="Left"
-                    Content="Удалить"
-                    FontSize="18"
-                    Style="{StaticResource letterButtons}" />
-                <Button
-                    Padding="10,0"
-                    HorizontalAlignment="Left"
-                    Content="Оставить непрочитанным"
-                    FontSize="18"
-                    Style="{StaticResource letterButtons}" />
-                <Button
-                    Padding="10,0"
-                    HorizontalAlignment="Left"
-                    Content="Важное"
-                    FontSize="18"
-                    Style="{StaticResource letterButtons}" />
-            </WrapPanel>
-        </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

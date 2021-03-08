@@ -72,6 +72,9 @@
     <Compile Include="Pages\LetterPageChildren\ReadLettersPage.xaml.cs">
       <DependentUpon>ReadLettersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\LetterPageChildren\ResponseToLetterPage.xaml.cs">
+      <DependentUpon>ResponseToLetterPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\NewsPage.xaml.cs">
       <DependentUpon>NewsPage.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\LetterPageChildren\ReadLettersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LetterPageChildren\ResponseToLetterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

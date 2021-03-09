@@ -31,7 +31,6 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
         {
             return $"TYPE: {LetterType}\n" +
                    $"TITLE: {Title}\n" +
-                   $"DESCRIPTION: {Description}\n" +
                    $"FROM: " + SenderLogin;
         }
     }

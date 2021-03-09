@@ -1,5 +1,6 @@
 ﻿using Multi_Server_Test.Server.Functions;
 using Multi_Server_Test.Server.Packages;
+using Multi_Server_Test.ServerData;
 using Multi_Server_Test.ServerData.Blocks;
 using Newtonsoft.Json;
 using System;
@@ -18,7 +19,9 @@ namespace Multi_Server_Test.Server.Models.NewsBlock
             string responseMessage = "";
             var jsonNews = JsonConvert.SerializeObject(reqObject);
             var newsForInsert = JsonConvert.DeserializeObject<News>(jsonNews);
-            var success = serverFunctions.InsertNewsInDB(newsForInsert);
+            MyServer.allNews.Add(newsForInsert);
+            MyServer.noSynchNews.Add(newsForInsert);
+            var success = serverFunctions.InsertNewsInDB(newsForInsert); //TODO: сделать таймер для автоматической синхронизации коллекций
 
             if (success > 0)
             {

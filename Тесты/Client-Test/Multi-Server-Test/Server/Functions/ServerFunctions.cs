@@ -94,6 +94,27 @@ namespace Multi_Server_Test.Server.Functions
             }
             catch (Exception) { return -1; }
         }
+        public ReplyLetter GetReplyByLetterId(int id)
+        {
+            string sCommand = $"SELECT * FROM ResponsesToLetters WHERE letterId={id}";
+            var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var answer = reader.GetString(1);
+                        var letterId = reader.GetInt32(2);
+                        var source = reader.IsDBNull(3) ? null : reader.GetString(3);
+                        var responder = reader.GetString(4);
+                        return new ReplyLetter(answer, source, responder, letterId);
+                    }
+                }
+                reader.Close();
+            }
+            return null;
+        }
         private News CheckNewsValidation(News checkNews) //каловая дичь
         {
             string validTitle = "", validDesc = "", validSource = "", validType = "";
@@ -196,6 +217,17 @@ namespace Multi_Server_Test.Server.Functions
                     return true;
             }
             return false;
+        }
+
+        public List<Letter> GetAllLetterByUserId(int id)
+        {
+            var collection = new List<Letter>();
+            foreach (var letter in MyServer.allLetters)
+            {
+                if (letter.SenderId == id)
+                    collection.Add(letter);
+            }
+            return collection;
         }
         public int ReplyToTheLetter(ReplyLetter reply)
         {

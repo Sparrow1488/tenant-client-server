@@ -37,6 +37,11 @@ namespace Multi_Server_Test.ServerData
         public static List<News> allNews = null;
         public static List<Letter> allLetters = null;
         public static List<Person> allUsers = null;
+
+        public static List<News> noSynchNews = new List<News>();
+        public static List<Letter> noSynchLetters = new List<Letter>();
+        public static List<Person> noSynchUsers = new List<Person>();
+
         public static Dictionary<UserToken, Person> tokensDictionary = new Dictionary<UserToken, Person>();
         public MyServer(string host, int port)
         {
@@ -127,10 +132,12 @@ namespace Multi_Server_Test.ServerData
                     modulEvents.BlockReport(this, "Distribute request to handle in main routing controller...", ConsoleColor.Yellow);
 
                     var letterModels = new List<Model>()
-                    { 
+                    {
                         new SendLetterModel("send"),
-                        new GetLetterModel("get"),
-                        new LettersReplyModel("reply")
+                        new GetAllLettersModel("get-all"),
+                        new LettersReplyModel("reply"),
+                        new GetReplyOnLetterModel("get-reply"),
+                        new GetMyLettersModel("get-my")
                     };
 
                     var userModels = new List<Model>()

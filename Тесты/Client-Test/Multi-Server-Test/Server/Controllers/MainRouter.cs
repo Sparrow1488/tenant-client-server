@@ -19,7 +19,7 @@ namespace Multi_Server_Test.ServerData.Blocks
             string request = package.SendingMeta.Action;
             string[] fullRequest = request.Split('/');
             string controllerName = fullRequest[0];
-            string modelAction = fullRequest[1] != null ? fullRequest[1] : "";
+            string modelAction = fullRequest[1] != null ? fullRequest[1] : ""; //TODO: при не верном запросы выбивает ошибку (выбор не существующего индекса)
 
             for (int i = 0; i < allControllers.Count; i++)
             {

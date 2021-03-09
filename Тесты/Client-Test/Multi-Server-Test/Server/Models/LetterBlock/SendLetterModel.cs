@@ -19,9 +19,13 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
             {
                 var getLetter = JsonConvert.DeserializeObject<Letter>(reqObject.ToString());
                 serverEvents.BlockReport(this, "Письмо успешно получено", ConsoleColor.Yellow);
-                Console.WriteLine(getLetter); //TODO: сделать сортер по типу новости (предложение, жалоба, вопрос)
+                Console.WriteLine(getLetter);
+
+                MyServer.allLetters.Add(getLetter);
+                MyServer.noSynchLetters.Add(getLetter);
                 int successInsert = AddLetterInDB(getLetter);
-                Console.WriteLine("Успешно добавлено писем: " + successInsert);
+                serverEvents.BlockReport(this, "Успешно добавлено писем: " + successInsert, ConsoleColor.Green);
+
                 response = Encoding.UTF8.GetBytes("Письмо получено");
                 return response;
             }
@@ -31,7 +35,7 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
                 serverEvents.BlockReport(this, exMessage, ConsoleColor.Red);
                 return Encoding.UTF8.GetBytes(exMessage);
             }
-}
+        }
         private int AddLetterInDB(Letter newLetter)
         {
             string sCommand = "INSERT INTO [Letters] (Title, Description, Type, Sender, DateCreate, SenderId) VALUES (@title, @desc, @type, @sender, @date, @senderId)";

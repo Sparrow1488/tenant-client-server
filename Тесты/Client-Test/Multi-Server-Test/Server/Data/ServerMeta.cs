@@ -27,13 +27,10 @@ namespace Multi_Server_Test.ServerData.Server
             else
                 Console.WriteLine("ОШИБКА ПОДКЛЮЧЕНИЯ К СУБД");
         }
-        public string usersPath = "Multi-server-users";
-        public string newsPath = "Multi-server-news";
-        public string lettersPath = "Multi-server-letters"; 
-
         public string reservePath = "reserve_data";
-        public string reserveNewsCollection = "NEWS_COLLECTION.txt";
-        public string reserveLetters = "LETTERS_ALL.txt";
+        public string reserveNewsCollectionTxt = "NEWS_COLLECTION.txt";
+        public string reserveLettersTxt = "LETTERS_ALL.txt";
+        public string reserveUsersTxt = "LETTERS_ALL.txt";
         public FirebaseClient firebaseClient = null;
         public IFirebaseConfig firebaseConfig = new FirebaseConfig()
         {

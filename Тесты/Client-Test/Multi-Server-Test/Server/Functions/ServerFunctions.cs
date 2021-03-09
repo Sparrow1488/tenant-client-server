@@ -52,14 +52,25 @@ namespace Multi_Server_Test.Server.Functions
                         var title = reader.GetString(1);
                         var desc = reader.GetString(2);
                         var type = reader.GetString(3);
-                        var sender = reader.GetString(4);
                         var date = reader.GetDateTime(5);
-                        selectLetters.Add(new Letter(title, desc, sender, type, date, id));
+                        var senderId = reader.GetInt32(6);
+                        var sender = GetUserLoginById(senderId);
+
+                        selectLetters.Add(new Letter(title, desc, sender, type, date, id, senderId));
                     }
                 }
                 reader.Close();
             }
             return selectLetters;
+        }
+        public string GetUserLoginById(int id)
+        {
+            foreach (var user in MyServer.allUsers)
+            {
+                if (user.Id == id)
+                    return user.Login;
+            }
+            return "delited";
         }
         public int InsertNewsInDB(News news)
         {
@@ -75,7 +86,7 @@ namespace Multi_Server_Test.Server.Functions
                     command.Parameters.AddWithValue("sender", validNews.Sender);
                     command.Parameters.AddWithValue("type",   validNews.Type);
                     var successInsert = command.ExecuteNonQuery();
-                    MyServer.newsCollectionOutDB.Add(validNews);
+                    MyServer.allNews.Add(validNews);
                     return successInsert;
                 }
             }
@@ -111,18 +122,37 @@ namespace Multi_Server_Test.Server.Functions
                 {
                     while (reader.Read())
                     {
+                        var id = reader.GetInt32(0);
                         var login = reader.GetString(1);
                         var password = reader.GetString(2);
                         var name = reader.GetString(3);
                         var lastName = reader.GetString(4);
                         var parentName = reader.GetString(5);
                         var roomNum = Convert.ToInt32(reader.GetValue(6));
-                        return new Person(name, lastName, parentName, login, password, roomNum, null);
+                        return new Person(name, lastName, parentName, login, password, roomNum, id, null);
                     }
                 }
                 reader.Close();
             }
             return null;
+        }
+        public string GetUserLoginOrDefault(int userId)
+        {
+            string sCommand = $"SELECT * FROM Users WHERE Id={userId}";
+            var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var login = reader.GetString(1);
+                        return login;
+                    }
+                }
+                reader.Close();
+            }
+            return "noname";
         }
         public Person GetUserByTokenOrDefault(UserToken token)
         {
@@ -181,14 +211,30 @@ namespace Multi_Server_Test.Server.Functions
                 return successInsert;
             }
         }
-        //private ReplyLetter CheckAnswerValidation(ReplyLetter answer)
-        //{
-        //    ReplyLetter validReply;
-        //    string validAnswer;
-        //    int letterId;
-        //    string validSender;
-        //    if (!string.IsNullOrWhiteSpace(answer.Answer))
-        //        validAnswer = answer
-        //}
+        public List<Person> GetAllUsersOutDB()
+        {
+            var usersCollection = new List<Person>();
+            string sCommand = $"SELECT * FROM Users";
+            var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var id = reader.GetInt32(0);
+                        var login = reader.GetString(1);
+                        var password = reader.GetString(2);
+                        var name = reader.GetString(3);
+                        var lastName = reader.GetString(4);
+                        var parentName = reader.GetString(5);
+                        var roomNum = Convert.ToInt32(reader.GetValue(6));
+                        usersCollection.Add(new Person(name, lastName, parentName, login, password, roomNum, id, null));
+                    }
+                }
+                reader.Close();
+            }
+            return usersCollection;
+        }
     }
 }

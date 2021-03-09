@@ -17,7 +17,7 @@ namespace Multi_Server_Test.Server.Blocks.Auth
         public override byte[] CompleteAction(object reqObject)
         {
             List<News> responseNewsCollection = new List<News>();
-            var newsCollectionToResponse = from news in MyServer.newsCollectionOutDB 
+            var newsCollectionToResponse = from news in MyServer.allNews 
                                            orderby news.DateTime descending
                                            select news;
             foreach (var news in newsCollectionToResponse)

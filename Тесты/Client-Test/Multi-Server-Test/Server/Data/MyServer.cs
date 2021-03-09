@@ -34,8 +34,9 @@ namespace Multi_Server_Test.ServerData
         public TcpListener Listener = null;
         public static ServerMeta Meta = null;
 
-        public static List<News> newsCollectionOutDB = null;
+        public static List<News> allNews = null;
         public static List<Letter> allLetters = null;
+        public static List<Person> allUsers = null;
         public static Dictionary<UserToken, Person> tokensDictionary = new Dictionary<UserToken, Person>();
         public MyServer(string host, int port)
         {
@@ -54,17 +55,36 @@ namespace Multi_Server_Test.ServerData
             }
         }
 
+        private object locker = new object();
         private ServerFunctions functions = new ServerFunctions();
         private Synchronizator synchronizator = new Synchronizator();
         private ServerReportsModule modulEvents = new ServerReportsModule();
         public async void Start()
         {
             Listener.Start();
-            var collectionOutDB = functions.GetAllNewsOutDB();
-            newsCollectionOutDB = await synchronizator.SynchronizeCollection(collectionOutDB, Meta.newsPath, Meta.reserveNewsCollection);
-            foreach (var news in newsCollectionOutDB)
-                Console.WriteLine(news.Title + "\n");
 
+            var allNewsOutDB = functions.GetAllNewsOutDB();
+            allNews = await synchronizator.SynchronizeCollection(allNewsOutDB, Meta.reservePath, Meta.reserveNewsCollectionTxt);
+            Console.WriteLine("Новостей синхронизированно: " + allNews.Count);
+
+            if (allNews != null)
+            {
+                var allUsersOutDB = functions.GetAllUsersOutDB();
+                allUsers = await synchronizator.SynchronizeCollection(allUsersOutDB, Meta.reservePath, Meta.reserveUsersTxt);
+                Console.WriteLine("Пользователей синхронизированно: " + allUsers.Count);
+            }
+
+            if (allUsers != null)
+            {
+                var allLettersOutDB = functions.GetAllLettersOutDB();
+                allLetters = await synchronizator.SynchronizeCollection(allLettersOutDB, Meta.reservePath, Meta.reserveLettersTxt);
+                Console.WriteLine("Писем синхронизированно: " + allLetters.Count);
+            }
+            else
+            {
+                modulEvents.BlockReport(this, "Письма не могут быть получены, поскольку таблица с отправителями пуста!", ConsoleColor.Red);
+            }
+            
             modulEvents.BlockReport(this, "Server started!", ConsoleColor.Green);
         }
         

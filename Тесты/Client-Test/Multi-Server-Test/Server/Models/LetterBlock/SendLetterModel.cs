@@ -34,7 +34,7 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
 }
         private int AddLetterInDB(Letter newLetter)
         {
-            string sCommand = "INSERT INTO [Letters] (Title, Description, Type, Sender, DateCreate) VALUES (@title, @desc, @type, @sender, @date)";
+            string sCommand = "INSERT INTO [Letters] (Title, Description, Type, Sender, DateCreate, SenderId) VALUES (@title, @desc, @type, @sender, @date, @senderId)";
             using (var command1 = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
             {
                 var validLetter = CheckValidation(newLetter);
@@ -44,6 +44,7 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
                 command1.Parameters.AddWithValue("type", validLetter.LetterType);
                 command1.Parameters.AddWithValue("sender", validLetter.SenderLogin);
                 command1.Parameters.AddWithValue("date", validLetter.DateCreate);
+                command1.Parameters.AddWithValue("senderId", validLetter.SenderId);
                 var successCount = command1.ExecuteNonQuery();
                 return successCount;
             }
@@ -61,7 +62,7 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
                 validType = letter.LetterType;
             if (!string.IsNullOrWhiteSpace(letter.SenderLogin))
                 validSender = letter.SenderLogin;
-            var validLetter = new Letter(validTitle, validDesc, validSender, validType, validDate, letter.Id);
+            var validLetter = new Letter(validTitle, validDesc, validSender, validType, validDate, letter.Id, letter.SenderId);
             return validLetter;
         }
     }

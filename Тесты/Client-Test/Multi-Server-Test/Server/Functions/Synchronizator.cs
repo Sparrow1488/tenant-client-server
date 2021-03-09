@@ -17,14 +17,14 @@ namespace Multi_Server_Test.Server.Functions
             {
                 if(collection != null)
                 {
-                    serverEvents.BlockReport("News was loaded successful", ConsoleColor.Green);
+                    serverEvents.BlockReport("Collection was loaded successful", ConsoleColor.Green);
                     if (File.Exists($"{dirPath}/{fileName}"))
                     {
                         using (var writer = new StreamWriter($"{dirPath}/{fileName}"))
                         {
                             var dataJson = JsonConvert.SerializeObject(collection);
                             await writer.WriteAsync(dataJson);
-                            serverEvents.BlockReport("News saved", ConsoleColor.Green);
+                            serverEvents.BlockReport("Collection saved", ConsoleColor.Green);
                         }
                     }
                     else

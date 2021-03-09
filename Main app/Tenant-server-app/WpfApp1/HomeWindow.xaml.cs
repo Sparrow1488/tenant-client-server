@@ -31,6 +31,7 @@ namespace WpfApp1
             profilePage = new ProfilePage();
             noticePage = new NoticePage();
             letterPage = new LetterPage();
+
         }
 
         private void ProfileBtn_Click(object sender, RoutedEventArgs e)

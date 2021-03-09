@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WpfApp1.MyApplication;
 using WpfApp1.Pages.HomePages.ChildLetterPage;
+using WpfApp1.Server.ServerMeta;
 
 namespace WpfApp1.Pages.HomePages
 {
@@ -30,6 +20,7 @@ namespace WpfApp1.Pages.HomePages
         private Page questionPage = new QuestionPage();
         private Page infoPage = new InformationLetterPage();
         private Page universalPage = new UniversalLetterPage();
+        private Page replyesPage = new ReplyReaderPage(null);
         public LetterPage()
         {
             InitializeComponent();
@@ -57,9 +48,16 @@ namespace WpfApp1.Pages.HomePages
             frameBox.Content = offerPage;
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private bool myLettersWasLoaded = false;
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            frameBox.Content = infoPage;
+            if (myLettersWasLoaded == false)
+            {
+                var myLettersCollection = await JumboServer.ActiveServer.GetMyLetters();
+                replyesPage = new ReplyReaderPage(myLettersCollection);
+                myLettersWasLoaded = true;
+            }
+            frameBox.Content = replyesPage;
         }
 
         private void SelectQuestionPageBtn_Click(object sender, RoutedEventArgs e)

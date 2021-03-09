@@ -43,13 +43,6 @@ namespace WpfApp1.Pages.HomePages
                                 MessageBoxImage.Error);
             }
         }
-
-
-        private void AddPanelBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var testNews = new News("Пицца", "Описание пиццы", JumboServer.ActiveServer.ActiveUser.Login);
-            AddNewsPanel(testNews);
-        }
         private void AddNewsPanel(News news)
         {
             var mainBorder = new Border()

@@ -100,9 +100,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\HomePages\ChildLetterPage\ReplyReaderPage.xaml.cs">
+      <DependentUpon>ReplyReaderPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HomePages\ChildLetterPage\UniversalLetterPage.xaml.cs">
       <DependentUpon>UniversalLetterPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Server\Packages\LettersDir\GetMyLetters.cs" />
+    <Compile Include="Server\Packages\LettersDir\GetReplyLetterPackage.cs" />
     <Compile Include="Server\Packages\LettersDir\ReplyToLetter.cs" />
     <Compile Include="Server\Packages\PersonalDir\AuthorizationByTokenPackage.cs" />
     <Compile Include="Server\Packages\PersonalDir\UserToken.cs" />
@@ -182,6 +187,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\HomePages\ChildLetterPage\QuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\HomePages\ChildLetterPage\ReplyReaderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

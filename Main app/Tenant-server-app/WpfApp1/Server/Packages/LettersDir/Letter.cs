@@ -21,6 +21,11 @@ namespace WpfApp1.Server.Packages.Letters
                 SenderId = senderId;
             }
         }
+        public Letter(int id)
+        {
+            if (id > -1)
+                Id = id;
+        }
         [JsonConstructor]
         public Letter(string title, string description, string senderLogin, string letterType, DateTime dateCreate, int id, int senderId)
         {

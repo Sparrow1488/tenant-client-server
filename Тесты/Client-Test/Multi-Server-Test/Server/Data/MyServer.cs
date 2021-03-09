@@ -63,15 +63,20 @@ namespace Multi_Server_Test.ServerData
         {
             Listener.Start();
 
-            var allNewsOutDB = functions.GetAllNewsOutDB();
-            allNews = await synchronizator.SynchronizeCollection(allNewsOutDB, Meta.reservePath, Meta.reserveNewsCollectionTxt);
-            Console.WriteLine("Новостей синхронизированно: " + allNews.Count);
+            
+            var allUsersOutDB = functions.GetAllUsersOutDB();
+            allUsers = await synchronizator.SynchronizeCollection(allUsersOutDB, Meta.reservePath, Meta.reserveUsersTxt);
+            Console.WriteLine("Пользователей синхронизированно: " + allUsers.Count);
 
-            if (allNews != null)
+            if(allUsersOutDB != null)
             {
-                var allUsersOutDB = functions.GetAllUsersOutDB();
-                allUsers = await synchronizator.SynchronizeCollection(allUsersOutDB, Meta.reservePath, Meta.reserveUsersTxt);
-                Console.WriteLine("Пользователей синхронизированно: " + allUsers.Count);
+                var allNewsOutDB = functions.GetAllNewsOutDB();
+                allNews = await synchronizator.SynchronizeCollection(allNewsOutDB, Meta.reservePath, Meta.reserveNewsCollectionTxt);
+                Console.WriteLine("Новостей синхронизированно: " + allNews.Count);
+            }
+            else
+            {
+                modulEvents.BlockReport(this, "Новости не могут быть получены, тк таблица с пользователями пуста", ConsoleColor.Red);
             }
 
             if (allUsers != null)

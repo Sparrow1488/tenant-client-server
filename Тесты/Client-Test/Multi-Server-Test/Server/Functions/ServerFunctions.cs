@@ -23,13 +23,15 @@ namespace Multi_Server_Test.Server.Functions
                 {
                     while (reader.Read())
                     {
+                        int id = reader.GetInt32(0);
                         string title = reader.GetString(1);
                         string description = reader.GetString(2);
                         string source = reader.IsDBNull(3) ? null : reader.GetString(3);
                         DateTime date = reader.IsDBNull(4) ? DateTime.Today : reader.GetDateTime(4);
-                        string sender = reader.IsDBNull(5) ? null : reader.GetString(5);
                         string type = reader.IsDBNull(6) ? null : reader.GetString(6);
-                        var news = new News(title, description, source, sender, type, date);
+                        int senderId = reader.GetInt32(7);
+                        string sender = GetUserLoginById(senderId);
+                        var news = new News(id, title, description, source, sender, type, date, senderId);
                         listNews.Add(news);
                     }
                     return listNews;
@@ -109,7 +111,7 @@ namespace Multi_Server_Test.Server.Functions
                 validDate = checkNews.DateTime;
             if (!string.IsNullOrWhiteSpace(checkNews.Sender))
                 validSender = checkNews.Sender;
-            var validNews = new News(validTitle, validDesc, validSource, validSender, validType, validDate);
+            var validNews = new News(checkNews.Id, validTitle, validDesc, validSource, validSender, validType, validDate, checkNews.SenderId);
             return validNews;
         }
         public Person GetUserOrDefault(Person person)

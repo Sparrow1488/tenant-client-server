@@ -41,7 +41,7 @@ namespace Chairman_Client.Pages.NewsPageChildren
 
         private async void SendNewsPostBtn_Click(object sender, RoutedEventArgs e)
         {
-            var newTest = new News(titleBox.Text, descBox.Text, JumboServer.ActiveServer.ActiveUser.Login, null, "offer", DateTime.Now);
+            var newTest = new News(titleBox.Text, descBox.Text, JumboServer.ActiveServer.ActiveUser.Id, null, "offer");
             var response = await PublishNewPost(newTest);
             MessageBox.Show(response);
         }

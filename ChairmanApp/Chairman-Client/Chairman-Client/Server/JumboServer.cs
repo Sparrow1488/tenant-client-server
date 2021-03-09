@@ -13,6 +13,7 @@ using WpfApp1.Server.Packages.NewsDir;
 using WpfApp1.Server.Packages.PersonalDir;
 using WpfApp1.Server.ServerExceptions;
 using System.Linq;
+using Chairman_Client.Server.Packages.LettersDir;
 
 namespace WpfApp1.Server.ServerMeta
 {
@@ -183,6 +184,34 @@ namespace WpfApp1.Server.ServerMeta
         {
             var pack = new SendLetterPackage(letter);
             return await SendAndGetAsync(pack);
+        }
+
+        public async Task<ReplyLetter> GetReplyByLetterId(int id)
+        {
+            try
+            {
+                var pack = new GetReplyLetterPackage(new Letter(id));
+                var replyJson = await ActiveServer.SendAndGetAsync(pack);
+                var reply = JsonConvert.DeserializeObject<ReplyLetter>(replyJson);
+                if (reply != null)
+                    return reply;
+            }
+            catch { }
+            return null;
+        }
+
+        public async Task<List<Letter>> GetMyLetters()
+        {
+            try
+            {
+                var pack = new GetMyLettersPackage(ActiveServer.ActiveUser);
+                var myLettersCollectionJson = await ActiveServer.SendAndGetAsync(pack);
+                var myLettersCollection = JsonConvert.DeserializeObject<List<Letter>>(myLettersCollectionJson);
+                if (myLettersCollection != null)
+                    return myLettersCollection;
+            }
+            catch { }
+            return null;
         }
 
     }

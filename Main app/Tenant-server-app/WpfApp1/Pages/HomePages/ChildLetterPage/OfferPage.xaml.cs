@@ -21,40 +21,40 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
 
         private async void sendLetterBtn_Click(object sender, RoutedEventArgs e)
         { //TODO: копипаст кода
-            var btn = (Button)sender;
-            btn.IsEnabled = false;
-            string result = string.Empty;
-            try
-            {
-                var letterSender = JumboServer.ActiveServer.ActiveUser.Login;
-                var sendLetter = new OfferLetter(titleLetter.Text,
-                                                 descriptionLetter.Text,
-                                                 letterSender);
-                result = await JumboServer.ActiveServer.SendLetter(sendLetter);
-                LetterPage.ShowMessage(result);
-            }
-            catch (SocketException)
-            {
-                result = "Ошибка подключения: данные не отправлены.";
-                LetterPage.ShowExceptionMessage(result);
-            }
-            catch (IOException)
-            {
-                result = "Ошибка сервера: данные отправлены, но не могут быть получены.";
-                LetterPage.ShowExceptionMessage(result);
-            }
-            catch (ArgumentException ex)
-            {
-                LetterPage.ShowExceptionMessage(ex.Message);
-            }
-            catch (JumboServerException ex)
-            {
-                LetterPage.ShowExceptionMessage(ex.Message);
-            }
-            finally
-            {
-                btn.IsEnabled = true;
-            }
+            //var btn = (Button)sender;
+            //btn.IsEnabled = false;
+            //string result = string.Empty;
+            //try
+            //{
+            //    var letterSender = JumboServer.ActiveServer.ActiveUser.Login;
+            //    var sendLetter = new OfferLetter(titleLetter.Text,
+            //                                     descriptionLetter.Text,
+            //                                     letterSender);
+            //    result = await JumboServer.ActiveServer.SendLetter(sendLetter);
+            //    LetterPage.ShowMessage(result);
+            //}
+            //catch (SocketException)
+            //{
+            //    result = "Ошибка подключения: данные не отправлены.";
+            //    LetterPage.ShowExceptionMessage(result);
+            //}
+            //catch (IOException)
+            //{
+            //    result = "Ошибка сервера: данные отправлены, но не могут быть получены.";
+            //    LetterPage.ShowExceptionMessage(result);
+            //}
+            //catch (ArgumentException ex)
+            //{
+            //    LetterPage.ShowExceptionMessage(ex.Message);
+            //}
+            //catch (JumboServerException ex)
+            //{
+            //    LetterPage.ShowExceptionMessage(ex.Message);
+            //}
+            //finally
+            //{
+            //    btn.IsEnabled = true;
+            //}
         }
     }
 }

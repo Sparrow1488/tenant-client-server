@@ -10,18 +10,19 @@ namespace WpfApp1.Server.Packages.Letters
         public string Title { get; }
         public string Description { get; }
         public string SenderLogin { get; }
+        public int SenderId { get; }
         public DateTime DateCreate = DateTime.Now;
-        public Letter(string title, string description, string senderLogin)
+        public Letter(string title, string description, int senderId)
         {
-            if(!string.IsNullOrWhiteSpace(senderLogin))
+            if(senderId > -1)
             {
                 Title = title;
                 Description = description;
-                SenderLogin = senderLogin;
+                SenderId = senderId;
             }
         }
         [JsonConstructor]
-        public Letter(string title, string description, string senderLogin, string letterType, DateTime dateCreate, int id)
+        public Letter(string title, string description, string senderLogin, string letterType, DateTime dateCreate, int id, int senderId)
         {
             if (!string.IsNullOrWhiteSpace(senderLogin))
             {
@@ -31,6 +32,7 @@ namespace WpfApp1.Server.Packages.Letters
                 LetterType = letterType;
                 DateCreate = dateCreate;
                 Id = id;
+                SenderId = senderId;
             }
         }
     }

@@ -38,7 +38,7 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
             string result = string.Empty;
             try
             {
-                var sendLetter = SelectLetterType(titleBox.Text, descBox.Text, JumboServer.ActiveServer.ActiveUser.Login);
+                var sendLetter = SelectLetterType(titleBox.Text, descBox.Text, JumboServer.ActiveServer.ActiveUser.Id);
                 if (sendLetter != null)
                 {
                     var letterSender = JumboServer.ActiveServer.ActiveUser.Login;
@@ -60,14 +60,14 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
                 btn.IsEnabled = true;
             }
         }
-        private Letter SelectLetterType(string title, string desc, string sender)
+        private Letter SelectLetterType(string title, string desc, int senderId)
         {
             if ((bool)offerType.IsChecked)
-                return new OfferLetter(title, desc, sender);
+                return new OfferLetter(title, desc, senderId);
             if ((bool)complaintType.IsChecked)
-                return new ComplaintLetter(title, desc, sender);
+                return new ComplaintLetter(title, desc, senderId);
             if ((bool)questionType.IsChecked)
-                return new QuestionLetter(title, desc, sender);
+                return new QuestionLetter(title, desc, senderId);
             return null;
         }
         private void descBox_MouseEnter(object sender, MouseEventArgs e)

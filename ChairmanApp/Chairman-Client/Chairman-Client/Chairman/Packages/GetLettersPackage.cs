@@ -7,7 +7,7 @@ namespace Chairman_Client.Chairman.Packages
     {
         public GetLettersPackage()
         {
-            SendingMeta = new PackageMeta(new ServerConfig().HOST, "Letter/get");
+            SendingMeta = new PackageMeta(new ServerConfig().HOST, "Letter/get-all");
         }
     }
 }

@@ -14,6 +14,7 @@ using WpfApp1.Server.Packages.PersonalDir;
 using WpfApp1.Server.ServerExceptions;
 using System.Linq;
 using Chairman_Client.Server.Packages.LettersDir;
+using WpfApp1.Server.Packages.SourceDir;
 
 namespace WpfApp1.Server.ServerMeta
 {
@@ -169,15 +170,19 @@ namespace WpfApp1.Server.ServerMeta
         }
         private void ReadStreamData(NetworkStream readStream, ref byte[] buffer, ref StringBuilder builder)
         {
-            if (readStream.CanRead)
+            try
             {
-                do
+                if (readStream.CanRead)
                 {
-                    int bytesSize = readStream.Read(buffer, 0, buffer.Length);
-                    builder.Append(Encoding.UTF8.GetString(buffer, 0, bytesSize));
+                    do
+                    {
+                        int bytesSize = readStream.Read(buffer, 0, buffer.Length);
+                        builder.Append(Encoding.UTF8.GetString(buffer, 0, bytesSize));
+                    }
+                    while (readStream.DataAvailable);
                 }
-                while (readStream.DataAvailable);
             }
+            catch (IOException) { }
         }
 
         public async Task<string> SendLetter(Letter letter)
@@ -209,6 +214,17 @@ namespace WpfApp1.Server.ServerMeta
                 var myLettersCollection = JsonConvert.DeserializeObject<List<Letter>>(myLettersCollectionJson);
                 if (myLettersCollection != null)
                     return myLettersCollection;
+            }
+            catch { }
+            return null;
+        }
+        public async Task<string> AddSource(Source source)
+        {
+            try
+            {
+                var pack = new AddNewsSourcePackage(source);
+                var response = await ActiveServer.SendAndGetAsync(pack);
+                return response;
             }
             catch { }
             return null;

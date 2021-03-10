@@ -11,6 +11,10 @@ namespace WpfApp1.Server.Packages
             SendingObject = sendObj;
         }
         public Package() { }
+        public Package(string request) 
+        {
+            SendingObject = request;
+        }
 
         public object SendingObject { get; }
         public PackageMeta SendingMeta { get; protected set; }

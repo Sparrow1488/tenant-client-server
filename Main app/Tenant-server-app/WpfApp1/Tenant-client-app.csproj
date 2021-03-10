@@ -112,6 +112,7 @@
     <Compile Include="Server\Packages\PersonalDir\AuthorizationByTokenPackage.cs" />
     <Compile Include="Server\Packages\PersonalDir\UserToken.cs" />
     <Compile Include="Server\Packages\SourceDir\AddNewsSourcePackage.cs" />
+    <Compile Include="Server\Packages\SourceDir\GetSourceByTokenPackage.cs" />
     <Compile Include="Server\Packages\SourceDir\Source.cs" />
     <Compile Include="Server\ServerExceptions\ConnectionException.cs" />
     <Compile Include="Server\ServerExceptions\GetResponseException.cs" />

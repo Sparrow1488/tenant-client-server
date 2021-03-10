@@ -218,13 +218,31 @@ namespace WpfApp1.Server.ServerMeta
             catch { }
             return null;
         }
+
+        /// <summary>
+        /// Добавить картинку на сервер
+        /// </summary>
+        /// <param name="source">Закодированная картинка</param>
+        /// <returns>Возвращает уникальный токен-идентификатор контента</returns>
         public async Task<string> AddSource(Source source)
         {
             try
             {
                 var pack = new AddNewsSourcePackage(source);
-                var response = await ActiveServer.SendAndGetAsync(pack);
-                return response;
+                var imageToken = await ActiveServer.SendAndGetAsync(pack);
+                return imageToken;
+            }
+            catch { }
+            return null;
+        }
+        public async Task<Source> GetSourceByToken(string token)
+        {
+            try
+            {
+                var pack = new GetSourceByTokenPackage(token);
+                var responseJson = await ActiveServer.SendAndGetAsync(pack);
+                var getSource = JsonConvert.DeserializeObject<Source>(responseJson);
+                return getSource;
             }
             catch { }
             return null;

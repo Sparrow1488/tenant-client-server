@@ -17,9 +17,15 @@ namespace Multi_Server_Test.ServerData.Blocks
         public void ExecuteRouting(Package package, TcpClient connectedClient)
         {
             string request = package.SendingMeta.Action;
+            string controllerName = "Info";
+            string modelAction = "info";
+            if (request == null)
+                return;
             string[] fullRequest = request.Split('/');
-            string controllerName = fullRequest[0];
-            string modelAction = fullRequest[1] != null ? fullRequest[1] : ""; //TODO: при не верном запросы выбивает ошибку (выбор не существующего индекса)
+            if (fullRequest.Length < 2)
+                return;
+            controllerName = fullRequest[0];
+            modelAction = fullRequest[1];
 
             for (int i = 0; i < allControllers.Count; i++)
             {

@@ -12,8 +12,6 @@ namespace Multi_Server_Test
             MyServer myServer = new MyServer("127.0.0.1", 8090);
             myServer.Start();
 
-            //TODO: сделать отправку сообщений председателю
-            //TODO: сделать клиент председателя
             myServer.ServeAndResponseToClient();
             Console.WriteLine("Server disconnect.");
         }

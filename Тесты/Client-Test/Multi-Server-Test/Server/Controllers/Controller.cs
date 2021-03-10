@@ -33,7 +33,7 @@ namespace Multi_Server_Test.Server.Controllers
                     Console.WriteLine(ControllerName + "> Не найдено модели под запрос");
                 }
             }
-            return modelResponseData;
+            return modelResponseData = Encoding.UTF8.GetBytes("Ошибка запроса: не существует модели под данный запрос!");
         }
     }
 }

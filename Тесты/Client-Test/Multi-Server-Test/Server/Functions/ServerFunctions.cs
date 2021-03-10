@@ -2,6 +2,7 @@
 using Multi_Server_Test.Server.Blocks.LetterBlock;
 using Multi_Server_Test.Server.Models.AuthBlock;
 using Multi_Server_Test.Server.Models.LetterBlock;
+using Multi_Server_Test.Server.Models.SourceBlock;
 using Multi_Server_Test.Server.Packages;
 using Multi_Server_Test.ServerData;
 using System;
@@ -271,16 +272,16 @@ namespace Multi_Server_Test.Server.Functions
             }
             return usersCollection;
         }
-        public int InsertImageInDB(string base64Image)
+        public int InsertImageInDB(Source source)
         {
             try
             {
                 string sCommand = "INSERT INTO [Sources] (Data, Type, SenderId, DateCreate) VALUES (@data, @type, @senderId, @date)";
                 using (var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
                 {
-                    command.Parameters.AddWithValue("data", base64Image);
-                    command.Parameters.AddWithValue("type", ".jpg");
-                    command.Parameters.AddWithValue("senderId", -1);
+                    command.Parameters.AddWithValue("data", source.Data);
+                    command.Parameters.AddWithValue("type", "нэту");
+                    command.Parameters.AddWithValue("senderId", source.SenderId);
                     command.Parameters.AddWithValue("date", DateTime.Now);
                     var successInsert = command.ExecuteNonQuery();
                     return successInsert;
@@ -288,9 +289,9 @@ namespace Multi_Server_Test.Server.Functions
             }
             catch (Exception) { return -1; }
         }
-        public string GetImageBase64OutDB(int imageId)
+        public string GetImageBase64ByIdOutDB(int sourceId)
         {
-            string sCommand = $"SELECT * FROM Sources WHERE id={imageId}";
+            string sCommand = $"SELECT * FROM Sources WHERE id={sourceId}";
             var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
             using (var reader = command.ExecuteReader())
             {

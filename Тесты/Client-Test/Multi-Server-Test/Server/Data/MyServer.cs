@@ -8,6 +8,7 @@ using Multi_Server_Test.Server.Functions;
 using Multi_Server_Test.Server.Models.AuthBlock;
 using Multi_Server_Test.Server.Models.LetterBlock;
 using Multi_Server_Test.Server.Models.NewsBlock;
+using Multi_Server_Test.Server.Models.SourceBlock;
 using Multi_Server_Test.Server.Packages;
 using Multi_Server_Test.ServerData.Blocks;
 using Multi_Server_Test.ServerData.Blocks.Auth;
@@ -152,11 +153,17 @@ namespace Multi_Server_Test.ServerData
                         new AddNewsModel("add")
                     };
 
+                    var sourceModels = new List<Model>()
+                    {
+                        new AddSourceModel("add")
+                    };
+
                     List<Controller> newControllers = new List<Controller>()
                     {
                         new UserController("User", userModels),
                         new NewsController("News", newsModels),
-                        new LettersController("Letter", letterModels)
+                        new LettersController("Letter", letterModels),
+                        new SourceController("Source", sourceModels)
                     };
 
                     MainRouter router = new MainRouter(newControllers);

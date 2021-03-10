@@ -1,0 +1,2 @@
+clienId = 914947009330-d7prrhnf34lir5pn72ulg7k70iu602gi.apps.googleusercontent.com
+secret = uwUtoREcFLLt3v0RKc3tsz_V

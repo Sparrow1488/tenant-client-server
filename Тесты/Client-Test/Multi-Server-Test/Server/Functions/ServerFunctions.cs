@@ -78,17 +78,19 @@ namespace Multi_Server_Test.Server.Functions
         {
             try
             {
-                string sCommand = "INSERT INTO [News] (Title, Description, DateCreate, Sender, Type) VALUES (@title, @desc, @date, @sender, @type)";
+                string sCommand = "INSERT INTO [News] (Title, Description, DateCreate, Sender, Type, SenderId) VALUES (@title, @desc, @date, @sender, @type, @senderId)";
                 using (var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
                 {
                     var validNews = CheckNewsValidation(news);
                     command.Parameters.AddWithValue("title",  validNews.Title);
                     command.Parameters.AddWithValue("desc",   validNews.Description);
                     command.Parameters.AddWithValue("date",   validNews.DateTime);
-                    command.Parameters.AddWithValue("sender", validNews.Sender);
+                    command.Parameters.AddWithValue("sender", "");
                     command.Parameters.AddWithValue("type",   validNews.Type);
+                    command.Parameters.AddWithValue("senderId",   validNews.SenderId);
                     var successInsert = command.ExecuteNonQuery();
-                    MyServer.allNews.Add(validNews);
+                    if (successInsert > 0)
+                        MyServer.allNews.Add(validNews);
                     return successInsert;
                 }
             }
@@ -117,8 +119,8 @@ namespace Multi_Server_Test.Server.Functions
         }
         private News CheckNewsValidation(News checkNews) //каловая дичь
         {
-            string validTitle = "", validDesc = "", validSource = "", validType = "";
-            DateTime validDate = Convert.ToDateTime("1/1/1900 12:00:00 ");
+            string validTitle = "", validDesc = "", validSource = "", validType = "notice";
+            DateTime validDate = DateTime.Now;
             string validSender = "noname";
             if (!string.IsNullOrWhiteSpace(checkNews.Title))
                 validTitle = checkNews.Title;

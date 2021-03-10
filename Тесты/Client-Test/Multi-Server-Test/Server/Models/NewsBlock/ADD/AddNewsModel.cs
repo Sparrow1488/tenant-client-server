@@ -20,9 +20,6 @@ namespace Multi_Server_Test.Server.Models.NewsBlock
             var jsonNews = JsonConvert.SerializeObject(reqObject);
             var newsForInsert = JsonConvert.DeserializeObject<News>(jsonNews);
 
-            MyServer.allNews.Add(newsForInsert);
-            MyServer.noSynchNews.Add(newsForInsert);
-
             bool canInsertInDB = CheckNewsValidation(newsForInsert);
 
             if (canInsertInDB)
@@ -30,6 +27,9 @@ namespace Multi_Server_Test.Server.Models.NewsBlock
                 var success = serverFunctions.InsertNewsInDB(newsForInsert); //TODO: сделать таймер для автоматической синхронизации коллекций
                 if (success > 0)
                 {
+                    MyServer.allNews.Add(newsForInsert);
+                    MyServer.noSynchNews.Add(newsForInsert);
+
                     serverEvents.BlockReport(this, "Успешно выполнено запросов: " + success, ConsoleColor.Green);
                     responseMessage = "Новость успешно опубликована";
                 }

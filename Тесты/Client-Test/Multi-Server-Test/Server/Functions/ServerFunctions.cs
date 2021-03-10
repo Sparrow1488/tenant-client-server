@@ -7,6 +7,7 @@ using Multi_Server_Test.ServerData;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Drawing;
 
 namespace Multi_Server_Test.Server.Functions
 {
@@ -89,8 +90,6 @@ namespace Multi_Server_Test.Server.Functions
                     command.Parameters.AddWithValue("type",   validNews.Type);
                     command.Parameters.AddWithValue("senderId",   validNews.SenderId);
                     var successInsert = command.ExecuteNonQuery();
-                    if (successInsert > 0)
-                        MyServer.allNews.Add(validNews);
                     return successInsert;
                 }
             }
@@ -271,6 +270,41 @@ namespace Multi_Server_Test.Server.Functions
                 reader.Close();
             }
             return usersCollection;
+        }
+        public int InsertImageInDB(string base64Image)
+        {
+            try
+            {
+                string sCommand = "INSERT INTO [Sources] (Data, Type, SenderId, DateCreate) VALUES (@data, @type, @senderId, @date)";
+                using (var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
+                {
+                    command.Parameters.AddWithValue("data", base64Image);
+                    command.Parameters.AddWithValue("type", ".jpg");
+                    command.Parameters.AddWithValue("senderId", -1);
+                    command.Parameters.AddWithValue("date", DateTime.Now);
+                    var successInsert = command.ExecuteNonQuery();
+                    return successInsert;
+                }
+            }
+            catch (Exception) { return -1; }
+        }
+        public string GetImageBase64OutDB(int imageId)
+        {
+            string sCommand = $"SELECT * FROM Sources WHERE id={imageId}";
+            var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var data = reader.GetString(1);
+                        return data;
+                    }
+                }
+                reader.Close();
+            }
+            return "nodata";
         }
     }
 }

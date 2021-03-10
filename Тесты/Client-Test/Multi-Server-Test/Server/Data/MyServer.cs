@@ -155,7 +155,8 @@ namespace Multi_Server_Test.ServerData
 
                     var sourceModels = new List<Model>()
                     {
-                        new AddSourceModel("add")
+                        new AddSourceModel("add"),
+                        new GetSourceModel("get-token")
                     };
 
                     List<Controller> newControllers = new List<Controller>()

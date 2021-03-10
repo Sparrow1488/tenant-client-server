@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Multi_Server_Test.Server.Models.SourceBlock;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,12 +8,15 @@ namespace Multi_Server_Test.Server.Packages
 {
     public class News
     {
-        public string Title { get; set; }
         public int Id { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
-        public string Source { get; set; }
+
+        public string SourcesId { get; set; }
+
         public string Sender { get; set; }
         public int SenderId { get; set; }
+
         public string Type { get; set; }
         public DateTime DateTime { get; set; } = DateTime.MinValue;
         public News(string title, string desc, DateTime date)
@@ -23,13 +27,13 @@ namespace Multi_Server_Test.Server.Packages
             DateTime = date;
         }
         [JsonConstructor]
-        public News(int id, string title, string description, string source, string sender, string type, DateTime dateTime, int senderId)
+        public News(int id, string title, string description, string sourcesId, string sender, string type, DateTime dateTime, int senderId)
         {
             Id = id;
             Title = title;
             Description = description;
             DateTime = dateTime;
-            Source = source;
+            SourcesId = sourcesId;
             Sender = sender;
             Type = type;
             SenderId = senderId;

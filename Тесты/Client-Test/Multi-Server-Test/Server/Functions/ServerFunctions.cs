@@ -8,7 +8,7 @@ using Multi_Server_Test.ServerData;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Drawing;
+using System.Text;
 
 namespace Multi_Server_Test.Server.Functions
 {
@@ -28,12 +28,12 @@ namespace Multi_Server_Test.Server.Functions
                         int id = reader.GetInt32(0);
                         string title = reader.GetString(1);
                         string description = reader.GetString(2);
-                        string source = reader.IsDBNull(3) ? null : reader.GetString(3);
+                        string sources = reader.IsDBNull(3) ? null : reader.GetString(3);
                         DateTime date = reader.IsDBNull(4) ? DateTime.Today : reader.GetDateTime(4);
                         string type = reader.IsDBNull(6) ? null : reader.GetString(6);
                         int senderId = reader.GetInt32(7);
                         string sender = GetUserLoginById(senderId);
-                        var news = new News(id, title, description, source, sender, type, date, senderId);
+                        var news = new News(id, title, description, sources, sender, type, date, senderId);
                         listNews.Add(news);
                     }
                     return listNews;
@@ -98,7 +98,7 @@ namespace Multi_Server_Test.Server.Functions
         }
         public ReplyLetter GetReplyByLetterId(int id)
         {
-            string sCommand = $"SELECT * FROM ResponsesToLetters WHERE letterId={id}";
+            string sCommand = $"SELECT * FROM ResponsesToLetters WHERE letterId=N'{id}'";
             var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
             using (var reader = command.ExecuteReader())
             {
@@ -119,22 +119,22 @@ namespace Multi_Server_Test.Server.Functions
         }
         private News CheckNewsValidation(News checkNews) //каловая дичь
         {
-            string validTitle = "", validDesc = "", validSource = "", validType = "notice";
+            string validTitle = "", validDesc = "", validSources = "", validType = "notice";
             DateTime validDate = DateTime.Now;
             string validSender = "noname";
             if (!string.IsNullOrWhiteSpace(checkNews.Title))
                 validTitle = checkNews.Title;
             if (!string.IsNullOrWhiteSpace(checkNews.Description))
                 validDesc = checkNews.Description;
-            if (!string.IsNullOrWhiteSpace(checkNews.Source))
-                validSource = checkNews.Source;
+            if (!string.IsNullOrWhiteSpace(checkNews.SourcesId))
+                validSources = checkNews.SourcesId;
             if (!string.IsNullOrWhiteSpace(checkNews.Type))
                 validType = checkNews.Type;
             if (checkNews.DateTime != null)
                 validDate = checkNews.DateTime;
             if (!string.IsNullOrWhiteSpace(checkNews.Sender))
                 validSender = checkNews.Sender;
-            var validNews = new News(checkNews.Id, validTitle, validDesc, validSource, validSender, validType, validDate, checkNews.SenderId);
+            var validNews = new News(checkNews.Id, validTitle, validDesc, validSources, validSender, validType, validDate, checkNews.SenderId);
             return validNews;
         }
         public Person GetUserOrDefault(Person person)
@@ -163,7 +163,7 @@ namespace Multi_Server_Test.Server.Functions
         }
         public string GetUserLoginOrDefault(int userId)
         {
-            string sCommand = $"SELECT * FROM Users WHERE Id={userId}";
+            string sCommand = $"SELECT * FROM Users WHERE Id=N'{userId}'";
             var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
             using (var reader = command.ExecuteReader())
             {
@@ -272,26 +272,42 @@ namespace Multi_Server_Test.Server.Functions
             }
             return usersCollection;
         }
-        public int InsertImageInDB(Source source)
+        public string InsertImageInDB(Source source)
         {
             try
             {
-                string sCommand = "INSERT INTO [Sources] (Data, Type, SenderId, DateCreate) VALUES (@data, @type, @senderId, @date)";
+                string sCommand = "INSERT INTO [Sources] (Data, Token, SenderId, DateCreate) VALUES (@data, @token, @senderId, @date)";
                 using (var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
                 {
                     command.Parameters.AddWithValue("data", source.Data);
-                    command.Parameters.AddWithValue("type", "нэту");
+                    string imageToken = GenerateImageToken();
+                    command.Parameters.AddWithValue("token", imageToken);
                     command.Parameters.AddWithValue("senderId", source.SenderId);
                     command.Parameters.AddWithValue("date", DateTime.Now);
-                    var successInsert = command.ExecuteNonQuery();
-                    return successInsert;
+                    command.ExecuteNonQuery();
+                    return imageToken;
                 }
             }
-            catch (Exception) { return -1; }
+            catch (Exception) { return null; }
         }
-        public string GetImageBase64ByIdOutDB(int sourceId)
+        public string GenerateImageToken()
         {
-            string sCommand = $"SELECT * FROM Sources WHERE id={sourceId}";
+            StringBuilder imageToken = new StringBuilder();
+            var rnd = new Random();
+            int repeatCount = 5;
+            for (int i = 0; i < repeatCount; i++)
+            {
+                var num = rnd.Next(5000, 10000);
+                imageToken.Append(num.ToString());
+                if (i == repeatCount - 1)
+                    return imageToken.ToString();
+                imageToken.Append("-");
+            }
+            return imageToken.ToString();
+        }
+        public Source GetSourceByTokenOutDB(string sourceToken)
+        {
+            string sCommand = $"SELECT * FROM Sources WHERE Token=N'{sourceToken}'";
             var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
             using (var reader = command.ExecuteReader())
             {
@@ -300,12 +316,16 @@ namespace Multi_Server_Test.Server.Functions
                     while (reader.Read())
                     {
                         var data = reader.GetString(1);
-                        return data;
+                        var token = reader.GetString(2);
+                        var senderId = reader.GetInt32(3);
+                        var date = reader.GetDateTime(4);
+                        var selectSource = new Source(data, token, senderId, date);
+                        return selectSource;
                     }
                 }
                 reader.Close();
             }
-            return "nodata";
+            return null;
         }
     }
 }

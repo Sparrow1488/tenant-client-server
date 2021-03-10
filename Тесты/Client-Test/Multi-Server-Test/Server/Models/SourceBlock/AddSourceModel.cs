@@ -22,11 +22,11 @@ namespace Multi_Server_Test.Server.Models.SourceBlock
                 var source = JsonConvert.DeserializeObject<Source>(reqObject.ToString());
                 if(!string.IsNullOrWhiteSpace(source.Data) && source.SenderId > 0)
                 {
-                    var success = serverFunctions.InsertImageInDB(source);
-                    if(success > 0)
+                    var tokenSource = serverFunctions.InsertImageInDB(source);
+                    if(tokenSource != null)
                     {
                         serverEvents.BlockReport(this, "Контент успешно добавлен в БД", ConsoleColor.Green);
-                        response = Encoding.UTF8.GetBytes("Картинка успешно загружена");
+                        response = Encoding.UTF8.GetBytes(tokenSource);
                     }
                     else
                     {

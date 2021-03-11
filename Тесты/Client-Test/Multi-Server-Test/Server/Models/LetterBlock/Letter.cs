@@ -9,13 +9,14 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
         public string LetterType { get; }
         public string Title { get; }
         public int Id { get; }
+        public string[] SourcesTokens { get; }
         public string Description { get; }
         public string SenderLogin { get; }
         public int SenderId { get; }
         public DateTime DateCreate { get; }
 
         [JsonConstructor]
-        public Letter(string title, string description, string senderLogin, string letterType, DateTime dateCreate, int id, int senderId)
+        public Letter(string title, string description, string senderLogin, string letterType, DateTime dateCreate, int id, int senderId, string[] sourcesTokens)
         {
             Title = title;
             Description = description;
@@ -26,6 +27,7 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
             else DateCreate = dateCreate;
             Id = id;
             SenderId = senderId;
+            SourcesTokens = sourcesTokens;
         }
         public override string ToString()
         {

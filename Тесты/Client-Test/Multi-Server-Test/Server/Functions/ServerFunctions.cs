@@ -5,6 +5,7 @@ using Multi_Server_Test.Server.Models.LetterBlock;
 using Multi_Server_Test.Server.Models.SourceBlock;
 using Multi_Server_Test.Server.Packages;
 using Multi_Server_Test.ServerData;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -59,13 +60,35 @@ namespace Multi_Server_Test.Server.Functions
                         var date = reader.GetDateTime(5);
                         var senderId = reader.GetInt32(6);
                         var sender = GetUserLoginById(senderId);
+                        var sources = reader.IsDBNull(7) ? null : reader.GetString(7);
+                        string[] arraySourcesLetter = null;
+                        if (!string.IsNullOrWhiteSpace(sources))
+                            arraySourcesLetter = JsonConvert.DeserializeObject<string[]>(sources);
 
-                        selectLetters.Add(new Letter(title, desc, sender, type, date, id, senderId));
+                        selectLetters.Add(new Letter(title, desc, sender, type, date, id, senderId, arraySourcesLetter));
                     }
                 }
                 reader.Close();
             }
             return selectLetters;
+        }
+        public int AddLetterInDB(Letter newLetter)
+        {
+            string sCommand = "INSERT INTO [Letters] (Title, Description, Type, DateCreate, SenderId, SourcesTokens) VALUES (@title, @desc, @type, @date, @senderId, @sources)";
+            using (var command1 = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
+            {
+                var validLetter = newLetter; //TODO: сделать валидацию письма
+                Console.WriteLine("Letter: " + MyServer.Meta.sqlConnection.State);
+                command1.Parameters.AddWithValue("title", validLetter.Title);
+                command1.Parameters.AddWithValue("desc", validLetter.Description);
+                command1.Parameters.AddWithValue("type", validLetter.LetterType);
+                command1.Parameters.AddWithValue("date", validLetter.DateCreate);
+                command1.Parameters.AddWithValue("senderId", validLetter.SenderId);
+                string jsonSourcesArray = JsonConvert.SerializeObject(validLetter.SourcesTokens);
+                command1.Parameters.AddWithValue("sources", jsonSourcesArray);
+                var successCount = command1.ExecuteNonQuery();
+                return successCount;
+            }
         }
         public string GetUserLoginById(int id)
         {
@@ -221,7 +244,7 @@ namespace Multi_Server_Test.Server.Functions
             return false;
         }
 
-        public List<Letter> GetAllLetterByUserId(int id)
+        public List<Letter> GetPersonalLetterByUserId(int id)
         {
             var collection = new List<Letter>();
             foreach (var letter in MyServer.allLetters)

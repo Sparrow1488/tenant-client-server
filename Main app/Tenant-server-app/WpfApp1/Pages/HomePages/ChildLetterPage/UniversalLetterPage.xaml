@@ -85,30 +85,30 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <RadioButton
-                            ToolTip="Выберите, если хотите пожаловаться"
                             x:Name="complaintType"
                             Grid.Column="0"
                             Margin="5,0,0,0"
                             VerticalContentAlignment="Center"
                             Content="Жалоба"
                             IsChecked="True"
-                            Style="{StaticResource additionalTextStyle}" />
+                            Style="{StaticResource additionalTextStyle}"
+                            ToolTip="Выберите, если хотите пожаловаться" />
                         <RadioButton
-                            ToolTip="Выберите, если у Вас есть к нам предложение"
                             x:Name="offerType"
                             Grid.Column="1"
                             Margin="5,0,0,0"
                             VerticalContentAlignment="Center"
                             Content="Предложение"
-                            Style="{StaticResource additionalTextStyle}" />
+                            Style="{StaticResource additionalTextStyle}"
+                            ToolTip="Выберите, если у Вас есть к нам предложение" />
                         <RadioButton
-                            ToolTip="Выберите, если хотите задать вопрос"
                             x:Name="questionType"
                             Grid.Column="2"
                             Margin="5,0,0,0"
                             VerticalContentAlignment="Center"
                             Content="Вопрос"
-                            Style="{StaticResource additionalTextStyle}" />
+                            Style="{StaticResource additionalTextStyle}"
+                            ToolTip="Выберите, если хотите задать вопрос" />
                     </Grid>
                 </GroupBox>
                 <Grid>
@@ -121,7 +121,7 @@
                         Margin="0,5"
                         Background="Transparent"
                         BorderThickness="0"
-                        Click="Button_Click"
+                        Click="SendLetterBtn_Click"
                         Style="{StaticResource defTextStyle}">
                         <WrapPanel>
                             <Image
@@ -132,10 +132,12 @@
                         </WrapPanel>
                     </Button>
                     <Button
+                        x:Name="sourceAttacherBtn"
                         Grid.Column="1"
                         Margin="0,5"
                         Background="Transparent"
                         BorderThickness="0"
+                        Click="AttachFile_Click_1"
                         Style="{StaticResource defTextStyle}">
                         <WrapPanel>
                             <Image

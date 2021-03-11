@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using WpfApp1.Server.Packages.Letters;
+using WpfApp1.Server.Packages.SourceDir;
 using WpfApp1.Server.ServerExceptions;
 using WpfApp1.Server.ServerMeta;
 
@@ -14,12 +18,13 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
     /// </summary>
     public partial class UniversalLetterPage : Page
     {
+        private List<string> UploadedSourceTokens = new List<string>();
         public UniversalLetterPage()
         {
             InitializeComponent();
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void SendLetterBtn_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender;
             btn.IsEnabled = false;
@@ -32,13 +37,11 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
                 {
                     var letterSender = JumboServer.ActiveServer.ActiveUser.Login;
                     
-                    result = await JumboServer.ActiveServer.SendLetter(sendLetter);
+                    result = await JumboServer.ActiveServer.SendLetter(sendLetter); //TODO: сделать нормальный ответ от сервера (прим.: 1-успешно, 2-ошибка и тд)
                     LetterPage.ShowMessage(result);
+                    UploadedSourceTokens.Clear();
+                    MessageBox.Show("Все вложения удалены локально, но загружены на сервер", "Warning attaches");
                 }
-            }
-            catch (JumboServerException ex)
-            {
-                LetterPage.ShowExceptionMessage(ex.Message);
             }
             catch (Exception ex)
             {
@@ -72,5 +75,32 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
             textBox.BorderThickness = new Thickness(0);
         }
 
+        private async void AttachFile_Click_1(object sender, RoutedEventArgs e)
+        {
+            string base64Data = string.Empty;
+            OpenFileDialog dialog = new OpenFileDialog();
+            if(dialog.ShowDialog() == true)
+            {
+                string filePath = dialog.FileName;
+                base64Data = Convert.ToBase64String(File.ReadAllBytes(filePath));
+                FileInfo info = new FileInfo(filePath);
+                MessageBox.Show(info.Extension, "File extension");
+            }
+            if (!string.IsNullOrWhiteSpace(base64Data))
+            {
+                var newSource = new Source(base64Data, JumboServer.ActiveServer.ActiveUser.Id);
+                var sourceToken = await JumboServer.ActiveServer.AddSource(newSource);
+                if (!string.IsNullOrWhiteSpace(sourceToken))
+                {
+                    UploadedSourceTokens.Add(sourceToken);
+                    MessageBox.Show("Токен вложения: " + sourceToken + "\n" + "Вложений всего: " + UploadedSourceTokens.Count, "Response source token");
+                }
+                else
+                    MessageBox.Show(sourceToken, "Exception upload source");
+
+            }
+            else
+                MessageBox.Show("Не удалось закодировать данные", "Exception encoding");
+        }
     }
 }

@@ -22,28 +22,36 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <ListBox>
-                <ListBoxItem Selected="ListBoxItem_Selected">
-                    <StackPanel>
-                        <TextBlock Text="{Binding SelectGun.Model}" />
-                        <TextBlock Text="{Binding SelectGun.Caliber}" />
-                        <TextBlock Text="{Binding SelectGun.YearCreate}" />
-                    </StackPanel>
-                </ListBoxItem>
+            <ListBox ItemsSource="{Binding Guns}" SelectedItem="{Binding SelectGun}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Model}" />
+                            <TextBlock Text="{Binding Caliber}" />
+                            <TextBlock Text="{Binding YearCreate}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
             <Button Command="{Binding Click}" Content="КЛИК!" />
         </StackPanel>
 
         <StackPanel Grid.Column="1">
-            <TextBox x:Name="newModelName" />
+            <TextBox x:Name="newModelName" Text="{Binding SelectGun.Model, Mode=OneWay}" />
             <Button
-                Command="{Binding RenameGun}"
+                Command="{Binding EditGunModel}"
                 CommandParameter="{Binding Text, ElementName=newModelName}"
                 Content="Применить новое имя" />
-            <TextBox x:Name="newCaliber" />
-            <Button Content="Применить измененный калибр" />
-            <TextBox x:Name="newYearCreate" />
-            <Button Content="Применить новый год создания" />
+            <TextBox x:Name="newCaliber" Text="{Binding SelectGun.Caliber, Mode=OneWay}" />
+            <Button
+                Command="{Binding EditGunCaliber}"
+                CommandParameter="{Binding Text, ElementName=newCaliber}"
+                Content="Применить измененный калибр" />
+            <TextBox x:Name="newYearCreate" Text="{Binding SelectGun.YearCreate, Mode=OneWay}" />
+            <Button
+                Command="{Binding EditGunYearCreate}"
+                CommandParameter="{Binding Text, ElementName=newYearCreate}"
+                Content="Применить новый год создания" />
         </StackPanel>
     </Grid>
 </Window>

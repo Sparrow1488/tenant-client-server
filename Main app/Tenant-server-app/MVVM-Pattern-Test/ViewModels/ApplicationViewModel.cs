@@ -14,7 +14,7 @@ namespace MVVM_Pattern_Test
     {
         private Gun gun;
         private int _count = 0;
-        public List<Gun> Guns = new List<Gun>();
+        public List<Gun> Guns { get; set; }
         public int Count 
         { 
             get 
@@ -35,13 +35,33 @@ namespace MVVM_Pattern_Test
                 }, (obj) => Count < 10);
             }
         }
-        public MyCommand RenameGun
+        public MyCommand EditGunModel
         {
             get
             {
                 return new MyCommand((obj) =>
                 {
                     SelectGun.Model = (string)obj;
+                }, (obj) => Count < 10);
+            }
+        }
+        public MyCommand EditGunCaliber
+        {
+            get
+            {
+                return new MyCommand((obj) =>
+                {
+                    SelectGun.Caliber = (string)obj;
+                });
+            }
+        }
+        public MyCommand EditGunYearCreate
+        {
+            get
+            {
+                return new MyCommand((obj) =>
+                {
+                    SelectGun.YearCreate = (string)obj;
                 }, (obj) => Count < 10);
             }
         }
@@ -52,9 +72,12 @@ namespace MVVM_Pattern_Test
         } 
         public ApplicationViewModel()
         {
-            SelectGun = new Gun() { Model="AR-15", Caliber=".222 REM", YearCreate="1950"};
-            Guns.Add(SelectGun);
+            Guns = new List<Gun>();
+
+            Guns.Add(new Gun() { Model = "AR-15", Caliber = ".223 REM", YearCreate = "1950" });
             Guns.Add(new Gun() { Model = "AK-74", Caliber = "5.45x39", YearCreate = "неважно" });
+            Guns.Add(new Gun() { Model = "HK-416", Caliber = ".223", YearCreate = "неважно" });
+            Guns.Add(new Gun() { Model = "MP-133", Caliber = "12/70", YearCreate = "неважно" });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

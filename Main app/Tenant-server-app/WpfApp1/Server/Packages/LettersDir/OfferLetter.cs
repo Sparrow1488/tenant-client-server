@@ -8,7 +8,7 @@ namespace WpfApp1.Server.Packages.Letters
 {
     public class OfferLetter : Letter
     {
-        public OfferLetter(string title, string description, int sender) : base(title, description, sender)
+        public OfferLetter(string title, string description, int senderId, string[] sourcesTokens) : base(title, description, senderId, sourcesTokens)
         {
             LetterType = "offer";
         }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.MyApplication;
 using WpfApp1.Server.Packages.Letters;
 
 namespace WpfApp1.Pages.HomePages.ChildLetterPage
@@ -29,56 +30,18 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
             MySendLetters = sendLetters;
         }
 
+        private bool myLettersWasLoaded = false;
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if(MySendLetters != null)
+            if(MySendLetters != null && !myLettersWasLoaded)
             {
                 foreach (var letter in MySendLetters)
                 {
-                    AddMyLetterOnPanel(letter);
+                    new LetterReader(letter, LetterPage.AdditionalFrame).AddMyLetterOnPanel(content);
                 }
+                myLettersWasLoaded = true;
             }
         }
-        private void AddMyLetterOnPanel(Letter letter)
-        {
-            var mainPanel = new StackPanel()
-            {
-                Margin = new Thickness(15, 2, 15, 2),
-            };
-            var titleBlock = new TextBlock()
-            {
-                FontSize = 24,
-                FontFamily = new FontFamily("Calibri Light"),
-                Text = "Заголовок: " + letter.Title
-            };
-            var dateBlock = new TextBlock()
-            {
-                FontSize = 24,
-                FontFamily = new FontFamily("Calibri Light"),
-                Text = "Дата отправки: " + letter.DateCreate.ToShortDateString()
-            };
-            var bottomPanel = new WrapPanel()
-            {
-            };
-            var replyesBlock = new TextBlock()
-            {
-                FontSize = 24,
-                FontFamily = new FontFamily("Calibri Light"),
-                Text = "Ответы(n): "
-            };
-            var showReply = new Button()
-            {
-                FontSize = 24,
-                FontFamily = new FontFamily("Calibri Light"),
-                Content = "Посмотреть"
-            };
-            bottomPanel.Children.Add(replyesBlock);
-            bottomPanel.Children.Add(showReply);
-            mainPanel.Children.Add(titleBlock);
-            mainPanel.Children.Add(dateBlock);
-            mainPanel.Children.Add(bottomPanel);
-
-            content.Children.Add(mainPanel);
-        }
+        
     }
 }

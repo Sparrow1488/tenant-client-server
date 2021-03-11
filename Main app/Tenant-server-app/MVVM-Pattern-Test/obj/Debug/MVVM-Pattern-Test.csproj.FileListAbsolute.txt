@@ -1,0 +1,16 @@
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\bin\Debug\MVVM-Pattern-Test.exe.config
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\bin\Debug\MVVM-Pattern-Test.exe
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\bin\Debug\MVVM-Pattern-Test.pdb
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\App.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM-Pattern-Test_MarkupCompile.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM-Pattern-Test_MarkupCompile.lref
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM-Pattern-Test.g.resources
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM_Pattern_Test.Properties.Resources.resources
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM-Pattern-Test.csproj.GenerateResource.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM-Pattern-Test.csproj.CoreCompileInputs.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM-Pattern-Test.exe
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM-Pattern-Test.pdb
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Views\MainWindow.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Views\MainWindow.baml
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM-Pattern-Test.csprojAssemblyReference.cache

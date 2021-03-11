@@ -63,7 +63,6 @@ C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-serve
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\bin\Debug\System.Net.Http.Extensions.xml
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\bin\Debug\System.Net.Http.Primitives.xml
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Tenant-client-app.csproj.App.config
-C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Tenant-client-app.csprojAssemblyReference.cache
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\HomeWindow.g.cs
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\MainWindow.g.cs
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Pages\HomePages\ChildLetterPage\ComplaintPage.g.cs
@@ -98,3 +97,4 @@ C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-serve
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Pages\HomePages\ChildLetterPage\UniversalLetterPage.baml
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Pages\HomePages\ChildLetterPage\ReplyReaderPage.g.cs
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Pages\HomePages\ChildLetterPage\ReplyReaderPage.baml
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\WpfApp1\obj\Debug\Tenant-client-app.csprojAssemblyReference.cache

@@ -8,7 +8,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using WpfApp1.Server.Packages.Letters;
 using WpfApp1.Server.Packages.SourceDir;
-using WpfApp1.Server.ServerExceptions;
 using WpfApp1.Server.ServerMeta;
 
 namespace WpfApp1.Pages.HomePages.ChildLetterPage
@@ -23,6 +22,23 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
         {
             InitializeComponent();
         }
+        public UniversalLetterPage(Letter readLetter)
+        {
+            InitializeComponent();
+
+            titleBox.Text = readLetter.Title;
+            descBox.Text = readLetter.Description;
+
+            sendBtn.IsEnabled = false;
+            sourceAttacherBtn.IsEnabled = false;
+            if(readLetter.SourcesTokens != null)
+            {
+                for (int i = 0; i < readLetter.SourcesTokens.Length; i++)
+                    if(readLetter.SourcesTokens[i] != null)
+                        AddInAttechedList(readLetter.SourcesTokens[i]);
+            }
+                
+        }
 
         private async void SendLetterBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -32,15 +48,26 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
             string result = string.Empty;
             try
             {
-                var sendLetter = SelectLetterType(titleBox.Text, descBox.Text, JumboServer.ActiveServer.ActiveUser.Id);
+                var sendLetter = SelectLetterType(titleBox.Text, descBox.Text, JumboServer.ActiveServer.ActiveUser.Id, UploadedSourceTokens);
                 if (sendLetter != null)
                 {
                     var letterSender = JumboServer.ActiveServer.ActiveUser.Login;
                     
                     result = await JumboServer.ActiveServer.SendLetter(sendLetter); //TODO: сделать нормальный ответ от сервера (прим.: 1-успешно, 2-ошибка и тд)
-                    LetterPage.ShowMessage(result);
-                    UploadedSourceTokens.Clear();
-                    MessageBox.Show("Все вложения удалены локально, но загружены на сервер", "Warning attaches");
+                    if(result == "1")
+                    {
+                        LetterPage.ShowMessage("Письмо успешно добавлено");
+                        UploadedSourceTokens.Clear();
+                        sourceAtteched.Items.Clear();
+                        sourceAtteched.Visibility = Visibility.Collapsed;
+                        titleBox.Text = "";
+                        descBox.Text = "";
+                    }
+                    else
+                    {
+                        LetterPage.ShowExceptionMessage("Возникла ошибка при получении письма");
+                    }
+                        
                 }
             }
             catch (Exception ex)
@@ -52,14 +79,19 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
                 btn.IsEnabled = true;
             }
         }
-        private Letter SelectLetterType(string title, string desc, int senderId)
+        private Letter SelectLetterType(string title, string desc, int senderId, List<string> sources)
         {
+            string[] uploadedSources = new string[5];
+            for (int i = 0; i < sources.Count; i++)
+            {
+                uploadedSources[i] = sources[i];
+            }
             if ((bool)offerType.IsChecked)
-                return new OfferLetter(title, desc, senderId);
+                return new OfferLetter(title, desc, senderId, uploadedSources);
             if ((bool)complaintType.IsChecked)
-                return new ComplaintLetter(title, desc, senderId);
+                return new ComplaintLetter(title, desc, senderId, uploadedSources);
             if ((bool)questionType.IsChecked)
-                return new QuestionLetter(title, desc, senderId);
+                return new QuestionLetter(title, desc, senderId, uploadedSources);
             return null;
         }
         private void descBox_MouseEnter(object sender, MouseEventArgs e)
@@ -92,7 +124,7 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
                 var sourceToken = await JumboServer.ActiveServer.AddSource(newSource);
                 if (!string.IsNullOrWhiteSpace(sourceToken))
                 {
-                    UploadedSourceTokens.Add(sourceToken);
+                    AddInAttechedList(sourceToken);
                     MessageBox.Show("Токен вложения: " + sourceToken + "\n" + "Вложений всего: " + UploadedSourceTokens.Count, "Response source token");
                 }
                 else
@@ -101,6 +133,13 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
             }
             else
                 MessageBox.Show("Не удалось закодировать данные", "Exception encoding");
+        }
+
+        private void AddInAttechedList(string token)
+        {
+            sourceAtteched.Visibility = Visibility.Visible;
+            UploadedSourceTokens.Add(token);
+            sourceAtteched.Items.Add("Source token: " + token);
         }
     }
 }

@@ -1,0 +1,49 @@
+﻿<Window
+    x:Class="MVVM_Pattern_Test.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MVVM_Pattern_Test"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="540"
+    Height="350"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <local:Gun
+            x:Key="gunInstance"
+            Caliber=".223 rem"
+            Model="AR-15"
+            YearCreate="1950" />
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <ListBox>
+                <ListBoxItem Selected="ListBoxItem_Selected">
+                    <StackPanel>
+                        <TextBlock Text="{Binding SelectGun.Model}" />
+                        <TextBlock Text="{Binding SelectGun.Caliber}" />
+                        <TextBlock Text="{Binding SelectGun.YearCreate}" />
+                    </StackPanel>
+                </ListBoxItem>
+            </ListBox>
+            <Button Command="{Binding Click}" Content="КЛИК!" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <TextBox x:Name="newModelName" />
+            <Button
+                Command="{Binding RenameGun}"
+                CommandParameter="{Binding Text, ElementName=newModelName}"
+                Content="Применить новое имя" />
+            <TextBox x:Name="newCaliber" />
+            <Button Content="Применить измененный калибр" />
+            <TextBox x:Name="newYearCreate" />
+            <Button Content="Применить новый год создания" />
+        </StackPanel>
+    </Grid>
+</Window>

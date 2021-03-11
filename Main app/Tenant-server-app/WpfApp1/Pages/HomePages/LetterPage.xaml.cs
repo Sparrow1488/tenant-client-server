@@ -21,13 +21,16 @@ namespace WpfApp1.Pages.HomePages
         private Page complaintPage = new ComplaintPage();
         private Page offerPage = new OfferPage();
         private Page questionPage = new QuestionPage();
-        //private Page infoPage = new InformationLetterPage();
         private Page universalPage = new UniversalLetterPage();
         private Page replyesPage = new ReplyReaderPage(null);
+
+        public static Frame AdditionalFrame = null;
         public LetterPage()
         {
             InitializeComponent();
             ExceptionText = exceptionText;
+
+            AdditionalFrame = additionalFrame;
         }
 
         public static void ShowMessage(string text)

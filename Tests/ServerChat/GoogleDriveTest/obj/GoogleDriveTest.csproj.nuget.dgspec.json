@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Tests\\ServerChat\\ServerChat\\ServerChat.csproj": {}
+    "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Tests\\ServerChat\\GoogleDriveTest\\GoogleDriveTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Tests\\ServerChat\\ServerChat\\ServerChat.csproj": {
+    "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Tests\\ServerChat\\GoogleDriveTest\\GoogleDriveTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Tests\\ServerChat\\ServerChat\\ServerChat.csproj",
-        "projectName": "ServerChat",
-        "projectPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Tests\\ServerChat\\ServerChat\\ServerChat.csproj",
+        "projectUniqueName": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Tests\\ServerChat\\GoogleDriveTest\\GoogleDriveTest.csproj",
+        "projectName": "GoogleDriveTest",
+        "projectPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Tests\\ServerChat\\GoogleDriveTest\\GoogleDriveTest.csproj",
         "packagesPath": "C:\\Users\\DOM\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Tests\\ServerChat\\ServerChat\\obj\\",
+        "outputPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Tests\\ServerChat\\GoogleDriveTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DOM\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,12 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Google.Apis.Drive.v3": {
+              "target": "Package",
+              "version": "[1.50.0.2250, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

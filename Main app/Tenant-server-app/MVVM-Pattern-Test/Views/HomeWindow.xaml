@@ -1,12 +1,209 @@
-﻿<Window x:Class="MVVM_Pattern_Test.Views.HomeWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MVVM_Pattern_Test.Views"
-        mc:Ignorable="d"
-        Title="HomeWindow" Height="450" Width="800">
+﻿<Window
+    x:Class="MVVM_Pattern_Test.Views.HomeWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MVVM_Pattern_Test.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Главная"
+    Width="1200"
+    Height="800"
+    MinWidth="1050"
+    MinHeight="550"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <Style x:Key="leftMenuBtn">
+            <Setter Property="ItemsControl.Background" Value="AliceBlue" />
+            <Setter Property="ItemsControl.BorderBrush" Value="Transparent" />
+            <Setter Property="ItemsControl.Padding" Value="5" />
+            <Setter Property="ItemsControl.FontSize" Value="25" />
+            <Setter Property="ItemsControl.FontFamily" Value="Calibri Light" />
+        </Style>
+        <Style x:Key="iconLeftMenu">
+            <Setter Property="ItemsControl.Width" Value="35" />
+            <Setter Property="ItemsControl.Margin" Value="0 0 5 0" />
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        
+        <DockPanel Margin="50,0,0,0">
+            <Frame
+                x:Name="ProfilePageFrame"
+                Content="{Binding ActivePage}"
+                NavigationUIVisibility="Hidden" />
+        </DockPanel>
+
+        <StackPanel
+            x:Name="menuLeftPanel"
+            Width="50"
+            HorizontalAlignment="Left"
+            Background="AliceBlue"
+            Orientation="Vertical">
+            <StackPanel.Style>
+                <Style TargetType="{x:Type StackPanel}">
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="Width"
+                                            To="50"
+                                            Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="Width"
+                                            To="230"
+                                            Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Style>
+            <StackPanel Height="80">
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="/refs/BG-4_1920x1080.jpg" Stretch="UniformToFill" />
+                </StackPanel.Background>
+            </StackPanel>
+
+            <Button HorizontalContentAlignment="Left" Style="{StaticResource leftMenuBtn}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Grid.Column="0"
+                            Source="/refs\icons\profileIcon.png"
+                            Style="{StaticResource iconLeftMenu}" />
+                        <TextBlock Grid.Column="1" Text="Профиль" />
+                    </StackPanel>
+                </Grid>
+            </Button>
+
+            <Button HorizontalContentAlignment="Left" Style="{StaticResource leftMenuBtn}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Grid.Column="0"
+                            Source="/refs\icons\noticeIcon.png"
+                            Style="{StaticResource iconLeftMenu}" />
+                        <TextBlock Text="Объявления" />
+                    </StackPanel>
+                </Grid>
+            </Button>
+
+            <Button HorizontalContentAlignment="Left" Style="{StaticResource leftMenuBtn}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Grid.Column="0"
+                            Source="/refs\icons\chatIcon.png"
+                            Style="{StaticResource iconLeftMenu}" />
+                        <TextBlock Text="Обратная связь" />
+                    </StackPanel>
+                </Grid>
+            </Button>
+
+            <Button HorizontalContentAlignment="Left" Style="{StaticResource leftMenuBtn}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Grid.Column="0"
+                            Source="/refs\icons\settingsIcon.png"
+                            Style="{StaticResource iconLeftMenu}" />
+                        <TextBlock Text="Настройки" />
+                    </StackPanel>
+                </Grid>
+            </Button>
+
+        </StackPanel>
+
+        <DockPanel
+            Grid.Column="2"
+            Height="20"
+            VerticalAlignment="Bottom"
+            Background="White">
+            <DockPanel.Style>
+                <Style TargetType="{x:Type DockPanel}">
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="Height"
+                                            To="80"
+                                            Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="Height"
+                                            To="20"
+                                            Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DockPanel.Style>
+            <StackPanel
+                Height="1"
+                Background="Black"
+                DockPanel.Dock="Top" />
+            <WrapPanel
+                Name="bottomPanel"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Button
+                    Margin="10,20"
+                    Padding="10,2"
+                    Content="Мы VK"
+                    FontSize="24" />
+                <Button
+                    Margin="10,20"
+                    Padding="10,2"
+                    Content="Мы на TouTube"
+                    FontSize="24" />
+                <Button
+                    Margin="10,20"
+                    Padding="10,2"
+                    Content="Мы в Tweeter"
+                    FontSize="24" />
+            </WrapPanel>
+        </DockPanel>
     </Grid>
 </Window>

@@ -10,7 +10,6 @@
     Height="800"
     MinWidth="1050"
     MinHeight="550"
-    Loaded="Window_Loaded"
     mc:Ignorable="d">
     <Window.Resources>
         <Style x:Key="leftMenuBtn">

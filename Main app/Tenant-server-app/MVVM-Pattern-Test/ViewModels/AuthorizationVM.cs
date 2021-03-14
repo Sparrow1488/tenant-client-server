@@ -1,7 +1,6 @@
 ﻿using MVVM_Pattern_Test.Commands;
 using MVVM_Pattern_Test.Views;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using WpfApp1.Server;
@@ -85,7 +84,7 @@ namespace MVVM_Pattern_Test.ViewModels
                         OpenHomeWindow();
                         CloseAuthWindow();
                     }
-                });
+                }, (obj) => CheckInputCondition());
             }
         }
         #endregion
@@ -97,8 +96,8 @@ namespace MVVM_Pattern_Test.ViewModels
         #region ValidationMethods
         public bool CheckInputCondition()
         {
-            if(string.IsNullOrWhiteSpace(_loginInput) &&
-               string.IsNullOrWhiteSpace(_passwordInput))
+            if(string.IsNullOrWhiteSpace(PasswordInput) &&
+               string.IsNullOrWhiteSpace(LoginInput))
             {
                 return false;
             }

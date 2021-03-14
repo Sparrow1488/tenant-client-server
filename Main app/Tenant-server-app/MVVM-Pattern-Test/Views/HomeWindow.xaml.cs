@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVVM_Pattern_Test.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace MVVM_Pattern_Test.Views
         public HomeWindow()
         {
             InitializeComponent();
+            DataContext = new HomeVM();
         }
     }
 }

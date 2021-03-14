@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\App.xaml
-3-347491780
-
-43-1416944283
+121726750410
+1-722758860
+53-1842755032
 1476155534
-Views\AuthorizationWindow.xaml;Views\HomeWindow.xaml;Views\MainWindow.xaml;
+Pages\HomePages\ChildLetterPage\ComplaintPage.xaml;Pages\HomePages\ChildLetterPage\InformationLetterPage.xaml;Pages\HomePages\ChildLetterPage\OfferPage.xaml;Pages\HomePages\ChildLetterPage\QuestionPage.xaml;Pages\HomePages\ChildLetterPage\ReplyReaderPage.xaml;Pages\HomePages\ChildLetterPage\UniversalLetterPage.xaml;Pages\HomePages\LetterPage.xaml;Pages\HomePages\NoticePage.xaml;Pages\HomePages\ProfilePage.xaml;Views\AuthorizationWindow.xaml;Views\HomeWindow.xaml;Views\MainWindow.xaml;
 
 True
 

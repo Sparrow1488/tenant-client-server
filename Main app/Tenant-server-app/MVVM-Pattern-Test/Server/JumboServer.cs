@@ -63,7 +63,7 @@ namespace WpfApp1.Server.ServerMeta
             try { ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse); }
             catch (JsonReaderException) { }
             if (ActiveUser == null)
-                throw new UserNotExist("Данный пользователь не существует. Возможно, отправленный Вами токен не действителен");
+                return false;
             return true;
         }
         public async Task<List<News>> ReceiveNewsCollectionAsync()

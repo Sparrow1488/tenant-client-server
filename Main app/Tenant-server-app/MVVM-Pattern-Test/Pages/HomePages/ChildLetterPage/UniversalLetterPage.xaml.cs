@@ -56,7 +56,7 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
                     result = await JumboServer.ActiveServer.SendLetter(sendLetter); //TODO: сделать нормальный ответ от сервера (прим.: 1-успешно, 2-ошибка и тд)
                     if(result == "1")
                     {
-                        LetterPage.ShowMessage("Письмо успешно добавлено");
+                        //LetterPage.ShowMessage("Письмо успешно добавлено");
                         UploadedSourceTokens.Clear();
                         sourceAtteched.Items.Clear();
                         sourceAtteched.Visibility = Visibility.Collapsed;
@@ -65,14 +65,14 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
                     }
                     else
                     {
-                        LetterPage.ShowExceptionMessage("Возникла ошибка при получении письма");
+                        //LetterPage.ShowExceptionMessage("Возникла ошибка при получении письма");
                     }
                         
                 }
             }
             catch (Exception ex)
             {
-                LetterPage.ShowExceptionMessage(ex.Message);
+                //LetterPage.ShowExceptionMessage(ex.Message);
             }
             finally
             {

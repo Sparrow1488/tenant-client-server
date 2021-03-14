@@ -4,6 +4,8 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using WpfApp1.Server;
+using WpfApp1.Server.Packages.PersonalDir;
+using WpfApp1.Server.ServerExceptions;
 using WpfApp1.Server.ServerMeta;
 
 namespace MVVM_Pattern_Test.ViewModels
@@ -83,10 +85,7 @@ namespace MVVM_Pattern_Test.ViewModels
                 return new MyCommand(async (obj) =>
                 {
                     var token = ServerFunctions.DeserializeTokenByFileName("token-auth");
-                    AuthResult = await ServerFunctions.AuthorizationByTokenAsync(token);
-                    ShowAuthResult();
-                    if (AuthResult)
-                        GoToHomeWindow();
+                    await TryAuthForToken(token);
                 });
             }
         }
@@ -94,6 +93,18 @@ namespace MVVM_Pattern_Test.ViewModels
         #endregion
 
         #region Methods
+        private async Task TryAuthForToken(UserToken token)
+        {
+            Notice = "Авторизуемся...";
+            try
+            {
+                AuthResult = await ServerFunctions.AuthorizationByTokenAsync(token);
+                ShowAuthResult();
+                if (AuthResult)
+                    GoToHomeWindow();
+            }
+            catch (JumboServerException ex) { Notice = ex.Message; }
+        }
         private void GoToHomeWindow()
         {
             OpenHomeWindow();

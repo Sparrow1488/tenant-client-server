@@ -12,7 +12,12 @@ namespace WpfApp1.Server.Packages.Letters
         public string SenderLogin { get; }
         public string[] SourcesTokens { get; }
         public int SenderId { get; }
-        public DateTime DateCreate = DateTime.Now;
+        public DateTime DateCreate 
+        { 
+            get { return _dateCreate; } 
+            private set { _dateCreate = value; }
+        }
+        private DateTime _dateCreate;
         public Letter(string title, string description, int senderId)
         {
             if(senderId > -1)
@@ -30,6 +35,7 @@ namespace WpfApp1.Server.Packages.Letters
                 Description = description;
                 SenderId = senderId;
                 SourcesTokens = sourcesTokens;
+                DateCreate = DateTime.Now;
             }
         }
         public Letter(int id)

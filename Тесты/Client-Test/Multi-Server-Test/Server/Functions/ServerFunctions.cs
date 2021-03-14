@@ -64,8 +64,8 @@ namespace Multi_Server_Test.Server.Functions
                         string[] arraySourcesLetter = null;
                         if (!string.IsNullOrWhiteSpace(sources))
                             arraySourcesLetter = JsonConvert.DeserializeObject<string[]>(sources);
-
-                        selectLetters.Add(new Letter(title, desc, sender, type, date, id, senderId, arraySourcesLetter));
+                        var existsSourcesArray = ExistsSourcesTokens(arraySourcesLetter);
+                        selectLetters.Add(new Letter(title, desc, sender, type, date, id, senderId, existsSourcesArray));
                     }
                 }
                 reader.Close();
@@ -84,11 +84,26 @@ namespace Multi_Server_Test.Server.Functions
                 command1.Parameters.AddWithValue("type", validLetter.LetterType);
                 command1.Parameters.AddWithValue("date", validLetter.DateCreate);
                 command1.Parameters.AddWithValue("senderId", validLetter.SenderId);
-                string jsonSourcesArray = JsonConvert.SerializeObject(validLetter.SourcesTokens);
+                var existsTokens = ExistsSourcesTokens(validLetter.SourcesTokens);
+                string jsonSourcesArray = JsonConvert.SerializeObject(existsTokens);
                 command1.Parameters.AddWithValue("sources", jsonSourcesArray);
                 var successCount = command1.ExecuteNonQuery();
                 return successCount;
             }
+        }
+        private string[] ExistsSourcesTokens(string[] tokens)
+        {
+            List<string> existsTokens = new List<string>();
+            if(tokens != null)
+            {
+                foreach (var token in tokens)
+                {
+                    if (token != null)
+                        existsTokens.Add(token);
+                }
+            }
+            return existsTokens.ToArray();
+
         }
         public string GetUserLoginById(int id)
         {

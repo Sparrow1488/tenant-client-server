@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,6 +58,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\AuthorizationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HomeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -64,8 +75,46 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\MyCommand.cs" />
+    <Compile Include="Server\Configuration\ServerConfig.cs" />
+    <Compile Include="Server\JumboServer.cs" />
+    <Compile Include="Server\Packages\LettersDir\ComplaintLetter.cs" />
+    <Compile Include="Server\Packages\LettersDir\GetMyLetters.cs" />
+    <Compile Include="Server\Packages\LettersDir\GetReplyLetterPackage.cs" />
+    <Compile Include="Server\Packages\LettersDir\Letter.cs" />
+    <Compile Include="Server\Packages\LettersDir\LettersCollection.cs" />
+    <Compile Include="Server\Packages\LettersDir\OfferLetter.cs" />
+    <Compile Include="Server\Packages\LettersDir\QuestionLetter.cs" />
+    <Compile Include="Server\Packages\LettersDir\ReplyToLetter.cs" />
+    <Compile Include="Server\Packages\LettersDir\SendLetterPackage.cs" />
+    <Compile Include="Server\Packages\Meta\PackageMeta.cs" />
+    <Compile Include="Server\Packages\NewsDir\AddNewsPackage.cs" />
+    <Compile Include="Server\Packages\NewsDir\News.cs" />
+    <Compile Include="Server\Packages\NewsDir\NewsCollection.cs" />
+    <Compile Include="Server\Packages\NewsDir\RecieveNewsPackage.cs" />
+    <Compile Include="Server\Packages\Package.cs" />
+    <Compile Include="Server\Packages\PersonalDir\AuthorizationByTokenPackage.cs" />
+    <Compile Include="Server\Packages\PersonalDir\AuthorizationPackage.cs" />
+    <Compile Include="Server\Packages\PersonalDir\Person.cs" />
+    <Compile Include="Server\Packages\PersonalDir\UserToken.cs" />
+    <Compile Include="Server\Packages\RequestObject.cs" />
+    <Compile Include="Server\Packages\SourceDir\AddNewsSourcePackage.cs" />
+    <Compile Include="Server\Packages\SourceDir\GetSourceByTokenPackage.cs" />
+    <Compile Include="Server\Packages\SourceDir\Source.cs" />
+    <Compile Include="Server\ServerExceptions\ConnectionException.cs" />
+    <Compile Include="Server\ServerExceptions\GetResponseException.cs" />
+    <Compile Include="Server\ServerExceptions\JumboServerException.cs" />
+    <Compile Include="Server\ServerExceptions\SendRequestException.cs" />
+    <Compile Include="Server\ServerExceptions\UserNotExist.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="Models\Gun.cs" />
+    <Compile Include="ViewModels\AuthorizationVM.cs" />
+    <Compile Include="ViewModels\BaseVM.cs" />
+    <Compile Include="Views\AuthorizationWindow.xaml.cs">
+      <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HomeWindow.xaml.cs">
+      <DependentUpon>HomeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -89,6 +138,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

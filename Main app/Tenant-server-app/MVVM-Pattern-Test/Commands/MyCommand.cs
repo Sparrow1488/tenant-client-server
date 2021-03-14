@@ -21,7 +21,6 @@ namespace MVVM_Pattern_Test.Commands
             this.execute = execute;
             this.canExecute = canExecute;
         }
-
         public bool CanExecute(object parameter)
         {
             return canExecute == null || canExecute(parameter);
@@ -30,6 +29,44 @@ namespace MVVM_Pattern_Test.Commands
         public void Execute(object parameter)
         {
             execute?.Invoke(parameter);
+        }
+    }
+    public interface IAsyncCommand : ICommand
+    {
+        Task ExecuteAsync(object parameter);
+    }
+    public class MyAsyncCommand : AsyncCommandBase
+    {
+        private readonly Func<Task> _command;
+        public MyAsyncCommand(Func<Task> command)
+        {
+            _command = command;
+        }
+        public override bool CanExecute(object parameter)
+        {
+            return true;
+        }
+        public override Task ExecuteAsync(object parameter)
+        {
+            return _command();
+        }
+    }
+    public abstract class AsyncCommandBase : IAsyncCommand
+    {
+        public abstract bool CanExecute(object parameter);
+        public abstract Task ExecuteAsync(object parameter);
+        public async void Execute(object parameter)
+        {
+            await ExecuteAsync(parameter);
+        }
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+        protected void RaiseCanExecuteChanged()
+        {
+            CommandManager.InvalidateRequerySuggested();
         }
     }
 }

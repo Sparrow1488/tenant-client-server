@@ -1,19 +1,14 @@
 ﻿using MVVM_Pattern_Test.Commands;
-using System;
+using MVVM_Pattern_Test.ViewModels;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MVVM_Pattern_Test
 {
-    public class ApplicationViewModel : INotifyPropertyChanged
+    public class ApplicationViewModel : BaseVM
     {
         private Gun gun;
         private int _count = 0;
+
         public List<Gun> Guns { get; set; }
         public int Count 
         { 
@@ -80,11 +75,5 @@ namespace MVVM_Pattern_Test
             Guns.Add(new Gun() { Model = "MP-133", Caliber = "12/70", YearCreate = "неважно" });
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
     }
 }

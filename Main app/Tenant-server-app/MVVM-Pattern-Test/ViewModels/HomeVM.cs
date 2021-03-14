@@ -23,6 +23,12 @@ namespace MVVM_Pattern_Test.ViewModels
         #endregion
 
         #region Props
+        public override string Notice
+        {
+            get { return _infoMessage; }
+            protected set { _infoMessage = value; OnPropertyChanged(); }
+        }
+
         public Page ProfilePage
         {
             get { return _profilePage; }
@@ -50,16 +56,37 @@ namespace MVVM_Pattern_Test.ViewModels
         #endregion
 
         #region Commands
-        public MyCommand SelectPage
+        public MyCommand ShowLettersPage
         {
             get
             {
                 return new MyCommand((obj) =>
                 {
-
-                }, (obj) => ActivePage != null);
+                    ActivePage = LettersPage;
+                }, (obj) => LettersPage != null);
             }
         }
+        public MyCommand ShowProfilePage
+        {
+            get
+            {
+                return new MyCommand((obj) =>
+                {
+                    ActivePage = ProfilePage;
+                }, (obj) => ProfilePage != null);
+            }
+        }
+        public MyCommand ShowNewsPage
+        {
+            get
+            {
+                return new MyCommand((obj) =>
+                {
+                    ActivePage = NewsPage;
+                }, (obj) => NewsPage != null);
+            }
+        }
+
         #endregion
     }
 }

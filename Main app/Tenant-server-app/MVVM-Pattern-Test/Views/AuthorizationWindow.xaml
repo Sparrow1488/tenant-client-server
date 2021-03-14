@@ -103,7 +103,7 @@
                             FontSize="18"
                             Foreground="Red"
                             Style="{StaticResource defaultTextStyle}"
-                            Text="{Binding InfoMessage, Mode=OneWay}"
+                            Text="{Binding Notice, Mode=OneWay}"
                             TextWrapping="Wrap" />
                     </Grid>
                 </TabItem>

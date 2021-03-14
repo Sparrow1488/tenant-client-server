@@ -58,19 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Pages\HomePages\ChildLetterPage\ComplaintPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Pages\HomePages\ChildLetterPage\InformationLetterPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\HomePages\ChildLetterPage\OfferPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\HomePages\ChildLetterPage\QuestionPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -111,17 +99,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\MyCommand.cs" />
-    <Compile Include="Pages\HomePages\ChildLetterPage\ComplaintPage.xaml.cs">
-      <DependentUpon>ComplaintPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="MyApplication\UserInformation\User.cs" />
     <Compile Include="Pages\HomePages\ChildLetterPage\InformationLetterPage.xaml.cs">
       <DependentUpon>InformationLetterPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\HomePages\ChildLetterPage\OfferPage.xaml.cs">
-      <DependentUpon>OfferPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\HomePages\ChildLetterPage\QuestionPage.xaml.cs">
-      <DependentUpon>QuestionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\HomePages\ChildLetterPage\ReplyReaderPage.xaml.cs">
       <DependentUpon>ReplyReaderPage.xaml</DependentUpon>
@@ -173,6 +153,8 @@
     <Compile Include="ViewModels\AuthorizationVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\HomeVM.cs" />
+    <Compile Include="ViewModels\LettersVM.cs" />
+    <Compile Include="ViewModels\ProfileVM.cs" />
     <Compile Include="Views\AuthorizationWindow.xaml.cs">
       <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
     </Compile>

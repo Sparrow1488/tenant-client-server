@@ -31,10 +31,10 @@ namespace WpfApp1.Server.ServerMeta
             ServerConfig = config;
             ActiveServer = this;
         }
-        public bool Authorization(Person dataPerson, bool saveToken) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
+        public async Task<bool> Authorization(Person dataPerson, bool saveToken) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
         {
             var authPack = new AuthorizationPackage(dataPerson);
-            var jsonResponse = SendAndGetAsync(authPack).Result;
+            var jsonResponse = await SendAndGetAsync(authPack);
 
             try 
             {

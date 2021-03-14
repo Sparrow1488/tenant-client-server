@@ -16,10 +16,18 @@ namespace MVVM_Pattern_Test.ViewModels
             ServerFunctions = new JumboServer(new ServerConfig());
             LoginInput = "";
             PasswordInput = "";
+
+            AuthorizationWithToken.Execute(null);
         }
         #endregion
 
         #region AllProps
+        public override string Notice
+        {
+            get { return _infoMessage; }
+            protected set { _infoMessage = value; OnPropertyChanged(); }
+        }
+
         public Action CloseAuthWindow;
         public Action OpenHomeWindow = new Action(() => new HomeWindow().Show());
         private JumboServer _serverFunctions;
@@ -28,31 +36,25 @@ namespace MVVM_Pattern_Test.ViewModels
             get { return _serverFunctions; }
             private set { _serverFunctions = value; OnPropertyChanged(); }
         }
-        private string _loginInput;
         public string LoginInput
         {
             get { return _loginInput; }
             set { _loginInput = value; OnPropertyChanged(); }
         }
-        private string _passwordInput;
+        private string _loginInput;
         public string PasswordInput
         {
             get { return _passwordInput; }
             set { _passwordInput = value; OnPropertyChanged(); }
         }
-        private string _infoMessage;
-
-        private bool _authResult = false;
+        private string _passwordInput;
         public bool AuthResult
         { 
             get { return _authResult; }
             set { _authResult = value; OnPropertyChanged(); }
         }
-        public string InfoMessage 
-        {
-            get { return _infoMessage; }
-            set { _infoMessage = value; OnPropertyChanged(); }
-        }
+        private bool _authResult = false;
+        
         #endregion
 
         #region Commands
@@ -64,33 +66,46 @@ namespace MVVM_Pattern_Test.ViewModels
                 {
                     var passwordBox = (PasswordBox)obj;
                     PasswordInput = passwordBox.Password;
-                    InfoMessage = "";
+                    Notice = "";
 
-                    AuthResult = await Task.Factory.StartNew(new Func<bool>(() =>
-                    {
-                        var inputData = new Person(LoginInput, PasswordInput);
-                        AuthResult = JumboServer.ActiveServer.Authorization(inputData, true);
-                        if (AuthResult)
-                        {
-                            InfoMessage = "Успешная авторизация";
-                            return true;
-                        }
-                        else
-                            InfoMessage = "Ошибка авторизации";
-                        return false;
-                    }));
+                    var inputData = new Person(LoginInput, PasswordInput);
+                    AuthResult = await JumboServer.ActiveServer.Authorization(inputData, true);
+                    ShowAuthResult();
                     if (AuthResult)
-                    {
-                        OpenHomeWindow();
-                        CloseAuthWindow();
-                    }
+                        GoToHomeWindow();
                 }, (obj) => CheckInputCondition());
             }
         }
+        public MyCommand AuthorizationWithToken
+        {
+            get
+            {
+                return new MyCommand(async (obj) =>
+                {
+                    var token = ServerFunctions.DeserializeTokenByFileName("token-auth");
+                    AuthResult = await ServerFunctions.AuthorizationByTokenAsync(token);
+                    ShowAuthResult();
+                    if (AuthResult)
+                        GoToHomeWindow();
+                });
+            }
+        }
+
         #endregion
 
         #region Methods
-
+        private void GoToHomeWindow()
+        {
+            OpenHomeWindow();
+            CloseAuthWindow();
+        }
+        private void ShowAuthResult()
+        {
+            if (AuthResult)
+                Notice = "Успешная авторизация";
+            else
+                Notice = "Ошибка авторизации";
+        }
         #endregion
 
         #region ValidationMethods

@@ -9,7 +9,6 @@
     d:DesignHeight="800"
     d:DesignWidth="1200"
     Background="#F4F6F7"
-    Loaded="Page_Loaded"
     mc:Ignorable="d">
     <Page.Resources>
         <Style x:Key="btnStyle">
@@ -55,25 +54,22 @@
             Width="Auto"
             Orientation="Horizontal">
             <StackPanel x:Name="userInfo" Margin="10">
-                <TextBlock
-                    x:Name="loginInfo"
-                    Style="{StaticResource textBlockStyle}"
-                    Text="Логин: " />
-                <TextBlock
-                    x:Name="fullNameInfo"
-                    Style="{StaticResource textBlockStyle}"
-                    Text="ФИО: "
-                    TextWrapping="Wrap" />
-                <TextBlock
-                    x:Name="roomNumInfo"
-                    Style="{StaticResource textBlockStyle}"
-                    Text="Квартира: "
-                    TextWrapping="Wrap" />
-                <TextBlock
-                    x:Name="phoneNumberInfo"
-                    Style="{StaticResource textBlockStyle}"
-                    Text="Номер телефона: "
-                    TextWrapping="Wrap" />
+                <WrapPanel Style="{StaticResource textBlockStyle}">
+                    <TextBlock Text="Логин: " />
+                    <TextBlock Text="{Binding AuthUser.Login}" />
+                </WrapPanel>
+                <WrapPanel Style="{StaticResource textBlockStyle}">
+                    <TextBlock Text="ФИО: " />
+                    <TextBlock Text="{Binding FullName}" />
+                </WrapPanel>
+                <WrapPanel Style="{StaticResource textBlockStyle}">
+                    <TextBlock Text="Квартира: " />
+                    <TextBlock Text="{Binding AuthUser.Room}" />
+                </WrapPanel>
+                <WrapPanel Style="{StaticResource textBlockStyle}">
+                    <TextBlock Text="Телефон: " />
+                    <TextBlock Text="{Binding AuthUser}" />
+                </WrapPanel>
                 <Button
                     Content="Редактировать профиль"
                     FontSize="24"

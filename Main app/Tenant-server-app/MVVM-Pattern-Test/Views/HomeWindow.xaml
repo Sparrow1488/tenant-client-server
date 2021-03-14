@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MVVM_Pattern_Test.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:MVVM_Pattern_Test.ViewModels"
     Title="Главная"
     Width="1200"
     Height="800"
@@ -75,7 +76,10 @@
                 </StackPanel.Background>
             </StackPanel>
 
-            <Button HorizontalContentAlignment="Left" Style="{StaticResource leftMenuBtn}">
+            <Button
+                HorizontalContentAlignment="Left"
+                Command="{Binding ShowProfilePage}"
+                Style="{StaticResource leftMenuBtn}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -92,7 +96,10 @@
                 </Grid>
             </Button>
 
-            <Button HorizontalContentAlignment="Left" Style="{StaticResource leftMenuBtn}">
+            <Button
+                HorizontalContentAlignment="Left"
+                Command="{Binding ShowNewsPage}"
+                Style="{StaticResource leftMenuBtn}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -109,7 +116,10 @@
                 </Grid>
             </Button>
 
-            <Button HorizontalContentAlignment="Left" Style="{StaticResource leftMenuBtn}">
+            <Button
+                HorizontalContentAlignment="Left"
+                Command="{Binding ShowLettersPage}"
+                Style="{StaticResource leftMenuBtn}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />

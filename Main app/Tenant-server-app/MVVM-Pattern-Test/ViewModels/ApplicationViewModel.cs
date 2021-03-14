@@ -9,6 +9,11 @@ namespace MVVM_Pattern_Test
         private Gun gun;
         private int _count = 0;
 
+        public override string Notice 
+        {
+            get { return _infoMessage; }
+            protected set { _infoMessage = value; OnPropertyChanged(); }
+        }
         public List<Gun> Guns { get; set; }
         public int Count 
         { 
@@ -64,7 +69,9 @@ namespace MVVM_Pattern_Test
         {
             get { return gun; }
             set { gun = value; OnPropertyChanged(); }
-        } 
+        }
+
+
         public ApplicationViewModel()
         {
             Guns = new List<Gun>();

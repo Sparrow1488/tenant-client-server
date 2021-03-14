@@ -17,10 +17,6 @@ namespace WpfApp1.Pages.HomePages
     {
         public static TextBlock ExceptionText;
         //private static ApplicationEvents applicationEvents = new ApplicationEvents();
-
-        private Page complaintPage = new ComplaintPage();
-        private Page offerPage = new OfferPage();
-        private Page questionPage = new QuestionPage();
         private Page universalPage = new UniversalLetterPage();
         private Page replyesPage = new ReplyReaderPage(null);
 
@@ -44,14 +40,12 @@ namespace WpfApp1.Pages.HomePages
 
         private void SelectComplaintPageBtn_Click(object sender, RoutedEventArgs e)
         {
-            frameBox.Content = null;
-            frameBox.Content = complaintPage;
+           
         }
 
         private void SelectOfferPageBtn_Click(object sender, RoutedEventArgs e)
         {
-            frameBox.Content = null;
-            frameBox.Content = offerPage;
+           
         }
 
         private bool myLettersWasLoaded = false;
@@ -68,8 +62,7 @@ namespace WpfApp1.Pages.HomePages
 
         private void SelectQuestionPageBtn_Click(object sender, RoutedEventArgs e)
         {
-            frameBox.Content = null;
-            frameBox.Content = questionPage;
+            
         }
 
         private void bottomPanel_MouseEnter(object sender, MouseEventArgs e)

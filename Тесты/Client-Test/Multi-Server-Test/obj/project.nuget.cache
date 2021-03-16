@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Dnxisr22r7KN6R1NH7NRs7D5GcvijBfjOEDS9X9cSSC1ds5EDGcRAjK3HIh05Q9I18mIoH+jGGKmBGAEmvPjOg==",
+  "dgSpecHash": "bBF5Jh4Bdu9RscEpEdF/tOWKgrTF1bPh6ij50sgYpFEUjsjacO9IlD9kBkcaHiBI7aLQUMjkEpxUrnbwMra1yQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\proj\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\Multi-Server-Test.csproj",
+  "projectFilePath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\Multi-Server-Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DOM\\.nuget\\packages\\firesharp\\2.0.4\\firesharp.2.0.4.nupkg.sha512",
     "C:\\Users\\DOM\\.nuget\\packages\\microsoft.bcl\\1.1.9\\microsoft.bcl.1.1.9.nupkg.sha512",

@@ -31,15 +31,19 @@ namespace WpfApp1.Server.ServerMeta
             ServerConfig = config;
             ActiveServer = this;
         }
-        public async Task<bool> AuthorizationAsync(Person dataPerson, bool saveToken) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
+        public async Task<bool> Authorization(Person dataPerson, bool saveToken) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
         {
             var authPack = new AuthorizationPackage(dataPerson);
             var jsonResponse = await SendAndGetAsync(authPack);
 
-            try { ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse); }
+            try 
+            {
+                ActiveUser = null;
+                ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse); 
+            }
             catch(JsonReaderException) { }
             if (ActiveUser == null)
-                throw new UserNotExist("Данный пользователь не существует. Возможно, вы ввели не верный логин или пароль");
+                return false;
             if (saveToken && ActiveUser.Token != null)
             {
                 using (var sw = File.CreateText(tokenFileName + ".txt"))
@@ -59,7 +63,7 @@ namespace WpfApp1.Server.ServerMeta
             try { ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse); }
             catch (JsonReaderException) { }
             if (ActiveUser == null)
-                throw new UserNotExist("Данный пользователь не существует. Возможно, отправленный Вами токен не действителен");
+                return false;
             return true;
         }
         public async Task<List<News>> ReceiveNewsCollectionAsync()
@@ -218,13 +222,31 @@ namespace WpfApp1.Server.ServerMeta
             catch { }
             return null;
         }
+
+        /// <summary>
+        /// Добавить картинку на сервер
+        /// </summary>
+        /// <param name="source">Закодированная картинка</param>
+        /// <returns>Возвращает уникальный токен-идентификатор контента</returns>
         public async Task<string> AddSource(Source source)
         {
             try
             {
                 var pack = new AddNewsSourcePackage(source);
-                var response = await ActiveServer.SendAndGetAsync(pack);
-                return response;
+                var imageToken = await ActiveServer.SendAndGetAsync(pack);
+                return imageToken;
+            }
+            catch { }
+            return null;
+        }
+        public async Task<Source> GetSourceByToken(string token)
+        {
+            try
+            {
+                var pack = new GetSourceByTokenPackage(token);
+                var responseJson = await ActiveServer.SendAndGetAsync(pack);
+                var getSource = JsonConvert.DeserializeObject<Source>(responseJson);
+                return getSource;
             }
             catch { }
             return null;

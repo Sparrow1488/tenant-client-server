@@ -20,68 +20,32 @@ namespace WpfApp1.Server
         [JsonConstructor]
         public Person(string login, string name, string lastName, string parentName, int room, string password, int id, UserToken token)
         {
-            var validName = CheckInputValidation(name, lastName, parentName);
-            var validAccountInfo = CheckInputValidation(login, password, room);
-
-            if (validName && validAccountInfo)
-            {
-                Login = login;
-                Name = name;
-                LastName = lastName;
-                ParentName = parentName;
-                Room = room;
-                Password = password;
-                Id = id;
-                Token = token;
-            }
-            else
-            {
-                throw new ArgumentException("Вы ввели некорректные данные");
-            }
+            Login = login;
+            Name = name;
+            LastName = lastName;
+            ParentName = parentName;
+            Room = room;
+            Password = password;
+            Id = id;
+            Token = token;
         }
 
-        public Person(string login, string password, int room)
+        public Person(string login, string password)
         {
-            var validAccount = CheckInputValidation(login, password, room);
+            var validAccount = CheckInputValidation(login, password);
             if (validAccount)
             {
                 Login = login;
                 Password = password;
-                Room = room;
-                //TODO: наверняка это присвоение можно как то упростить
-            }
-            else
-            {
-                throw new ArgumentException("Вы ввели некорректные данные");
             }
         }
-
-        private bool CheckInputValidation(string name, string lastName, string parentName)
-        {
-            if (string.IsNullOrWhiteSpace(name) ||
-                string.IsNullOrWhiteSpace(lastName) ||
-                string.IsNullOrWhiteSpace(parentName))
-                return false;
-            else
-                return true;
-        }
-        private bool CheckInputValidation(string login, string password, int room)
+        private bool CheckInputValidation(string login, string password)
         {
             if (string.IsNullOrWhiteSpace(login) ||
-                string.IsNullOrWhiteSpace(password) ||
-                room <= 0)
+                string.IsNullOrWhiteSpace(password))
                 return false;
             else
                 return true;
         }
-        //private bool CheckInputValidation(string login, int room)
-        //{
-        //    if (string.IsNullOrWhiteSpace(login) ||
-        //        room <= 0)
-        //        return false;
-        //    else
-        //        return true;
-        //}
-
     }
 }

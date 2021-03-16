@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\App.xaml
-8-811156448
+8-761654348
 
-47-1778720250
+51-659423513
 141907809619
-HomeWindow.xaml;MainWindow.xaml;Pages\LetterPage.xaml;Pages\LetterPageChildren\ReadLettersPage.xaml;Pages\LetterPageChildren\ResponseToLetterPage.xaml;Pages\NewsPage.xaml;Pages\NewsPageChildren\NewsCollectionPage.xaml;Pages\NewsPageChildren\NewsWriterPage.xaml;
+Views\HomeWindow.xaml;MainWindow.xaml;Pages\LetterPage.xaml;Pages\LetterPageChildren\ReadLettersPage.xaml;Pages\LetterPageChildren\ResponseToLetterPage.xaml;Pages\NewsPage.xaml;Pages\NewsPageChildren\NewsCollectionPage.xaml;Pages\NewsPageChildren\NewsWriterPage.xaml;
 
-False
+True
 

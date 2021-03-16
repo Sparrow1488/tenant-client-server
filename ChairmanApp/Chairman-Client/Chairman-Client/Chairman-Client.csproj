@@ -62,7 +62,10 @@
     <Compile Include="Chairman\Packages\AddNewsPackage.cs" />
     <Compile Include="Chairman\Packages\GetLettersPackage.cs" />
     <Compile Include="Chairman\Packages\SendAnswerToLetterPackage.cs" />
-    <Compile Include="HomeWindow.xaml.cs">
+    <Compile Include="Commands\MyCommand.cs" />
+    <Compile Include="ViewModels\AuthorizationVM.cs" />
+    <Compile Include="ViewModels\BaseVM.cs" />
+    <Compile Include="Views\HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LetterPage.xaml.cs">
@@ -107,13 +110,14 @@
     <Compile Include="Server\Packages\PersonalDir\UserToken.cs" />
     <Compile Include="Server\Packages\RequestObject.cs" />
     <Compile Include="Server\Packages\SourceDir\AddNewsSourcePackage.cs" />
+    <Compile Include="Server\Packages\SourceDir\GetSourceByTokenPackage.cs" />
     <Compile Include="Server\Packages\SourceDir\Source.cs" />
     <Compile Include="Server\ServerExceptions\ConnectionException.cs" />
     <Compile Include="Server\ServerExceptions\GetResponseException.cs" />
     <Compile Include="Server\ServerExceptions\JumboServerException.cs" />
     <Compile Include="Server\ServerExceptions\SendRequestException.cs" />
     <Compile Include="Server\ServerExceptions\UserNotExist.cs" />
-    <Page Include="HomeWindow.xaml">
+    <Page Include="Views\HomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -220,5 +224,6 @@
   <ItemGroup>
     <Resource Include="refs1\oblaka_1920x1080.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,11 +3,9 @@ C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\bin\Debug\Chairman-Client.pdb
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\bin\Debug\Newtonsoft.Json.dll
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\bin\Debug\Newtonsoft.Json.xml
-C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\MainWindow.g.cs
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\App.g.cs
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Chairman-Client_MarkupCompile.cache
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Chairman-Client_MarkupCompile.lref
-C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\MainWindow.baml
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Chairman-Client.g.resources
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Chairman_Client.Properties.Resources.resources
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Chairman-Client.csproj.GenerateResource.cache
@@ -15,9 +13,7 @@ C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Chairman-Client.csproj.CopyComplete
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Chairman-Client.exe
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Chairman-Client.pdb
-C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\HomeWindow.g.cs
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Pages\LetterPage.g.cs
-C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\HomeWindow.baml
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Pages\LetterPage.baml
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\HomeWindow.g.cs
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\MainWindow.g.cs
@@ -60,3 +56,7 @@ C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Pages\LetterPageChildren\ResponseToLetterPage.g.cs
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Pages\LetterPageChildren\ResponseToLetterPage.baml
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Chairman-Client.csprojAssemblyReference.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Views\HomeWindow.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\Views\HomeWindow.baml
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\MainWindow.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\MainWindow.baml

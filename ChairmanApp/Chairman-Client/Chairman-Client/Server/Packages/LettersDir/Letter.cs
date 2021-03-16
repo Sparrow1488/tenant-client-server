@@ -10,16 +10,26 @@ namespace WpfApp1.Server.Packages.Letters
         public string Title { get; }
         public string Description { get; }
         public string SenderLogin { get; }
+        public string[] SourcesTokens { get; }
         public int SenderId { get; }
-        public DateTime DateCreate = DateTime.Now;
-        public Letter(string title, string description, int senderId)
+        public DateTime DateCreate { get; }
+        public Letter(string title, string description, int senderId, int letterType)
         {
-            if(senderId > -1)
-            {
-                Title = title;
-                Description = description;
-                SenderId = senderId;
-            }
+            Title = title;
+            Description = description;
+            SenderId = senderId;
+            DateCreate = DateTime.Now;
+            LetterType = "testingTestType";
+        }
+        public Letter(string title, string description, int senderId, string[] sourcesTokens, int letterType)
+        {
+            
+            Title = title;
+            Description = description;
+            SenderId = senderId;
+            SourcesTokens = sourcesTokens;
+            DateCreate = DateTime.Now;
+            LetterType = "testingTestType";
         }
         public Letter(int id)
         {
@@ -27,18 +37,16 @@ namespace WpfApp1.Server.Packages.Letters
                 Id = id;
         }
         [JsonConstructor]
-        public Letter(string title, string description, string senderLogin, string letterType, DateTime dateCreate, int id, int senderId)
+        public Letter(string title, string description, string senderLogin, string letterType, DateTime dateCreate, int id, int senderId, string[] sourcesTokens)
         {
-            if (!string.IsNullOrWhiteSpace(senderLogin))
-            {
-                Title = title;
-                Description = description;
-                SenderLogin = senderLogin;
-                LetterType = letterType;
-                DateCreate = dateCreate;
-                Id = id;
-                SenderId = senderId;
-            }
+            Title = title;
+            Description = description;
+            SenderLogin = senderLogin;
+            LetterType = letterType;
+            DateCreate = dateCreate;
+            Id = id;
+            SenderId = senderId;
+            SourcesTokens = sourcesTokens;
         }
     }
 }

@@ -30,15 +30,16 @@
                     x:Name="titlePageText"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    FontSize="28"
+                    FontSize="26"
                     Text="Напишите нам! Мы Вам обязательно ответим"
                     TextWrapping="Wrap" />
             </StackPanel>
             <Button
-                Width="600"
+                Width="580"
                 Background="Transparent"
                 Command="{Binding ShowUniversalLetterPage}"
                 Content="Написать"
+                FontFamily="Calibri Light"
                 FontSize="24" />
         </StackPanel>
 
@@ -62,34 +63,49 @@
                     BorderBrush="Gray"
                     BorderThickness="1"
                     CornerRadius="5">
-                    <ScrollViewer
-                        Grid.Row="1"
-                        Margin="0,10"
-                        HorizontalContentAlignment="Center">
-                        <ListBox
-                            BorderThickness="0"
-                            FontSize="22"
-                            ItemsSource="{Binding MyLetters}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel>
-                                        <WrapPanel>
-                                            <TextBlock Text="Заголовок: " />
-                                            <TextBlock Text="{Binding Title}" />
-                                        </WrapPanel>
-                                        <WrapPanel>
-                                            <TextBlock Text="Дата: " />
-                                            <TextBlock Text="{Binding DateCreate}" />
-                                        </WrapPanel>
-                                        <WrapPanel>
-                                            <TextBlock Text="Вложения: " />
-                                            <TextBlock Text="{Binding SourcesTokens.Count, TargetNullValue=отсутсвуют}" />
-                                        </WrapPanel>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </ScrollViewer>
+                    <StackPanel>
+                        <WrapPanel>
+                            <Button
+                                Height="Auto"
+                                Margin="0,0,20,0"
+                                Background="Transparent"
+                                Command="{Binding RecieveMyLetters}"
+                                Content="Обновить" />
+                            <TextBlock
+                                FontFamily="Calibri Light"
+                                FontSize="24"
+                                Text="Ваша недавняя активность:" />
+                        </WrapPanel>
+
+                        <ScrollViewer
+                            Grid.Row="1"
+                            Margin="0,10"
+                            HorizontalContentAlignment="Center">
+                            <ListBox
+                                BorderThickness="0"
+                                FontSize="22"
+                                ItemsSource="{Binding MyLetters}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <WrapPanel>
+                                                <TextBlock Text="Заголовок: " />
+                                                <TextBlock Text="{Binding Title}" />
+                                            </WrapPanel>
+                                            <WrapPanel>
+                                                <TextBlock Text="Дата: " />
+                                                <TextBlock Text="{Binding DateCreate}" />
+                                            </WrapPanel>
+                                            <WrapPanel>
+                                                <TextBlock Text="Вложения: " />
+                                                <TextBlock Text="{Binding SourcesTokens.Count, TargetNullValue=отсутсвуют}" />
+                                            </WrapPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </ScrollViewer>
+                    </StackPanel>
                 </Border>
             </StackPanel>
         </ScrollViewer>

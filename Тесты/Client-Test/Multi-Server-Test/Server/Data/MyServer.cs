@@ -1,6 +1,4 @@
-﻿using FireSharp;
-using FireSharp.Response;
-using Multi_Server_Test.Blocks;
+﻿using Multi_Server_Test.Blocks;
 using Multi_Server_Test.Server.Blocks.Auth;
 using Multi_Server_Test.Server.Blocks.LetterBlock;
 using Multi_Server_Test.Server.Controllers;
@@ -16,9 +14,6 @@ using Multi_Server_Test.ServerData.Server;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data.SqlTypes;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -28,29 +23,13 @@ namespace Multi_Server_Test.ServerData
 {
     public class MyServer
     {
-        public string HOST = null;
-        public int PORT = 0;
-        public string serverName { get; }
-
-        public TcpListener Listener = null;
-        public static ServerMeta Meta = null;
-
-        public static List<News> allNews = null;
-        public static List<Letter> allLetters = null;
-        public static List<Person> allUsers = null;
-
-        public static List<News> noSynchNews = new List<News>();
-        public static List<Letter> noSynchLetters = new List<Letter>();
-        public static List<Person> noSynchUsers = new List<Person>();
-
-        public static Dictionary<UserToken, Person> tokensDictionary = new Dictionary<UserToken, Person>();
+        #region Constructor
         public MyServer(string host, int port)
         {
             if (!string.IsNullOrWhiteSpace(host) && port > 10)
             {
                 HOST = host;
                 PORT = port;
-                serverName = "JumboServer";
 
                 Listener = new TcpListener(IPAddress.Parse(HOST), PORT);
                 Meta = new ServerMeta();
@@ -60,21 +39,45 @@ namespace Multi_Server_Test.ServerData
                 throw new ArgumentException("Вы передали некорректные значения");
             }
         }
+        #endregion
 
-        private object locker = new object();
+        #region Props
+        public string HOST = null;
+        public int PORT = 0;
+        public string serverName { get; } = "JumboServer";
+
+        public TcpListener Listener = null;
+        public static ServerMeta Meta = null;
+        #endregion
+
+        #region LocalStorage
+        public static List<News> allNews = null;
+        public static List<Letter> allLetters = null;
+        public static List<Person> allUsers = null;
+
+        public static List<News> noSynchNews = new List<News>();
+        public static List<Letter> noSynchLetters = new List<Letter>();
+        public static List<Person> noSynchUsers = new List<Person>();
+
+        public static Dictionary<UserToken, Person> tokensDictionary = new Dictionary<UserToken, Person>();
+        #endregion
+
+        #region OtherInstances
         private ServerFunctions functions = new ServerFunctions();
         private Synchronizator synchronizator = new Synchronizator();
         private ServerReportsModule modulEvents = new ServerReportsModule();
+        #endregion
+
+        #region ServerMethods
         public async void Start()
         {
             Listener.Start();
 
-            
             var allUsersOutDB = functions.GetAllUsersOutDB();
             allUsers = await synchronizator.SynchronizeCollection(allUsersOutDB, Meta.reservePath, Meta.reserveUsersTxt);
             Console.WriteLine("Пользователей синхронизированно: " + allUsers.Count);
 
-            if(allUsersOutDB != null)
+            if (allUsersOutDB != null)
             {
                 var allNewsOutDB = functions.GetAllNewsOutDB();
                 allNews = await synchronizator.SynchronizeCollection(allNewsOutDB, Meta.reservePath, Meta.reserveNewsCollectionTxt);
@@ -95,10 +98,9 @@ namespace Multi_Server_Test.ServerData
             {
                 modulEvents.BlockReport(this, "Письма не могут быть получены, поскольку таблица с отправителями пуста!", ConsoleColor.Red);
             }
-            
+
             modulEvents.BlockReport(this, "Server started!", ConsoleColor.Green);
         }
-        
         public void ServeAndResponseToClient()
         {
             while (true)
@@ -118,7 +120,7 @@ namespace Multi_Server_Test.ServerData
 
                 var clientStream = validClient.GetStream();
                 string jsonPackage = GetDataFromStream(clientStream);
-                if(jsonPackage == null)
+                if (jsonPackage == null)
                 {
                     modulEvents.BlockReport(this, "Ошибка: поток не поддерживает чтение", ConsoleColor.Red);
                     return;
@@ -142,13 +144,13 @@ namespace Multi_Server_Test.ServerData
                     };
 
                     var userModels = new List<Model>()
-                    { 
+                    {
                         new AuthorizationModel("auth"),
                         new AuthorizationForTokenModel("auth-token")
                     };
 
                     var newsModels = new List<Model>()
-                    { 
+                    {
                         new GetNewsCollectionModel("get"),
                         new AddNewsModel("add")
                     };
@@ -175,11 +177,11 @@ namespace Multi_Server_Test.ServerData
             }
             else
                 modulEvents.BlockReport(this, "Client not connected", ConsoleColor.Red);
-            
+
         }
-        
-        
-        #region Вторичные методы
+        #endregion
+
+        #region AdditionalMethods
         private string GetDataFromStream(NetworkStream clientStream)
         {
             if (clientStream.CanRead)
@@ -195,7 +197,19 @@ namespace Multi_Server_Test.ServerData
                 return jsonPackage.ToString();
             }
             else
-                return null;
+                return null; 
+        }
+        public static void AddLetterInLocalStorage(Letter letter)
+        {
+            var funcs = new ServerFunctions();
+
+            if(letter.SourcesTokens != null)
+            {
+                var existLetterAttachs = funcs.ReturnExistTokens(letter.SourcesTokens);
+                letter.SourcesTokens = existLetterAttachs;
+            }
+            allLetters.Add(letter);
+            noSynchLetters.Add(letter);
         }
         #endregion
     }

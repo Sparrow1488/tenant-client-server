@@ -64,7 +64,7 @@ namespace Multi_Server_Test.Server.Functions
                         string[] arraySourcesLetter = null;
                         if (!string.IsNullOrWhiteSpace(sources))
                             arraySourcesLetter = JsonConvert.DeserializeObject<string[]>(sources);
-                        var existsSourcesArray = ExistsSourcesTokens(arraySourcesLetter);
+                        var existsSourcesArray = ReturnExistTokens(arraySourcesLetter);
                         selectLetters.Add(new Letter(title, desc, sender, type, date, id, senderId, existsSourcesArray));
                     }
                 }
@@ -84,14 +84,14 @@ namespace Multi_Server_Test.Server.Functions
                 command1.Parameters.AddWithValue("type", validLetter.LetterType);
                 command1.Parameters.AddWithValue("date", validLetter.DateCreate);
                 command1.Parameters.AddWithValue("senderId", validLetter.SenderId);
-                var existsTokens = ExistsSourcesTokens(validLetter.SourcesTokens);
+                var existsTokens = ReturnExistTokens(validLetter.SourcesTokens);
                 string jsonSourcesArray = JsonConvert.SerializeObject(existsTokens);
                 command1.Parameters.AddWithValue("sources", jsonSourcesArray);
                 var successCount = command1.ExecuteNonQuery();
                 return successCount;
             }
         }
-        private string[] ExistsSourcesTokens(string[] tokens)
+        public string[] ReturnExistTokens(string[] tokens)
         {
             List<string> existsTokens = new List<string>();
             if(tokens != null)
@@ -103,7 +103,6 @@ namespace Multi_Server_Test.Server.Functions
                 }
             }
             return existsTokens.ToArray();
-
         }
         public string GetUserLoginById(int id)
         {
@@ -265,7 +264,11 @@ namespace Multi_Server_Test.Server.Functions
             foreach (var letter in MyServer.allLetters)
             {
                 if (letter.SenderId == id)
+                {
+                    var existSource = ReturnExistTokens(letter.SourcesTokens);
+                    letter.SourcesTokens = existSource;
                     collection.Add(letter);
+                }
             }
             return collection;
         }

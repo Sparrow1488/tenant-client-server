@@ -12,31 +12,24 @@ namespace WpfApp1.Server.Packages.Letters
         public string SenderLogin { get; }
         public string[] SourcesTokens { get; }
         public int SenderId { get; }
-        public DateTime DateCreate 
-        { 
-            get { return _dateCreate; } 
-            private set { _dateCreate = value; }
-        }
-        private DateTime _dateCreate;
-        public Letter(string title, string description, int senderId)
+        public DateTime DateCreate { get; }
+        public Letter(string title, string description, int senderId, int letterType)
         {
-            if(senderId > -1)
-            {
-                Title = title;
-                Description = description;
-                SenderId = senderId;
-            }
+            Title = title;
+            Description = description;
+            SenderId = senderId;
+            DateCreate = DateTime.Now;
+            LetterType = "testingTestType";
         }
-        public Letter(string title, string description, int senderId, string[] sourcesTokens)
+        public Letter(string title, string description, int senderId, string[] sourcesTokens, int letterType)
         {
-            if (senderId > -1)
-            {
-                Title = title;
-                Description = description;
-                SenderId = senderId;
-                SourcesTokens = sourcesTokens;
-                DateCreate = DateTime.Now;
-            }
+            
+            Title = title;
+            Description = description;
+            SenderId = senderId;
+            SourcesTokens = sourcesTokens;
+            DateCreate = DateTime.Now;
+            LetterType = "testingTestType";
         }
         public Letter(int id)
         {
@@ -46,17 +39,14 @@ namespace WpfApp1.Server.Packages.Letters
         [JsonConstructor]
         public Letter(string title, string description, string senderLogin, string letterType, DateTime dateCreate, int id, int senderId, string[] sourcesTokens)
         {
-            if (!string.IsNullOrWhiteSpace(senderLogin))
-            {
-                Title = title;
-                Description = description;
-                SenderLogin = senderLogin;
-                LetterType = letterType;
-                DateCreate = dateCreate;
-                Id = id;
-                SenderId = senderId;
-                SourcesTokens = sourcesTokens;
-            }
+            Title = title;
+            Description = description;
+            SenderLogin = senderLogin;
+            LetterType = letterType;
+            DateCreate = dateCreate;
+            Id = id;
+            SenderId = senderId;
+            SourcesTokens = sourcesTokens;
         }
     }
 }

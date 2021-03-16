@@ -90,10 +90,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -148,22 +144,18 @@
     <Compile Include="Server\ServerExceptions\JumboServerException.cs" />
     <Compile Include="Server\ServerExceptions\SendRequestException.cs" />
     <Compile Include="Server\ServerExceptions\UserNotExist.cs" />
-    <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="Models\Gun.cs" />
     <Compile Include="ViewModels\AuthorizationVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\HomeVM.cs" />
-    <Compile Include="ViewModels\LettersVM.cs" />
+    <Compile Include="ViewModels\LettersViewModels\LetterSenderVM.cs" />
+    <Compile Include="ViewModels\LettersViewModels\LettersVM.cs" />
     <Compile Include="ViewModels\ProfileVM.cs" />
     <Compile Include="Views\AuthorizationWindow.xaml.cs">
       <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -68,13 +68,10 @@ namespace MVVM_Pattern_Test.ViewModels
                 {
                     var passwordBox = (PasswordBox)obj;
                     PasswordInput = passwordBox.Password;
-                    Notice = "";
+                    Notice = "Отправка запроса на вход в систему...";
 
                     var inputData = new Person(LoginInput, PasswordInput);
-                    AuthResult = await JumboServer.ActiveServer.Authorization(inputData, true);
-                    ShowAuthResult();
-                    if (AuthResult)
-                        GoToHomeWindow();
+                    await TryAuth(inputData);
                 }, (obj) => CheckInputCondition());
             }
         }
@@ -95,10 +92,22 @@ namespace MVVM_Pattern_Test.ViewModels
         #region Methods
         private async Task TryAuthForToken(UserToken token)
         {
-            Notice = "Авторизуемся...";
+            Notice = "Вход в систему...";
             try
             {
                 AuthResult = await ServerFunctions.AuthorizationByTokenAsync(token);
+                ShowAuthResult();
+                if (AuthResult)
+                    GoToHomeWindow();
+            }
+            catch (JumboServerException ex) { Notice = ex.Message; }
+        }
+        private async Task TryAuth(Person inputData)
+        {
+            Notice = "Вход в систему...";
+            try
+            {
+                AuthResult = await ServerFunctions.Authorization(inputData, true);
                 ShowAuthResult();
                 if (AuthResult)
                     GoToHomeWindow();
@@ -115,7 +124,7 @@ namespace MVVM_Pattern_Test.ViewModels
             if (AuthResult)
                 Notice = "Успешная авторизация";
             else
-                Notice = "Ошибка авторизации";
+                Notice = "Не удалось войти в систему. Проверьте правильность логина или пароля";
         }
         #endregion
 

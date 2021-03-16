@@ -23,21 +23,22 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
                 serverEvents.BlockReport(this, "Письмо успешно получено", ConsoleColor.Yellow);
                 Console.WriteLine(getLetter);
 
-                MyServer.allLetters.Add(getLetter);
-                MyServer.noSynchLetters.Add(getLetter);
-
-                var canInsertInDB = CheckValidation(getLetter);
+                bool canInsertInDB = CheckValidation(getLetter);
 
                 if (canInsertInDB)
                 {
+                    var existTokens = serverFunctions.ReturnExistTokens(getLetter.SourcesTokens);
+                    getLetter.SourcesTokens = existTokens;
+
                     int successInsert = serverFunctions.AddLetterInDB(getLetter);
                     serverEvents.BlockReport(this, "Успешно добавлено писем: " + successInsert, ConsoleColor.Green);
+                    MyServer.AddLetterInLocalStorage(getLetter);
                     response = Encoding.UTF8.GetBytes("1");
                 }
                 else
                 {
                     serverEvents.BlockReport(this, "Ошибка валидации полученного письма: не добавлено в БД", ConsoleColor.Yellow);
-                    response = Encoding.UTF8.GetBytes("-1");
+                    response = Encoding.UTF8.GetBytes("0");
                 }
                 
                 return response;
@@ -54,6 +55,8 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
             {
                 return false;
             }
+            //if(letter.SourcesTokens == null)
+            //    letter.SourcesTokens = 
             return true;
         }
         

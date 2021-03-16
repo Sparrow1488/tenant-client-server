@@ -9,7 +9,7 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
         public string LetterType { get; }
         public string Title { get; }
         public int Id { get; }
-        public string[] SourcesTokens { get; }
+        public string[] SourcesTokens { get; set; }
         public string Description { get; }
         public string SenderLogin { get; }
         public int SenderId { get; }

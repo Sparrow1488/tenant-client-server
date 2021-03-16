@@ -28,9 +28,9 @@
             <TextBlock
                 Grid.Row="0"
                 HorizontalAlignment="Center"
-                FontSize="30"
+                FontSize="26"
                 FontWeight="DemiBold"
-                Text="Форма авторизации" />
+                Text="Войдите в систему" />
             <TabControl>
                 <TabItem
                     FontSize="16"
@@ -101,7 +101,7 @@
                             Grid.Row="6"
                             HorizontalAlignment="Center"
                             FontSize="18"
-                            Foreground="Red"
+                            Foreground="LightSlateGray"
                             Style="{StaticResource defaultTextStyle}"
                             Text="{Binding Notice, Mode=OneWay}"
                             TextWrapping="Wrap" />

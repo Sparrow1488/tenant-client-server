@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\proj\\tenant-client-server\\Main app\\Tenant-server-app\\JsonClient\\JsonClient.csproj": {}
+    "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Main app\\Tenant-server-app\\JsonClient\\JsonClient.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\proj\\tenant-client-server\\Main app\\Tenant-server-app\\JsonClient\\JsonClient.csproj": {
+    "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Main app\\Tenant-server-app\\JsonClient\\JsonClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\proj\\tenant-client-server\\Main app\\Tenant-server-app\\JsonClient\\JsonClient.csproj",
+        "projectUniqueName": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Main app\\Tenant-server-app\\JsonClient\\JsonClient.csproj",
         "projectName": "JsonClient",
-        "projectPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\proj\\tenant-client-server\\Main app\\Tenant-server-app\\JsonClient\\JsonClient.csproj",
+        "projectPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Main app\\Tenant-server-app\\JsonClient\\JsonClient.csproj",
         "packagesPath": "C:\\Users\\DOM\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\proj\\tenant-client-server\\Main app\\Tenant-server-app\\JsonClient\\obj\\",
+        "outputPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Main app\\Tenant-server-app\\JsonClient\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DOM\\AppData\\Roaming\\NuGet\\NuGet.Config",

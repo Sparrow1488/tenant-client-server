@@ -10,7 +10,6 @@
     Height="550"
     MinWidth="1100"
     MinHeight="500"
-    Loaded="Window_Loaded"
     mc:Ignorable="d">
     <Window.Resources>
         <Style x:Key="menuTextStyle">
@@ -26,6 +25,7 @@
         <Frame
             x:Name="homeContentFrame"
             Margin="50,0,0,0"
+            Content="{Binding ActivePage}"
             NavigationUIVisibility="Hidden" />
 
         <StackPanel
@@ -68,7 +68,7 @@
                 HorizontalContentAlignment="Left"
                 Background="Transparent"
                 BorderBrush="Transparent"
-                Click="SelectLetterPageBtn_Click">
+                Command="{Binding ShowLettersPage}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/refs1/icons/letterIcons.png" Style="{StaticResource menuIconsStyler}" />
                     <TextBlock Style="{StaticResource menuTextStyle}" Text="Письма" />
@@ -79,9 +79,9 @@
                 HorizontalContentAlignment="Left"
                 Background="Transparent"
                 BorderBrush="Transparent"
-                Click="NewsPageOpenBtn_Click">
+                Command="{Binding ShowNewsPage}">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="refs1/icons/newsIcon.png" Style="{StaticResource menuIconsStyler}" />
+                    <Image Source="/refs1/icons/newsIcon.png" Style="{StaticResource menuIconsStyler}" />
                     <TextBlock Style="{StaticResource menuTextStyle}" Text="Объявления" />
                 </StackPanel>
             </Button>

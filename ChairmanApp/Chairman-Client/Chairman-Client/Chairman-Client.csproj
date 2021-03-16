@@ -65,6 +65,8 @@
     <Compile Include="Commands\MyCommand.cs" />
     <Compile Include="ViewModels\AuthorizationVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
+    <Compile Include="ViewModels\HomeVM.cs" />
+    <Compile Include="ViewModels\LettersVM.cs" />
     <Compile Include="Views\HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>

@@ -16,6 +16,7 @@ namespace Multi_Server_Test.Blocks
         public string Password { get; set; }
         public int Room { get; set; }
         public int Id { get; set; }
+        public int AdminStatus { get; set; }
         public UserToken Token { get; set; }
 
         [JsonConstructor]
@@ -24,7 +25,7 @@ namespace Multi_Server_Test.Blocks
             Login = login;
             Password = password;
         }
-        public Person(string name, string lastName, string parentName, string login, string password, int room, int id, UserToken token)
+        public Person(string name, string lastName, string parentName, string login, string password, int room, int id, UserToken token, int adminStatus)
         {
             Name = name;
             LastName = lastName;
@@ -34,6 +35,7 @@ namespace Multi_Server_Test.Blocks
             Room = room;
             Id = id;
             Token = token;
+            AdminStatus = adminStatus;
         }
     }
 }

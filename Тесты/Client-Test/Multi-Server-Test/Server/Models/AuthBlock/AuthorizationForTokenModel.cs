@@ -14,19 +14,22 @@ namespace Multi_Server_Test.Server.Models.AuthBlock
 
         public override byte[] CompleteAction(object reqObject)
         {
-            var getInputToken = JsonConvert.DeserializeObject<UserToken>(reqObject.ToString());
+            byte[] response = Encoding.UTF8.GetBytes("-1");
+            if (reqObject == null)
+                return response;
+            var getInputToken = JsonConvert.DeserializeObject<UserToken>(reqObject?.ToString()); //TODO: иногда null вылетает
             var authUser = serverFunctions.GetUserByTokenOrDefault(getInputToken);
 
             if(authUser != null)
             {
                 var jsonResponsePerson = JsonConvert.SerializeObject(authUser);
-                byte[] response = Encoding.UTF8.GetBytes(jsonResponsePerson);
+                response = Encoding.UTF8.GetBytes(jsonResponsePerson);
                 serverEvents.BlockReport(this, "Успешный вход по токену", ConsoleColor.Green);
                 return response;
             }
             else
             {
-                byte[] response = Encoding.UTF8.GetBytes("Ошибка входа через токен. Попробуйте авторизацию по логину и паролю");
+                response = Encoding.UTF8.GetBytes("Ошибка входа через токен. Попробуйте авторизацию по логину и паролю");
                 serverEvents.BlockReport(this, "Ошибка входа по токену", ConsoleColor.Green);
                 return response;
             }

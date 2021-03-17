@@ -15,7 +15,7 @@ namespace Multi_Server_Test.Server.Views
             if (WriteStream.CanWrite)
             {
                 serverEvents.BlockReport(this, "Данные отправлены", ConsoleColor.Green);
-                WriteStream.Write(ResponseData, 0, ResponseData.Length);
+                WriteStream.Write(ResponseData, 0, ResponseData.Length); //TODO: проверка на null
                 WriteStream.Close();
             }
             else

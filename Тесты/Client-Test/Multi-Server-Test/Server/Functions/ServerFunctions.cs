@@ -174,7 +174,7 @@ namespace Multi_Server_Test.Server.Functions
             var validNews = new News(checkNews.Id, validTitle, validDesc, validSources, validSender, validType, validDate, checkNews.SenderId);
             return validNews;
         }
-        public Person GetUserOrDefault(Person person)
+        public Person GetUserOrDefaultOutDB(Person person)
         {
             string sCommand = $"SELECT * FROM Users WHERE Login=N'{person.Login}' AND Password=N'{person.Password}'";
             var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
@@ -191,7 +191,9 @@ namespace Multi_Server_Test.Server.Functions
                         var lastName = reader.GetString(4);
                         var parentName = reader.GetString(5);
                         var roomNum = Convert.ToInt32(reader.GetValue(6));
-                        return new Person(name, lastName, parentName, login, password, roomNum, id, null);
+                        int adminStatus = Convert.ToInt32(reader.GetValue(7));
+
+                        return new Person(name, lastName, parentName, login, password, roomNum, id, null, adminStatus);
                     }
                 }
                 reader.Close();
@@ -306,7 +308,8 @@ namespace Multi_Server_Test.Server.Functions
                         var lastName = reader.GetString(4);
                         var parentName = reader.GetString(5);
                         var roomNum = Convert.ToInt32(reader.GetValue(6));
-                        usersCollection.Add(new Person(name, lastName, parentName, login, password, roomNum, id, null));
+                        var adminStatus = Convert.ToInt32(reader.GetValue(7));
+                        usersCollection.Add(new Person(name, lastName, parentName, login, password, roomNum, id, null, adminStatus));
                     }
                 }
                 reader.Close();

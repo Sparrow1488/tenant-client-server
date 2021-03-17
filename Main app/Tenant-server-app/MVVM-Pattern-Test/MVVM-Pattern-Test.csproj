@@ -62,9 +62,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\HomePages\Admin\NewsWriterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\HomePages\Admin\ResponseToLetterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\HomePages\ChildLetterPage\InformationLetterPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\HomePages\ChildLetterPage\ReadLetterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\HomePages\ChildLetterPage\ReplyReaderPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -103,8 +115,17 @@
     <Compile Include="Pages\HomePages\Admin\AdminReaderPage.xaml.cs">
       <DependentUpon>AdminReaderPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\HomePages\Admin\NewsWriterPage.xaml.cs">
+      <DependentUpon>NewsWriterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HomePages\Admin\ResponseToLetterPage.xaml.cs">
+      <DependentUpon>ResponseToLetterPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HomePages\ChildLetterPage\InformationLetterPage.xaml.cs">
       <DependentUpon>InformationLetterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HomePages\ChildLetterPage\ReadLetterPage.xaml.cs">
+      <DependentUpon>ReadLetterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\HomePages\ChildLetterPage\ReplyReaderPage.xaml.cs">
       <DependentUpon>ReplyReaderPage.xaml</DependentUpon>
@@ -155,13 +176,13 @@
     <Compile Include="Server\ServerExceptions\JumboServerException.cs" />
     <Compile Include="Server\ServerExceptions\SendRequestException.cs" />
     <Compile Include="Server\ServerExceptions\UserNotExist.cs" />
-    <Compile Include="Models\Gun.cs" />
     <Compile Include="ViewModels\Admin\AdminLettersVM.cs" />
     <Compile Include="ViewModels\AuthorizationVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\HomeVM.cs" />
     <Compile Include="ViewModels\LettersViewModels\LetterSenderVM.cs" />
     <Compile Include="ViewModels\LettersViewModels\LettersVM.cs" />
+    <Compile Include="ViewModels\LettersViewModels\ReadLetterVM.cs" />
     <Compile Include="ViewModels\ProfileVM.cs" />
     <Compile Include="Views\AuthorizationWindow.xaml.cs">
       <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
@@ -216,6 +237,14 @@
     <Resource Include="refs\icons\userIcon2.png" />
     <Resource Include="refs\images\infoLetterIMG_1.jpg" />
     <Resource Include="refs\icons\openLetter.png" />
+    <Resource Include="refs\icons\sendIcon.png" />
+    <Resource Include="refs\icons\attachFile.png" />
+    <Resource Include="refs\icons\blog.png" />
+    <Resource Include="refs\icons\goBack.png" />
+    <Resource Include="refs\icons\letterIcons.png" />
+    <Resource Include="refs\icons\newsIcon.png" />
+    <Resource Include="refs\icons\reload.png" />
+    <Resource Include="refs\icons\writing.png" />
     <Content Include="refs\TestIMG-1.jfif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

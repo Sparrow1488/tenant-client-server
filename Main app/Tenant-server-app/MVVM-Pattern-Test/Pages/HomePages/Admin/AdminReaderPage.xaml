@@ -39,7 +39,8 @@
                 <ListBox
                     MaxWidth="230"
                     Background="AliceBlue"
-                    ItemsSource="{Binding AllLetters}">
+                    ItemsSource="{Binding AllLetters}"
+                    SelectedItem="{Binding SelectedLetter}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -51,13 +52,17 @@
                                     TextWrapping="Wrap" />
                                 <TextBlock
                                     Margin="5,0,5,0"
-                                    FontSize="10"
+                                    FontSize="12"
                                     Text="{Binding Path=LetterType}"
+                                    TextWrapping="Wrap" />
+                                <TextBlock
+                                    Margin="5,0,5,0"
+                                    FontSize="12"
+                                    Text="{Binding Path=SenderLogin}"
                                     TextWrapping="Wrap" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
-
                 </ListBox>
             </StackPanel>
         </ScrollViewer>
@@ -73,6 +78,7 @@
             Grid.RowSpan="2"
             Grid.Column="2"
             Background="AliceBlue"
+            Content="{Binding ReadLetterPage}"
             NavigationUIVisibility="Hidden" />
     </Grid>
 </Page>

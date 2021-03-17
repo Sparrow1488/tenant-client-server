@@ -1,12 +1,9 @@
 ﻿using Chairman_Client.Server.Chairman.Functions;
 using MVVM_Pattern_Test.Commands;
-using MVVM_Pattern_Test.ViewModels;
-using System;
+using MVVM_Pattern_Test.Pages.HomePages.ChildLetterPage;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using WpfApp1.Server.Packages.Letters;
 using WpfApp1.Server.ServerMeta;
 
@@ -17,7 +14,7 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
         #region Constructor
         public AdminLettersVM()
         {
-
+            ReadLetterPage = new ReadLetterPage(SelectedLetter);
         }
         #endregion
 
@@ -33,7 +30,22 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
             set { _allLetters = value; OnPropertyChanged(); }
         }
         private List<Letter> _allLetters = new List<Letter>();
-        private Functions functions = new Functions("secret", JumboServer.ActiveServer);
+        public Letter SelectedLetter
+        {
+            get { return _selectedLetter; }
+            set { _selectedLetter = value; ReadLetterPage = new ReadLetterPage(_selectedLetter); OnPropertyChanged();  }
+        }
+        private Letter _selectedLetter;
+        private Functions functions = new Functions(JumboServer.ActiveServer);
+        #endregion
+
+        #region Pages
+        public Page ReadLetterPage
+        {
+            get { return _readLetterPage; }
+            set { _readLetterPage = value; OnPropertyChanged(); }
+        }
+        private Page _readLetterPage;
         #endregion
 
         #region Commands

@@ -119,3 +119,10 @@ C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\proj\tenant-client-server\Main app\Tenant-
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM-Pattern-Test.pdb
 C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\Admin\AdminReaderPage.g.cs
 C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\Admin\AdminReaderPage.baml
+C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM-Pattern-Test.csprojAssemblyReference.cache
+C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\Admin\NewsWriterPage.g.cs
+C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\Admin\ResponseToLetterPage.g.cs
+C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\Admin\NewsWriterPage.baml
+C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\Admin\ResponseToLetterPage.baml
+C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\ChildLetterPage\ReadLetterPage.g.cs
+C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\ChildLetterPage\ReadLetterPage.baml

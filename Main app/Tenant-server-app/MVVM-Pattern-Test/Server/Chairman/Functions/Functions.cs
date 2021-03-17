@@ -13,14 +13,10 @@ namespace Chairman_Client.Server.Chairman.Functions
     public class Functions
     {
         public static Functions Active;
-        public Functions(string secretCode, JumboServer server)
+        public Functions(JumboServer server)
         {
-            if (secretCode == "secret" && server != null)
-            {
+            if(server != null)
                 Active = this;
-            }
-            else
-                throw new NullReferenceException("Вам отказано в доступе");
         }
         public async Task<List<Letter>> GetLetters()
         {

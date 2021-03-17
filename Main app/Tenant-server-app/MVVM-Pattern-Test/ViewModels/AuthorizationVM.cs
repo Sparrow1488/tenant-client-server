@@ -93,7 +93,7 @@ namespace MVVM_Pattern_Test.ViewModels
         #region Methods
         private async Task TryAuthForToken(UserToken token)
         {
-            Notice = "Вход в систему...";
+            //Notice = "Вход в систему...";
             try
             {
                 AuthResult = await ServerFunctions.AuthorizationByTokenAsync(token);

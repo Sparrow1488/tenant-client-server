@@ -13,7 +13,9 @@ namespace MVVM_Pattern_Test.ViewModels
             ProfilePage = new ProfilePage();
             LettersPage = new LetterPage();
             NewsPage = new NoticePage();
+
             AdminReaderPage = new AdminReaderPage();
+            AdminNewsWriterPage = new NewsWriterPage();
             //AdminLettersPage = new AdminLettersPage();
 
             ActivePage = ProfilePage;
@@ -45,18 +47,28 @@ namespace MVVM_Pattern_Test.ViewModels
             private set { _lettersPage = value; OnPropertyChanged(); }
         }
         private Page _lettersPage;
-        public Page AdminReaderPage
-        {
-            get { return _adminReaderPage; }
-            private set { _adminReaderPage = value; OnPropertyChanged(); }
-        }
-        private Page _adminReaderPage;
         public Page ActivePage
         {
             get { return _activePage; }
             set { _activePage = value; OnPropertyChanged(); }
         }
         private Page _activePage;
+
+        #region ADMIN_REGINON
+        public Page AdminReaderPage
+        {
+            get { return _adminReaderPage; }
+            private set { _adminReaderPage = value; OnPropertyChanged(); }
+        }
+        private Page _adminReaderPage;
+        public Page AdminNewsWriterPage
+        {
+            get { return _adminNewsWriterPage; }
+            private set { _adminNewsWriterPage = value; OnPropertyChanged(); }
+        }
+        private Page _adminNewsWriterPage;
+        #endregion AdminRegion
+        
         #endregion
 
         #region Commands

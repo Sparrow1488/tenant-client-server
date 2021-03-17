@@ -144,7 +144,7 @@ namespace WpfApp1.Server.ServerMeta
                         token = JsonConvert.DeserializeObject<UserToken>(jsonToken);
                     }
                 }
-                catch (Exception) { }
+                catch (Exception) { return null; }
             }
             return token;
         }

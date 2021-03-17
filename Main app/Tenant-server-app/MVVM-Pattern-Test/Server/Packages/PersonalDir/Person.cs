@@ -16,9 +16,10 @@ namespace WpfApp1.Server
         public string Password { get; }
         public int Room { get; }
         public UserToken Token { get; set; }
+        public int AdminStatus { get; }
 
         [JsonConstructor]
-        public Person(string login, string name, string lastName, string parentName, int room, string password, int id, UserToken token)
+        public Person(string login, string name, string lastName, string parentName, int room, string password, int id, UserToken token, int adminStatus)
         {
             Login = login;
             Name = name;
@@ -28,6 +29,7 @@ namespace WpfApp1.Server
             Password = password;
             Id = id;
             Token = token;
+            AdminStatus = adminStatus;
         }
 
         public Person(string login, string password)

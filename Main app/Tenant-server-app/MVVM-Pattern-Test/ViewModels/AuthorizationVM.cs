@@ -82,7 +82,8 @@ namespace MVVM_Pattern_Test.ViewModels
                 return new MyCommand(async (obj) =>
                 {
                     var token = ServerFunctions.DeserializeTokenByFileName("token-auth");
-                    await TryAuthForToken(token);
+                    if(token != null)
+                        await TryAuthForToken(token);
                 });
             }
         }
@@ -101,6 +102,7 @@ namespace MVVM_Pattern_Test.ViewModels
                     GoToHomeWindow();
             }
             catch (JumboServerException ex) { Notice = ex.Message; }
+            catch (Exception) { }
         }
         private async Task TryAuth(Person inputData)
         {
@@ -113,6 +115,7 @@ namespace MVVM_Pattern_Test.ViewModels
                     GoToHomeWindow();
             }
             catch (JumboServerException ex) { Notice = ex.Message; }
+            catch (Exception) { }
         }
         private void GoToHomeWindow()
         {

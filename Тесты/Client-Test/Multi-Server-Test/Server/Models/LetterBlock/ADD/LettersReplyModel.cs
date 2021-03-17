@@ -12,7 +12,7 @@ namespace Multi_Server_Test.Server.Models.LetterBlock
     {
         private ServerReportsModule serverEvents = new ServerReportsModule();
         private ServerFunctions serverFunctions = new ServerFunctions();
-        public LettersReplyModel(string modelAction) : base(modelAction) { }
+        public LettersReplyModel(string modelAction, bool forOnlyAdmin) : base(modelAction, forOnlyAdmin) { }
 
         public override byte[] CompleteAction(object reqObject)
         {

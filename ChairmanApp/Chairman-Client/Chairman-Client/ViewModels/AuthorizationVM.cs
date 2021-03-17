@@ -101,6 +101,7 @@ namespace MVVM_Pattern_Test.ViewModels
                     GoToHomeWindow();
             }
             catch (JumboServerException ex) { Notice = ex.Message; }
+            catch (Exception ex) { Notice = ex.Message; }
         }
         private async Task TryAuth(Person inputData)
         {

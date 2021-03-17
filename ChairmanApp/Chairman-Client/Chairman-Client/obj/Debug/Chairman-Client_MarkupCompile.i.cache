@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\
+C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\obj\Debug\
 Chairman_Client
 none
 false
 DEBUG;TRACE
-C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\App.xaml
-8-761654348
+C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\ChairmanApp\Chairman-Client\Chairman-Client\App.xaml
+8-598200622
 
-53-1846309849
-141907809619
-Views\HomeWindow.xaml;MainWindow.xaml;Pages\LetterPage.xaml;Pages\LetterPageChildren\ReadLettersPage.xaml;Pages\LetterPageChildren\ResponseToLetterPage.xaml;Pages\NewsPage.xaml;Pages\NewsPageChildren\NewsCollectionPage.xaml;Pages\NewsPageChildren\NewsWriterPage.xaml;
+531169232009
+14862113437
+Views\HomeWindow.xaml;MainWindow.xaml;Pages\AdminLettersPage.xaml;Pages\LetterPageChildren\ReadLettersPage.xaml;Pages\LetterPageChildren\ResponseToLetterPage.xaml;Pages\NewsPage.xaml;Pages\NewsPageChildren\NewsCollectionPage.xaml;Pages\NewsPageChildren\NewsWriterPage.xaml;
 
-True
+False
 

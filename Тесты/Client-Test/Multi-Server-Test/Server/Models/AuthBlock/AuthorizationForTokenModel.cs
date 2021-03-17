@@ -8,7 +8,7 @@ namespace Multi_Server_Test.Server.Models.AuthBlock
 {
     public class AuthorizationForTokenModel : Model
     {
-        public AuthorizationForTokenModel(string modelAction) : base(modelAction) { }
+        public AuthorizationForTokenModel(string modelAction, bool forOnlyAdmin) : base(modelAction, forOnlyAdmin) { }
         private ServerFunctions serverFunctions = new ServerFunctions();
         private ServerReportsModule serverEvents = new ServerReportsModule();
 

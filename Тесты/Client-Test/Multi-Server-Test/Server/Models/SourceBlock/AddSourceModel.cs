@@ -12,7 +12,7 @@ namespace Multi_Server_Test.Server.Models.SourceBlock
     {
         private ServerReportsModule serverEvents = new ServerReportsModule();
         private ServerFunctions serverFunctions = new ServerFunctions();
-        public AddSourceModel(string modelAction) : base(modelAction) { }
+        public AddSourceModel(string modelAction, bool forOnlyAdmin) : base(modelAction, forOnlyAdmin) { }
 
         public override byte[] CompleteAction(object reqObject)
         {

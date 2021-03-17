@@ -11,7 +11,7 @@ namespace Multi_Server_Test.Server.Blocks.LetterBlock
     {
         private ServerReportsModule serverEvents = new ServerReportsModule();
         private ServerFunctions serverFunctions = new ServerFunctions();
-        public SendLetterModel(string modelAction) : base(modelAction) { }
+        public SendLetterModel(string modelAction, bool forOnlyAdmin) : base(modelAction, forOnlyAdmin) { }
         public override byte[] CompleteAction(object reqObject)
         {
             byte[] response = Encoding.UTF8.GetBytes("-1");

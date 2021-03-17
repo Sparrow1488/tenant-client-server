@@ -136,29 +136,29 @@ namespace Multi_Server_Test.ServerData
 
                     var letterModels = new List<Model>()
                     {
-                        new SendLetterModel("send"),
-                        new GetAllLettersModel("get-all"),
-                        new LettersReplyModel("reply"),
-                        new GetReplyOnLetterModel("get-reply"),
-                        new GetMyLettersModel("get-my")
+                        new SendLetterModel("send", false),
+                        new GetAllLettersModel("get-all", true),
+                        new LettersReplyModel("reply", false),
+                        new GetReplyOnLetterModel("get-reply", true),
+                        new GetMyLettersModel("get-my", false)
                     };
 
                     var userModels = new List<Model>()
                     {
-                        new AuthorizationModel("auth"),
-                        new AuthorizationForTokenModel("auth-token")
+                        new AuthorizationModel("auth", false),
+                        new AuthorizationForTokenModel("auth-token", false)
                     };
 
                     var newsModels = new List<Model>()
                     {
-                        new GetNewsCollectionModel("get"),
-                        new AddNewsModel("add")
+                        new GetNewsCollectionModel("get", false),
+                        new AddNewsModel("add", true)
                     };
 
                     var sourceModels = new List<Model>()
                     {
-                        new AddSourceModel("add"),
-                        new GetSourceModel("get-token")
+                        new AddSourceModel("add", false),
+                        new GetSourceModel("get-token", false)
                     };
 
                     List<Controller> newControllers = new List<Controller>()

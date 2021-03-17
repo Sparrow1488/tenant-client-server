@@ -12,7 +12,7 @@ namespace Multi_Server_Test.Server.Blocks.Auth
     public class GetNewsCollectionModel : Model
     {
         //private ServerModulEvents serverEvents = new ServerModulEvents();
-        public GetNewsCollectionModel(string modelAction) : base(modelAction) { }
+        public GetNewsCollectionModel(string modelAction, bool forOnlyAdmin) : base(modelAction, forOnlyAdmin) { }
 
         public override byte[] CompleteAction(object reqObject)
         {

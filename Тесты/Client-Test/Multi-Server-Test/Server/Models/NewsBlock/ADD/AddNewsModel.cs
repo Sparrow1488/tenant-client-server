@@ -12,7 +12,7 @@ namespace Multi_Server_Test.Server.Models.NewsBlock
     {
         private ServerReportsModule serverEvents = new ServerReportsModule();
         private ServerFunctions serverFunctions = new ServerFunctions();
-        public AddNewsModel(string modelAction) : base(modelAction) { }
+        public AddNewsModel(string modelAction, bool forOnlyAdmin) : base(modelAction, forOnlyAdmin) { }
 
         public override byte[] CompleteAction(object reqObject)
         {

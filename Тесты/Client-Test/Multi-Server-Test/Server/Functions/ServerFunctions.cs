@@ -253,8 +253,8 @@ namespace Multi_Server_Test.Server.Functions
         {
             foreach (var item in MyServer.tokensDictionary)
             {
-                if (item.Key.SynchronizationPassword == token.SynchronizationPassword &&
-                    item.Key.EncodedLogin == token.EncodedLogin)
+                if (item.Key?.SynchronizationPassword == token?.SynchronizationPassword &&
+                    item.Key?.EncodedLogin == token?.EncodedLogin)
                     return true;
             }
             return false;
@@ -370,6 +370,13 @@ namespace Multi_Server_Test.Server.Functions
                 reader.Close();
             }
             return null;
+        }
+        public bool ForAdminChecker(UserToken token)
+        {
+            var findUser = GetUserByTokenOrDefault(token);
+            if (findUser?.AdminStatus == 1)
+                return true;
+            return false;
         }
     }
 }

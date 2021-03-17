@@ -10,7 +10,7 @@ namespace Multi_Server_Test.ServerData.Blocks.Auth
 {
     public class AuthorizationModel : Model
     {
-        public AuthorizationModel(string blockAction) : base(blockAction) { }
+        public AuthorizationModel(string modelAction, bool forOnlyAdmin) : base(modelAction, forOnlyAdmin) { }
         private ServerReportsModule serverEvents = new ServerReportsModule();
         private ServerFunctions serverFunctions = new ServerFunctions();
         public override byte[] CompleteAction(object reqObj)

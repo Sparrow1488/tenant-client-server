@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\
+C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\
 MVVM_Pattern_Test
 none
 false
 DEBUG;TRACE
-C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\App.xaml
-8935848407
+C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\App.xaml
+91397064976
 1-722758860
-521142497045
-14-981950537
-Pages\HomePages\ChildLetterPage\InformationLetterPage.xaml;Pages\HomePages\ChildLetterPage\ReplyReaderPage.xaml;Pages\HomePages\ChildLetterPage\UniversalLetterPage.xaml;Pages\HomePages\LetterPage.xaml;Pages\HomePages\NoticePage.xaml;Pages\HomePages\ProfilePage.xaml;Views\AuthorizationWindow.xaml;Views\HomeWindow.xaml;
+582027248937
+1476155534
+Pages\HomePages\Admin\AdminReaderPage.xaml;Pages\HomePages\ChildLetterPage\InformationLetterPage.xaml;Pages\HomePages\ChildLetterPage\ReplyReaderPage.xaml;Pages\HomePages\ChildLetterPage\UniversalLetterPage.xaml;Pages\HomePages\LetterPage.xaml;Pages\HomePages\NoticePage.xaml;Pages\HomePages\ProfilePage.xaml;Views\AuthorizationWindow.xaml;Views\HomeWindow.xaml;
 
-False
+True
 

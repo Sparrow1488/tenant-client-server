@@ -9,7 +9,7 @@ using WpfApp1.Pages.HomePages.ChildLetterPage;
 using WpfApp1.Server.Packages.Letters;
 using WpfApp1.Server.ServerMeta;
 
-namespace MVVM_Pattern_Test.ViewModels
+namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
 {
     public class LettersVM : BaseVM
     {

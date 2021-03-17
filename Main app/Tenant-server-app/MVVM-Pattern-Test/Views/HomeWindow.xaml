@@ -111,7 +111,27 @@
                             Grid.Column="0"
                             Source="/refs\icons\noticeIcon.png"
                             Style="{StaticResource iconLeftMenu}" />
-                        <TextBlock Text="Объявления" />
+                        <TextBlock Text="Лента" />
+                    </StackPanel>
+                </Grid>
+            </Button>
+
+            <Button
+                HorizontalContentAlignment="Left"
+                Command="{Binding ShowAdminReaderPage}"
+                Style="{StaticResource leftMenuBtn}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Grid.Column="0"
+                            Source="/refs\icons\openLetter.png"
+                            Style="{StaticResource iconLeftMenu}" />
+                        <TextBlock Text="Почтовый ящик" />
                     </StackPanel>
                 </Grid>
             </Button>
@@ -131,7 +151,7 @@
                             Grid.Column="0"
                             Source="/refs\icons\chatIcon.png"
                             Style="{StaticResource iconLeftMenu}" />
-                        <TextBlock Text="Обратная связь" />
+                        <TextBlock Text="Написать" />
                     </StackPanel>
                 </Grid>
             </Button>

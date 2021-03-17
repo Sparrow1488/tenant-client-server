@@ -58,6 +58,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Pages\HomePages\Admin\AdminReaderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\HomePages\ChildLetterPage\InformationLetterPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -96,6 +100,9 @@
     </Compile>
     <Compile Include="Commands\MyCommand.cs" />
     <Compile Include="MyApplication\UserInformation\User.cs" />
+    <Compile Include="Pages\HomePages\Admin\AdminReaderPage.xaml.cs">
+      <DependentUpon>AdminReaderPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HomePages\ChildLetterPage\InformationLetterPage.xaml.cs">
       <DependentUpon>InformationLetterPage.xaml</DependentUpon>
     </Compile>
@@ -114,6 +121,10 @@
     <Compile Include="Pages\HomePages\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Server\Chairman\Functions\Functions.cs" />
+    <Compile Include="Server\Chairman\Packages\AddNewsPackage.cs" />
+    <Compile Include="Server\Chairman\Packages\GetLettersPackage.cs" />
+    <Compile Include="Server\Chairman\Packages\SendAnswerToLetterPackage.cs" />
     <Compile Include="Server\Configuration\ServerConfig.cs" />
     <Compile Include="Server\JumboServer.cs" />
     <Compile Include="Server\Packages\LettersDir\ComplaintLetter.cs" />
@@ -145,6 +156,7 @@
     <Compile Include="Server\ServerExceptions\SendRequestException.cs" />
     <Compile Include="Server\ServerExceptions\UserNotExist.cs" />
     <Compile Include="Models\Gun.cs" />
+    <Compile Include="ViewModels\Admin\AdminLettersVM.cs" />
     <Compile Include="ViewModels\AuthorizationVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\HomeVM.cs" />
@@ -203,6 +215,7 @@
     <Resource Include="refs\icons\userIcon.png" />
     <Resource Include="refs\icons\userIcon2.png" />
     <Resource Include="refs\images\infoLetterIMG_1.jpg" />
+    <Resource Include="refs\icons\openLetter.png" />
     <Content Include="refs\TestIMG-1.jfif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

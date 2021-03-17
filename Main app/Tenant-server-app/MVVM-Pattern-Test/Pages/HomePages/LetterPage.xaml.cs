@@ -1,14 +1,5 @@
-﻿using MVVM_Pattern_Test.ViewModels;
-using System;
-using System.IO;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-//using WpfApp1.MyApplication;
-using WpfApp1.Pages.HomePages.ChildLetterPage;
-using WpfApp1.Server.Packages.SourceDir;
-using WpfApp1.Server.ServerMeta;
-
+﻿using System.Windows.Controls;
+using MVVM_Pattern_Test.ViewModels.LettersViewModels;
 namespace WpfApp1.Pages.HomePages
 {
     /// <summary>

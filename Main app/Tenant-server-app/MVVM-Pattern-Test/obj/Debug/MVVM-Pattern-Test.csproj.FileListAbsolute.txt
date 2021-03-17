@@ -37,7 +37,6 @@ C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\T
 C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\bin\Debug\MVVM-Pattern-Test.pdb
 C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM-Pattern-Test.csprojAssemblyReference.cache
 C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Views\AuthorizationWindow.g.cs
 C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\App.g.cs
 C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM-Pattern-Test_MarkupCompile.cache
@@ -118,3 +117,5 @@ C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\proj\tenant-client-server\Main app\Tenant-
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM-Pattern-Test.csproj.CopyComplete
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM-Pattern-Test.exe
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM-Pattern-Test.pdb
+C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\Admin\AdminReaderPage.g.cs
+C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\Admin\AdminReaderPage.baml

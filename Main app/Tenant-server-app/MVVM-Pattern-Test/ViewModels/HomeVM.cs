@@ -1,9 +1,5 @@
 ﻿using MVVM_Pattern_Test.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MVVM_Pattern_Test.Pages.HomePages.Admin;
 using System.Windows.Controls;
 using WpfApp1.Pages.HomePages;
 
@@ -17,6 +13,8 @@ namespace MVVM_Pattern_Test.ViewModels
             ProfilePage = new ProfilePage();
             LettersPage = new LetterPage();
             NewsPage = new NoticePage();
+            AdminReaderPage = new AdminReaderPage();
+            //AdminLettersPage = new AdminLettersPage();
 
             ActivePage = ProfilePage;
         }
@@ -47,6 +45,12 @@ namespace MVVM_Pattern_Test.ViewModels
             private set { _lettersPage = value; OnPropertyChanged(); }
         }
         private Page _lettersPage;
+        public Page AdminReaderPage
+        {
+            get { return _adminReaderPage; }
+            private set { _adminReaderPage = value; OnPropertyChanged(); }
+        }
+        private Page _adminReaderPage;
         public Page ActivePage
         {
             get { return _activePage; }
@@ -84,6 +88,16 @@ namespace MVVM_Pattern_Test.ViewModels
                 {
                     ActivePage = NewsPage;
                 }, (obj) => NewsPage != null);
+            }
+        }
+        public MyCommand ShowAdminReaderPage
+        {
+            get
+            {
+                return new MyCommand((obj) =>
+                {
+                    ActivePage = AdminReaderPage;
+                }, (obj) => AdminReaderPage != null);
             }
         }
 

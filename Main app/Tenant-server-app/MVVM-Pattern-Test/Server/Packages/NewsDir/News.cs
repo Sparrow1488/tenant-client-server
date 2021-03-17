@@ -38,5 +38,6 @@ namespace Multi_Server_Test.Server
             Source = source;
             Type = type;
         }
+        public News() { }
     }
 }

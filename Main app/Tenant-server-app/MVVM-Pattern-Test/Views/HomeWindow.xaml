@@ -11,6 +11,7 @@
     Height="800"
     MinWidth="1050"
     MinHeight="550"
+    Loaded="Window_Loaded"
     mc:Ignorable="d">
     <Window.Resources>
         <Style x:Key="leftMenuBtn">
@@ -61,7 +62,7 @@
                                     <Storyboard>
                                         <DoubleAnimation
                                             Storyboard.TargetProperty="Width"
-                                            To="230"
+                                            To="250"
                                             Duration="0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -117,6 +118,28 @@
             </Button>
 
             <Button
+                Name="viewWriteNewsBtn"
+                HorizontalContentAlignment="Left"
+                Command="{Binding ShowAdminNewsWriterPage}"
+                Style="{StaticResource leftMenuBtn}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Grid.Column="0"
+                            Source="/refs\icons\write/write-letter.png"
+                            Style="{StaticResource iconLeftMenu}" />
+                        <TextBlock Text="Новое объявление" />
+                    </StackPanel>
+                </Grid>
+            </Button>
+
+            <Button
+                Name="viewAllLettersBtn"
                 HorizontalContentAlignment="Left"
                 Command="{Binding ShowAdminReaderPage}"
                 Style="{StaticResource leftMenuBtn}">
@@ -129,7 +152,7 @@
                     <StackPanel Orientation="Horizontal">
                         <Image
                             Grid.Column="0"
-                            Source="/refs\icons\openLetter.png"
+                            Source="/refs\icons\mail\mail.png"
                             Style="{StaticResource iconLeftMenu}" />
                         <TextBlock Text="Почтовый ящик" />
                     </StackPanel>
@@ -149,9 +172,9 @@
                     <StackPanel Orientation="Horizontal">
                         <Image
                             Grid.Column="0"
-                            Source="/refs\icons\chatIcon.png"
+                            Source="/refs\icons\send\send-letter.png"
                             Style="{StaticResource iconLeftMenu}" />
-                        <TextBlock Text="Написать" />
+                        <TextBlock Text="Отправить письмо" />
                     </StackPanel>
                 </Grid>
             </Button>

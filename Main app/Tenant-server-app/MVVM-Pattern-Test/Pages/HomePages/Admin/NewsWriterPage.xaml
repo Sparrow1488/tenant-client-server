@@ -70,7 +70,7 @@
                         <TextBox
                             x:Name="titleBox"
                             Style="{StaticResource textBoxStyle}"
-                            Text="Заголовок"
+                            Text="{Binding NewPost.Title, Mode=TwoWay}"
                             TextWrapping="Wrap" />
                         <StackPanel
                             Height="1"
@@ -80,12 +80,12 @@
                             x:Name="descBox"
                             Width="Auto"
                             Style="{StaticResource textBoxStyle}"
-                            Text="Описание"
+                            Text="{Binding NewPost.Description, Mode=TwoWay}"
                             TextWrapping="Wrap" />
                         <StackPanel Height="1" Background="Gray" />
                         <GroupBox Margin="0,10,0,0">
                             <StackPanel>
-                                <TextBlock Style="{StaticResource additionalTextStyle}" Text="Отправитель: " />
+                                <TextBlock Style="{StaticResource additionalTextStyle}" Text="Отправитель" />
                                 <TextBlock Style="{StaticResource additionalTextStyle}" Text="Дата отправки: " />
                                 <WrapPanel>
                                     <TextBlock Style="{StaticResource additionalTextStyle}" Text="Тип записи: " />
@@ -122,7 +122,7 @@
                             Padding="0,5,0,0"
                             VerticalContentAlignment="Center">
                             <WrapPanel>
-                                <Button Style="{StaticResource buttonStyler}">
+                                <Button Command="{Binding SendNews}" Style="{StaticResource buttonStyler}">
                                     <WrapPanel>
                                         <Image
                                             Width="20"
@@ -143,6 +143,13 @@
                             </WrapPanel>
                         </GroupBox>
                     </StackPanel>
+                    <TextBlock
+                        Margin="10,5"
+                        HorizontalAlignment="Center"
+                        FontSize="20"
+                        Foreground="Black"
+                        Text="{Binding Notice}"
+                        TextWrapping="Wrap" />
                 </StackPanel>
             </Border>
 

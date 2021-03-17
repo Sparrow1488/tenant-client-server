@@ -16,7 +16,6 @@ namespace MVVM_Pattern_Test.ViewModels
 
             AdminReaderPage = new AdminReaderPage();
             AdminNewsWriterPage = new NewsWriterPage();
-            //AdminLettersPage = new AdminLettersPage();
 
             ActivePage = ProfilePage;
         }
@@ -68,7 +67,7 @@ namespace MVVM_Pattern_Test.ViewModels
         }
         private Page _adminNewsWriterPage;
         #endregion AdminRegion
-        
+
         #endregion
 
         #region Commands
@@ -112,7 +111,16 @@ namespace MVVM_Pattern_Test.ViewModels
                 }, (obj) => AdminReaderPage != null);
             }
         }
-
+        public MyCommand ShowAdminNewsWriterPage
+        {
+            get
+            {
+                return new MyCommand((obj) =>
+                {
+                    ActivePage = AdminNewsWriterPage;
+                }, (obj) => AdminNewsWriterPage != null);
+            }
+        }
         #endregion
     }
 }

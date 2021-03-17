@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVVM_Pattern_Test.ViewModels.Admin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace MVVM_Pattern_Test.Pages.HomePages.Admin
         public NewsWriterPage()
         {
             InitializeComponent();
+
+            DataContext = new AdminNewsVM();
         }
     }
 }

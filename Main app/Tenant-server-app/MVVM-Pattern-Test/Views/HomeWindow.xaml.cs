@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp1.Server.ServerMeta;
 
 namespace MVVM_Pattern_Test.Views
 {
@@ -24,6 +25,16 @@ namespace MVVM_Pattern_Test.Views
         {
             InitializeComponent();
             DataContext = new HomeVM();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var authUser = JumboServer.ActiveServer.ActiveUser;
+            if (authUser.AdminStatus != 1)
+            {
+                viewAllLettersBtn.Visibility = Visibility.Collapsed;
+                viewWriteNewsBtn.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

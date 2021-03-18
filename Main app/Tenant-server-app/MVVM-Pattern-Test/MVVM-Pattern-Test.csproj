@@ -184,6 +184,7 @@
     <Compile Include="ViewModels\LettersViewModels\LetterSenderVM.cs" />
     <Compile Include="ViewModels\LettersViewModels\LettersVM.cs" />
     <Compile Include="ViewModels\LettersViewModels\ReadLetterVM.cs" />
+    <Compile Include="ViewModels\NewsViewModels\RecieveNewsVM.cs" />
     <Compile Include="ViewModels\ProfileVM.cs" />
     <Compile Include="Views\AuthorizationWindow.xaml.cs">
       <DependentUpon>AuthorizationWindow.xaml</DependentUpon>

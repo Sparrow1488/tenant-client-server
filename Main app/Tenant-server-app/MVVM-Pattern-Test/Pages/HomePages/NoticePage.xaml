@@ -9,32 +9,84 @@
     d:DesignHeight="800"
     d:DesignWidth="1200"
     Background="GhostWhite"
-    Loaded="Page_Loaded"
     mc:Ignorable="d">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <!--<StackPanel Grid.Column="0">
-            <Button
-                x:Name="addPanelBtn"
-                Width="Auto"
-                Height="40"
-                Click="AddPanelBtn_Click"
-                Content="ADD"
-                FontSize="30" />
-        </StackPanel>-->
-
-        <ScrollViewer Grid.Column="1">
-            <StackPanel
-                x:Name="contentPanel"
-                Width="800"
-                Height="Auto"
-                Margin="15"
-                CanVerticallyScroll="True" />
-        </ScrollViewer>
-    </Grid>
+    <ScrollViewer
+        Grid.Column="1"
+        Width="800"
+        Margin="0,0,0,20"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Top"
+        CanContentScroll="True">
+        <Grid>
+            <StackPanel>
+                <Button
+                    HorizontalContentAlignment="Center"
+                    Command="{Binding RecieveNews}"
+                    Content="Обновить"
+                    FontSize="24" />
+                <ItemsControl
+                    x:Name="tStack"
+                    Grid.Column="0"
+                    Margin="0,20,0,0"
+                    ItemsSource="{Binding RecievedNews}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                x:Name="contentPanel"
+                                Width="650"
+                                Margin="0,0,0,10"
+                                Padding="5"
+                                HorizontalAlignment="Center"
+                                BorderBrush="Gray"
+                                BorderThickness="1"
+                                CornerRadius="2">
+                                <StackPanel>
+                                    <WrapPanel Margin="5,0">
+                                        <Image Width="50" Source="/refs/images/infoLetterIMG_1.jpg" />
+                                        <TextBlock
+                                            Margin="10,0"
+                                            VerticalAlignment="Center"
+                                            FontSize="20"
+                                            Text="{Binding Sender}" />
+                                        <TextBlock
+                                            Margin="10,0"
+                                            VerticalAlignment="Center"
+                                            FontSize="20"
+                                            Text="-" />
+                                        <TextBlock
+                                            Margin="10,0"
+                                            VerticalAlignment="Center"
+                                            FontSize="20"
+                                            Text="{Binding DateTime}" />
+                                    </WrapPanel>
+                                    <TextBlock
+                                        Margin="5,0"
+                                        FontSize="24"
+                                        FontWeight="DemiBold"
+                                        Text="{Binding Title}" />
+                                    <StackPanel
+                                        Height="1"
+                                        Margin="5,5"
+                                        Background="Black" />
+                                    <TextBox
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        FontSize="20"
+                                        IsReadOnly="True"
+                                        Text="{Binding Description}"
+                                        TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Page>

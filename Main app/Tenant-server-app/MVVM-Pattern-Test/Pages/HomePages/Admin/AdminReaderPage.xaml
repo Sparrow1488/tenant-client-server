@@ -26,7 +26,8 @@
                 Background="Transparent"
                 BorderThickness="0"
                 Command="{Binding RecieveAllLetters}"
-                Content="Обновить" />
+                Content="Обновить"
+                FontSize="20" />
         </StackPanel>
 
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
@@ -37,7 +38,7 @@
                 Orientation="Vertical">
 
                 <ListBox
-                    MaxWidth="230"
+                    MaxWidth="250"
                     Background="AliceBlue"
                     ItemsSource="{Binding AllLetters}"
                     SelectedItem="{Binding SelectedLetter}">

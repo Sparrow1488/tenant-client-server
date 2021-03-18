@@ -15,35 +15,10 @@ namespace WpfApp1.Pages.HomePages
     /// </summary>
     public partial class NoticePage : Page
     {
-        private List<News> ReceivedNews;
         public NoticePage()
         {
             InitializeComponent();
             DataContext = new RecieveNewsVM();
         }
-
-        //private bool IsLoadNews = false;
-        //private async void Page_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (!IsLoadNews)
-        //        {
-        //            ReceivedNews = await JumboServer.ActiveServer.ReceiveNewsCollectionAsync();
-        //            foreach (var news in ReceivedNews)
-        //            {
-        //                AddNewsPanel(news);
-        //            }
-        //            IsLoadNews = true;
-        //        }
-        //    }
-        //    catch (JumboServerException ex)
-        //    {
-        //        MessageBox.Show(ex.Message.ToString(),
-        //                        "Внутреннее исключение",
-        //                        MessageBoxButton.OK,
-        //                        MessageBoxImage.Error);
-        //    }
-        //}
     }
 }

@@ -126,7 +126,21 @@
                             Content="Важное"
                             FontSize="18"
                             Style="{StaticResource letterButtons}" />
+                        <Button
+                            Padding="10,0"
+                            HorizontalAlignment="Left"
+                            Command="{Binding RecieveSource}"
+                            Content="Смотреть прикреп"
+                            FontSize="18"
+                            Style="{StaticResource letterButtons}" />
                     </WrapPanel>
+                    <ListBox ItemsSource="{Binding MySources}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Path=Source}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                     <Frame x:Name="responseFrame" NavigationUIVisibility="Hidden" />
                 </StackPanel>
             </StackPanel>

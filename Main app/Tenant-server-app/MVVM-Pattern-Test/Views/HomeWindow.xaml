@@ -15,7 +15,7 @@
     mc:Ignorable="d">
     <Window.Resources>
         <Style x:Key="leftMenuBtn">
-            <Setter Property="ItemsControl.Background" Value="AliceBlue" />
+            <Setter Property="ItemsControl.Background" Value="Transparent" />
             <Setter Property="ItemsControl.BorderBrush" Value="Transparent" />
             <Setter Property="ItemsControl.Padding" Value="5" />
             <Setter Property="ItemsControl.FontSize" Value="25" />
@@ -39,7 +39,7 @@
             x:Name="menuLeftPanel"
             Width="50"
             HorizontalAlignment="Left"
-            Background="AliceBlue"
+            Background="#9c9c9c"
             Orientation="Vertical">
             <StackPanel.Style>
                 <Style TargetType="{x:Type StackPanel}">
@@ -92,7 +92,10 @@
                             Grid.Column="0"
                             Source="/refs\icons\profileIcon.png"
                             Style="{StaticResource iconLeftMenu}" />
-                        <TextBlock Grid.Column="1" Text="Профиль" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Foreground="White"
+                            Text="Профиль" />
                     </StackPanel>
                 </Grid>
             </Button>

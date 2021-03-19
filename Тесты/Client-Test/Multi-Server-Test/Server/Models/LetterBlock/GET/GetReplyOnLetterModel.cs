@@ -20,10 +20,11 @@ namespace Multi_Server_Test.Server.Models.LetterBlock
             try
             {
                 var getLetter = JsonConvert.DeserializeObject<Letter>(reqObject.ToString());
-                var reply = serverFunctions.GetReplyByLetterId(getLetter.Id);
-                if (reply != null)
+                var replyes = serverFunctions.GetReplyByLetterId(getLetter.Id);
+                if (replyes != null)
                 {
-                    var replyJson = JsonConvert.SerializeObject(reply);
+                    serverEvents.BlockReport(this, "Ответы на письма получены", ConsoleColor.Green);
+                    var replyJson = JsonConvert.SerializeObject(replyes);
                     response = Encoding.UTF8.GetBytes(replyJson);
                 }
                 return response;

@@ -20,23 +20,24 @@ namespace Multi_Server_Test.Server.Models.LetterBlock
             {
                 byte[] response;
                 var replyObj = JsonConvert.DeserializeObject<ReplyLetter>(reqObject.ToString());
-                serverEvents.BlockReport(this, "Запрос на добавление ответа письму", ConsoleColor.Yellow);
+                serverEvents.BlockReport(this, "Запрос на добавление ответа на письмо", ConsoleColor.Yellow);
                 int successCompl = serverFunctions.ReplyToTheLetter(replyObj);
                 if(successCompl > 0)
                 {
-                    response = Encoding.UTF8.GetBytes("Ответ успешно добавлен");
                     serverEvents.BlockReport(this, "Ответ успешно добавлен", ConsoleColor.Green);
+                    response = Encoding.UTF8.GetBytes("1");
                 }
                 else
                 {
-                    response = Encoding.UTF8.GetBytes("Ошибка записи ответа");
                     serverEvents.BlockReport(this, "Ошибка записи ответа", ConsoleColor.Red);
+                    response = Encoding.UTF8.GetBytes("-1");
                 }
                 return response;
             }
             catch (Exception)
             {
-                return Encoding.UTF8.GetBytes("Неизвестная ошибка");
+                serverEvents.BlockReport(this, "Неизвестная ошибка", ConsoleColor.Red);
+                return Encoding.UTF8.GetBytes("-1");
             }
         }
     }

@@ -133,9 +133,10 @@ namespace Multi_Server_Test.Server.Functions
             }
             catch (Exception) { return -1; }
         }
-        public ReplyLetter GetReplyByLetterId(int id)
+        public List<ReplyLetter> GetReplyByLetterId(int id)
         {
             string sCommand = $"SELECT * FROM ResponsesToLetters WHERE letterId=N'{id}'";
+            List<ReplyLetter> allReplyes = new List<ReplyLetter>();
             var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
             using (var reader = command.ExecuteReader())
             {
@@ -147,12 +148,14 @@ namespace Multi_Server_Test.Server.Functions
                         var letterId = reader.GetInt32(2);
                         var source = reader.IsDBNull(3) ? null : reader.GetString(3);
                         var responder = reader.GetString(4);
-                        return new ReplyLetter(answer, source, responder, letterId);
+                        var responderId = reader.GetInt32(5);
+                        var reply = new ReplyLetter(answer, source, responder, letterId, responderId);
+                        allReplyes.Add(reply);
                     }
                 }
                 reader.Close();
             }
-            return null;
+            return allReplyes;
         }
         private News CheckNewsValidation(News checkNews) //каловая дичь
         {
@@ -276,7 +279,7 @@ namespace Multi_Server_Test.Server.Functions
         }
         public int ReplyToTheLetter(ReplyLetter reply)
         {
-            string sCommand = $"INSERT INTO [ResponsesToLetters] (answerText, letterId, source, responder) VALUES (@answer, @letterId, @source, @sender)";
+            string sCommand = $"INSERT INTO [ResponsesToLetters] (answerText, letterId, source, responder, responderId) VALUES (@answer, @letterId, @source, @sender, @senderId)";
             using (var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
             {
                 command.Parameters.AddWithValue("answer", reply.Answer);
@@ -285,7 +288,8 @@ namespace Multi_Server_Test.Server.Functions
                 if (reply.Source != null) //TODO: попробовать при != null добавлять параметр, иначе нет
                     validSource = reply.Source;
                 command.Parameters.AddWithValue("source", validSource); 
-                command.Parameters.AddWithValue("sender", reply.Responder);
+                command.Parameters.AddWithValue("sender", reply.Responder ?? "admin");
+                command.Parameters.AddWithValue("senderId", reply.ResponderId);
                 var successInsert = command.ExecuteNonQuery();
                 return successInsert;
             }

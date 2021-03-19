@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Multi_Server_Test.Server.Models.LetterBlock
 {
@@ -11,13 +8,15 @@ namespace Multi_Server_Test.Server.Models.LetterBlock
         public string Source { get; }
         public string Responder { get; }
         public int LetterId { get; }
+        public int ResponderId { get; }
         [JsonConstructor]
-        public ReplyLetter(string answer, string source, string responder, int letterId)
+        public ReplyLetter(string answer, string source, string responder, int letterId, int responderId)
         {
             Answer = answer;
             Source = source;
             Responder = responder;
             LetterId = letterId;
+            ResponderId = responderId;
         }
     }
 }

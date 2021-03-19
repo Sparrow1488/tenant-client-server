@@ -38,14 +38,15 @@
                     BorderThickness="0"
                     FontFamily="Calibri Light"
                     FontSize="22"
-                    Text="Ответ"
+                    Text="{Binding Answer, Mode=TwoWay}"
                     TextWrapping="Wrap" />
                 <StackPanel Height="1" Background="Black" />
                 <Button
                     Margin="0,5"
                     Padding="5"
                     Background="Transparent"
-                    BorderThickness="0">
+                    BorderThickness="0"
+                    Command="{Binding DoReply}">
                     <WrapPanel>
                         <Image
                             Width="25"
@@ -58,6 +59,12 @@
                             Text="Отправить" />
                     </WrapPanel>
                 </Button>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="18"
+                    Foreground="LightSlateGray"
+                    Text="{Binding Notice}"
+                    TextWrapping="Wrap" />
             </StackPanel>
         </Border>
     </Grid>

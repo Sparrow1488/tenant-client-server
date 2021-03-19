@@ -195,18 +195,17 @@ namespace WpfApp1.Server.ServerMeta
             return await SendAndGetAsync(pack);
         }
 
-        public async Task<ReplyLetter> GetReplyByLetterId(int id)
+        public async Task<List<ReplyLetter>> GetReplyByLetterId(int id)
         {
+            List<ReplyLetter> replyes = new List<ReplyLetter>();
             try
             {
                 var pack = new GetReplyLetterPackage(new Letter(id));
                 var replyJson = await ActiveServer.SendAndGetAsync(pack);
-                var reply = JsonConvert.DeserializeObject<ReplyLetter>(replyJson);
-                if (reply != null)
-                    return reply;
+                replyes = JsonConvert.DeserializeObject<List<ReplyLetter>>(replyJson);
             }
             catch { }
-            return null;
+            return replyes;
         }
 
         public async Task<List<Letter>> GetMyLetters()

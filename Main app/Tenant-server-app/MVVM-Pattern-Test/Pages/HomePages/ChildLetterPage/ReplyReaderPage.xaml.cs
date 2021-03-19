@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVVM_Pattern_Test.ViewModels.LettersViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,25 +24,11 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
     public partial class ReplyReaderPage : Page
     {
         private List<Letter> MySendLetters = new List<Letter>();
-        public ReplyReaderPage(List<Letter> sendLetters)
+        public ReplyReaderPage(int letterId)
         {
             InitializeComponent();
 
-            MySendLetters = sendLetters;
+            DataContext = new ResponseReaderVM(letterId);
         }
-
-        private bool myLettersWasLoaded = false;
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            if(MySendLetters != null && !myLettersWasLoaded)
-            {
-                foreach (var letter in MySendLetters)
-                {
-                    //new LetterReader(letter, LetterPage.AdditionalFrame).AddMyLetterOnPanel(content);
-                }
-                myLettersWasLoaded = true;
-            }
-        }
-        
     }
 }

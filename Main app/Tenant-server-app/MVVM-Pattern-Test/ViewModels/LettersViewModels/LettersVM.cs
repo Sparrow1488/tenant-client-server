@@ -35,6 +35,12 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
             private set { _newLetter = value; OnPropertyChanged(); }
         }
         private Letter _newLetter;
+        public Letter SelectedLetter
+        {
+            get { return _selectedLetter; }
+            set { _selectedLetter = value; OnPropertyChanged(); }
+        }
+        private Letter _selectedLetter;
         public Page SelectedPage
         {
             get { return _selectedPage; }
@@ -53,6 +59,12 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
             private set { _myLetter = value; OnPropertyChanged(); }
         }
         public List<Letter> _myLetter = new List<Letter>();
+        public Page ResponseReader
+        { 
+            get { return _responseReaderPage; }
+            set { _responseReaderPage = value; OnPropertyChanged(); }
+        }
+        private Page _responseReaderPage;
         #endregion
 
         #region Commands
@@ -75,6 +87,16 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
                 {
                     SelectedPage = UniversalPage;
                 }, (obj) => UniversalPage != null);
+            }
+        }
+        public MyCommand ShowResponseReaderPage
+        {
+            get
+            {
+                return new MyCommand((obj) =>
+                {
+                    ResponseReader = new ReplyReaderPage(SelectedLetter.Id);
+                }, (obj) => SelectedLetter != null);
             }
         }
         #endregion

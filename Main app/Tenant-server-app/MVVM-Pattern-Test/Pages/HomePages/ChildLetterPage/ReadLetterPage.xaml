@@ -105,6 +105,7 @@
                             Name="replyBtn"
                             Padding="10,0"
                             HorizontalAlignment="Left"
+                            Command="{Binding ShowReplyPage}"
                             Content="Ответить"
                             FontSize="18"
                             Style="{StaticResource letterButtons}" />
@@ -141,7 +142,10 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <Frame x:Name="responseFrame" NavigationUIVisibility="Hidden" />
+                    <Frame
+                        x:Name="responseFrame"
+                        Content="{Binding ReplyPage}"
+                        NavigationUIVisibility="Hidden" />
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

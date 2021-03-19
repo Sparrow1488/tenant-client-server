@@ -13,7 +13,8 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="*" MinWidth="650" />
+            <ColumnDefinition Width="0.8*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -71,6 +72,12 @@
                                 Background="Transparent"
                                 Command="{Binding RecieveMyLetters}"
                                 Content="Обновить" />
+                            <Button
+                                Height="Auto"
+                                Margin="0,0,20,0"
+                                Background="Transparent"
+                                Command="{Binding ShowResponseReaderPage}"
+                                Content="Ответы" />
                             <TextBlock
                                 FontFamily="Calibri Light"
                                 FontSize="24"
@@ -84,7 +91,8 @@
                             <ListBox
                                 BorderThickness="0"
                                 FontSize="22"
-                                ItemsSource="{Binding MyLetters}">
+                                ItemsSource="{Binding MyLetters}"
+                                SelectedItem="{Binding SelectedLetter}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
@@ -125,6 +133,14 @@
                 TextWrapping="Wrap"
                 Visibility="Collapsed" />
         </StackPanel>
+
+        <Frame
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Background="AliceBlue"
+            Content="{Binding ResponseReader}"
+            NavigationUIVisibility="Hidden" />
 
     </Grid>
 </Page>

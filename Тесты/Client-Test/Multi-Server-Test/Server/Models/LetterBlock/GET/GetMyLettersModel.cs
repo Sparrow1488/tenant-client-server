@@ -21,7 +21,8 @@ namespace Multi_Server_Test.Server.Models.LetterBlock
             try
             {
                 var getPerson = JsonConvert.DeserializeObject<Person>(reqObject.ToString());
-                var personLetters = serverFunctions.GetPersonalLetterByUserId(getPerson.Id);
+                //var personLetters = serverFunctions.GetPersonalLetterByUserId(getPerson.Id);
+                var personLetters = serverFunctions.GetPersonalLetterByUserIdOutDB(getPerson.Id);
                 if (personLetters != null)
                 {
                     var replyJson = JsonConvert.SerializeObject(personLetters);

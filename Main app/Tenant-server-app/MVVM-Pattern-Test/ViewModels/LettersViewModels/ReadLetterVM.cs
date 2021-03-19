@@ -42,7 +42,7 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
                 return new MyCommand((obj) =>
                 {
                     ReplyPage = new ResponseToLetterPage(ReadLetter.Id);
-                });
+                }, (obj) => ReadLetter != null);
             }
         }
         private string MyPath 

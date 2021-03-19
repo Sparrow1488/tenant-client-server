@@ -277,6 +277,36 @@ namespace Multi_Server_Test.Server.Functions
             }
             return collection;
         }
+        public List<Letter> GetPersonalLetterByUserIdOutDB(int id)
+        {
+            var selectLetters = new List<Letter>();
+            string sCommand = $"SELECT * FROM Letters WHERE SenderId={id}";
+            var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var idLetter = reader.GetInt32(0);
+                        var title = reader.GetString(1);
+                        var desc = reader.GetString(2);
+                        var type = reader.GetString(3);
+                        var date = reader.GetDateTime(5);
+                        var senderId = reader.GetInt32(6);
+                        var sender = GetUserLoginById(senderId);
+                        var sources = reader.IsDBNull(7) ? null : reader.GetString(7);
+                        string[] arraySourcesLetter = null;
+                        if (!string.IsNullOrWhiteSpace(sources))
+                            arraySourcesLetter = JsonConvert.DeserializeObject<string[]>(sources);
+                        var existsSourcesArray = ReturnExistTokens(arraySourcesLetter);
+                        selectLetters.Add(new Letter(title, desc, sender, type, date, idLetter, senderId, existsSourcesArray));
+                    }
+                }
+                reader.Close();
+            }
+            return selectLetters;
+        }
         public int ReplyToTheLetter(ReplyLetter reply)
         {
             string sCommand = $"INSERT INTO [ResponsesToLetters] (answerText, letterId, source, responder, responderId) VALUES (@answer, @letterId, @source, @sender, @senderId)";

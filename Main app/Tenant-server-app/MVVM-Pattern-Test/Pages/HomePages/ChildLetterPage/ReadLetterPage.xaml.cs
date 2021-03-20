@@ -1,5 +1,9 @@
 ﻿using MVVM_Pattern_Test.ViewModels.LettersViewModels;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using WpfApp1.Server.Packages.Letters;
 
 namespace MVVM_Pattern_Test.Pages.HomePages.ChildLetterPage

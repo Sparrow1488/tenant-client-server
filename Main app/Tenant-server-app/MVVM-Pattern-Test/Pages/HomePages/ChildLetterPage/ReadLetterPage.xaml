@@ -131,13 +131,34 @@
                             FontSize="18"
                             Style="{StaticResource letterButtons}" />
                     </WrapPanel>
-                    <ListBox ItemsSource="{Binding MySources}">
-                        <ListBox.ItemTemplate>
+
+                    <ListBox
+                        x:Name="dsd"
+                        ItemsSource="{Binding SourceTokens}"
+                        SelectedItem="{Binding SelectedToken}" />
+
+                    <ItemsControl ItemsSource="{Binding Sources}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding Path=Source}" />
+                                <StackPanel>
+                                    <Image
+                                        x:Name="attachedImage"
+                                        Width="350"
+                                        Source="{Binding}" />
+                                    <Button
+                                        Command="{Binding SaveImage}"
+                                        CommandParameter="{Binding ElementName=attachedImage}"
+                                        Content="Save" />
+                                </StackPanel>
                             </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
                     <Frame
                         x:Name="responseFrame"
                         HorizontalAlignment="Center"

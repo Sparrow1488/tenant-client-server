@@ -2,20 +2,28 @@
 using MVVM_Pattern_Test.Pages.HomePages.Admin;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Drawing;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using WpfApp1.Server.Packages.Letters;
+using WpfApp1.Server.ServerMeta;
 
 namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
 {
     public class ReadLetterVM : BaseVM
     {
+        #region Constructor
         public ReadLetterVM(Letter readLetter)
         {
             ReadLetter = readLetter;
         }
+        #endregion
+
+        #region Props
         public Letter ReadLetter { get { return _letter; } private set { _letter = value; OnPropertyChanged(); } }
         private Letter _letter;
         public Page ReplyPage
@@ -24,15 +32,36 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
             set { _replyPage = value; OnPropertyChanged(); }
         }
         private Page _replyPage;
+        public ObservableCollection<string> SourceTokens
+        {
+            get { return _sourceTokens; }
+            set { _sourceTokens = value; OnPropertyChanged(); }
+        }
+        private ObservableCollection<string> _sourceTokens = new ObservableCollection<string>();
+        public ObservableCollection<ImageSource> Sources
+        {
+            get { return _sources; }
+            set { _sources = value; OnPropertyChanged(); }
+        }
+        private ObservableCollection<ImageSource> _sources = new ObservableCollection<ImageSource>();
+        public string SelectedToken
+        {
+            get { return _selectedToken; }
+            set { _selectedToken = value; OnPropertyChanged(); }
+        }
+        private string _selectedToken;
         public override string Notice { get { return _infoMessage; } protected set { _infoMessage = value; OnPropertyChanged(); } }
+        #endregion
+
+        #region Commands
         public MyCommand RecieveSource
         {
             get
             {
                 return new MyCommand(async (obj) =>
                 {
-                    await ReciveSourceByToken();
-                });
+                    SourceTokens =  await ReciveSourceByToken();
+                }, (obj) => ReadLetter != null);
             }
         }
         public MyCommand ShowReplyPage
@@ -45,53 +74,36 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
                 }, (obj) => ReadLetter != null);
             }
         }
-        private string MyPath 
-        { 
-            get { return @"C:\Users\Dom\Desktop\Репозитории\asdasd.png"; } 
-            set 
-            {
-                Random rnd = new Random();
-                var rndNum = rnd.Next(10000, 999999);
-                MyPath = value; OnPropertyChanged(); 
-            } 
-        }
-        //public ImageSource MyImagee
-        //{
-        //    get { return _MyImagee; }
-        //    set
-        //    {
-        //        _MyImagee = value; OnPropertyChanged();
-        //    }
-        //}
-        //private ImageSource _MyImagee = new BitmapImage(new Uri(@"C:\Users\Dom\Desktop\Репозитории\asdasd.png"));
-        public List<System.Windows.Controls.Image> Images
+        public MyCommand SaveImage
         {
-            get { return _images; }
-            set
+            get
             {
-                _images = value; /*OnPropertyChanged();*/
+                return new MyCommand((obj) =>
+                {
+                    //var image = (Image)obj;
+                }, (obj) => ReadLetter != null);
             }
         }
-        private List<System.Windows.Controls.Image> _images = new List<System.Windows.Controls.Image>();
-        public List<ImageSource> MySources
+        #endregion
+
+
+        #region Methods
+        private string path = @"C:\Users\Dom\Desktop\MyContent\img.png";
+        private async Task<ObservableCollection<string>> ReciveSourceByToken()
         {
-            get { return _MySources; }
-            set
+            if (ReadLetter == null) return SourceTokens;
+            foreach (var token in ReadLetter.SourcesTokens)
             {
-                _MySources = value; OnPropertyChanged();
+                SourceTokens.Add(token);
+                var source = await JumboServer.ActiveServer.GetSourceByToken(token);
+                var sourceData = Convert.FromBase64String(source.Data);
+                Sources.Add(BitmapFrame.Create(new MemoryStream(sourceData)));
             }
+            return SourceTokens;
+            //File.WriteAllBytes(path, sourceData);
+            //imageControl.Source = BitmapFrame.Create(new MemoryStream(File.ReadAllBytes(@"C:\Users\Dom\Downloads\profile.png")));
         }
-        private List<ImageSource> _MySources = new List<ImageSource>();
-        private async Task ReciveSourceByToken()
-        {
-            if (ReadLetter == null) return;
-            foreach (var token in ReadLetter?.SourcesTokens)
-            {
-                ImageSource d = new BitmapImage(new Uri(MyPath));
-                //var source = await JumboServer.ActiveServer.GetSourceByToken(token);
-                //Image image = Image.FromStream(new MemoryStream(Convert.FromBase64String(source.Data)));
-                //image.Save(MyPath);
-            }
-        }
+        #endregion
+
     }
 }

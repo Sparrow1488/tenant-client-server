@@ -5,10 +5,10 @@ namespace WpfApp1.Server.Packages.SourceDir
 {
     public class Source : RequestObject
     {
-        public string SourceToken { get; }
-        public string Data { get; }
-        public int SenderId { get; }
-        public DateTime DateCreate { get; } = DateTime.Now;
+        public string SourceToken { get; set; }
+        public string Data { get; set; }
+        public int SenderId { get; set; }
+        public DateTime DateCreate { get; set; } = DateTime.Now;
         [JsonConstructor]
         public Source(string data, string sourceToken, int senderId, DateTime dateCreate)
         {

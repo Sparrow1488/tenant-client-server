@@ -21,7 +21,6 @@
         <StackPanel
             Grid.Row="0"
             Margin="20,0,20,0"
-            HorizontalAlignment="Center"
             Orientation="Vertical">
             <StackPanel>
                 <TextBlock
@@ -39,13 +38,14 @@
                 Content="Написать"
                 FontFamily="Calibri Light"
                 FontSize="24" />
+            <StackPanel
+                Height="1"
+                Margin="0,2"
+                Background="Black" />
         </StackPanel>
 
-        <ScrollViewer Grid.Row="1" Margin="0,20">
-            <StackPanel
-                Grid.Row="1"
-                Height="Auto"
-                Margin="0,10,0,0">
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Grid.Row="1" Height="Auto">
                 <Frame
                     x:Name="additionalFrame"
                     Grid.Column="1"

@@ -34,24 +34,11 @@
         </Style>
     </Page.Resources>
 
-    <Grid>
-
-        <StackPanel x:Name="mainWriterPanel">
-
-            <Button
-                Width="Auto"
-                HorizontalAlignment="Left"
-                Background="White"
-                BorderThickness="0">
-                <WrapPanel>
-                    <Image
-                        Width="25"
-                        Margin="0,0,5,0"
-                        Source="/refs/icons/goBack.png" />
-                    <TextBlock Style="{StaticResource defaultTextStyle}" Text="Назад" />
-                </WrapPanel>
-            </Button>
-
+    <Grid TextOptions.TextFormattingMode="Display">
+        <StackPanel
+            x:Name="mainWriterPanel"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
             <Border
                 Padding="10"
                 HorizontalAlignment="Center"
@@ -63,11 +50,15 @@
                     <DropShadowEffect
                         BlurRadius="20"
                         Opacity="0.3"
+                        RenderingBias="Quality"
                         Color="Gray" />
                 </Border.Effect>
 
                 <StackPanel>
-
+                    <StackPanel
+                        Width="40"
+                        Height="5"
+                        Background="Orange" />
                     <WrapPanel HorizontalAlignment="Center">
                         <Image
                             Width="30"

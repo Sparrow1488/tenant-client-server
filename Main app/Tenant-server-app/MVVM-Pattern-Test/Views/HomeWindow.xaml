@@ -9,7 +9,7 @@
     Title="Главная"
     Width="1200"
     Height="800"
-    MinWidth="1050"
+    MinWidth="900"
     MinHeight="550"
     Loaded="Window_Loaded"
     mc:Ignorable="d">
@@ -30,7 +30,6 @@
     </Window.Resources>
 
     <Grid>
-
         <DockPanel Margin="50,0,0,0">
             <Frame
                 x:Name="ProfilePageFrame"
@@ -110,41 +109,42 @@
                     RenderingBias="Quality"
                     ShadowDepth="2" />
             </StackPanel.Effect>
-            <StackPanel.Style>
-                <Style TargetType="{x:Type StackPanel}">
-                    <Style.Triggers>
-                        <EventTrigger RoutedEvent="MouseLeave">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetProperty="Width"
-                                            To="50"
-                                            Duration="0:0:0.2" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseEnter">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetProperty="Width"
-                                            To="250"
-                                            Duration="0:0:0.2" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-                    </Style.Triggers>
-                </Style>
-            </StackPanel.Style>
             <StackPanel Height="80">
                 <StackPanel.Background>
                     <ImageBrush ImageSource="/refs/BG-4_1920x1080.jpg" Stretch="UniformToFill" />
                 </StackPanel.Background>
             </StackPanel>
+            <ToggleButton
+                HorizontalContentAlignment="Left"
+                Checked="ToggleButton_Checked"
+                Style="{StaticResource leftMenuBtn}"
+                Unchecked="ToggleButton_Unchecked">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Grid.Column="0"
+                            Source="/refs\icons\list.png"
+                            Style="{StaticResource iconLeftMenu}">
+                            <Image.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="2"
+                                    Opacity="0.2"
+                                    RenderingBias="Quality"
+                                    ShadowDepth="2" />
+                            </Image.Effect>
+                        </Image>
+                        <TextBlock
+                            Grid.Column="1"
+                            Foreground="White"
+                            Text="Закрыть" />
+                    </StackPanel>
+                </Grid>
+            </ToggleButton>
 
             <Button
                 HorizontalContentAlignment="Left"
@@ -201,6 +201,34 @@
                             </Image.Effect>
                         </Image>
                         <TextBlock Text="Лента" />
+                    </StackPanel>
+                </Grid>
+            </Button>
+
+            <Button
+                HorizontalContentAlignment="Left"
+                Command="{Binding ShowLettersPage}"
+                Style="{StaticResource leftMenuBtn}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Grid.Column="0"
+                            Source="/refs\icons\send\send-letter-color.png"
+                            Style="{StaticResource iconLeftMenu}">
+                            <Image.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="2"
+                                    Opacity="0.2"
+                                    RenderingBias="Quality"
+                                    ShadowDepth="2" />
+                            </Image.Effect>
+                        </Image>
+                        <TextBlock Text="Отправить письмо" />
                     </StackPanel>
                 </Grid>
             </Button>
@@ -263,33 +291,7 @@
                 </Grid>
             </Button>
 
-            <Button
-                HorizontalContentAlignment="Left"
-                Command="{Binding ShowLettersPage}"
-                Style="{StaticResource leftMenuBtn}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
 
-                    <StackPanel Orientation="Horizontal">
-                        <Image
-                            Grid.Column="0"
-                            Source="/refs\icons\send\send-letter-color.png"
-                            Style="{StaticResource iconLeftMenu}">
-                            <Image.Effect>
-                                <DropShadowEffect
-                                    BlurRadius="2"
-                                    Opacity="0.2"
-                                    RenderingBias="Quality"
-                                    ShadowDepth="2" />
-                            </Image.Effect>
-                        </Image>
-                        <TextBlock Text="Отправить письмо" />
-                    </StackPanel>
-                </Grid>
-            </Button>
 
             <Button HorizontalContentAlignment="Left" Style="{StaticResource leftMenuBtn}">
                 <Grid>

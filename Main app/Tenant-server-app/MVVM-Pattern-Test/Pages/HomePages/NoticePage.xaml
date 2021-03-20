@@ -18,7 +18,8 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Top"
         Background="FloralWhite"
-        CanContentScroll="True">
+        CanContentScroll="True"
+        TextOptions.TextFormattingMode="Display">
         <Grid>
             <StackPanel>
                 <Button
@@ -52,6 +53,7 @@
                                     <DropShadowEffect
                                         BlurRadius="10"
                                         Opacity="0.2"
+                                        RenderingBias="Quality"
                                         Color="Gray" />
                                 </Border.Effect>
                                 <StackPanel>

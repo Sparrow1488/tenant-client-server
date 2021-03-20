@@ -25,7 +25,11 @@
             BorderThickness="1"
             CornerRadius="6">
 
-            <StackPanel Width="610" HorizontalAlignment="Center">
+            <StackPanel MinWidth="380" HorizontalAlignment="Center">
+                <StackPanel
+                    Width="60"
+                    Height="5"
+                    Background="Orange" />
                 <TextBlock
                     HorizontalAlignment="Center"
                     FontFamily="Calibri Light"
@@ -33,6 +37,7 @@
                     Text="Написать ответ" />
                 <TextBox
                     x:Name="responseTextBox"
+                    Width="Auto"
                     MaxHeight="200"
                     Margin="0,5"
                     BorderThickness="0"

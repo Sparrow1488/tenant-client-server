@@ -78,7 +78,6 @@
             x:Name="letterReaderFrame"
             Grid.RowSpan="2"
             Grid.Column="2"
-            Background="AliceBlue"
             Content="{Binding ReadLetterPage}"
             NavigationUIVisibility="Hidden" />
     </Grid>

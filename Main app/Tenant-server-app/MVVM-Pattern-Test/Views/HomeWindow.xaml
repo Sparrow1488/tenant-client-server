@@ -13,13 +13,15 @@
     MinHeight="550"
     Loaded="Window_Loaded"
     mc:Ignorable="d">
+
     <Window.Resources>
         <Style x:Key="leftMenuBtn">
             <Setter Property="ItemsControl.Background" Value="Transparent" />
             <Setter Property="ItemsControl.BorderBrush" Value="Transparent" />
             <Setter Property="ItemsControl.Padding" Value="5" />
             <Setter Property="ItemsControl.FontSize" Value="25" />
-            <Setter Property="ItemsControl.FontFamily" Value="Calibri Light" />
+            <Setter Property="ItemsControl.FontFamily" Value="Calibri" />
+            <Setter Property="ItemsControl.Foreground" Value="White" />
         </Style>
         <Style x:Key="iconLeftMenu">
             <Setter Property="ItemsControl.Width" Value="35" />
@@ -28,6 +30,7 @@
     </Window.Resources>
 
     <Grid>
+
         <DockPanel Margin="50,0,0,0">
             <Frame
                 x:Name="ProfilePageFrame"
@@ -98,8 +101,15 @@
             x:Name="menuLeftPanel"
             Width="50"
             HorizontalAlignment="Left"
-            Background="#9c9c9c"
+            Background="#2398AB"
             Orientation="Vertical">
+            <StackPanel.Effect>
+                <DropShadowEffect
+                    BlurRadius="20"
+                    Direction="-100"
+                    RenderingBias="Quality"
+                    ShadowDepth="2" />
+            </StackPanel.Effect>
             <StackPanel.Style>
                 <Style TargetType="{x:Type StackPanel}">
                     <Style.Triggers>
@@ -149,8 +159,16 @@
                     <StackPanel Orientation="Horizontal">
                         <Image
                             Grid.Column="0"
-                            Source="/refs\icons\profileIcon.png"
-                            Style="{StaticResource iconLeftMenu}" />
+                            Source="/refs\icons\profile\profile-color.png"
+                            Style="{StaticResource iconLeftMenu}">
+                            <Image.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="2"
+                                    Opacity="0.2"
+                                    RenderingBias="Quality"
+                                    ShadowDepth="2" />
+                            </Image.Effect>
+                        </Image>
                         <TextBlock
                             Grid.Column="1"
                             Foreground="White"
@@ -172,8 +190,16 @@
                     <StackPanel Orientation="Horizontal">
                         <Image
                             Grid.Column="0"
-                            Source="/refs\icons\noticeIcon.png"
-                            Style="{StaticResource iconLeftMenu}" />
+                            Source="/refs\icons\news\newspaper-color.png"
+                            Style="{StaticResource iconLeftMenu}">
+                            <Image.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="2"
+                                    Opacity="0.2"
+                                    RenderingBias="Quality"
+                                    ShadowDepth="2" />
+                            </Image.Effect>
+                        </Image>
                         <TextBlock Text="Лента" />
                     </StackPanel>
                 </Grid>
@@ -193,9 +219,17 @@
                     <StackPanel Orientation="Horizontal">
                         <Image
                             Grid.Column="0"
-                            Source="/refs\icons\write/write-letter.png"
-                            Style="{StaticResource iconLeftMenu}" />
-                        <TextBlock Text="Новое объявление" />
+                            Source="/refs\icons\write/write-letter-color.png"
+                            Style="{StaticResource iconLeftMenu}">
+                            <Image.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="2"
+                                    Opacity="0.2"
+                                    RenderingBias="Quality"
+                                    ShadowDepth="2" />
+                            </Image.Effect>
+                        </Image>
+                        <TextBlock Foreground="Orange" Text="Новое объявление" />
                     </StackPanel>
                 </Grid>
             </Button>
@@ -214,9 +248,17 @@
                     <StackPanel Orientation="Horizontal">
                         <Image
                             Grid.Column="0"
-                            Source="/refs\icons\mail\mail.png"
-                            Style="{StaticResource iconLeftMenu}" />
-                        <TextBlock Text="Почтовый ящик" />
+                            Source="/refs\icons\mail\mail-color.png"
+                            Style="{StaticResource iconLeftMenu}">
+                            <Image.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="2"
+                                    Opacity="0.2"
+                                    RenderingBias="Quality"
+                                    ShadowDepth="2" />
+                            </Image.Effect>
+                        </Image>
+                        <TextBlock Foreground="Orange" Text="Почтовый ящик" />
                     </StackPanel>
                 </Grid>
             </Button>
@@ -234,8 +276,16 @@
                     <StackPanel Orientation="Horizontal">
                         <Image
                             Grid.Column="0"
-                            Source="/refs\icons\send\send-letter.png"
-                            Style="{StaticResource iconLeftMenu}" />
+                            Source="/refs\icons\send\send-letter-color.png"
+                            Style="{StaticResource iconLeftMenu}">
+                            <Image.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="2"
+                                    Opacity="0.2"
+                                    RenderingBias="Quality"
+                                    ShadowDepth="2" />
+                            </Image.Effect>
+                        </Image>
                         <TextBlock Text="Отправить письмо" />
                     </StackPanel>
                 </Grid>
@@ -251,8 +301,16 @@
                     <StackPanel Orientation="Horizontal">
                         <Image
                             Grid.Column="0"
-                            Source="/refs\icons\settingsIcon.png"
-                            Style="{StaticResource iconLeftMenu}" />
+                            Source="/refs\icons\settings\settings-color.png"
+                            Style="{StaticResource iconLeftMenu}">
+                            <Image.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="-10"
+                                    Opacity="0.2"
+                                    RenderingBias="Quality"
+                                    ShadowDepth="2" />
+                            </Image.Effect>
+                        </Image>
                         <TextBlock Text="Настройки" />
                     </StackPanel>
                 </Grid>

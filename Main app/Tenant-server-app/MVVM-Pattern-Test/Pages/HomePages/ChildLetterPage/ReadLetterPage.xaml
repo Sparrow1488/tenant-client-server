@@ -64,13 +64,12 @@
                 IsReadOnly="True"
                 Style="{StaticResource defaultTextStyle}"
                 Text="{Binding ReadLetter.ShortDateCreate}" />
+            <StackPanel Height="1" Background="Black" />
         </StackPanel>
         <!--  СОНОВНОЙ КОНТЕНТ  -->
         <ScrollViewer Grid.Row="1">
             <StackPanel>
                 <StackPanel Margin="50,0,50,0" Orientation="Vertical">
-                    <StackPanel Height="1" Background="Black" />
-
                     <GroupBox
                         BorderThickness="1"
                         FontSize="12"

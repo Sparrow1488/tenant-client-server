@@ -33,12 +33,15 @@
             <Setter Property="ItemsControl.Padding" Value="4 2" />
         </Style>
     </Page.Resources>
+
     <Grid>
+
         <StackPanel x:Name="mainWriterPanel">
+
             <Button
                 Width="Auto"
                 HorizontalAlignment="Left"
-                Background="Transparent"
+                Background="White"
                 BorderThickness="0">
                 <WrapPanel>
                     <Image
@@ -52,10 +55,19 @@
             <Border
                 Padding="10"
                 HorizontalAlignment="Center"
+                Background="White"
                 BorderBrush="Black"
                 BorderThickness="1"
                 CornerRadius="5">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="20"
+                        Opacity="0.3"
+                        Color="Gray" />
+                </Border.Effect>
+
                 <StackPanel>
+
                     <WrapPanel HorizontalAlignment="Center">
                         <Image
                             Width="30"

@@ -25,7 +25,7 @@
             BorderThickness="1"
             CornerRadius="6">
 
-            <StackPanel Width="610">
+            <StackPanel Width="610" HorizontalAlignment="Center">
                 <TextBlock
                     HorizontalAlignment="Center"
                     FontFamily="Calibri Light"

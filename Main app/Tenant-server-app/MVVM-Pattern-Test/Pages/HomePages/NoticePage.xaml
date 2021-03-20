@@ -17,6 +17,7 @@
         Margin="0,0,0,20"
         HorizontalAlignment="Center"
         VerticalAlignment="Top"
+        Background="FloralWhite"
         CanContentScroll="True">
         <Grid>
             <StackPanel>
@@ -43,9 +44,16 @@
                                 Margin="0,0,0,10"
                                 Padding="5"
                                 HorizontalAlignment="Center"
-                                BorderBrush="Gray"
+                                Background="White"
+                                BorderBrush="LightGray"
                                 BorderThickness="1"
-                                CornerRadius="2">
+                                CornerRadius="1">
+                                <Border.Effect>
+                                    <DropShadowEffect
+                                        BlurRadius="10"
+                                        Opacity="0.2"
+                                        Color="Gray" />
+                                </Border.Effect>
                                 <StackPanel>
                                     <WrapPanel Margin="5,0">
                                         <Image Width="50" Source="/refs/images/infoLetterIMG_1.jpg" />
@@ -73,7 +81,7 @@
                                     <StackPanel
                                         Height="1"
                                         Margin="5,5"
-                                        Background="Black" />
+                                        Background="Gray" />
                                     <TextBox
                                         Background="Transparent"
                                         BorderThickness="0"

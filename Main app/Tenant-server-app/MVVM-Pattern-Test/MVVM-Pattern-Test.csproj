@@ -256,6 +256,9 @@
     <Resource Include="refs\icons\Send\send-letter-color.png" />
     <Resource Include="refs\icons\Mail\mail-color.png" />
     <Resource Include="refs\icons\Mail\mail.png" />
+    <Resource Include="refs\icons\News\newspaper-color.png" />
+    <Resource Include="refs\icons\Profile\profile-color.png" />
+    <Resource Include="refs\icons\Settings\settings-color.png" />
     <Content Include="refs\TestIMG-1.jfif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

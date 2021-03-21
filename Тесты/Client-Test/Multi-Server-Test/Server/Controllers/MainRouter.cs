@@ -9,39 +9,37 @@ namespace Multi_Server_Test.ServerData.Blocks
 {
     public class MainRouter
     {
-        private List<Controller> allControllers { get; }
-        public MainRouter(List<Controller> existingControllers)
+        private List<Controller> AllControllers { get; }
+        public MainRouter(List<Controller> projectControllers)
         {
-            allControllers = existingControllers;
+            if (projectControllers == null || projectControllers.Count == 0)
+                throw new ArgumentNullException("Вы не можете создать проект, не задействова ни одного контроллера!");
+            AllControllers = projectControllers;
         }
 
+        private string controllerName = string.Empty;
+        private string modelAction = string.Empty;
+        private string requestAction = string.Empty;
         public void ExecuteRouting(Package package, TcpClient connectedClient)
         {
-            string request = package.SendingMeta.Action;
-            string controllerName = "Info";
-            string modelAction = "info";
-            if (request == null)
-                return;
-            string[] fullRequest = request.Split('/');
-            if (fullRequest.Length < 2)
-                return;
-            controllerName = fullRequest[0];
-            modelAction = fullRequest[1];
+            requestAction = package?.SendingMeta?.Action;
+            string[] requestComponents = requestAction.Split('/');
+            if (requestComponents.Length < 2) return;
+            controllerName = requestComponents[0] ?? "info";
+            modelAction = requestComponents[1] ?? "info";
 
-            for (int i = 0; i < allControllers.Count; i++)
+            for (int i = 0; i < AllControllers.Count; i++)
             {
-                var controller = allControllers[i];
+                var controller = AllControllers[i];
                 if (controller.ControllerName == controllerName)
                 {
                     controller.ExecuteRouting(modelAction, package, connectedClient);
                     break;
                 }
-                else if (i == allControllers.Count - 1)
-                {
+
+                if (i == AllControllers.Count - 1)
                     Console.WriteLine("MainRouter> Ошибка: Не найдено модели под запрос");
-                }
             }
-            
         }
     }
 }

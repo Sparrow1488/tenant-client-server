@@ -1,4 +1,5 @@
-﻿using Multi_Server_Test.Blocks;
+﻿using Multi_Server_Test;
+using Multi_Server_Test.Blocks;
 using Multi_Server_Test.Server.Blocks.Auth;
 using Multi_Server_Test.Server.Blocks.LetterBlock;
 using Multi_Server_Test.Server.Controllers;
@@ -20,7 +21,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Multi_Server_Test.ServerData
+namespace JumboServer
 {
     public class MyServer
     {
@@ -65,7 +66,7 @@ namespace Multi_Server_Test.ServerData
 
         #region OtherInstances
         private ServerFunctions functions = new ServerFunctions();
-        private Synchronizator synchronizator = new Synchronizator();
+        private CollectionSynchronizator synchronizator = new CollectionSynchronizator();
         private ServerReportsModule modulEvents = new ServerReportsModule();
         #endregion
 

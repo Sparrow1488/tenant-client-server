@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+XEj/GZONN+QrEnSDpFqPTyslCzhQPKLpGWwTINpK+gdEavm4VfZ9Z6QE30I60QaolD5ZtEz1fDKScryZURhcg==",
+  "dgSpecHash": "2m0IYMxCMtt5hSH+Xlx3AwSFeGpdFaU4AhUXOnWp287nU0GQfTVgUTImorkHF31tMi1tlmF7a8KDgqYFh5n/gQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Dom\\Desktop\\Репозитории\\Proj\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\Multi-Server-Test.csproj",
+  "projectFilePath": "C:\\Users\\Dom\\Desktop\\Репозитории\\Proj\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\JumboServer-alpha.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dom\\.nuget\\packages\\firesharp\\2.0.4\\firesharp.2.0.4.nupkg.sha512",
     "C:\\Users\\Dom\\.nuget\\packages\\microsoft.bcl\\1.1.9\\microsoft.bcl.1.1.9.nupkg.sha512",

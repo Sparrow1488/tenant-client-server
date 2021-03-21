@@ -20,9 +20,9 @@ namespace Multi_Server_Test.Server.Packages
         public override string ToString()
         {
             return $"Получена мета:\n" +
-                   $"To: {Address},\n" +
-                   $"From: {FromHostName},\n" +
-                   $"Action: {Action}";
+                      $"To: {Address},\n" +
+                      $"From: {FromHostName},\n" +
+                      $"Action: {Action}";
         }
     }
 }

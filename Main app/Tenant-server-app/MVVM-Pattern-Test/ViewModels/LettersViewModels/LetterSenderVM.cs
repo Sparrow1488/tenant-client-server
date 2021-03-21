@@ -91,10 +91,12 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
                 return new MyCommand(async (obj) =>
                 {
                     string base64Data = string.Empty;
+                    string fileExtension = string.Empty;
                     OpenFileDialog dialog = new OpenFileDialog();
                     if (dialog.ShowDialog() == true)
                     {
                         string filePath = dialog.FileName;
+                        fileExtension = Path.GetExtension(filePath);
                         try { base64Data = Convert.ToBase64String(File.ReadAllBytes(filePath)); }
                         catch { /* НЕВЕРНЫЙ ФОРМАТЬ ДОКУМЕНТА*/ }
                         FileInfo info = new FileInfo(filePath);
@@ -102,7 +104,7 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
                     }
                     if (!string.IsNullOrWhiteSpace(base64Data))
                     {
-                        var newSource = new Source(base64Data, JumboServer.ActiveServer.ActiveUser.Id);
+                        var newSource = new Source(base64Data, JumboServer.ActiveServer.ActiveUser.Id, fileExtension);
                         var sourceToken = await JumboServer.ActiveServer.AddSource(newSource);
                         if (!string.IsNullOrWhiteSpace(sourceToken))
                         {

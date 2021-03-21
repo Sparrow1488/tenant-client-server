@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using WpfApp1.Server.Packages.Letters;
+using WpfApp1.Server.ServerExceptions;
 using WpfApp1.Server.ServerMeta;
 
 namespace MVVM_Pattern_Test.ViewModels.Admin
@@ -55,15 +56,20 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
             {
                 return new MyCommand(async (obj) =>
                 {
-                    var responseLetters = await functions.GetLetters();
-                    if (responseLetters != null)
-                    {
-                        Notice = "Все письма успешно получены";
-                        AllLetters = responseLetters;
+
+                    try 
+                    { 
+                        var responseLetters = await functions.GetLetters();
+                        if (responseLetters != null)
+                        {
+                            Notice = "Все письма успешно получены";
+                            AllLetters = responseLetters;
+                        }
+                        else
+                            Notice = "Список писем пока пуст";
+                        MessageBox.Show(Notice);
                     }
-                    else
-                        Notice = "Список писем пока пуст";
-                    MessageBox.Show(Notice);
+                    catch(JumboServerException ex) { Notice = ex.Message; }
                 }, (obj) => functions != null);
             }
         }

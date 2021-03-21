@@ -9,7 +9,7 @@
     Title="Главная"
     Width="1200"
     Height="800"
-    MinWidth="900"
+    MinWidth="870"
     MinHeight="550"
     Loaded="Window_Loaded"
     mc:Ignorable="d">

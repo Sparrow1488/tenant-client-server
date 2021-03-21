@@ -4,11 +4,13 @@ using FireSharp.Interfaces;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
 
 namespace Multi_Server_Test.ServerData.Server
 {
     public class ServerMeta
     {
+        public static Encoding Encoding = Encoding.UTF32;
         public SqlConnection sqlConnection = null;
         private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\JumboDataBase.mdf;Integrated Security=True";
         public ServerMeta()

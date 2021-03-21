@@ -1,5 +1,6 @@
 ﻿using Multi_Server_Test.Server.Functions;
 using Multi_Server_Test.ServerData.Blocks;
+using Multi_Server_Test.ServerData.Server;
 using Newtonsoft.Json;
 using System;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Multi_Server_Test.Server.Models.AuthBlock
 
         public override byte[] CompleteAction(object reqObject)
         {
-            byte[] response = Encoding.UTF8.GetBytes("-1");
+            byte[] response = ServerMeta.Encoding.GetBytes("-1");
             if (reqObject == null)
                 return response;
             var getInputToken = JsonConvert.DeserializeObject<UserToken>(reqObject?.ToString()); //TODO: иногда null вылетает
@@ -23,13 +24,13 @@ namespace Multi_Server_Test.Server.Models.AuthBlock
             if(authUser != null)
             {
                 var jsonResponsePerson = JsonConvert.SerializeObject(authUser);
-                response = Encoding.UTF8.GetBytes(jsonResponsePerson);
+                response = ServerMeta.Encoding.GetBytes(jsonResponsePerson);
                 serverEvents.BlockReport(this, "Успешный вход по токену", ConsoleColor.Green);
                 return response;
             }
             else
             {
-                response = Encoding.UTF8.GetBytes("Ошибка входа через токен. Попробуйте авторизацию по логину и паролю");
+                response = ServerMeta.Encoding.GetBytes("Ошибка входа через токен. Попробуйте авторизацию по логину и паролю");
                 serverEvents.BlockReport(this, "Ошибка входа по токену", ConsoleColor.Green);
                 return response;
             }

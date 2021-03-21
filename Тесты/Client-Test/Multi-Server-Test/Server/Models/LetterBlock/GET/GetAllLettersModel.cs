@@ -1,6 +1,7 @@
 ﻿using Multi_Server_Test.Server.Blocks.LetterBlock;
 using Multi_Server_Test.Server.Functions;
 using Multi_Server_Test.ServerData.Blocks;
+using Multi_Server_Test.ServerData.Server;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -24,18 +25,18 @@ namespace Multi_Server_Test.Server.Models.LetterBlock
 
                 if (lettersOutDB == null)
                 {
-                    response = Encoding.UTF8.GetBytes("Список писем пока пуст");
+                    response = ServerMeta.Encoding.GetBytes("Список писем пока пуст");
                 }
                 else
                 {
                     string responseLetters = JsonConvert.SerializeObject(lettersOutDB);
-                    response = Encoding.UTF8.GetBytes(responseLetters);
+                    response = ServerMeta.Encoding.GetBytes(responseLetters);
                 }
                 return response;
             }
             catch (Exception) 
             {
-                return Encoding.UTF8.GetBytes("Неизвестная ошибка");
+                return ServerMeta.Encoding.GetBytes("Неизвестная ошибка");
             }
         }
     }

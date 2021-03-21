@@ -2,6 +2,7 @@
 using Multi_Server_Test.Server.Packages;
 using Multi_Server_Test.ServerData;
 using Multi_Server_Test.ServerData.Blocks;
+using Multi_Server_Test.ServerData.Server;
 using Newtonsoft.Json;
 using System;
 using System.Text;
@@ -45,7 +46,7 @@ namespace Multi_Server_Test.Server.Models.NewsBlock
                 responseMessage = "Ошибка валидации";
             }
 
-            return Encoding.UTF8.GetBytes(responseMessage);
+            return ServerMeta.Encoding.GetBytes(responseMessage);
         }
         private bool CheckNewsValidation(News news)
         {

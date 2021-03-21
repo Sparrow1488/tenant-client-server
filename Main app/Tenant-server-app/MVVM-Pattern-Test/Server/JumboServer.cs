@@ -25,6 +25,7 @@ namespace WpfApp1.Server.ServerMeta
         public Person ActiveUser = null;
         private ServerConfig ServerConfig = null;
         public string tokenFileName = "token-auth";
+        private Encoding ServerEncoding = Encoding.UTF32;
 
         public JumboServer(ServerConfig config)
         {
@@ -68,15 +69,16 @@ namespace WpfApp1.Server.ServerMeta
         }
         public async Task<List<News>> ReceiveNewsCollectionAsync()
         {
+            List<News> responseNewsCollection = new List<News>();
             var pack = new RecieveNewsPackage();
             string jsonCollection = await SendAndGetAsync(pack);
             var collectionResponse = JsonConvert.DeserializeObject<List<News>>(jsonCollection);
             if (collectionResponse == null)
-                throw new NullReferenceException("Получена пустая коллекция!");
+                return responseNewsCollection;
             var toOrderbyDateCreateNews = from news in collectionResponse
                                           orderby news.DateTime
                                           select news;
-            List<News> responseNewsCollection = new List<News>();
+            
             foreach (var news in toOrderbyDateCreateNews)
                 responseNewsCollection.Add(news);
             return collectionResponse;
@@ -109,7 +111,7 @@ namespace WpfApp1.Server.ServerMeta
                 {
                     NetworkStream stream = TCPclient.GetStream();
                     string jsonPackage = JsonConvert.SerializeObject(package);
-                    byte[] data = Encoding.UTF8.GetBytes(jsonPackage);
+                    byte[] data = ServerEncoding.GetBytes(jsonPackage);
                     await stream.WriteAsync(data, 0, data.Length);
                 }
                 else throw new ConnectionException("Ошибка подключения к серверу");
@@ -181,7 +183,7 @@ namespace WpfApp1.Server.ServerMeta
                     do
                     {
                         int bytesSize = readStream.Read(buffer, 0, buffer.Length);
-                        builder.Append(Encoding.UTF8.GetString(buffer, 0, bytesSize));
+                        builder.Append(ServerEncoding.GetString(buffer, 0, bytesSize));
                     }
                     while (readStream.DataAvailable);
                 }

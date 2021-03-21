@@ -14,6 +14,7 @@ using Multi_Server_Test.ServerData.Server;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -190,8 +191,12 @@ namespace Multi_Server_Test.ServerData
                 StringBuilder jsonPackage = new StringBuilder();
                 do
                 {
-                    int bytes = clientStream.Read(buffer, 0, buffer.Length);
-                    jsonPackage.Append(Encoding.UTF8.GetString(buffer, 0, bytes));
+                    try 
+                    {
+                        int bytes = clientStream.Read(buffer, 0, buffer.Length);
+                        jsonPackage.Append(ServerMeta.Encoding.GetString(buffer, 0, bytes));
+                    }
+                    catch (IOException) { }
                 }
                 while (clientStream.DataAvailable);
                 return jsonPackage.ToString();

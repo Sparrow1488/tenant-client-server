@@ -350,20 +350,21 @@ namespace Multi_Server_Test.Server.Functions
             }
             return usersCollection;
         }
-        public string InsertImageInDB(Source source)
+        public string InsertSourceInDB(Source source)
         {
             try
             {
-                string sCommand = "INSERT INTO [Sources] (Data, Token, SenderId, DateCreate) VALUES (@data, @token, @senderId, @date)";
+                string sCommand = "INSERT INTO [Sources] (Data, Token, SenderId, DateCreate, Extension) VALUES (@data, @token, @senderId, @date, @extension)";
                 using (var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
                 {
                     command.Parameters.AddWithValue("data", source.Data);
-                    string imageToken = GenerateImageToken();
-                    command.Parameters.AddWithValue("token", imageToken);
+                    string fileToken = GenerateImageToken();
+                    command.Parameters.AddWithValue("token", fileToken);
                     command.Parameters.AddWithValue("senderId", source.SenderId);
                     command.Parameters.AddWithValue("date", DateTime.Now);
+                    command.Parameters.AddWithValue("extension", source.Extension ?? "");
                     command.ExecuteNonQuery();
-                    return imageToken;
+                    return fileToken;
                 }
             }
             catch (Exception) { return null; }
@@ -397,7 +398,8 @@ namespace Multi_Server_Test.Server.Functions
                         var token = reader.GetString(2);
                         var senderId = reader.GetInt32(3);
                         var date = reader.GetDateTime(4);
-                        var selectSource = new Source(data, token, senderId, date);
+                        var extension = reader.GetString(5);
+                        var selectSource = new Source(data, token, senderId, date, extension);
                         return selectSource;
                     }
                 }
@@ -411,6 +413,25 @@ namespace Multi_Server_Test.Server.Functions
             if (findUser?.AdminStatus == 1)
                 return true;
             return false;
+        }
+
+        public UserToken GenerateToken()
+        {
+            var rnd = new Random();
+            var pas = $"{rnd.Next(5000, 100000)}-{rnd.Next(0, 1000)}-{rnd.Next(200, 6000)}";
+            var log = $"randomBulbins";
+            return new UserToken(pas, log);
+        }
+        public UserToken GenerateToken(Person person)
+        {
+            var rnd = new Random();
+            var pas = $"{rnd.Next(5000, 100000)}-{rnd.Next(0, 1000)}-{rnd.Next(200, 6000)}";
+            StringBuilder log = new StringBuilder("randomBulbins");
+            for (int i = 0; i < person.Login.Length; i++)
+            {
+                log.Append(person.Login[i] + rnd.Next(100));
+            }
+            return new UserToken(pas, log.ToString());
         }
     }
 }

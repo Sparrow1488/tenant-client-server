@@ -44,6 +44,12 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
             set { _sources = value; OnPropertyChanged(); }
         }
         private ObservableCollection<ImageSource> _sources = new ObservableCollection<ImageSource>();
+        public ObservableCollection<string> OtherDocuments
+        {
+            get { return _otherDocuments; }
+            set { _otherDocuments = value; OnPropertyChanged(); }
+        }
+        private ObservableCollection<string> _otherDocuments = new ObservableCollection<string>();
         public string SelectedToken
         {
             get { return _selectedToken; }
@@ -80,7 +86,7 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
             {
                 return new MyCommand((obj) =>
                 {
-                    //var image = (Image)obj;
+                    Console.WriteLine("что");
                 }, (obj) => ReadLetter != null);
             }
         }
@@ -96,8 +102,10 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
             {
                 SourceTokens.Add(token);
                 var source = await JumboServer.ActiveServer.GetSourceByToken(token);
-                var sourceData = Convert.FromBase64String(source.Data);
-                Sources.Add(BitmapFrame.Create(new MemoryStream(sourceData)));
+                if (source == null) continue;
+                var sourceData = Convert.FromBase64String(source?.Data);
+                try { Sources.Add(BitmapFrame.Create(new MemoryStream(sourceData))); }
+                catch { OtherDocuments.Add("Какое то вложение"); }
             }
             return SourceTokens;
             //File.WriteAllBytes(path, sourceData);

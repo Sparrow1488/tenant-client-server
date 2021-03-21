@@ -30,16 +30,20 @@
                 FontSize="20" />
         </StackPanel>
 
-        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+        <ScrollViewer
+            Grid.Row="1"
+            Margin="0,0,0,20"
+            HorizontalScrollBarVisibility="Auto">
             <StackPanel
                 x:Name="leftLettersList"
-                Grid.Column="0"
-                Margin="10"
+                Grid.Row="1"
+                Margin="0,0,0,20"
                 Orientation="Vertical">
 
                 <ListBox
                     MaxWidth="250"
-                    Background="AliceBlue"
+                    Background="White"
+                    BorderThickness="0"
                     ItemsSource="{Binding AllLetters}"
                     SelectedItem="{Binding SelectedLetter}">
                     <ListBox.ItemTemplate>

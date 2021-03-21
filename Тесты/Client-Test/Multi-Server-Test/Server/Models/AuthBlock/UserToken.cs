@@ -1,7 +1,4 @@
-﻿using Multi_Server_Test.Blocks;
-using Newtonsoft.Json;
-using System;
-using System.Text;
+﻿using Newtonsoft.Json;
 
 namespace Multi_Server_Test.Server.Models.AuthBlock
 {
@@ -15,24 +12,7 @@ namespace Multi_Server_Test.Server.Models.AuthBlock
             SynchronizationPassword = synchronizationPassword;
             EncodedLogin = encodedLogin;
         }
-        public static UserToken GenerateToken()
-        {
-            var rnd = new Random();
-            var pas = $"{rnd.Next(5000,100000)}-{rnd.Next(0, 1000)}-{rnd.Next(200, 6000)}";
-            var log = $"randomBulbins";
-            return new UserToken(pas, log);
-        }
-        public static UserToken GenerateToken(Person person)
-        {
-            var rnd = new Random();
-            var pas = $"{rnd.Next(5000, 100000)}-{rnd.Next(0, 1000)}-{rnd.Next(200, 6000)}";
-            StringBuilder log = new StringBuilder("randomBulbins");
-            for (int i = 0; i < person.Login.Length; i++)
-            {
-                log.Append(person.Login[i] + rnd.Next(100));
-            }
-            return new UserToken(pas, log.ToString());
-        }
+        
         private UserToken TryDeserializeToken(string jsonToken)
         {
             try

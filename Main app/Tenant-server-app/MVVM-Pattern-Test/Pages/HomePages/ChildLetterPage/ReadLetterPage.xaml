@@ -29,7 +29,10 @@
         </Style>
     </Page.Resources>
 
-    <Grid Margin="20,0,20,0" Background="White">
+    <Grid
+        Margin="20,0,20,0"
+        Background="White"
+        TextOptions.TextFormattingMode="Display">
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="110" />
             <RowDefinition />
@@ -64,13 +67,23 @@
             <StackPanel Height="1" Background="Black" />
         </StackPanel>
         <!--  СОНОВНОЙ КОНТЕНТ  -->
-        <ScrollViewer Grid.Row="1">
-            <StackPanel>
-                <StackPanel Margin="50,0,50,0" Orientation="Vertical">
+        <ScrollViewer Grid.Row="1" Margin="0,0,0,25">
+            <StackPanel Background="White">
+
+                <StackPanel Margin="0,0,5,0" Orientation="Vertical">
+
                     <GroupBox
+                        Background="White"
                         BorderThickness="1"
                         FontSize="12"
                         Header="Письмо">
+                        <GroupBox.Effect>
+                            <DropShadowEffect
+                                BlurRadius="10"
+                                Opacity="0.2"
+                                RenderingBias="Quality"
+                                Color="Gray" />
+                        </GroupBox.Effect>
                         <StackPanel>
                             <TextBox
                                 Name="mainTitle"
@@ -87,83 +100,124 @@
                                 IsReadOnly="True"
                                 Text="{Binding ReadLetter.Description, Mode=OneWay}"
                                 TextWrapping="Wrap" />
+                            <StackPanel
+                                Height="1"
+                                Margin="50,0"
+                                Background="Black" />
+                            <WrapPanel
+                                Margin="0,10"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal">
+                                <Button
+                                    Name="replyBtn"
+                                    Padding="10,0"
+                                    HorizontalAlignment="Left"
+                                    Command="{Binding ShowReplyPage}"
+                                    Content="Ответить"
+                                    FontSize="18"
+                                    Style="{StaticResource letterButtons}" />
+                                <Button
+                                    Padding="10,0"
+                                    HorizontalAlignment="Left"
+                                    Content="Удалить"
+                                    FontSize="18"
+                                    Style="{StaticResource letterButtons}" />
+                                <Button
+                                    Padding="10,0"
+                                    HorizontalAlignment="Left"
+                                    Content="Важное"
+                                    FontSize="18"
+                                    Style="{StaticResource letterButtons}" />
+                                <Button
+                                    Padding="10,0"
+                                    HorizontalAlignment="Left"
+                                    Command="{Binding RecieveSource}"
+                                    Content="Смотреть прикреп"
+                                    FontSize="18"
+                                    Style="{StaticResource letterButtons}" />
+                            </WrapPanel>
                         </StackPanel>
+
                     </GroupBox>
-                    <StackPanel
-                        Height="1"
-                        Margin="100,0"
-                        Background="Black" />
-                    <WrapPanel
-                        Margin="0,10"
-                        HorizontalAlignment="Center"
-                        Orientation="Horizontal">
-                        <Button
-                            Name="replyBtn"
-                            Padding="10,0"
-                            HorizontalAlignment="Left"
-                            Command="{Binding ShowReplyPage}"
-                            Content="Ответить"
-                            FontSize="18"
-                            Style="{StaticResource letterButtons}" />
-                        <Button
-                            Padding="10,0"
-                            HorizontalAlignment="Left"
-                            Content="Удалить"
-                            FontSize="18"
-                            Style="{StaticResource letterButtons}" />
-                        <Button
-                            Padding="10,0"
-                            HorizontalAlignment="Left"
-                            Content="Оставить непрочитанным"
-                            FontSize="18"
-                            Style="{StaticResource letterButtons}" />
-                        <Button
-                            Padding="10,0"
-                            HorizontalAlignment="Left"
-                            Content="Важное"
-                            FontSize="18"
-                            Style="{StaticResource letterButtons}" />
-                        <Button
-                            Padding="10,0"
-                            HorizontalAlignment="Left"
-                            Command="{Binding RecieveSource}"
-                            Content="Смотреть прикреп"
-                            FontSize="18"
-                            Style="{StaticResource letterButtons}" />
-                    </WrapPanel>
-
-                    <ListBox
-                        x:Name="dsd"
-                        ItemsSource="{Binding SourceTokens}"
-                        SelectedItem="{Binding SelectedToken}" />
-
-                    <ItemsControl ItemsSource="{Binding Sources}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Vertical" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <Image
-                                        x:Name="attachedImage"
-                                        Width="350"
-                                        Source="{Binding}" />
-                                    <Button
-                                        Command="{Binding SaveImage}"
-                                        CommandParameter="{Binding ElementName=attachedImage}"
-                                        Content="Save" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
 
                     <Frame
                         x:Name="responseFrame"
+                        Margin="0,40,0,0"
                         HorizontalAlignment="Center"
                         Content="{Binding ReplyPage}"
                         NavigationUIVisibility="Hidden" />
+
+                    <Border
+                        Margin="0,40,0,0"
+                        Background="White"
+                        BorderBrush="Gray"
+                        BorderThickness="1"
+                        CornerRadius="2">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="10"
+                                Opacity="0.2"
+                                RenderingBias="Quality"
+                                Color="Gray" />
+                        </Border.Effect>
+                        <StackPanel>
+                            <WrapPanel Background="Gray">
+                                <TextBlock
+                                    Margin="10,2"
+                                    FontSize="20"
+                                    Foreground="White"
+                                    Text="Вложения" />
+                            </WrapPanel>
+
+                            <ItemsControl ItemsSource="{Binding Sources}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <WrapPanel>
+                                            <TextBlock
+                                                VerticalAlignment="Center"
+                                                FontSize="16"
+                                                Text="Вложения name" />
+                                            <Image
+                                                x:Name="attachedImage"
+                                                Width="180"
+                                                MouseEnter="attachedImage_MouseEnter"
+                                                MouseLeave="attachedImage_MouseLeave"
+                                                MouseLeftButtonDown="attachedImage_MouseLeftButtonDown"
+                                                Source="{Binding}" />
+
+                                        </WrapPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <ItemsControl ItemsSource="{Binding OtherDocuments}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <WrapPanel>
+                                            <TextBlock
+                                                VerticalAlignment="Center"
+                                                FontSize="16"
+                                                Text="Вложения name" />
+                                            <TextBlock
+                                                VerticalAlignment="Center"
+                                                FontSize="16"
+                                                Text="Расширения name" />
+                                        </WrapPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

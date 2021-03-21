@@ -1,5 +1,6 @@
 ﻿using Multi_Server_Test.Server.Functions;
 using Multi_Server_Test.ServerData.Blocks;
+using Multi_Server_Test.ServerData.Server;
 using Newtonsoft.Json;
 using System;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Multi_Server_Test.Server.Models.SourceBlock
 
         public override byte[] CompleteAction(object reqObject)
         {
-            byte[] response = Encoding.UTF8.GetBytes("Неизвестная ошибка");
+            byte[] response = ServerMeta.Encoding.GetBytes("Неизвестная ошибка");
             try
             {
                 var tokenRequest = Convert.ToString(reqObject);
@@ -22,7 +23,7 @@ namespace Multi_Server_Test.Server.Models.SourceBlock
                 if(source != null)
                 {
                     serverEvents.BlockReport(this, "Получен контент", ConsoleColor.Yellow);
-                    response = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(source));
+                    response = ServerMeta.Encoding.GetBytes(JsonConvert.SerializeObject(source));
                 }
                 return response;
             }
@@ -30,7 +31,7 @@ namespace Multi_Server_Test.Server.Models.SourceBlock
             {
                 var exMessage = "Неизвестная ошибка";
                 serverEvents.BlockReport(this, exMessage, ConsoleColor.Red);
-                return Encoding.UTF8.GetBytes(exMessage);
+                return ServerMeta.Encoding.GetBytes(exMessage);
             }
         }
     }

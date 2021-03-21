@@ -1,6 +1,7 @@
 ﻿using Multi_Server_Test.Server.Blocks.LetterBlock;
 using Multi_Server_Test.Server.Functions;
 using Multi_Server_Test.ServerData.Blocks;
+using Multi_Server_Test.ServerData.Server;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -25,19 +26,19 @@ namespace Multi_Server_Test.Server.Models.LetterBlock
                 if(successCompl > 0)
                 {
                     serverEvents.BlockReport(this, "Ответ успешно добавлен", ConsoleColor.Green);
-                    response = Encoding.UTF8.GetBytes("1");
+                    response = ServerMeta.Encoding.GetBytes("1");
                 }
                 else
                 {
                     serverEvents.BlockReport(this, "Ошибка записи ответа", ConsoleColor.Red);
-                    response = Encoding.UTF8.GetBytes("-1");
+                    response = ServerMeta.Encoding.GetBytes("-1");
                 }
                 return response;
             }
             catch (Exception)
             {
                 serverEvents.BlockReport(this, "Неизвестная ошибка", ConsoleColor.Red);
-                return Encoding.UTF8.GetBytes("-1");
+                return ServerMeta.Encoding.GetBytes("-1");
             }
         }
     }

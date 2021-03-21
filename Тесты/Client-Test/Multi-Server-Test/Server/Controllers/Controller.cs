@@ -1,6 +1,7 @@
 ﻿using Multi_Server_Test.Server.Functions;
 using Multi_Server_Test.Server.Packages;
 using Multi_Server_Test.ServerData.Blocks;
+using Multi_Server_Test.ServerData.Server;
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
@@ -48,7 +49,7 @@ namespace Multi_Server_Test.Server.Controllers
                     Console.WriteLine(ControllerName + "> Не найдено модели под запрос");
                 }
             }
-            return modelResponseData = Encoding.UTF8.GetBytes("Ошибка запроса: не существует модели под данный запрос!");
+            return modelResponseData = ServerMeta.Encoding.GetBytes("Ошибка запроса: не существует модели под данный запрос!");
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿using Multi_Server_Test.ServerData;
+﻿using Multi_Server_Test.Server.Packages;
+using Multi_Server_Test.ServerData;
 using Multi_Server_Test.ServerData.Blocks;
+using Multi_Server_Test.ServerData.Server;
 using Newtonsoft.Json;
 using System;
-using System.Text;
-using System.Linq;
-using Multi_Server_Test.Server.Packages;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Multi_Server_Test.Server.Blocks.Auth
 {
@@ -28,12 +28,12 @@ namespace Multi_Server_Test.Server.Blocks.Auth
             try
             {
                 var jsonNewsCollection = JsonConvert.SerializeObject(responseNewsCollection);
-                response = Encoding.UTF8.GetBytes(jsonNewsCollection);
+                response = ServerMeta.Encoding.GetBytes(jsonNewsCollection);
                 return response;
             }
             catch (Exception) 
             {
-                return Encoding.UTF8.GetBytes("Неизвестная ошибка");
+                return ServerMeta.Encoding.GetBytes("Неизвестная ошибка");
             }
         }
     }

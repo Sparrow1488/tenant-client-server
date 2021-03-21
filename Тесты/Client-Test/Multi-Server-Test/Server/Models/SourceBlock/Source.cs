@@ -10,14 +10,16 @@ namespace Multi_Server_Test.Server.Models.SourceBlock
         public string Data { get; }
         public string SourceToken { get; }
         public int SenderId { get; }
+        public string Extension { get; set; }
         public DateTime DateCreate { get; }
         [JsonConstructor]
-        public Source(string data, string sourceToken, int senderId, DateTime dateCreate)
+        public Source(string data, string sourceToken, int senderId, DateTime dateCreate, string extension)
         {
             Data = data;
             SourceToken = sourceToken;
             SenderId = senderId;
             DateCreate = dateCreate;
+            Extension = extension;
         }
     }
 }

@@ -74,14 +74,16 @@ namespace JumboServer
         public async void Start()
         {
             Listener.Start();
-
             #region SynchUsers
+
             var allUsersOutDB = functions.GetAllUsersOutDB();
             allUsers = await synchronizator.SynchronizeCollection(allUsersOutDB, Meta.reservePath, Meta.reserveUsersTxt);
             Console.WriteLine("Пользователей синхронизированно: " + allUsers.Count);
+
             #endregion
 
             #region SynchNews
+
             if (allUsersOutDB != null)
             {
                 var allNewsOutDB = functions.GetAllNewsOutDB();
@@ -89,12 +91,12 @@ namespace JumboServer
                 Console.WriteLine("Новостей синхронизированно: " + allNews.Count);
             }
             else
-            {
                 modulEvents.BlockReport(this, "Новости не могут быть получены, тк таблица с пользователями пуста", ConsoleColor.Red);
-            }
+
             #endregion
 
             #region SynchLetters
+
             if (allUsers != null)
             {
                 var allLettersOutDB = functions.GetAllLettersOutDB();
@@ -102,13 +104,11 @@ namespace JumboServer
                 Console.WriteLine("Писем синхронизированно: " + allLetters.Count);
             }
             else
-            {
                 modulEvents.BlockReport(this, "Письма не могут быть получены, поскольку таблица с отправителями пуста!", ConsoleColor.Red);
-            }
+
             #endregion
 
             MainRouter = CreateDefaultMVC();
-
             modulEvents.BlockReport(this, "Server started!", ConsoleColor.Green);
         }
         public void ServeAndResponseToClient()
@@ -126,48 +126,41 @@ namespace JumboServer
             if (connectedClient.Connected)
             {
                 modulEvents.BlockReport(this, "Client connect", ConsoleColor.Green);
-
                 var clientStream = connectedClient.GetStream();
-                string jsonPackage = GetDataFromStream(clientStream);
-                if (!string.IsNullOrWhiteSpace(jsonPackage.ToString()))
-                {
-                    var getPackage = JsonConvert.DeserializeObject<Package>(jsonPackage.ToString());
-                    Console.WriteLine(getPackage.SendingMeta);
-                    var clientObject = JsonConvert.SerializeObject(getPackage.SendingObject);
-
-                    modulEvents.BlockReport(this, "Distribute request to handle in main routing controller...", ConsoleColor.Yellow);
-                    MainRouter.ExecuteRouting(getPackage, connectedClient);
-                }
+                GetDataFromStream(clientStream, out string jsonPackage);
+                if (!string.IsNullOrWhiteSpace(jsonPackage))
+                    RecieveAndRouting(jsonPackage, ref connectedClient);
                 else
-                    modulEvents.BlockReport(this, "Пакет данных не может быть получен!", ConsoleColor.Red);
+                    modulEvents.BlockReport(this, "Data package can not be recieved!", ConsoleColor.Red);
             }
-            else
-                modulEvents.BlockReport(this, "Client not connected", ConsoleColor.Red);
-
         }
         #endregion
 
         #region AdditionalMethods
-        private string GetDataFromStream(NetworkStream clientStream)
+        private void GetDataFromStream(NetworkStream clientStream, out string jsonPackage)
         {
+            StringBuilder recievedData = new StringBuilder();
             if (clientStream.CanRead)
             {
                 byte[] buffer = new byte[1024];
-                StringBuilder jsonPackage = new StringBuilder();
-                do
-                {
-                    try 
-                    {
-                        int bytes = clientStream.Read(buffer, 0, buffer.Length);
-                        jsonPackage.Append(ServerMeta.Encoding.GetString(buffer, 0, bytes));
-                    }
-                    catch (IOException) { }
-                }
-                while (clientStream.DataAvailable);
-                return jsonPackage.ToString();
+                recievedData = ReadStreamData(ref buffer, ref clientStream);
             }
-            else
-                return null; 
+            jsonPackage = recievedData.ToString();
+        }
+        private StringBuilder ReadStreamData(ref byte[] buffer, ref NetworkStream clientStream)
+        {
+            StringBuilder jsonPackage = new StringBuilder();
+            do
+            {
+                try
+                {
+                    int bytes = clientStream.Read(buffer, 0, buffer.Length);
+                    jsonPackage.Append(ServerMeta.Encoding.GetString(buffer, 0, bytes));
+                }
+                catch (IOException) { }
+            } 
+            while (clientStream.DataAvailable);
+            return jsonPackage;
         }
         public static void AddLetterInLocalStorage(Letter letter)
         {
@@ -182,7 +175,7 @@ namespace JumboServer
             noSynchLetters.Add(letter);
         }
 
-        public MainRouter CreateDefaultMVC()
+        private MainRouter CreateDefaultMVC()
         {
             #region CreatingModels
 
@@ -232,6 +225,15 @@ namespace JumboServer
             };
 
             return new MainRouter(createdControllers);
+        }
+
+        private void RecieveAndRouting(string serializeDataPackage, ref TcpClient connectedClient)
+        {
+            var getPackage = JsonConvert.DeserializeObject<Package>(serializeDataPackage.ToString());
+            Console.WriteLine(getPackage.SendingMeta);
+
+            modulEvents.BlockReport(this, "Distribute request to handle in MainRouter controller...", ConsoleColor.Yellow);
+            MainRouter.ExecuteRouting(getPackage, connectedClient);
         }
         #endregion
     }

@@ -29,3 +29,4 @@ C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Тесты
 C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\obj\Debug\netcoreapp3.1\JumboServer-alpha.dll
 C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\obj\Debug\netcoreapp3.1\JumboServer-alpha.pdb
 C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\obj\Debug\netcoreapp3.1\JumboServer-alpha.genruntimeconfig.cache
+C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\obj\Debug\netcoreapp3.1\JumboServer-alpha.csprojAssemblyReference.cache

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.IO;
 using JumboServer;
-using Multi_Server_Test.Server.Functions;
-using Multi_Server_Test.Server.Models.SourceBlock;
-using Multi_Server_Test.ServerData;
+using JumboServer.Functions;
 
-namespace Multi_Server_Test
+namespace JumboServer
 {
     public class Program
     {

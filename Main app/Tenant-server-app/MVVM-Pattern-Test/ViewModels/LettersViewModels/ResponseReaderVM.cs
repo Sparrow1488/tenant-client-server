@@ -38,11 +38,7 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
                 return new MyCommand(async (obj) =>
                 {
                     var responses = await JumboServer.ActiveServer.GetReplyByLetterId(_actualLetterId);
-                    if (responses != null)
-                    {
-                        AllResponses = responses;
-                    }
-                    else MessageBox.Show("Попка", "Ответ");
+                    AllResponses = responses;
                 });
             }
         }

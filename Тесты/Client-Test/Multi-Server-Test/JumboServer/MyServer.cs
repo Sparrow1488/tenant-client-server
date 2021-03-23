@@ -36,15 +36,13 @@ namespace JumboServer
                 Meta = new ServerMeta();
             }
             else
-            {
                 throw new ArgumentException("Вы передали некорректные значения");
-            }
         }
         #endregion
 
         #region Props
-        public string HOST = null;
-        public int PORT = 0;
+        public string HOST = string.Empty;
+        public int PORT       = 0;
         public string serverName { get; } = "JumboServer";
 
         public TcpListener Listener = null;
@@ -84,7 +82,7 @@ namespace JumboServer
 
             #region SynchNews
 
-            if (allUsersOutDB != null)
+            if (allUsers != null)
             {
                 var allNewsOutDB = functions.GetAllNewsOutDB();
                 allNews = await synchronizator.SynchronizeCollection(allNewsOutDB, Meta.reservePath, Meta.reserveNewsCollectionTxt);
@@ -127,9 +125,9 @@ namespace JumboServer
             {
                 modulEvents.BlockReport(this, "Client connect", ConsoleColor.Green);
                 var clientStream = connectedClient.GetStream();
-                GetDataFromStream(clientStream, out string jsonPackage);
-                if (!string.IsNullOrWhiteSpace(jsonPackage))
-                    RecieveAndRouting(jsonPackage, ref connectedClient);
+                string  receivedJsonPackage = GetDataFromStream(clientStream);
+                if (!string.IsNullOrWhiteSpace(receivedJsonPackage))
+                    RecieveAndRouting(receivedJsonPackage, ref connectedClient);
                 else
                     modulEvents.BlockReport(this, "Data package can not be recieved!", ConsoleColor.Red);
             }
@@ -137,7 +135,7 @@ namespace JumboServer
         #endregion
 
         #region AdditionalMethods
-        private void GetDataFromStream(NetworkStream clientStream, out string jsonPackage)
+        private string GetDataFromStream(NetworkStream clientStream)
         {
             StringBuilder recievedData = new StringBuilder();
             if (clientStream.CanRead)
@@ -145,7 +143,7 @@ namespace JumboServer
                 byte[] buffer = new byte[1024];
                 recievedData = ReadStreamData(ref buffer, ref clientStream);
             }
-            jsonPackage = recievedData.ToString();
+            return recievedData.ToString();
         }
         private StringBuilder ReadStreamData(ref byte[] buffer, ref NetworkStream clientStream)
         {
@@ -184,8 +182,8 @@ namespace JumboServer
             {
                 new SendLetterModel("send", false),
                 new GetAllLettersModel("get-all", true),
-                new LettersReplyModel("reply", false),
-                new GetReplyOnLetterModel("get-reply", true),
+                new LettersReplyModel("reply", true),
+                new GetReplyOnLetterModel("get-reply", false),
                 new GetMyLettersModel("get-my", false)
             };
             #endregion 

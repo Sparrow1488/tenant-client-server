@@ -10,11 +10,10 @@ namespace JumboServer.Controllers
     {
         public UserController(string name, List<Model> controllerModel) : base(name, controllerModel) { }
 
-        public override void ExecuteRouting(string requestCommand, Package package, TcpClient sender)
+        public override void ExecuteRouting(string requestCommand, ref Package package, ref TcpClient sender)
         {
-            var responseData = ExecuteModelAction(requestCommand, package);
-            var clientStream = sender.GetStream();
-            new UserView(responseData, clientStream).ExecuteModuleProcessing();
+            var view = new UserView(ref sender);
+            CompleteDefaultControllerProcessing(requestCommand, package, view);
         }
     }
 }

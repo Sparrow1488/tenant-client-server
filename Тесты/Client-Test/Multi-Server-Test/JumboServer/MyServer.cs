@@ -42,8 +42,8 @@ namespace JumboServer
 
         #region Props
         public string HOST = string.Empty;
-        public int PORT       = 0;
-        public string serverName { get; } = "JumboServer";
+        public int PORT = 0;
+        public readonly string serverName = "JumboServer";
 
         public TcpListener Listener = null;
         public static ServerMeta Meta = null;

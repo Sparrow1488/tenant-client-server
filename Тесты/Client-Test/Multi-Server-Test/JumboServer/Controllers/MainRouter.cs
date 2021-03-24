@@ -17,7 +17,7 @@ namespace JumboServer.Controllers
         public MainRouter(List<Controller> projectControllers)
         {
             if (projectControllers == null || projectControllers.Count == 0)
-                throw new ArgumentNullException("Вы не можете создать проект, не используя ни одного контроллера!");
+                throw new ArgumentNullException("You cannot use instance of MainController with out controller!");
             AllControllers = projectControllers;
         }
         

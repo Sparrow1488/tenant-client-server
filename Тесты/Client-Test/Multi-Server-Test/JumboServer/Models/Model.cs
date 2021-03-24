@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace JumboServer.Models
+﻿namespace JumboServer.Models
 {
     public abstract class Model
     {

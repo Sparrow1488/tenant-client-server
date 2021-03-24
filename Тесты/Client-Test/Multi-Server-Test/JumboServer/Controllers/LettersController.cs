@@ -12,7 +12,7 @@ namespace JumboServer.Controllers
 
         public override void ExecuteRouting(string requestCommand, ref Package package, ref TcpClient sender)
         {
-            var view = new LetterView(ref sender);
+            var view = new DefaultAPI_View(ref sender);
             CompleteDefaultControllerProcessing(requestCommand, package, view);
         }
     }

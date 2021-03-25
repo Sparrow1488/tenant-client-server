@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using JumboServer.Functions;
 using JumboServer.API;
+using System.Linq;
 
 namespace JumboServer.Models.LetterBlock.GET
 {
@@ -28,7 +29,8 @@ namespace JumboServer.Models.LetterBlock.GET
                 }
                 else
                 {
-                    string responseLetters = JsonConvert.SerializeObject(lettersOutDB);
+                    var sortLettersList = lettersOutDB.OrderByDescending(letter => letter.DateCreate).ToList();
+                    string responseLetters = JsonConvert.SerializeObject(sortLettersList);
                     response = ServerMeta.Encoding.GetBytes(responseLetters);
                 }
                 return response;

@@ -16,13 +16,7 @@ namespace JumboServer.Models.NewsBlock.GET
         public override byte[] CompleteAction(object reqObject)
         {
             List<News> responseNewsCollection = new List<News>();
-            var newsCollectionToResponse = from news in MyServer.allNews 
-                                           orderby news.DateTime descending
-                                           select news;
-            foreach (var news in newsCollectionToResponse)
-            {
-                responseNewsCollection.Add(news);
-            }
+            responseNewsCollection = MyServer.allNews.OrderByDescending(news => news.DateTime).ToList();
             byte[] response;
             try
             {

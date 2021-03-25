@@ -32,6 +32,11 @@ namespace Chairman_Client.Server.Chairman.Functions
                 return null;
             }
         }
+        /// <summary>
+        /// Отправляет запись на сервер
+        /// </summary>
+        /// <param name="news"></param>
+        /// <returns>"1" - если запись успешно добавлена; "0" - если запись не прошла проверку валидации; "-1" - неизвестная ошибка сервера</returns>
         public async Task<string> AddNews(News news)
         {
             var pack = new AddNewsPackage(news);

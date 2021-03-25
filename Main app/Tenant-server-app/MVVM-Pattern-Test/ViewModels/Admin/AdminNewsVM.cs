@@ -42,7 +42,6 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
                 {
                     var response = await functions.AddNews(NewPost);
                     Notice = response;
-                    MessageBox.Show(Notice);
                 }, (obj) => NewPost != null && JumboServer.ActiveServer.ActiveUser != null);
             }
         }

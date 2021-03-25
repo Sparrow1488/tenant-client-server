@@ -17,7 +17,6 @@
         Margin="0,0,0,20"
         HorizontalAlignment="Center"
         VerticalAlignment="Top"
-        Background="FloralWhite"
         CanContentScroll="True"
         TextOptions.TextFormattingMode="Display">
         <Grid>

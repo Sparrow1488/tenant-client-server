@@ -13,7 +13,6 @@
 
     <Grid>
         <Border
-            Width="400"
             Margin="5"
             BorderBrush="Gray"
             BorderThickness="1"
@@ -22,19 +21,26 @@
                 <StackPanel>
                     <TextBlock FontSize="20" Text="Ваши ответы" />
                 </StackPanel>
-                <ListBox ItemsSource="{Binding AllResponses}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock FontSize="20" Text="{Binding Path=Answer}" />
-                                <StackPanel Height="1" Background="Black" />
-                                <TextBlock FontSize="20" Text="{Binding Path=Responder}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <StackPanel>
+                    <ListBox ItemsSource="{Binding AllResponses}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel MaxWidth="400">
+                                    <TextBlock
+                                        FontSize="20"
+                                        Text="{Binding Path=Answer}"
+                                        TextWrapping="Wrap" />
+                                    <StackPanel Height="1" Background="Black" />
+                                    <TextBlock
+                                        FontSize="20"
+                                        Text="{Binding Path=Responder}"
+                                        TextWrapping="Wrap" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
             </StackPanel>
-
         </Border>
     </Grid>
 </Page>

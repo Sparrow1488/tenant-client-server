@@ -15,7 +15,7 @@ namespace JumboServer.Models.NewsBlock.ADD
 
         public override byte[] CompleteAction(object reqObject)
         {
-            string responseMessage = "Неизвестная ошибка";
+            string responseMessage = "-1";
             var jsonNews = JsonConvert.SerializeObject(reqObject);
             var newsForInsert = JsonConvert.DeserializeObject<News>(jsonNews);
 
@@ -30,18 +30,18 @@ namespace JumboServer.Models.NewsBlock.ADD
                     MyServer.noSynchNews.Add(newsForInsert);
 
                     serverEvents.BlockReport(this, "Успешно выполнено запросов: " + success, ConsoleColor.Green);
-                    responseMessage = "Новость успешно опубликована";
+                    responseMessage = "1";
                 }
                 else
                 {
                     serverEvents.BlockReport(this, "Выполнено запросов: " + success, ConsoleColor.Red);
-                    responseMessage = "Ошибка публикации";
+                    responseMessage = "-1";
                 }
             }
             else
             {
                 serverEvents.BlockReport(this, "Ошибка публикации: не пройдено валидацию", ConsoleColor.Yellow);
-                responseMessage = "Ошибка валидации";
+                responseMessage = "0";
             }
 
             return ServerMeta.Encoding.GetBytes(responseMessage);
@@ -54,10 +54,5 @@ namespace JumboServer.Models.NewsBlock.ADD
             }
             return true;
         }
-        //private void PreapareResponse(string response, string serverMessage, ConsoleColor color)
-        //{
-        //    serverEvents.BlockReport(this, "Выполнено запросов: " + success, ConsoleColor.Red);
-        //    responseMessage = "Ошибка публикации";
-        //}
     }
 }

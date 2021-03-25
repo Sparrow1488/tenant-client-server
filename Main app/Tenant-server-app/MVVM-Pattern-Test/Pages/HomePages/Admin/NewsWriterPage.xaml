@@ -82,6 +82,8 @@
                         <TextBox
                             x:Name="descBox"
                             Width="Auto"
+                            MaxHeight="220"
+                            AcceptsReturn="True"
                             Style="{StaticResource textBoxStyle}"
                             Text="{Binding NewPost.Description, Mode=TwoWay}"
                             TextWrapping="Wrap" />
@@ -151,7 +153,7 @@
                         HorizontalAlignment="Center"
                         FontSize="20"
                         Foreground="Black"
-                        Text="{Binding Notice}"
+                        Text="{Binding Notice, Mode=OneWay}"
                         TextWrapping="Wrap" />
                 </StackPanel>
             </Border>

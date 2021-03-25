@@ -170,6 +170,7 @@ namespace WpfApp1.Server.ServerMeta
                 });
             }
             catch (IOException) { breakConnection = true; }
+            catch  { }
             if (breakConnection)
                 throw new GetResponseException("Удаленный хост принудительно разорвал существующее подключение");
             return response.ToString();

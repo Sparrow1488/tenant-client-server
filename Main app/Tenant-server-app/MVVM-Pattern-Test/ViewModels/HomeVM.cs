@@ -10,14 +10,7 @@ namespace MVVM_Pattern_Test.ViewModels
         #region Constructor
         public HomeVM()
         {
-            ProfilePage = new ProfilePage();
-            LettersPage = new LetterPage();
-            NewsPage = new NoticePage();
-
-            AdminReaderPage = new AdminReaderPage();
-            AdminNewsWriterPage = new NewsWriterPage();
-
-            ActivePage = ProfilePage;
+            ShowProfilePage.Execute(null);
         }
         #endregion
 
@@ -77,8 +70,9 @@ namespace MVVM_Pattern_Test.ViewModels
             {
                 return new MyCommand((obj) =>
                 {
+                    if (LettersPage == null) LettersPage = new LetterPage();
                     ActivePage = LettersPage;
-                }, (obj) => LettersPage != null);
+                });
             }
         }
         public MyCommand ShowProfilePage
@@ -87,8 +81,9 @@ namespace MVVM_Pattern_Test.ViewModels
             {
                 return new MyCommand((obj) =>
                 {
+                    if (ProfilePage == null) ProfilePage = new ProfilePage();
                     ActivePage = ProfilePage;
-                }, (obj) => ProfilePage != null);
+                });
             }
         }
         public MyCommand ShowNewsPage
@@ -97,8 +92,9 @@ namespace MVVM_Pattern_Test.ViewModels
             {
                 return new MyCommand((obj) =>
                 {
+                    if (NewsPage == null) NewsPage = new NoticePage();
                     ActivePage = NewsPage;
-                }, (obj) => NewsPage != null);
+                });
             }
         }
         public MyCommand ShowAdminReaderPage
@@ -107,8 +103,9 @@ namespace MVVM_Pattern_Test.ViewModels
             {
                 return new MyCommand((obj) =>
                 {
+                    if (AdminReaderPage == null) AdminReaderPage = new AdminReaderPage();
                     ActivePage = AdminReaderPage;
-                }, (obj) => AdminReaderPage != null);
+                });
             }
         }
         public MyCommand ShowAdminNewsWriterPage
@@ -117,8 +114,9 @@ namespace MVVM_Pattern_Test.ViewModels
             {
                 return new MyCommand((obj) =>
                 {
+                    if (AdminNewsWriterPage == null) AdminNewsWriterPage = new NewsWriterPage();
                     ActivePage = AdminNewsWriterPage;
-                }, (obj) => AdminNewsWriterPage != null);
+                });
             }
         }
         #endregion

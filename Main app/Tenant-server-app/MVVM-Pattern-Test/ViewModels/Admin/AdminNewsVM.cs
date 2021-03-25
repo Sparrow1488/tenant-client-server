@@ -1,12 +1,6 @@
 ﻿using Chairman_Client.Server.Chairman.Functions;
 using Multi_Server_Test.Server;
 using MVVM_Pattern_Test.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using WpfApp1.Server.ServerMeta;
 
 namespace MVVM_Pattern_Test.ViewModels.Admin
@@ -40,12 +34,31 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
             {
                 return new MyCommand(async (obj) =>
                 {
-                    var response = await functions.AddNews(NewPost);
-                    Notice = response;
+                    var requestResult = await functions.AddNews(NewPost);
+                    PrintServerResult(requestResult);
                 }, (obj) => NewPost != null && JumboServer.ActiveServer.ActiveUser != null);
             }
         }
         #endregion
 
+        #region OtherMetods
+        public void PrintServerResult(string requestResult)
+        {
+            if (requestResult == "1")
+            {
+                Notice = "Новость успешно добавлена";
+                ToBaseForm();
+            }
+            else if (requestResult == "0")
+                Notice = "Ошибка при проверке на валидацию";
+            else
+                Notice = "Неизвестная ошибка сервера";
+        }
+        public void ToBaseForm()
+        {
+            NewPost.Title = "";
+            NewPost.Description = "";
+        }
+        #endregion
     }
 }

@@ -15,6 +15,7 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
         #region Constructor
         public AdminLettersVM()
         {
+            RecieveAllLetters.Execute(null);
             ReadLetterPage = new ReadLetterPage(SelectedLetter);
         }
         #endregion

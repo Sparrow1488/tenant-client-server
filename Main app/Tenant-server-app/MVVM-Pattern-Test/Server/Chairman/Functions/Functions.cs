@@ -35,7 +35,7 @@ namespace Chairman_Client.Server.Chairman.Functions
         /// <summary>
         /// Отправляет запись на сервер
         /// </summary>
-        /// <param name="news"></param>
+        /// <param name="news">Новая запись</param>
         /// <returns>"1" - если запись успешно добавлена; "0" - если запись не прошла проверку валидации; "-1" - неизвестная ошибка сервера</returns>
         public async Task<string> AddNews(News news)
         {

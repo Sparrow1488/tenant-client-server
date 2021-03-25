@@ -1,10 +1,6 @@
 ﻿using Multi_Server_Test.Server;
 using MVVM_Pattern_Test.Commands;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -16,7 +12,7 @@ namespace MVVM_Pattern_Test.ViewModels.NewsViewModels
     {
         public RecieveNewsVM()
         {
-
+            RecieveNews.Execute(null);
         }
         public override string Notice { get { return _infoMessage; } protected set { _infoMessage = value; OnPropertyChanged(); } }
         public List<News> RecievedNews

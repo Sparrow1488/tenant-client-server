@@ -152,7 +152,7 @@
                         Margin="10,5"
                         HorizontalAlignment="Center"
                         FontSize="20"
-                        Foreground="Black"
+                        Foreground="Gray"
                         Text="{Binding Notice, Mode=OneWay}"
                         TextWrapping="Wrap" />
                 </StackPanel>

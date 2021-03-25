@@ -16,24 +16,24 @@ namespace MVVM_Pattern_Test.Pages.HomePages.ChildLetterPage
     /// </summary>
     public partial class ReadLetterPage : Page
     {
-        
         public ReadLetterPage(Letter readLetter)
         {
             InitializeComponent();
             DataContext = new ReadLetterVM(readLetter); 
         }
 
-        private double firstlyWidth = 120;
+        private double firstlyWidth = 180;
         private void attachedImage_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             var image = (Image)sender;
-            firstlyWidth = image.Width;
-
-            var anim = new DoubleAnimation();
-            anim.From = firstlyWidth;
-            anim.To = firstlyWidth * 2;
-            anim.Duration = new Duration(TimeSpan.FromMilliseconds(200));
-            image.BeginAnimation(WidthProperty, anim);
+            if (image.Width == firstlyWidth)
+            {
+                var anim = new DoubleAnimation();
+                anim.From = firstlyWidth;
+                anim.To = firstlyWidth * 2;
+                anim.Duration = new Duration(TimeSpan.FromMilliseconds(200));
+                image.BeginAnimation(WidthProperty, anim);
+            }
         }
 
         private void attachedImage_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)

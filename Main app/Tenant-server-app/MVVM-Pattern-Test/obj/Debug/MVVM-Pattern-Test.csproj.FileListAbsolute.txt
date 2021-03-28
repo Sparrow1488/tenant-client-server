@@ -126,3 +126,12 @@ C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\T
 C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\ChildLetterPage\ReadLetterPage.g.cs
 C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\ChildLetterPage\ReadLetterPage.baml
 C:\Users\Dom\Desktop\Репозитории\Proj\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\MVVM-Pattern-Test.csprojAssemblyReference.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\bin\Debug\RSAEncrypter.dll
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\Admin\AdminReaderPage.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\Admin\NewsWriterPage.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\Admin\ResponseToLetterPage.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\ChildLetterPage\ReadLetterPage.g.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\Admin\AdminReaderPage.baml
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\Admin\NewsWriterPage.baml
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\Admin\ResponseToLetterPage.baml
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\ChildLetterPage\ReadLetterPage.baml

@@ -1,15 +1,11 @@
-﻿using Microsoft.Win32;
-using MVVM_Pattern_Test.ViewModels.LettersViewModels;
-using System;
+﻿using MVVM_Pattern_Test.ViewModels.LettersViewModels;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using WpfApp1.Server.Packages.Letters;
-using WpfApp1.Server.Packages.SourceDir;
-using WpfApp1.Server.ServerMeta;
+using System.Collections.ObjectModel;
 
 namespace WpfApp1.Pages.HomePages.ChildLetterPage
 {
@@ -18,7 +14,7 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
     /// </summary>
     public partial class UniversalLetterPage : Page
     {
-        private List<string> UploadedSourceTokens = new List<string>();
+        private ObservableCollection<string> UploadedSourceTokens = new ObservableCollection<string>();
         public UniversalLetterPage()
         {
             InitializeComponent();

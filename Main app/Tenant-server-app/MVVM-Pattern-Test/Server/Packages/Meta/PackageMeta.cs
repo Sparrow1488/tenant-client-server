@@ -17,5 +17,6 @@ namespace WpfApp1.Server.Packages
         public string Action { get; }
         public string FromHostName { get; }
         public UserToken UserToken { get; }
+        
     }
 }

@@ -15,6 +15,8 @@ using WpfApp1.Server.ServerExceptions;
 using System.Linq;
 using Chairman_Client.Server.Packages.LettersDir;
 using WpfApp1.Server.Packages.SourceDir;
+using RSAEncrypter;
+using System.Security.Cryptography;
 
 namespace WpfApp1.Server.ServerMeta
 {
@@ -27,10 +29,24 @@ namespace WpfApp1.Server.ServerMeta
         public string tokenFileName = "token-auth";
         private Encoding ServerEncoding = Encoding.UTF32;
 
+        public string PublicKey { get; private set; }
+        public string PrivateKey { get; private set; }
+
         public JumboServer(ServerConfig config)
         {
             ServerConfig = config;
             ActiveServer = this;
+
+            var sr1 = new StreamReader(@"C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\publicKey.txt");
+            var sr2 = new StreamReader(@"C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\privateKey.txt");
+            //PublicKey = sr1.ReadToEnd();
+            //PrivateKey = sr2.ReadToEnd();
+
+            //byte[] data = new byte[2048];
+            //data = Encoding.UTF8.GetBytes("шо");
+            //var encrypt = MyRSA.EncryptData(data, MyRSA.StringToRsa(PublicKey));
+            //var decrypt = MyRSA.DecryptData(encrypt, MyRSA.StringToRsa(PrivateKey));
+            //string res = Encoding.UTF8.GetString(decrypt);
         }
         public async Task<bool> Authorization(Person dataPerson, bool saveToken) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
         {

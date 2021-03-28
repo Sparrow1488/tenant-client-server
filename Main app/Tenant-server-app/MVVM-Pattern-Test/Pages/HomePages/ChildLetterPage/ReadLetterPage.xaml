@@ -132,7 +132,7 @@
                                     Padding="10,0"
                                     HorizontalAlignment="Left"
                                     Command="{Binding RecieveSource}"
-                                    Content="Смотреть прикреп"
+                                    Content="Смотреть вложения"
                                     FontSize="18"
                                     Style="{StaticResource letterButtons}" />
                             </WrapPanel>

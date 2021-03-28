@@ -20,6 +20,8 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
         public ReadLetterVM(Letter readLetter)
         {
             ReadLetter = readLetter;
+
+            RecieveSource.Execute(null);
         }
         #endregion
 

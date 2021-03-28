@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using System.Windows;
 using WpfApp1.Server.Packages.Letters;
 using WpfApp1.Server.Packages.SourceDir;
 using WpfApp1.Server.ServerExceptions;
 using WpfApp1.Server.ServerMeta;
+using System.Collections.ObjectModel;
 
 namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
 {
@@ -58,10 +58,11 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
                     string result = string.Empty;
                     try
                     {
+                        var tokensCollection = new List<string>(AttachmentsTokens);
                         Letter sendLetter = null;
                         if (AttachmentsTokens == null)
                             sendLetter = new Letter(Title, Description, JumboServer.ActiveServer.ActiveUser.Id, 0);
-                        else sendLetter = new Letter(Title, Description, JumboServer.ActiveServer.ActiveUser.Id, AttachmentsTokens.ToArray(), 0);
+                        else sendLetter = new Letter(Title, Description, JumboServer.ActiveServer.ActiveUser.Id, tokensCollection.ToArray(), 0);
                         
                         var letterSender = JumboServer.ActiveServer.ActiveUser.Login;
                         result = await TrySendLetter(sendLetter);
@@ -98,25 +99,27 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
                         string filePath = dialog.FileName;
                         fileExtension = Path.GetExtension(filePath);
                         try { base64Data = Convert.ToBase64String(File.ReadAllBytes(filePath)); }
-                        catch { /* НЕВЕРНЫЙ ФОРМАТЬ ДОКУМЕНТА*/ }
-                        FileInfo info = new FileInfo(filePath);
-                        MessageBox.Show("Вы пытаетесь прикрепить файл с расширением: " + info.Extension, "Подтвердите отправку", MessageBoxButton.YesNo);
+                        catch { Notice = "Вы пытаетесь прикрепить не верный формат файла"; }
                     }
                     if (!string.IsNullOrWhiteSpace(base64Data))
                     {
                         var newSource = new Source(base64Data, JumboServer.ActiveServer.ActiveUser.Id, fileExtension);
+                        Notice = "Загрузка...";
+                        AttachWasAttached = false;
                         var sourceToken = await JumboServer.ActiveServer.AddSource(newSource);
+
                         if (!string.IsNullOrWhiteSpace(sourceToken))
                         {
                             AttachmentsTokens.Add(sourceToken);
-                            MessageBox.Show("Токен вложения: " + sourceToken + "\n" + "Вложений всего: " + AttachmentsTokens.Count, "Вложение успешно добавлено");
+                            Notice = "Файл успешно добавлен";
                         }
                         else
-                            MessageBox.Show(sourceToken, "Exception upload source");
+                            Notice = "Ошибка загрузки файла";
                     }
                     else
-                        MessageBox.Show("Не удалось закодировать данные", "Exception encoding");
-                }, (obj) => AttachmentsTokens.Count < 5);
+                        Notice = "Не удалось закодировать данные";
+                    AttachWasAttached = true;
+                }, (obj) => AttachmentsTokens.Count < 5 && AttachWasAttached);
             }
         }
         #endregion

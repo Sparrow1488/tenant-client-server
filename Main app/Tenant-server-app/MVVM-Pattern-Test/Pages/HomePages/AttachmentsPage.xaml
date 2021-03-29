@@ -41,7 +41,7 @@
                         Margin="10,2"
                         FontSize="20"
                         Foreground="White"
-                        Text="{Binding Notice}" />
+                        Text="{Binding Notice, Mode=OneTime}" />
                 </WrapPanel>
 
                 <ItemsControl ItemsSource="{Binding ImageSources}" TextOptions.TextFormattingMode="Display">

@@ -293,7 +293,10 @@
 
 
 
-            <Button HorizontalContentAlignment="Left" Style="{StaticResource leftMenuBtn}">
+            <Button
+                HorizontalContentAlignment="Left"
+                Command="{Binding ShowSettingsPage}"
+                Style="{StaticResource leftMenuBtn}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />

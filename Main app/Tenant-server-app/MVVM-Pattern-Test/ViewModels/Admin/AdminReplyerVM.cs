@@ -42,7 +42,10 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
                     {
                         var response = await functions.SendReplyToLetter(newReply);
                         if (response == "1")
+                        {
                             Notice = "Ответ отправлен";
+                            Answer = "";
+                        }
                         else Notice = "Ошибка отправки ответа";
                     }
                 }, (obj)=> Answer.Length > 5 && JumboServer.ActiveServer.ActiveUser.Id > 0);

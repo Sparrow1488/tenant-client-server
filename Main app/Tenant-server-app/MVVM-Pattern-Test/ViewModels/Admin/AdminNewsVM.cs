@@ -11,7 +11,7 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
         public AdminNewsVM()
         {
             var sender = JumboServer.ActiveServer.ActiveUser;
-            NewPost = new News("Заголовок", "Описание", sender.Id, null, "testtest");
+            NewPost = new News("", "", sender.Id, null, "News");
             NewPost.Sender = sender.Login;
         }
         #endregion
@@ -50,14 +50,13 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
                 ToBaseForm();
             }
             else if (requestResult == "0")
-                Notice = "Ошибка при проверке на валидацию";
+                Notice = "Ошибка публикации: не пройдено валидацию\nУказания: возможно, текст слишком мал для публикации";
             else
                 Notice = "Неизвестная ошибка сервера";
         }
         public void ToBaseForm()
         {
-            NewPost.Title = "";
-            NewPost.Description = "";
+            NewPost = new News("", "", JumboServer.ActiveServer.ActiveUser.Id, null, "News");
         }
         #endregion
     }

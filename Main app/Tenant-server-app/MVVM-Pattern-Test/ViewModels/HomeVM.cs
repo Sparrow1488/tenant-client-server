@@ -1,4 +1,5 @@
 ﻿using MVVM_Pattern_Test.Commands;
+using MVVM_Pattern_Test.Pages.HomePages;
 using MVVM_Pattern_Test.Pages.HomePages.Admin;
 using System.Windows.Controls;
 using WpfApp1.Pages.HomePages;
@@ -45,6 +46,12 @@ namespace MVVM_Pattern_Test.ViewModels
             set { _activePage = value; OnPropertyChanged(); }
         }
         private Page _activePage;
+        public Page SettingsPage
+        {
+            get { return _settingsPage; }
+            set { _settingsPage = value; OnPropertyChanged(); }
+        }
+        private Page _settingsPage;
 
         #region ADMIN_REGINON
         public Page AdminReaderPage
@@ -116,6 +123,17 @@ namespace MVVM_Pattern_Test.ViewModels
                 {
                     if (AdminNewsWriterPage == null) AdminNewsWriterPage = new NewsWriterPage();
                     ActivePage = AdminNewsWriterPage;
+                });
+            }
+        }
+        public MyCommand ShowSettingsPage
+        {
+            get
+            {
+                return new MyCommand((obj) =>
+                {
+                    if (SettingsPage == null) SettingsPage = new SettingsPage();
+                    ActivePage = SettingsPage;
                 });
             }
         }

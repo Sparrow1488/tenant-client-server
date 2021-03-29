@@ -128,96 +128,26 @@
                                     Content="Важное"
                                     FontSize="18"
                                     Style="{StaticResource letterButtons}" />
-                                <Button
-                                    Padding="10,0"
-                                    HorizontalAlignment="Left"
-                                    Command="{Binding RecieveSource}"
-                                    Content="Смотреть вложения"
-                                    FontSize="18"
-                                    Style="{StaticResource letterButtons}" />
                             </WrapPanel>
                         </StackPanel>
 
                     </GroupBox>
 
-                    <Frame
-                        x:Name="responseFrame"
-                        Margin="0,40,0,0"
-                        HorizontalAlignment="Center"
-                        Content="{Binding ReplyPage}"
-                        NavigationUIVisibility="Hidden" />
+                    <StackPanel Orientation="Vertical">
+                        <Frame
+                            x:Name="responseFrame"
+                            Margin="0,40,0,0"
+                            HorizontalAlignment="Center"
+                            Content="{Binding ReplyPage}"
+                            NavigationUIVisibility="Hidden" />
 
-                    <Border
-                        Margin="0,40,0,0"
-                        Background="White"
-                        BorderBrush="Gray"
-                        BorderThickness="1"
-                        CornerRadius="2">
-                        <Border.Effect>
-                            <DropShadowEffect
-                                BlurRadius="10"
-                                Opacity="0.2"
-                                RenderingBias="Quality"
-                                Color="Gray" />
-                        </Border.Effect>
-                        <StackPanel>
-                            <WrapPanel Background="Gray">
-                                <TextBlock
-                                    Margin="10,2"
-                                    FontSize="20"
-                                    Foreground="White"
-                                    Text="Вложения" />
-                            </WrapPanel>
-
-                            <ItemsControl ItemsSource="{Binding Sources}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Vertical" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <WrapPanel>
-                                            <TextBlock
-                                                VerticalAlignment="Center"
-                                                FontSize="16"
-                                                Text="Вложения name" />
-                                            <Image
-                                                x:Name="attachedImage"
-                                                Width="180"
-                                                MouseEnter="attachedImage_MouseEnter"
-                                                MouseLeave="attachedImage_MouseLeave"
-                                                MouseLeftButtonDown="attachedImage_MouseLeftButtonDown"
-                                                Source="{Binding}" />
-
-                                        </WrapPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-
-                            <ItemsControl ItemsSource="{Binding OtherDocuments}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Vertical" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <WrapPanel>
-                                            <TextBlock
-                                                VerticalAlignment="Center"
-                                                FontSize="16"
-                                                Text="Вложения name" />
-                                            <TextBlock
-                                                VerticalAlignment="Center"
-                                                FontSize="16"
-                                                Text="Расширения name" />
-                                        </WrapPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
-                    </Border>
+                        <Frame
+                            x:Name="attachmentsFrame"
+                            Margin="0,40,0,0"
+                            HorizontalAlignment="Center"
+                            Content="{Binding AttachPage}"
+                            NavigationUIVisibility="Hidden" />
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

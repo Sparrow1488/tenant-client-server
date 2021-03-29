@@ -92,6 +92,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\HomePages\AttachmentsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\HomePages\ChildLetterPage\InformationLetterPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -142,6 +146,9 @@
     </Compile>
     <Compile Include="Pages\HomePages\Admin\ResponseToLetterPage.xaml.cs">
       <DependentUpon>ResponseToLetterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HomePages\AttachmentsPage.xaml.cs">
+      <DependentUpon>AttachmentsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\HomePages\ChildLetterPage\InformationLetterPage.xaml.cs">
       <DependentUpon>InformationLetterPage.xaml</DependentUpon>
@@ -201,6 +208,7 @@
     <Compile Include="ViewModels\Admin\AdminLettersVM.cs" />
     <Compile Include="ViewModels\Admin\AdminNewsVM.cs" />
     <Compile Include="ViewModels\Admin\AdminReplyerVM.cs" />
+    <Compile Include="ViewModels\AttachmentsVM.cs" />
     <Compile Include="ViewModels\AuthorizationVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\HomeVM.cs" />

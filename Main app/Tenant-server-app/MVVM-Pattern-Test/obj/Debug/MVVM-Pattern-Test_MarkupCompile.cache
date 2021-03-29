@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\App.xaml
-12-750451756
+13-2109554935
 1-722758860
-64-1550515444
+66-2526112
 17-1579115505
-Pages\HomePages\Admin\AdminReaderPage.xaml;Pages\HomePages\Admin\NewsWriterPage.xaml;Pages\HomePages\Admin\ResponseToLetterPage.xaml;Pages\HomePages\ChildLetterPage\InformationLetterPage.xaml;Pages\HomePages\ChildLetterPage\ReadLetterPage.xaml;Pages\HomePages\ChildLetterPage\ReplyReaderPage.xaml;Pages\HomePages\ChildLetterPage\UniversalLetterPage.xaml;Pages\HomePages\LetterPage.xaml;Pages\HomePages\NoticePage.xaml;Pages\HomePages\ProfilePage.xaml;Views\AuthorizationWindow.xaml;Views\HomeWindow.xaml;
+Pages\HomePages\Admin\AdminReaderPage.xaml;Pages\HomePages\Admin\NewsWriterPage.xaml;Pages\HomePages\Admin\ResponseToLetterPage.xaml;Pages\HomePages\AttachmentsPage.xaml;Pages\HomePages\ChildLetterPage\InformationLetterPage.xaml;Pages\HomePages\ChildLetterPage\ReadLetterPage.xaml;Pages\HomePages\ChildLetterPage\ReplyReaderPage.xaml;Pages\HomePages\ChildLetterPage\UniversalLetterPage.xaml;Pages\HomePages\LetterPage.xaml;Pages\HomePages\NoticePage.xaml;Pages\HomePages\ProfilePage.xaml;Views\AuthorizationWindow.xaml;Views\HomeWindow.xaml;
 
 False
 

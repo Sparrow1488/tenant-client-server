@@ -40,7 +40,7 @@ namespace JumboServer.Models.NewsBlock.ADD
             }
             else
             {
-                serverEvents.BlockReport(this, "Ошибка публикации: не пройдено валидацию", ConsoleColor.Yellow);
+                serverEvents.BlockReport(this, "Ошибка публикации: не пройдено валидацию\nУказания: возможно, текст слишком мал для публикации", ConsoleColor.Yellow);
                 responseMessage = "0";
             }
 
@@ -48,11 +48,11 @@ namespace JumboServer.Models.NewsBlock.ADD
         }
         private bool CheckNewsValidation(News news)
         {
-            if(string.IsNullOrWhiteSpace(news.Title) || string.IsNullOrWhiteSpace(news.Description))
+            if(news.Title.Length > 5 && news.Description.Length > 10 && news.Title != "Заголовок" && news.Description != "Описание")
             {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
     }
 }

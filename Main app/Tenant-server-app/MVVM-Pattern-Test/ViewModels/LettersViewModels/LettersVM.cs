@@ -1,4 +1,5 @@
 ﻿using MVVM_Pattern_Test.Commands;
+using MVVM_Pattern_Test.Pages.HomePages.ChildLetterPage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
             RecieveMyLetters.Execute(null);
 
             UniversalPage = new UniversalLetterPage();
+            ReadLetterPage = new ReadLetterPage(SelectedLetter);
         }
         #endregion
 
@@ -38,7 +40,12 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
         public Letter SelectedLetter
         {
             get { return _selectedLetter; }
-            set { _selectedLetter = value; OnPropertyChanged(); }
+            set 
+            { 
+                _selectedLetter = value; ReadLetterPage = new ReadLetterPage(SelectedLetter);
+                //ResponseReader = new ReplyReaderPage(SelectedLetter.Id); 
+                OnPropertyChanged();
+            }
         }
         private Letter _selectedLetter;
         public Page SelectedPage
@@ -53,6 +60,12 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
             private set { _universalPage = value; OnPropertyChanged(); }
         }
         private Page _universalPage;
+        public Page ReadLetterPage
+        {
+            get { return _readLetterPage; }
+            set { _readLetterPage = value; OnPropertyChanged(); }
+        }
+        private Page _readLetterPage;
         public List<Letter> MyLetters
         {
             get { return _myLetter; }

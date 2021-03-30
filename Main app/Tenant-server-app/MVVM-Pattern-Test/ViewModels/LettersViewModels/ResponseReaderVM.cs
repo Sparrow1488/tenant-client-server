@@ -1,12 +1,6 @@
 ﻿using Chairman_Client.Server.Packages.LettersDir;
 using MVVM_Pattern_Test.Commands;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using WpfApp1.Server.Packages.Letters;
 using WpfApp1.Server.ServerMeta;
 
 namespace MVVM_Pattern_Test.ViewModels.LettersViewModels

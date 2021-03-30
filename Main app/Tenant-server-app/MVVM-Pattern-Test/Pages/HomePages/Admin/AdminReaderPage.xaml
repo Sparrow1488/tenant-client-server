@@ -78,11 +78,12 @@
             Width="1"
             Background="Gray" />
 
-        <Frame
-            x:Name="letterReaderFrame"
-            Grid.RowSpan="2"
-            Grid.Column="2"
-            Content="{Binding ReadLetterPage}"
-            NavigationUIVisibility="Hidden" />
+        <ScrollViewer Grid.RowSpan="2" Grid.Column="2">
+            <Frame
+                x:Name="letterReaderFrame"
+                Content="{Binding ReadLetterPage}"
+                NavigationUIVisibility="Hidden" />
+        </ScrollViewer>
+
     </Grid>
 </Page>

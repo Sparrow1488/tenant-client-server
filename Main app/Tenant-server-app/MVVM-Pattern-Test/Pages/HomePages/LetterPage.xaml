@@ -121,25 +121,12 @@
                         NavigationUIVisibility="Hidden" />
 
                 </Grid>
-
+                <Frame
+                    Grid.Row="1"
+                    Content="{Binding ReadLetterPage}"
+                    NavigationUIVisibility="Hidden" />
             </StackPanel>
         </ScrollViewer>
-
-
-        <StackPanel
-            Grid.Row="2"
-            MaxWidth="500"
-            Background="AliceBlue"
-            Orientation="Vertical">
-            <TextBlock
-                x:Name="exceptionText"
-                Margin="10"
-                HorizontalAlignment="Center"
-                FontSize="20"
-                Text="{Binding Notice}"
-                TextWrapping="Wrap"
-                Visibility="Collapsed" />
-        </StackPanel>
 
 
 

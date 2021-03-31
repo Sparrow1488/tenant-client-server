@@ -23,9 +23,18 @@
             <StackPanel>
                 <Button
                     HorizontalContentAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Gray"
                     Command="{Binding RecieveNews}"
-                    Content="Обновить"
-                    FontSize="24" />
+                    FontSize="20">
+                    <WrapPanel>
+                        <Image
+                            Width="30"
+                            Margin="5,0"
+                            Source="/refs/icons/reload.png" />
+                        <TextBlock Text="Обновить" />
+                    </WrapPanel>
+                </Button>
                 <ItemsControl
                     x:Name="tStack"
                     Grid.Column="0"
@@ -61,22 +70,22 @@
                                         <TextBlock
                                             Margin="10,0"
                                             VerticalAlignment="Center"
-                                            FontSize="20"
+                                            FontSize="18"
                                             Text="{Binding Sender}" />
                                         <TextBlock
                                             Margin="10,0"
                                             VerticalAlignment="Center"
-                                            FontSize="20"
+                                            FontSize="18"
                                             Text="-" />
                                         <TextBlock
                                             Margin="10,0"
                                             VerticalAlignment="Center"
-                                            FontSize="20"
+                                            FontSize="18"
                                             Text="{Binding DateTime}" />
                                     </WrapPanel>
                                     <TextBlock
                                         Margin="5,0"
-                                        FontSize="24"
+                                        FontSize="20"
                                         FontWeight="DemiBold"
                                         Text="{Binding Title}" />
                                     <StackPanel

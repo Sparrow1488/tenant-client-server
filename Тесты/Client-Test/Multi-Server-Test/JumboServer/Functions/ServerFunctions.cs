@@ -4,16 +4,38 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 using JumboServer.API;
+using JumboServer.Meta;
 
 namespace JumboServer.Functions
 {
     public class ServerFunctions
     {
+        public SqlConnection TrySqlConnect(SqlConnection connection)
+        {
+            int counter = 0;
+            while (counter < 4)
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                    return connection;
+                else connection.Open();
+            }
+            return connection;
+        }
+        public SqlConnection OpenSqlConnection()
+        {
+            var testConnection = new SqlConnection(MyServer.Meta.connectionString);
+            testConnection = TrySqlConnect(testConnection);
+            if (testConnection.State == System.Data.ConnectionState.Open)
+                return testConnection;
+            else
+                testConnection = TrySqlConnect(testConnection);
+            return testConnection;
+        }
         public List<News> GetAllNewsOutDB()
         {
             var listNews = new List<News>();
 
-            var command = new SqlCommand("SELECT * FROM News", MyServer.Meta.sqlConnection);
+            var command = new SqlCommand("SELECT * FROM News", OpenSqlConnection());
             using (var reader = command.ExecuteReader())
             {
                 if (reader.HasRows)
@@ -40,7 +62,7 @@ namespace JumboServer.Functions
         {
             var selectLetters = new List<Letter>();
             string sCommand = "SELECT * FROM Letters";
-            var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
+            var command = new SqlCommand(sCommand, OpenSqlConnection());
             using (var reader = command.ExecuteReader())
             {
                 if (reader.HasRows)
@@ -69,10 +91,9 @@ namespace JumboServer.Functions
         public int AddLetterInDB(Letter newLetter)
         {
             string sCommand = "INSERT INTO [Letters] (Title, Description, Type, DateCreate, SenderId, SourcesTokens) VALUES (@title, @desc, @type, @date, @senderId, @sources)";
-            using (var command1 = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
+            using (var command1 = new SqlCommand(sCommand, OpenSqlConnection()))
             {
                 var validLetter = newLetter; //TODO: сделать валидацию письма
-                Console.WriteLine("Letter: " + MyServer.Meta.sqlConnection.State);
                 command1.Parameters.AddWithValue("title", validLetter.Title);
                 command1.Parameters.AddWithValue("desc", validLetter.Description);
                 command1.Parameters.AddWithValue("type", validLetter.LetterType);
@@ -112,7 +133,7 @@ namespace JumboServer.Functions
             try
             {
                 string sCommand = "INSERT INTO [News] (Title, Description, DateCreate, Sender, Type, SenderId) VALUES (@title, @desc, @date, @sender, @type, @senderId)";
-                using (var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
+                using (var command = new SqlCommand(sCommand, OpenSqlConnection()))
                 {
                     var validNews = CheckNewsValidation(news);
                     command.Parameters.AddWithValue("title",  validNews.Title);
@@ -131,7 +152,7 @@ namespace JumboServer.Functions
         {
             string sCommand = $"SELECT * FROM ResponsesToLetters WHERE letterId=N'{id}'";
             List<ReplyLetter> allReplyes = new List<ReplyLetter>();
-            var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
+            var command = new SqlCommand(sCommand, OpenSqlConnection());
             using (var reader = command.ExecuteReader())
             {
                 if (reader.HasRows)
@@ -174,7 +195,7 @@ namespace JumboServer.Functions
         public Person GetUserOrDefaultOutDB(Person person)
         {
             string sCommand = $"SELECT * FROM Users WHERE Login=N'{person.Login}' AND Password=N'{person.Password}'";
-            var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
+            var command = new SqlCommand(sCommand, OpenSqlConnection());
             using (var reader = command.ExecuteReader())
             {
                 if (reader.HasRows)
@@ -200,7 +221,7 @@ namespace JumboServer.Functions
         public string GetUserLoginOrDefault(int userId)
         {
             string sCommand = $"SELECT * FROM Users WHERE Id=N'{userId}'";
-            var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
+            var command = new SqlCommand(sCommand, OpenSqlConnection());
             using (var reader = command.ExecuteReader())
             {
                 if (reader.HasRows)
@@ -275,7 +296,7 @@ namespace JumboServer.Functions
         {
             var selectLetters = new List<Letter>();
             string sCommand = $"SELECT * FROM Letters WHERE SenderId={id}";
-            var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
+            var command = new SqlCommand(sCommand, OpenSqlConnection());
             using (var reader = command.ExecuteReader())
             {
                 if (reader.HasRows)
@@ -304,7 +325,7 @@ namespace JumboServer.Functions
         public int ReplyToTheLetter(ReplyLetter reply)
         {
             string sCommand = $"INSERT INTO [ResponsesToLetters] (answerText, letterId, source, responder, responderId) VALUES (@answer, @letterId, @source, @sender, @senderId)";
-            using (var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
+            using (var command = new SqlCommand(sCommand, OpenSqlConnection()))
             {
                 command.Parameters.AddWithValue("answer", reply.Answer);
                 command.Parameters.AddWithValue("letterId", reply.LetterId);
@@ -322,7 +343,7 @@ namespace JumboServer.Functions
         {
             var usersCollection = new List<Person>();
             string sCommand = $"SELECT * FROM Users";
-            var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
+            var command = new SqlCommand(sCommand, OpenSqlConnection());
             using (var reader = command.ExecuteReader())
             {
                 if (reader.HasRows)
@@ -349,7 +370,7 @@ namespace JumboServer.Functions
             try
             {
                 string sCommand = "INSERT INTO [Sources] (Data, Token, SenderId, DateCreate, Extension) VALUES (@data, @token, @senderId, @date, @extension)";
-                using (var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection))
+                using (var command = new SqlCommand(sCommand, OpenSqlConnection()))
                 {
                     command.Parameters.AddWithValue("data", source.Data);
                     string fileToken = GenerateImageToken();
@@ -381,7 +402,7 @@ namespace JumboServer.Functions
         public Source GetSourceByTokenOutDB(string sourceToken)
         {
             string sCommand = $"SELECT * FROM Sources WHERE Token=N'{sourceToken}'";
-            var command = new SqlCommand(sCommand, MyServer.Meta.sqlConnection);
+            var command = new SqlCommand(sCommand, OpenSqlConnection());
             using (var reader = command.ExecuteReader())
             {
                 if (reader.HasRows)

@@ -25,8 +25,8 @@ namespace JumboServer.Meta
         public string reserveLettersTxt = "LETTERS_ALL.txt";
         public string reserveUsersTxt = "LETTERS_ALL.txt";
         public static Encoding Encoding = Encoding.UTF32;
-        public SqlConnection sqlConnection = null;
-        private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\JumboDataBase.mdf;Integrated Security=True";
+        //public SqlConnection sqlConnection = null;
+        public string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\JumboDataBase.mdf;Integrated Security=True";
         
         public string PublicRSAKey { get; set; }
         public string PrivateRSAKey { get; set; }
@@ -35,12 +35,15 @@ namespace JumboServer.Meta
         #region Methods
         private void CreateSqlConnection()
         {
-            sqlConnection = new SqlConnection(connectionString);
-            sqlConnection.Open();
-            if (sqlConnection.State == ConnectionState.Open)
-                Console.WriteLine("Успешное подключение к СУБД");
-            else
-                Console.WriteLine("ОШИБКА ПОДКЛЮЧЕНИЯ К СУБД");
+            using (var testConnection = new SqlConnection(connectionString))
+            {
+                testConnection.Open();
+                if (testConnection.State == ConnectionState.Open)
+                    Console.WriteLine("Успешное подключение к СУБД");
+                else
+                    Console.WriteLine("ОШИБКА ПОДКЛЮЧЕНИЯ К СУБД");
+                testConnection.Close();
+            }
         }
         #endregion
     }

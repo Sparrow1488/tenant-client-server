@@ -45,12 +45,13 @@ namespace JumboServer.Functions
                         int id = reader.GetInt32(0);
                         string title = reader.GetString(1);
                         string description = reader.GetString(2);
-                        string sources = reader.IsDBNull(3) ? null : reader.GetString(3);
+                        string jsonSource = reader.IsDBNull(3) ? null : reader.GetString(3);
                         DateTime date = reader.IsDBNull(4) ? DateTime.Today : reader.GetDateTime(4);
                         string type = reader.IsDBNull(6) ? null : reader.GetString(6);
                         int senderId = reader.GetInt32(7);
                         string sender = GetUserLoginById(senderId);
-                        var news = new News(id, title, description, sources, sender, type, date, senderId);
+                        var sourceTokens = JsonConvert.DeserializeObject<string[]>(jsonSource);
+                        var news = new News(id, title, description, sourceTokens, sender, type, date, senderId);
                         listNews.Add(news);
                     }
                     return listNews;
@@ -58,6 +59,17 @@ namespace JumboServer.Functions
                 return null;
             }
         }
+        //public T TryDeserialuze<T>(string json)
+        //{
+        //    T concreteObj;
+        //    try
+        //    {
+        //        concreteObj = JsonConvert.DeserializeObject<T>(json);
+        //        return concreteObj;
+        //    }
+        //    catch { }
+        //    return concreteObj;
+        //}
         public List<Letter> GetAllLettersOutDB()
         {
             var selectLetters = new List<Letter>();
@@ -132,16 +144,17 @@ namespace JumboServer.Functions
         {
             try
             {
-                string sCommand = "INSERT INTO [News] (Title, Description, DateCreate, Sender, Type, SenderId) VALUES (@title, @desc, @date, @sender, @type, @senderId)";
+                string sCommand = "INSERT INTO [News] (Title, Description, Source, DateCreate, Sender, Type, SenderId) VALUES (@title, @desc, @source, @date, @sender, @type, @senderId)";
                 using (var command = new SqlCommand(sCommand, OpenSqlConnection()))
                 {
-                    var validNews = CheckNewsValidation(news);
-                    command.Parameters.AddWithValue("title",  validNews.Title);
-                    command.Parameters.AddWithValue("desc",   validNews.Description);
-                    command.Parameters.AddWithValue("date",   validNews.DateTime);
+                    command.Parameters.AddWithValue("title", news.Title);
+                    command.Parameters.AddWithValue("desc", news.Description);
+                    var jsonSource = JsonConvert.SerializeObject(news.SourceTokens);
+                    command.Parameters.AddWithValue("source", jsonSource);
+                    command.Parameters.AddWithValue("date", news.DateTime);
                     command.Parameters.AddWithValue("sender", "");
-                    command.Parameters.AddWithValue("type",   validNews.Type);
-                    command.Parameters.AddWithValue("senderId",   validNews.SenderId);
+                    command.Parameters.AddWithValue("type", news.Type);
+                    command.Parameters.AddWithValue("senderId", news.SenderId);
                     var successInsert = command.ExecuteNonQuery();
                     return successInsert;
                 }
@@ -172,26 +185,26 @@ namespace JumboServer.Functions
             }
             return allReplyes;
         }
-        private News CheckNewsValidation(News checkNews) //каловая дичь
-        {
-            string validTitle = "", validDesc = "", validSources = "", validType = "notice";
-            DateTime validDate = DateTime.Now;
-            string validSender = "noname";
-            if (!string.IsNullOrWhiteSpace(checkNews.Title))
-                validTitle = checkNews.Title;
-            if (!string.IsNullOrWhiteSpace(checkNews.Description))
-                validDesc = checkNews.Description;
-            if (!string.IsNullOrWhiteSpace(checkNews.SourcesId))
-                validSources = checkNews.SourcesId;
-            if (!string.IsNullOrWhiteSpace(checkNews.Type))
-                validType = checkNews.Type;
-            if (checkNews.DateTime != null)
-                validDate = checkNews.DateTime;
-            if (!string.IsNullOrWhiteSpace(checkNews.Sender))
-                validSender = checkNews.Sender;
-            var validNews = new News(checkNews.Id, validTitle, validDesc, validSources, validSender, validType, validDate, checkNews.SenderId);
-            return validNews;
-        }
+        //private News CheckNewsValidation(News checkNews) //каловая дичь
+        //{
+        //    string validTitle = "", validDesc = "", validType = "notice";
+        //    DateTime validDate = DateTime.Now;
+        //    string validSender = "noname";
+        //    if (!string.IsNullOrWhiteSpace(checkNews.Title))
+        //        validTitle = checkNews.Title;
+        //    if (!string.IsNullOrWhiteSpace(checkNews.Description))
+        //        validDesc = checkNews.Description;
+        //    if (checkNews.SourceTokens == null)
+        //        checkNews.SourceTokens = new string[0];
+        //    if (!string.IsNullOrWhiteSpace(checkNews.Type))
+        //        validType = checkNews.Type;
+        //    if (checkNews.DateTime != null)
+        //        validDate = checkNews.DateTime;
+        //    if (!string.IsNullOrWhiteSpace(checkNews.Sender))
+        //        validSender = checkNews.Sender;
+        //    var validNews = new News(checkNews.Id, validTitle, validDesc, checkNews.SourceTokens, validSender, validType, validDate, checkNews.SenderId);
+        //    return validNews;
+        //}
         public Person GetUserOrDefaultOutDB(Person person)
         {
             string sCommand = $"SELECT * FROM Users WHERE Login=N'{person.Login}' AND Password=N'{person.Password}'";

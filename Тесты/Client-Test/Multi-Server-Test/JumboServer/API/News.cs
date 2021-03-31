@@ -11,7 +11,7 @@ namespace JumboServer.API
         public string Title { get; set; }
         public string Description { get; set; }
 
-        public string SourcesId { get; set; }
+        public string[] SourceTokens { get; set; }
 
         public string Sender { get; set; }
         public int SenderId { get; set; }
@@ -26,13 +26,13 @@ namespace JumboServer.API
             DateTime = date;
         }
         [JsonConstructor]
-        public News(int id, string title, string description, string sourcesId, string sender, string type, DateTime dateTime, int senderId)
+        public News(int id, string title, string description, string[] sourceTokens, string sender, string type, DateTime dateTime, int senderId)
         {
             Id = id;
             Title = title;
             Description = description;
             DateTime = dateTime;
-            SourcesId = sourcesId;
+            SourceTokens = sourceTokens;
             Sender = sender;
             Type = type;
             SenderId = senderId;

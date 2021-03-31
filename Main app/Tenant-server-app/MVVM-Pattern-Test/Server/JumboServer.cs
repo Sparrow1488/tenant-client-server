@@ -15,7 +15,6 @@ using WpfApp1.Server.ServerExceptions;
 using System.Linq;
 using Chairman_Client.Server.Packages.LettersDir;
 using WpfApp1.Server.Packages.SourceDir;
-using RSAEncrypter;
 using System.Security.Cryptography;
 
 namespace WpfApp1.Server.ServerMeta
@@ -23,7 +22,6 @@ namespace WpfApp1.Server.ServerMeta
     public class JumboServer
     {
         public static JumboServer ActiveServer;
-        private TcpClient TCPclient = null; //TODO: убрать лишнее
         public Person ActiveUser = null;
         private ServerConfig ServerConfig = null;
         public string tokenFileName = "token-auth";
@@ -37,16 +35,6 @@ namespace WpfApp1.Server.ServerMeta
             ServerConfig = config;
             ActiveServer = this;
 
-            var sr1 = new StreamReader(@"C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\publicKey.txt");
-            var sr2 = new StreamReader(@"C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\privateKey.txt");
-            //PublicKey = sr1.ReadToEnd();
-            //PrivateKey = sr2.ReadToEnd();
-
-            //byte[] data = new byte[2048];
-            //data = Encoding.UTF8.GetBytes("шо");
-            //var encrypt = MyRSA.EncryptData(data, MyRSA.StringToRsa(PublicKey));
-            //var decrypt = MyRSA.DecryptData(encrypt, MyRSA.StringToRsa(PrivateKey));
-            //string res = Encoding.UTF8.GetString(decrypt);
         }
         public async Task<bool> Authorization(Person dataPerson, bool saveToken) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
         {
@@ -105,48 +93,47 @@ namespace WpfApp1.Server.ServerMeta
             string jsonResponse = null;
             try
             {
-                var canSendRequest = await TrySendRequestAsync(package);
+                TcpClient client = new TcpClient(ServerConfig.HOST, ServerConfig.PORT);
+                var canSendRequest = await TrySendRequestAsync(package, client);
                 if (canSendRequest)
                 {
-                    jsonResponse = await GetResponseAsync();
-                    TCPclient.Close();
+                    jsonResponse = await GetResponseAsync(client);
                 }
             }
             catch (InvalidOperationException) { }
             return jsonResponse;
         }
 
-        private async Task<bool> TrySendRequestAsync(Package package)
+        private async Task<bool> TrySendRequestAsync(Package package, TcpClient client)
         {
-            TCPclient = new TcpClient();
-            if (!TCPclient.Connected)
-            {
-                TCPclient = new TcpClient();
-                var isConnect = await TryConnect();
-                if (isConnect)
+            bool isConnect = client.Connected;
+            if (!client.Connected)
+                isConnect = await TryConnect(client);
+            if (isConnect)
                 {
-                    NetworkStream stream = TCPclient.GetStream();
+                    NetworkStream stream = client.GetStream();
                     string jsonPackage = JsonConvert.SerializeObject(package);
                     byte[] data = ServerEncoding.GetBytes(jsonPackage);
                     await stream.WriteAsync(data, 0, data.Length);
                 }
                 else throw new ConnectionException("Ошибка подключения к серверу");
-            }
             return true;
         }
-        private async Task<bool> TryConnect()
+        private async Task<bool> TryConnect(TcpClient client)
         {
             int connectCounter = 0;
+            if (client.Connected)
+                return true;
             do
             {
-                try{ await TCPclient.ConnectAsync(ServerConfig.HOST, ServerConfig.PORT); }
+                try{ await client.ConnectAsync(ServerConfig.HOST, ServerConfig.PORT); }
                 catch (SocketException) { }
 
                 connectCounter++;
                 if (connectCounter == 3)
                     return false;
             }
-            while (TCPclient.Connected != true);
+            while (client.Connected != true);
             return true;
         }
         public UserToken DeserializeTokenByFileName(string tokenName)
@@ -167,7 +154,7 @@ namespace WpfApp1.Server.ServerMeta
             return token;
         }
 
-        private async Task<string> GetResponseAsync()
+        private async Task<string> GetResponseAsync(TcpClient client)
         {
             StringBuilder response = new StringBuilder();
             byte[] getData = new byte[2048];
@@ -176,13 +163,13 @@ namespace WpfApp1.Server.ServerMeta
             {
                 await Task.Run(() =>
                 {
-                    if (!TCPclient.Connected || TCPclient == null)
+                    if (!client.Connected || client == null)
                         throw new ConnectionException("Ошибка подключения к серверу");
 
-                    var serverStream = TCPclient.GetStream();
+                    var serverStream = client.GetStream();
                     ReadStreamData(serverStream, ref getData, ref response);
                     serverStream.Close();
-                    TCPclient.Close();
+                    client.Close();
                 });
             }
             catch (IOException) { breakConnection = true; }

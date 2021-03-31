@@ -141,6 +141,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\MyCommand.cs" />
+    <Compile Include="MyApplication\ClientFunctions.cs" />
     <Compile Include="MyApplication\UserInformation\User.cs" />
     <Compile Include="Pages\HomePages\Admin\AdminReaderPage.xaml.cs">
       <DependentUpon>AdminReaderPage.xaml</DependentUpon>

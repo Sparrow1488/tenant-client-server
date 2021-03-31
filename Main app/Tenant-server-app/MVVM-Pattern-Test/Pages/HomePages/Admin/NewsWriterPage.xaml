@@ -92,7 +92,7 @@
                             <StackPanel>
                                 <TextBlock Style="{StaticResource additionalTextStyle}" Text="Отправитель" />
                                 <TextBlock Style="{StaticResource additionalTextStyle}" Text="Дата отправки: " />
-                                <WrapPanel>
+                                <!--<WrapPanel>
                                     <TextBlock Style="{StaticResource additionalTextStyle}" Text="Тип записи: " />
                                     <RadioButton
                                         VerticalContentAlignment="Center"
@@ -118,7 +118,7 @@
                                         BorderThickness="2"
                                         Content="Предупреждение"
                                         Style="{StaticResource additionalTextStyle}" />
-                                </WrapPanel>
+                                </WrapPanel>-->
                             </StackPanel>
                         </GroupBox>
 
@@ -136,7 +136,7 @@
                                         <TextBlock Text="Отправить" />
                                     </WrapPanel>
                                 </Button>
-                                <Button Style="{StaticResource buttonStyler}">
+                                <Button Command="{Binding AttachFile}" Style="{StaticResource buttonStyler}">
                                     <WrapPanel>
                                         <Image
                                             Width="20"

@@ -9,6 +9,7 @@ using WpfApp1.Server.Packages.SourceDir;
 using WpfApp1.Server.ServerExceptions;
 using WpfApp1.Server.ServerMeta;
 using System.Collections.ObjectModel;
+using MVVM_Pattern_Test.MyApplication;
 
 namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
 {
@@ -46,6 +47,7 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
         }
         private List<string> _attachments;
         private bool AttachWasAttached = true;
+        private ClientFunctions funcs = new ClientFunctions();
         #endregion
 
         #region Commands
@@ -93,14 +95,7 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
                 {
                     string base64Data = string.Empty;
                     string fileExtension = string.Empty;
-                    OpenFileDialog dialog = new OpenFileDialog();
-                    if (dialog.ShowDialog() == true)
-                    {
-                        string filePath = dialog.FileName;
-                        fileExtension = Path.GetExtension(filePath);
-                        try { base64Data = Convert.ToBase64String(File.ReadAllBytes(filePath)); }
-                        catch { Notice = "Вы пытаетесь прикрепить не верный формат файла"; }
-                    }
+                    funcs.OpenFile(out base64Data, out fileExtension);
                     if (!string.IsNullOrWhiteSpace(base64Data))
                     {
                         var newSource = new Source(base64Data, JumboServer.ActiveServer.ActiveUser.Id, fileExtension);

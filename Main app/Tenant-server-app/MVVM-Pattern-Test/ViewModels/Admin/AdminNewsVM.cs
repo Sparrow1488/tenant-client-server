@@ -1,6 +1,10 @@
 ﻿using Chairman_Client.Server.Chairman.Functions;
 using Multi_Server_Test.Server;
 using MVVM_Pattern_Test.Commands;
+using MVVM_Pattern_Test.MyApplication;
+using System.Collections.Generic;
+using System.Windows;
+using WpfApp1.Server.Packages.SourceDir;
 using WpfApp1.Server.ServerMeta;
 
 namespace MVVM_Pattern_Test.ViewModels.Admin
@@ -11,7 +15,7 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
         public AdminNewsVM()
         {
             var sender = JumboServer.ActiveServer.ActiveUser;
-            NewPost = new News("", "", sender.Id, null, "News");
+            NewPost = new News("", "", sender.Id, SourceTokens.ToArray(), "News");
             NewPost.Sender = sender.Login;
         }
         #endregion
@@ -25,6 +29,8 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
         }
         private News _post;
         private Functions functions = new Functions(JumboServer.ActiveServer);
+        private ClientFunctions funcs = new ClientFunctions();
+        public List<string> SourceTokens = new List<string>();
         #endregion
 
         #region Commands
@@ -34,9 +40,31 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
             {
                 return new MyCommand(async (obj) =>
                 {
+                    NewPost.SourceTokens = SourceTokens.ToArray();
                     var requestResult = await functions.AddNews(NewPost);
                     PrintServerResult(requestResult);
                 }, (obj) => NewPost != null && JumboServer.ActiveServer.ActiveUser != null);
+            }
+        }
+        public MyCommand AttachFile
+        {
+            get
+            {
+                return new MyCommand(async (obj) =>
+                {
+                    string base64Data = string.Empty;
+                    string extensionFile = string.Empty;
+                    funcs.OpenFile(out base64Data, out extensionFile);
+                    if(!string.IsNullOrWhiteSpace(base64Data) && !string.IsNullOrWhiteSpace(extensionFile))
+                    {
+                        var sourceToken = await JumboServer.ActiveServer.AddSource(new Source(base64Data, 
+                                                                                                                    JumboServer.ActiveServer.ActiveUser.Id, 
+                                                                                                                    extensionFile));
+                        if (!string.IsNullOrWhiteSpace(sourceToken))
+                            SourceTokens.Add(sourceToken);
+                        Notice = "Файл успешно прикреплен";
+                    }
+                });
             }
         }
         #endregion

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using MVVM_Pattern_Test.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -13,13 +14,17 @@ namespace MVVM_Pattern_Test.Pages.HomePages
     /// </summary>
     public partial class AttachmentsPage : Page
     {
-        public AttachmentsPage(Letter sourceFromLetter)
+        public AttachmentsPage(List<string> sourceTokens)
         {
             InitializeComponent();
-
-            DataContext = new AttachmentsVM(sourceFromLetter);
+            DataContext = new AttachmentsVM(sourceTokens);
         }
-        private double firstlyWidth = 480;
+        public AttachmentsPage(string[] sourceTokens)
+        {
+            InitializeComponent();
+            DataContext = new AttachmentsVM(sourceTokens);
+        }
+        private double firstlyWidth = 200;
         private void attachedImage_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             var image = (Image)sender;

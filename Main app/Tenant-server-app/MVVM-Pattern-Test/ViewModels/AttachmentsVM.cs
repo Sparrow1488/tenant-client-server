@@ -15,24 +15,33 @@ namespace MVVM_Pattern_Test.ViewModels
     public class AttachmentsVM : BaseVM
     {
         #region Constructor
-        public AttachmentsVM(Letter readLetter)
+        public AttachmentsVM(List<string> tokens)
         {
-            ReadLetter = readLetter;
-            RecieveSource.Execute(null);
+            if(tokens != null && tokens.Count > 0)
+            {
+                SourceTokens = tokens;
+                RecieveSource.Execute(null);
+            }
+        }
+        public AttachmentsVM(string[] tokens)
+        {
+            if (tokens != null && tokens.Length > 0)
+            {
+                foreach (var token in tokens)
+                    SourceTokens.Add(token);
+                RecieveSource.Execute(null);
+            }
         }
         #endregion
 
         #region Props
         public override string Notice { get { return _infoMessage; } protected set { _infoMessage = value; } }
-        public Letter ReadLetter { get { return _letter; } private set { _letter = value; OnPropertyChanged(); } }
-        private Letter _letter;
-
-        public ObservableCollection<string> SourceTokens
+        public List<string> SourceTokens
         {
             get { return _sourceTokens; }
             set { _sourceTokens = value; OnPropertyChanged(); }
         }
-        private ObservableCollection<string> _sourceTokens = new ObservableCollection<string>();
+        private List<string> _sourceTokens = new List<string>();
         public ObservableCollection<ImageSource> ImageSources
         {
             get { return _imageSources; }
@@ -60,8 +69,8 @@ namespace MVVM_Pattern_Test.ViewModels
             {
                 return new MyCommand(async (obj) =>
                 {
-                    SourceTokens = await ReciveSourceByToken();
-                }, (obj) => ReadLetter != null);
+                    await ReciveSourceByToken();
+                });
             }
         }
         private string path = "./Downloads/";
@@ -79,18 +88,16 @@ namespace MVVM_Pattern_Test.ViewModels
                         File.WriteAllBytes(fileName, file.Value);
                     }
                     Notice = "Файлы успешно загружены";
-                }, (obj) => ReadLetter != null && DataByAttachments != null && DataByAttachments.Count > 0);
+                }, (obj) => DataByAttachments != null && DataByAttachments.Count > 0);
             }
         }
         #endregion
 
         #region Methods
-        private async Task<ObservableCollection<string>> ReciveSourceByToken()
+        private async Task ReciveSourceByToken()
         {
-            if (ReadLetter == null) return SourceTokens;
-            foreach (var token in ReadLetter.SourcesTokens)
+            foreach (var token in SourceTokens)
             {
-                SourceTokens.Add(token);
                 var source = await JumboServer.ActiveServer.GetSourceByToken(token);
                 if (source == null) continue;
                 byte[] sourceData = Convert.FromBase64String(source?.Data);
@@ -98,7 +105,6 @@ namespace MVVM_Pattern_Test.ViewModels
                 try { ImageSources.Add(BitmapFrame.Create(new MemoryStream(sourceData))); }
                 catch { OtherDocuments.Add(source); }
             }
-            return SourceTokens;
         }
         #endregion
     }

@@ -39,7 +39,7 @@
                     x:Name="tStack"
                     Grid.Column="0"
                     Margin="0,20,0,0"
-                    ItemsSource="{Binding RecievedNews}">
+                    ItemsSource="{Binding RecievedNewsStruct}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Vertical" />
@@ -71,7 +71,7 @@
                                             Margin="10,0"
                                             VerticalAlignment="Center"
                                             FontSize="18"
-                                            Text="{Binding Sender}" />
+                                            Text="{Binding ReadNews.Sender}" />
                                         <TextBlock
                                             Margin="10,0"
                                             VerticalAlignment="Center"
@@ -81,13 +81,13 @@
                                             Margin="10,0"
                                             VerticalAlignment="Center"
                                             FontSize="18"
-                                            Text="{Binding DateTime}" />
+                                            Text="{Binding ReadNews.DateTime}" />
                                     </WrapPanel>
                                     <TextBlock
                                         Margin="5,0"
                                         FontSize="20"
                                         FontWeight="DemiBold"
-                                        Text="{Binding Title}" />
+                                        Text="{Binding ReadNews.Title}" />
                                     <StackPanel
                                         Height="1"
                                         Margin="5,5"
@@ -97,8 +97,9 @@
                                         BorderThickness="0"
                                         FontSize="20"
                                         IsReadOnly="True"
-                                        Text="{Binding Description}"
+                                        Text="{Binding ReadNews.Description}"
                                         TextWrapping="Wrap" />
+                                    <Frame Content="{Binding AttachmentsPage}" NavigationUIVisibility="Hidden" Margin="0 20 0 0"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>

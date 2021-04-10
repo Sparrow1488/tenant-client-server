@@ -59,7 +59,7 @@
                                     Text="Вложения name" />
                                 <Image
                                     x:Name="attachedImage"
-                                    Width="480"
+                                    Width="200"
                                     MouseEnter="attachedImage_MouseEnter"
                                     MouseLeave="attachedImage_MouseLeave"
                                     MouseLeftButtonDown="attachedImage_MouseLeftButtonDown"
@@ -78,7 +78,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <WrapPanel>
+                            <WrapPanel Orientation="Vertical">
                                 <TextBlock
                                     VerticalAlignment="Center"
                                     FontSize="16"

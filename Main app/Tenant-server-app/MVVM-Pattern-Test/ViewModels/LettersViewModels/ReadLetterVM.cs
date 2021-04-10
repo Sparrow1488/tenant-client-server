@@ -60,7 +60,7 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
             {
                 return new MyCommand((obj) =>
                 {
-                    AttachPage = new AttachmentsPage(ReadLetter);
+                    AttachPage = new AttachmentsPage(ReadLetter?.SourcesTokens);
                 }, (obj) => ReadLetter != null);
             }
         }

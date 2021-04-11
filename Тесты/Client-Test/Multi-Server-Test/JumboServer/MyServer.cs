@@ -35,10 +35,10 @@ namespace JumboServer
                 Listener = new TcpListener(IPAddress.Parse(HOST), PORT);
                 Meta = new ServerMeta();
 
-                var sr1 = new StreamReader(@"C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\publicKey.txt");
-                var sr2 = new StreamReader(@"C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\privateKey.txt");
-                Meta.PublicRSAKey = sr1.ReadToEnd();
-                Meta.PrivateRSAKey = sr2.ReadToEnd();
+                //var sr1 = new StreamReader(@"C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\publicKey.txt");
+                //var sr2 = new StreamReader(@"C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\privateKey.txt");
+                //Meta.PublicRSAKey = sr1.ReadToEnd();
+                //Meta.PrivateRSAKey = sr2.ReadToEnd();
             }
             else
                 throw new ArgumentException("Вы передали некорректные значения");

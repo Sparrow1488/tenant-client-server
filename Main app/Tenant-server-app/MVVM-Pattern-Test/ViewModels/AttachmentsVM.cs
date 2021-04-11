@@ -101,7 +101,7 @@ namespace MVVM_Pattern_Test.ViewModels
                 var source = await JumboServer.ActiveServer.GetSourceByToken(token);
                 if (source == null) continue;
                 byte[] sourceData = Convert.FromBase64String(source?.Data);
-                DataByAttachments.Add(source.Extension, sourceData);
+                DataByAttachments.Add(source.Extension, sourceData); //TODO: BAG - нельзя добавлять один ключ несколько раз
                 try { ImageSources.Add(BitmapFrame.Create(new MemoryStream(sourceData))); }
                 catch { OtherDocuments.Add(source); }
             }

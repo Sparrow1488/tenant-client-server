@@ -21,6 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="AesEncryptor">
+      <HintPath>..\..\AesEncryptor.dll</HintPath>
+    </Reference>
     <Reference Include="RSAEncrypter">
       <HintPath>..\..\RSAEncrypter.dll</HintPath>
     </Reference>

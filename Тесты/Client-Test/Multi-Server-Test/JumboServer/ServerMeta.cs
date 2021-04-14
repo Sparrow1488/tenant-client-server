@@ -25,11 +25,11 @@ namespace JumboServer.Meta
         public string reserveLettersTxt = "LETTERS_ALL.txt";
         public string reserveUsersTxt = "LETTERS_ALL.txt";
         public static Encoding Encoding = Encoding.UTF32;
-        //public SqlConnection sqlConnection = null;
         public string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\JumboDataBase.mdf;Integrated Security=True";
         
         public string PublicRSAKey { get; set; }
         public string PrivateRSAKey { get; set; }
+        public string AesKey { get; set; }
         #endregion
 
         #region Methods

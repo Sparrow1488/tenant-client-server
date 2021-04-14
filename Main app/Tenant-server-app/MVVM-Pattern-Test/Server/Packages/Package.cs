@@ -6,12 +6,12 @@ namespace WpfApp1.Server.Packages
 {
     public abstract class Package
     {
-        public Package(RequestObject sendObj)
+        protected Package(RequestObject sendObj)
         {
             SendingObject = sendObj;
         }
-        public Package() { }
-        public Package(string request) 
+        protected Package() { }
+        protected Package(string request) 
         {
             SendingObject = request;
         }

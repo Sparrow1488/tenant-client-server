@@ -169,3 +169,4 @@ C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Main app\Tenant
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\ProfilePage.baml
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Pages\HomePages\SettingsPage.baml
 C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\obj\Debug\Views\HomeWindow.baml
+C:\Users\Dom\Desktop\Репозитории\tenant-client-server\Main app\Tenant-server-app\MVVM-Pattern-Test\bin\Debug\AesEncryptor.dll

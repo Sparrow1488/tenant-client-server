@@ -16,6 +16,9 @@ using System.Linq;
 using Chairman_Client.Server.Packages.LettersDir;
 using WpfApp1.Server.Packages.SourceDir;
 using System.Security.Cryptography;
+using AesEncryptor;
+using RSAEncrypter;
+using MVVM_Pattern_Test.Server.Packages;
 
 namespace WpfApp1.Server.ServerMeta
 {
@@ -26,6 +29,8 @@ namespace WpfApp1.Server.ServerMeta
         private ServerConfig ServerConfig = null;
         public string tokenFileName = "token-auth";
         private Encoding ServerEncoding = Encoding.UTF32;
+        public string PublicRSAServerKey = "ПОЛУЧИ ВАШИСТ ГРАНАТУ!!!!";
+        public string AESServerKey = "ПОЛУЧИ ВАШИСТ ГРАНАТУ!!!!";
 
         public string PublicKey { get; private set; }
         public string PrivateKey { get; private set; }
@@ -34,30 +39,81 @@ namespace WpfApp1.Server.ServerMeta
         {
             ServerConfig = config;
             ActiveServer = this;
-
+            PublicRSAServerKey = File.ReadAllText("publicKey.txt");
         }
-        public async Task<bool> Authorization(Person dataPerson, bool saveToken) //TODO: на сервере: сделать лист с токенами и проверять их при получении от пользователей
+        public async Task<bool> Authorization(Person dataPerson, bool saveToken)
         {
-            var authPack = new AuthorizationPackage(dataPerson);
-            var jsonResponse = await SendAndGetAsync(authPack);
+            var sourceData = File.ReadAllBytes(@"C:\Users\Dom\Desktop\план.rtf");
+            var source = new Source(Convert.ToBase64String(sourceData), 1, ".rtf");
+            var packSnusa = new AddNewSourcePackage(source);
+            byte[] key = MyAes.GenerateKey();
+            byte[] IV = MyAes.GenerateIV();
+            string jsonPackage = JsonConvert.SerializeObject(packSnusa);
+            byte[] encyptData = MyAes.Encrypt(jsonPackage, key, IV);
 
-            try 
-            {
-                ActiveUser = null;
-                ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse); 
-            }
-            catch(JsonReaderException) { }
-            if (ActiveUser == null)
-                return false;
-            if (saveToken && ActiveUser.Token != null)
-            {
-                using (var sw = File.CreateText(tokenFileName + ".txt"))
-                {
-                    var userToken = ActiveUser.Token;
-                    var jsonToken = JsonConvert.SerializeObject(userToken);
-                    sw.WriteLine(jsonToken);
-                }
-            }
+            RSACryptoServiceProvider rcsp = new RSACryptoServiceProvider(1024);
+            RSAParameters privateRsaParam = rcsp.ExportParameters(true);
+            RSAParameters publicRsaParam = rcsp.ExportParameters(false);
+
+            string xmlPrivateRsa = MyRSA.RsaToString(privateRsaParam);
+            string xmlPublicRsa = MyRSA.RsaToString(publicRsaParam);
+            byte[] encryptAesKey = MyRSA.EncryptData(key, MyRSA.StringToRsa(xmlPublicRsa));
+            byte[] encryptAesIV = MyRSA.EncryptData(IV, MyRSA.StringToRsa(xmlPublicRsa));
+            SecretPackage secPack = new SecretPackage();
+            secPack.EncyptPackage = encyptData;
+            secPack.KEY = encryptAesKey;
+            secPack.IV = encryptAesIV;
+            var sendData = JsonConvert.SerializeObject(secPack);
+
+            byte[] receivedAesKey = new byte[256];
+            TcpClient client = new TcpClient("че", 888);
+            //отправляю серверу байтики
+            var writeStream = client.GetStream();
+            writeStream.Write(encryptAesKey, 0, encryptAesKey.Length);
+
+            // *сервер их получает*
+
+            writeStream = client.GetStream();
+            writeStream.Write(encryptAesIV, 0, encryptAesIV.Length);
+
+            // *сервер их получает*
+
+            writeStream = client.GetStream();
+            writeStream.Write(encyptData, 0, encyptData.Length);
+
+            // *сервер их получает*
+            // *сервер отправляет ответ*
+
+
+            //Send DATA
+
+            var receivedData = JsonConvert.DeserializeObject<SecretPackage>(sendData);
+            var decryptAesKey = MyRSA.DecryptData(receivedData.KEY, MyRSA.StringToRsa(xmlPrivateRsa));
+            var decryptAesIV = MyRSA.DecryptData(receivedData.IV, MyRSA.StringToRsa(xmlPrivateRsa));
+            string decryptPackageJson = MyAes.Decrypt(receivedData.EncyptPackage, decryptAesKey, decryptAesIV);
+            Package ReceivedPackage = JsonConvert.DeserializeObject<Package>(decryptPackageJson);
+            Console.WriteLine(ReceivedPackage);
+
+            //var authPack = new AuthorizationPackage(dataPerson);
+            //var jsonResponse = await SendAndGetAsync(authPack);
+
+            //try 
+            //{
+            //    ActiveUser = null;
+            //    ActiveUser = JsonConvert.DeserializeObject<Person>(jsonResponse); 
+            //}
+            //catch(JsonReaderException) { }
+            //if (ActiveUser == null)
+            //    return false;
+            //if (saveToken && ActiveUser.Token != null)
+            //{
+            //    using (var sw = File.CreateText(tokenFileName + ".txt"))
+            //    {
+            //        var userToken = ActiveUser.Token;
+            //        var jsonToken = JsonConvert.SerializeObject(userToken);
+            //        sw.WriteLine(jsonToken);
+            //    }
+            //}
             return true;
         }
         public async Task<bool> AuthorizationByTokenAsync(UserToken token)
@@ -237,7 +293,7 @@ namespace WpfApp1.Server.ServerMeta
         {
             try
             {
-                var pack = new AddNewsSourcePackage(source);
+                var pack = new AddNewSourcePackage(source);
                 var imageToken = await ActiveServer.SendAndGetAsync(pack);
                 return imageToken;
             }

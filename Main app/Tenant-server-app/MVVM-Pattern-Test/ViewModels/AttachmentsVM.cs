@@ -54,12 +54,12 @@ namespace MVVM_Pattern_Test.ViewModels
             set { _otherDocuments = value; OnPropertyChanged(); }
         }
         private ObservableCollection<Source> _otherDocuments = new ObservableCollection<Source>();
-        public Dictionary<string, byte[]> DataByAttachments
+        public List<Source> AttachmentsSource
         {
-            get { return _dataByAttachments; }
-            set { _dataByAttachments = value; OnPropertyChanged(); }
+            get { return _attachmentsSource; }
+            set { _attachmentsSource = value; OnPropertyChanged(); }
         }
-        private Dictionary<string, byte[]> _dataByAttachments = new Dictionary<string, byte[]>();
+        private List<Source> _attachmentsSource = new List<Source>();
         #endregion
 
         #region Commands
@@ -73,7 +73,7 @@ namespace MVVM_Pattern_Test.ViewModels
                 });
             }
         }
-        private string path = "./Downloads/";
+        private string directoryPath = @".\Downloads\";
         public MyCommand SaveAll
         {
             get
@@ -81,14 +81,22 @@ namespace MVVM_Pattern_Test.ViewModels
                 return new MyCommand((obj) =>
                 {
                     Random rnd = new Random();
-                    foreach (var file in DataByAttachments)
+                    string downloadArchivePath = directoryPath + @"\" + "Docs" + DateTime.Now.ToBinary() + "_" + rnd.Next(1000, 99999).ToString() + @"\";
+                    try
                     {
-                        var num = rnd.Next(20000, 60000);
-                        string fileName = $"{path}{file.Key.Replace('.', ' ').ToUpper()}_{num}{file.Key}";
-                        File.WriteAllBytes(fileName, file.Value);
+                        foreach (var source in AttachmentsSource)
+                        {
+                            DirectoryInfo info = new DirectoryInfo(directoryPath);
+                            if (!info.Exists) Directory.CreateDirectory(directoryPath);
+                            Directory.CreateDirectory(downloadArchivePath);
+                            var rndNum = rnd.Next(10000, 60000);
+                            string fileName = $"{downloadArchivePath}{source?.Extension.Replace('.', ' ').ToUpper()}_{rndNum}{source?.Extension}";
+                            File.WriteAllBytes(fileName, Convert.FromBase64String(source.Data));
+                        }
+                        Notice = "Файлы успешно загружены";
                     }
-                    Notice = "Файлы успешно загружены";
-                }, (obj) => DataByAttachments != null && DataByAttachments.Count > 0);
+                    catch { }
+                }, (obj) => AttachmentsSource != null && AttachmentsSource.Count > 0);
             }
         }
         #endregion
@@ -101,7 +109,7 @@ namespace MVVM_Pattern_Test.ViewModels
                 var source = await JumboServer.ActiveServer.GetSourceByToken(token);
                 if (source == null) continue;
                 byte[] sourceData = Convert.FromBase64String(source?.Data);
-                DataByAttachments.Add(source.Extension, sourceData); //TODO: BAG - нельзя добавлять один ключ несколько раз
+                AttachmentsSource.Add(source);
                 try { ImageSources.Add(BitmapFrame.Create(new MemoryStream(sourceData))); }
                 catch { OtherDocuments.Add(source); }
             }

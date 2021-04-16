@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AesEncryptor">
+      <HintPath>..\..\..\..\Desktop\Репозитории\tenant-client-server\Тесты\AesEncryptor.dll</HintPath>
+    </Reference>
+    <Reference Include="RSAEncrypter">
+      <HintPath>..\..\..\..\Desktop\Репозитории\tenant-client-server\Тесты\RSAEncrypter.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

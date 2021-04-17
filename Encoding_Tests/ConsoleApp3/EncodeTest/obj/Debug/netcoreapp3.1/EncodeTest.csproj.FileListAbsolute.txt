@@ -19,3 +19,9 @@ C:\Users\Dom\source\repos\ConsoleApp3\EncodeTest\obj\Debug\netcoreapp3.1\EncodeT
 C:\Users\Dom\source\repos\ConsoleApp3\EncodeTest\obj\Debug\netcoreapp3.1\EncodeTest.pdb
 C:\Users\Dom\source\repos\ConsoleApp3\EncodeTest\obj\Debug\netcoreapp3.1\EncodeTest.genruntimeconfig.cache
 C:\Users\Dom\source\repos\ConsoleApp3\EncodeTest\bin\Debug\netcoreapp3.1\RSAEncrypter.dll
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Encoding_Tests\ConsoleApp3\EncodeTest\obj\Debug\netcoreapp3.1\EncodeTest.csprojAssemblyReference.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Encoding_Tests\ConsoleApp3\EncodeTest\obj\Debug\netcoreapp3.1\EncodeTest.AssemblyInfoInputs.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Encoding_Tests\ConsoleApp3\EncodeTest\obj\Debug\netcoreapp3.1\EncodeTest.AssemblyInfo.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Encoding_Tests\ConsoleApp3\EncodeTest\obj\Debug\netcoreapp3.1\EncodeTest.csproj.CoreCompileInputs.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Encoding_Tests\ConsoleApp3\EncodeTest\obj\Debug\netcoreapp3.1\EncodeTest.dll
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Encoding_Tests\ConsoleApp3\EncodeTest\obj\Debug\netcoreapp3.1\EncodeTest.pdb

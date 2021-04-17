@@ -11,10 +11,10 @@
 
   <ItemGroup>
     <Reference Include="AesEncryptor">
-      <HintPath>..\..\..\..\Desktop\Репозитории\tenant-client-server\Тесты\AesEncryptor.dll</HintPath>
+      <HintPath>bin\Debug\netcoreapp3.1\AesEncryptor.dll</HintPath>
     </Reference>
     <Reference Include="RSAEncrypter">
-      <HintPath>..\..\..\..\Desktop\Репозитории\tenant-client-server\Тесты\RSAEncrypter.dll</HintPath>
+      <HintPath>bin\Debug\netcoreapp3.1\RSAEncrypter.dll</HintPath>
     </Reference>
   </ItemGroup>
 

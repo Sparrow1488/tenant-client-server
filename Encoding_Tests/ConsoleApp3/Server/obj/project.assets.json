@@ -149,19 +149,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dom\\.nuget\\packages\\": {}
+    "C:\\Users\\DOM\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dom\\source\\repos\\ConsoleApp3\\Server\\Server.csproj",
+      "projectUniqueName": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Encoding_Tests\\ConsoleApp3\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "C:\\Users\\Dom\\source\\repos\\ConsoleApp3\\Server\\Server.csproj",
-      "packagesPath": "C:\\Users\\Dom\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dom\\source\\repos\\ConsoleApp3\\Server\\obj\\",
+      "projectPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Encoding_Tests\\ConsoleApp3\\Server\\Server.csproj",
+      "packagesPath": "C:\\Users\\DOM\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Encoding_Tests\\ConsoleApp3\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Dom\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\DOM\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -207,7 +207,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

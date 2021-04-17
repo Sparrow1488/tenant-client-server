@@ -1,0 +1,16 @@
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\ConsoleApp1\bin\Debug\netcoreapp3.1\ConsoleApp1.exe
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\ConsoleApp1\bin\Debug\netcoreapp3.1\ConsoleApp1.deps.json
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\ConsoleApp1\bin\Debug\netcoreapp3.1\ConsoleApp1.runtimeconfig.json
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\ConsoleApp1\bin\Debug\netcoreapp3.1\ConsoleApp1.runtimeconfig.dev.json
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\ConsoleApp1\bin\Debug\netcoreapp3.1\ConsoleApp1.dll
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\ConsoleApp1\bin\Debug\netcoreapp3.1\ConsoleApp1.pdb
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\ConsoleApp1\bin\Debug\netcoreapp3.1\AesEncryptor.dll
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\ConsoleApp1\bin\Debug\netcoreapp3.1\RSAEncrypter.dll
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\ConsoleApp1\obj\Debug\netcoreapp3.1\ConsoleApp1.csprojAssemblyReference.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\ConsoleApp1\obj\Debug\netcoreapp3.1\ConsoleApp1.AssemblyInfoInputs.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\ConsoleApp1\obj\Debug\netcoreapp3.1\ConsoleApp1.AssemblyInfo.cs
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\ConsoleApp1\obj\Debug\netcoreapp3.1\ConsoleApp1.csproj.CoreCompileInputs.cache
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\ConsoleApp1\obj\Debug\netcoreapp3.1\ConsoleApp1.csproj.CopyComplete
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\ConsoleApp1\obj\Debug\netcoreapp3.1\ConsoleApp1.dll
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\ConsoleApp1\obj\Debug\netcoreapp3.1\ConsoleApp1.pdb
+C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Main app\Tenant-server-app\ConsoleApp1\obj\Debug\netcoreapp3.1\ConsoleApp1.genruntimeconfig.cache

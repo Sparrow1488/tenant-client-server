@@ -28,7 +28,8 @@ namespace ConsoleApp3
             string xmlServerRsa = Encoding.UTF32.GetString(serverRsa);
             PublicServerKey = MyRSA.StringToRsa(xmlServerRsa);
 
-            byte[] publicRsa = Encoding.UTF32.GetBytes(MyRSA.RsaToString(PublicKey));
+            string xmlRsa = MyRSA.RsaToString(PublicKey);
+            byte[] publicRsa = Encoding.UTF32.GetBytes(xmlRsa);
             WriteStreamData(writeStream, publicRsa, "RSA PUBLIC KEY SEND");
 
             byte[] aesKey = EncryptByServerRSA(AesKey);
@@ -37,7 +38,7 @@ namespace ConsoleApp3
             byte[] aesIV = EncryptByServerRSA(AesIV);
             WriteStreamData(writeStream, aesIV, "AES IV отправлен");
 
-            byte[] mainData = File.ReadAllBytes(@"C:\Users\Dom\Downloads\sample_95e89a811e9ea57ad9ee89bb74faeae46f95d9af.jpg");
+            byte[] mainData = File.ReadAllBytes(@"C:\Users\DOM\Downloads\header_slilpknot_iowa.jpg");
             string base64Data = Convert.ToBase64String(mainData);
             byte[] encryptMainData = MyAes.Encrypt(base64Data,
                                                                                 AesKey,
@@ -64,7 +65,7 @@ namespace ConsoleApp3
             RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
             PublicKey = rsa.ExportParameters(false);
             PrivateKey = rsa.ExportParameters(true);
-            AesKey = MyAes.GenerateIV();
+            AesKey = MyAes.GenerateKey();
             AesIV = MyAes.GenerateIV();
         }
         static byte[] EncryptByServerRSA(byte[] key)

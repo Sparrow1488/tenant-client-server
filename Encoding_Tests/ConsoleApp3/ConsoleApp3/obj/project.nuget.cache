@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "ZDdfJ0vHsvCiX1GAM5jC7762agSW8zPGrORaDIt7RHdla7stS8QBoCvOHUmILz4lpldK0kSKFpR4FZTcwLJrdQ==",
+  "dgSpecHash": "6rXEKFfctr363/KW9kh3+eoPl9lfJaRZy3cPwCLiTJMMhSuMJCpm++ZMG85Pb7FUtC8NUsgIthpRoVP25V+sag==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Dom\\source\\repos\\ConsoleApp3\\ConsoleApp3\\Client.csproj",
+  "projectFilePath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Encoding_Tests\\ConsoleApp3\\ConsoleApp3\\Client.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Dom\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
-    "C:\\Users\\Dom\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
-    "C:\\Users\\Dom\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512"
+    "C:\\Users\\DOM\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\DOM\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\DOM\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512"
   ],
   "logs": []
 }

@@ -17,8 +17,8 @@ namespace Server
         public static RSAParameters PublicClientKey { get; set; }
         public static RSAParameters PublicKey { get; set; }
         public static RSAParameters PrivateKey { get; set; }
-        public static byte[] AesKey { get; set; }
-        public static byte[] AesIV { get; set; }
+        //public static byte[] AesKey { get; set; }
+        //public static byte[] AesIV { get; set; }
         static void Main(string[] args)
         {
             TcpListener listener = new TcpListener(1090);
@@ -39,49 +39,44 @@ namespace Server
             byte[] publicRsa = Encoding.UTF32.GetBytes(xmlRsa);
             stream.Write(publicRsa, 0, publicRsa.Length);
 
-            while (!stream.DataAvailable) { }
-            byte[] key = new byte[2048];
-            stream.Read(key, 0, key.Length);
-            var rsa = Encoding.UTF32.GetString(key);
-            Console.WriteLine(rsa);
-            stream.Flush();
+            byte[] publicClientKey = ReadStreamData(stream, "PUBLIC KEY GET", 2048);
+            byte[] encKey  = ReadStreamData(stream, "AES KEY GET", 128);
+            byte[] encIV = ReadStreamData(stream, "AES IV GET", 128);
+            //byte[] encMainData = ReadStreamData(stream, "MAIN DATA GET", 49);
+            byte[] decAesKey = DecryptByRsa(encKey);
+            byte[] decAesIV = DecryptByRsa(encIV);
 
-            while (!stream.DataAvailable) { }
-            byte[] aesKey = new byte[128];
-            stream.Read(aesKey, 0, aesKey.Length);
-            Console.WriteLine("Aes Key: " + aesKey);
-            stream.Flush();
-
-            while (!stream.DataAvailable) { }
-            byte[] aesIV = new byte[128];
-            stream.Read(aesIV, 0, aesIV.Length);
-            Console.WriteLine("Aes IV: " + aesIV);
-            stream.Flush();
-
-            byte[] decAesKey = DecryptByRsa(aesKey);
-            byte[] decAesIV = DecryptByRsa(aesIV);
-
-            while (!stream.DataAvailable) { }
-            byte[] encryptMainData = new byte[500000];
-            stream.Read(encryptMainData, 0, encryptMainData.Length);
-            var base64Image = MyAes.Decrypt(encryptMainData, decAesKey, decAesIV);
-            byte[] imageBytes = Convert.FromBase64String(base64Image);
-            var image = Image.FromStream(new MemoryStream(imageBytes));
-            Console.WriteLine("image: " + image.Width);
-            stream.Flush();
-
+            string base64Image = string.Empty;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                stream.CopyTo(ms);
+                byte[] encDataBytes = ms.ToArray();
+                base64Image = MyAes.Decrypt(encDataBytes, decAesKey, decAesIV);
+            }
+            byte[] finalyDataBytes = Convert.FromBase64String(base64Image);
+            File.WriteAllBytes(@"C:\Users\DOM\Downloads\data.jpg", finalyDataBytes);
+            Console.WriteLine("DATA WRITE");
         }
         static void CreateKeys()
         {
             RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
             PublicKey = rsa.ExportParameters(false);
             PrivateKey = rsa.ExportParameters(true);
-            AesKey = MyAes.GenerateIV();
-            AesIV = MyAes.GenerateIV();
+            //AesKey = MyAes.GenerateKey();
+            //AesIV = MyAes.GenerateIV();
         }
         static byte[] DecryptByRsa(byte[] encKey)
         {
             return MyRSA.DecryptData(encKey, PrivateKey);
+        }
+        static byte[] ReadStreamData(NetworkStream stream, string consoleMessage, int bufferLenght)
+        {
+            while (!stream.DataAvailable) { } // Ждем когда сервер прочтет данные
+            byte[] buffer = new byte[bufferLenght];
+            stream.Read(buffer, 0, buffer.Length);
+            Console.WriteLine(consoleMessage);
+            stream.Flush();
+            return buffer;
         }
     }
 }

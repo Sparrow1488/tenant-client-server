@@ -204,6 +204,7 @@
     <Compile Include="Server\Packages\NewsDir\NewsCollection.cs" />
     <Compile Include="Server\Packages\NewsDir\RecieveNewsPackage.cs" />
     <Compile Include="Server\Packages\Package.cs" />
+    <Compile Include="Server\Packages\PackageInfo.cs" />
     <Compile Include="Server\Packages\PersonalDir\AuthorizationByTokenPackage.cs" />
     <Compile Include="Server\Packages\PersonalDir\AuthorizationPackage.cs" />
     <Compile Include="Server\Packages\PersonalDir\Person.cs" />

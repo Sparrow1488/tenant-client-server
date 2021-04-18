@@ -109,7 +109,7 @@ namespace MVVM_Pattern_Test.ViewModels
             Notice = "Вход в систему...";
             try
             {
-                AuthResult = await ServerFunctions.Authorization(inputData, true);
+                AuthResult = await ServerFunctions.AuthorizationAsync(inputData, true);
                 ShowAuthResult();
                 if (AuthResult)
                     GoToHomeWindow();

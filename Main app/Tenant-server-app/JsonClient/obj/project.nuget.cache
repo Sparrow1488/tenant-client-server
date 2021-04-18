@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "kgsythL+yY7S6O3+0epof0VOnJr/+oagNb/dt2Ci587cgSkqmIqomU+5wE0AO7zX8e9EQ+TSIGt9mm8mWC6WVA==",
+  "dgSpecHash": "CIzv8l5i4WssfmeGdfGLS5gviqLd3ovQMAru+df8JNWBZokKM0vePK/bKAExNPwzoWIBxA0LAXwwiSwbqXx8bQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Main app\\Tenant-server-app\\JsonClient\\JsonClient.csproj",
+  "projectFilePath": "C:\\Users\\Dom\\Desktop\\Репозитории\\tenant-client-server\\Main app\\Tenant-server-app\\JsonClient\\JsonClient.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\DOM\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+    "C:\\Users\\Dom\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],
   "logs": []
 }

@@ -28,20 +28,14 @@ namespace WpfApp1.Server.ServerMeta
         public Person ActiveUser = null;
         private ServerConfig ServerConfig = null;
         public string tokenFileName = "token-auth";
-        private Encoding ServerEncoding = Encoding.UTF32;
-        public string PublicRSAServerKey = "ПОЛУЧИ  ФАШИСТ ГРАНАТУ!!!!";
-        public string AESServerKey = "ПОЛУЧИ ФАШИСТ ГРАНАТУ!!!!";
-
-        public string PublicKey { get; private set; }
-        public string PrivateKey { get; private set; }
+        public Encoding ServerEncoding = Encoding.UTF32;
 
         public JumboServer(ServerConfig config)
         {
             ServerConfig = config;
             ActiveServer = this;
-            PublicRSAServerKey = File.ReadAllText("publicKey.txt");
         }
-        public async Task<bool> Authorization(Person dataPerson, bool saveToken)
+        public async Task<bool> AuthorizationAsync(Person dataPerson, bool saveToken)
         {
             var authPack = new AuthorizationPackage(dataPerson);
             var jsonResponse = await SendAndGetAsync(authPack);
@@ -96,35 +90,49 @@ namespace WpfApp1.Server.ServerMeta
         public async Task<string> SendAndGetAsync(Package package)
         {
             string jsonResponse = null;
+            RSACryptoServiceProvider src = new RSACryptoServiceProvider();
+            RSAParameters publicKey = src.ExportParameters(false);
+            RSAParameters privateKey = src.ExportParameters(true);
+            byte[] aesKey = MyAes.GenerateKey();
+            byte[] aesIV = MyAes.GenerateIV();
             try
             {
                 TcpClient client = new TcpClient(ServerConfig.HOST, ServerConfig.PORT);
-                var canSendRequest = await TrySendRequestAsync(package, client);
-                if (canSendRequest)
+                bool connected = await TryConnect(client);
+                if (connected)
                 {
-                    jsonResponse = await GetResponseAsync(client);
-                }
+                    var stream = client.GetStream();
+                    byte[] serverRsaData = await GetResponseAsync(stream); // GET RSA
+                    string xmlServerRsa = ActiveServer.ServerEncoding.GetString(serverRsaData);
+                    RSAParameters serverPublicRsa = MyRSA.StringToRsa(xmlServerRsa);
+
+                    string jsonPackage = JsonConvert.SerializeObject(package);
+                    byte[] encJsonPackage = MyAes.Encrypt(jsonPackage, aesKey, aesIV);
+
+                    string xmlPublicRsa = MyRSA.RsaToString(publicKey);
+                    var infoPackage = new PackageInfo(encJsonPackage.Length, xmlPublicRsa);
+                    string jsonDataInfo = JsonConvert.SerializeObject(infoPackage);
+                    byte[] packageInfoData = ActiveServer.ServerEncoding.GetBytes(jsonDataInfo);
+                    SendRequest(packageInfoData, stream); // INFO DATA
+                    SendRequest(MyRSA.EncryptData(aesKey, serverPublicRsa), stream); // AES KEY
+                    SendRequest(MyRSA.EncryptData(aesIV, serverPublicRsa), stream); // AES IV
+                    SendRequest(encJsonPackage, stream); // MAIN DATA
+
+                    var responseStream = client.GetStream();
+                    byte[] response = await GetResponseAsync(responseStream);
+                    string jsonRespofnse = ServerEncoding.GetString(response); //TODO: МЫ ОСТАНОВИЛИСЬ НА ЭТОМ
+                 }
             }
             catch (InvalidOperationException) { }
             return jsonResponse;
         }
 
-        private async Task<bool> TrySendRequestAsync(Package package, TcpClient client)
+        public void SendRequest(byte[] data, NetworkStream stream)
         {
-            bool isConnect = client.Connected;
-            if (!client.Connected)
-                isConnect = await TryConnect(client);
-            if (isConnect)
-                {
-                    NetworkStream stream = client.GetStream();
-                    string jsonPackage = JsonConvert.SerializeObject(package);
-                    byte[] data = ServerEncoding.GetBytes(jsonPackage);
-                    await stream.WriteAsync(data, 0, data.Length);
-                }
-                else throw new ConnectionException("Ошибка подключения к серверу");
-            return true;
+            while (stream.DataAvailable) { } // Ждем когда сервер прочтет данные
+            stream.Write(data, 0, data.Length);
         }
-        private async Task<bool> TryConnect(TcpClient client)
+        public async Task<bool> TryConnect(TcpClient client)
         {
             int connectCounter = 0;
             if (client.Connected)
@@ -159,31 +167,26 @@ namespace WpfApp1.Server.ServerMeta
             return token;
         }
 
-        private async Task<string> GetResponseAsync(TcpClient client)
+        public async Task<byte[]> GetResponseAsync(NetworkStream stream)
         {
-            StringBuilder response = new StringBuilder();
+            //StringBuilder response = new StringBuilder();
             byte[] getData = new byte[2048];
             bool breakConnection = false;
             try
             {
                 await Task.Run(() =>
                 {
-                    if (!client.Connected || client == null)
-                        throw new ConnectionException("Ошибка подключения к серверу");
-
-                    var serverStream = client.GetStream();
-                    ReadStreamData(serverStream, ref getData, ref response);
-                    serverStream.Close();
-                    client.Close();
+                    ReadStreamData(stream, ref getData);
                 });
             }
             catch (IOException) { breakConnection = true; }
             catch  { }
             if (breakConnection)
                 throw new GetResponseException("Удаленный хост принудительно разорвал существующее подключение");
-            return response.ToString();
+            //return response.ToString();
+            return getData;
         }
-        private void ReadStreamData(NetworkStream readStream, ref byte[] buffer, ref StringBuilder builder)
+        private void ReadStreamData(NetworkStream readStream, ref byte[] buffer)
         {
             try
             {
@@ -191,8 +194,7 @@ namespace WpfApp1.Server.ServerMeta
                 {
                     do
                     {
-                        int bytesSize = readStream.Read(buffer, 0, buffer.Length);
-                        builder.Append(ServerEncoding.GetString(buffer, 0, bytesSize));
+                        readStream.Read(buffer, 0, buffer.Length);
                     }
                     while (readStream.DataAvailable);
                 }

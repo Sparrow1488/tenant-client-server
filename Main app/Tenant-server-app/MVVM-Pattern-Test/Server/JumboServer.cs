@@ -90,11 +90,6 @@ namespace WpfApp1.Server.ServerMeta
         public async Task<string> SendAndGetAsync(Package package)
         {
             string jsonResponse = null;
-            RSACryptoServiceProvider src = new RSACryptoServiceProvider();
-            RSAParameters publicKey = src.ExportParameters(false);
-            RSAParameters privateKey = src.ExportParameters(true);
-            byte[] aesKey = MyAes.GenerateKey();
-            byte[] aesIV = MyAes.GenerateIV();
             try
             {
                 TcpClient client = new TcpClient(ServerConfig.HOST, ServerConfig.PORT);
@@ -102,25 +97,10 @@ namespace WpfApp1.Server.ServerMeta
                 if (connected)
                 {
                     var stream = client.GetStream();
-                    byte[] serverRsaData = await GetResponseAsync(stream); // GET RSA
-                    string xmlServerRsa = ActiveServer.ServerEncoding.GetString(serverRsaData);
-                    RSAParameters serverPublicRsa = MyRSA.StringToRsa(xmlServerRsa);
-
                     string jsonPackage = JsonConvert.SerializeObject(package);
-                    byte[] encJsonPackage = MyAes.Encrypt(jsonPackage, aesKey, aesIV);
-
-                    string xmlPublicRsa = MyRSA.RsaToString(publicKey);
-                    var infoPackage = new PackageInfo(encJsonPackage.Length, xmlPublicRsa);
-                    string jsonDataInfo = JsonConvert.SerializeObject(infoPackage);
-                    byte[] packageInfoData = ActiveServer.ServerEncoding.GetBytes(jsonDataInfo);
-                    SendRequest(packageInfoData, stream); // INFO DATA
-                    SendRequest(MyRSA.EncryptData(aesKey, serverPublicRsa), stream); // AES KEY
-                    SendRequest(MyRSA.EncryptData(aesIV, serverPublicRsa), stream); // AES IV
-                    SendRequest(encJsonPackage, stream); // MAIN DATA
-
-                    var responseStream = client.GetStream();
-                    byte[] response = await GetResponseAsync(responseStream);
-                    string jsonRespofnse = ServerEncoding.GetString(response); //TODO: МЫ ОСТАНОВИЛИСЬ НА ЭТОМ
+                    byte[] data = ServerEncoding.GetBytes(jsonPackage);
+                    await stream.WriteAsync(data, 0, data.Length);
+                    jsonResponse = await GetResponseAsync(stream);
                  }
             }
             catch (InvalidOperationException) { }
@@ -167,39 +147,41 @@ namespace WpfApp1.Server.ServerMeta
             return token;
         }
 
-        public async Task<byte[]> GetResponseAsync(NetworkStream stream)
+        public async Task<string> GetResponseAsync(NetworkStream stream)
         {
-            //StringBuilder response = new StringBuilder();
+            StringBuilder response = new StringBuilder();
             byte[] getData = new byte[2048];
             bool breakConnection = false;
             try
             {
                 await Task.Run(() =>
                 {
-                    ReadStreamData(stream, ref getData);
+                    response = ReadStreamData(stream, ref getData);
                 });
             }
             catch (IOException) { breakConnection = true; }
             catch  { }
             if (breakConnection)
                 throw new GetResponseException("Удаленный хост принудительно разорвал существующее подключение");
-            //return response.ToString();
-            return getData;
+            return response.ToString();
         }
-        private void ReadStreamData(NetworkStream readStream, ref byte[] buffer)
+        private StringBuilder ReadStreamData(NetworkStream readStream, ref byte[] buffer)
         {
+            StringBuilder builder = new StringBuilder();
             try
             {
                 if (readStream.CanRead)
                 {
                     do
                     {
-                        readStream.Read(buffer, 0, buffer.Length);
+                        int bytesSize = readStream.Read(buffer, 0, buffer.Length);
+                        builder.Append(ServerEncoding.GetString(buffer, 0, bytesSize));
                     }
                     while (readStream.DataAvailable);
                 }
             }
             catch (IOException) { }
+            return builder;
         }
 
         public async Task<string> SendLetter(Letter letter)

@@ -42,7 +42,8 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
             get { return _selectedLetter; }
             set 
             { 
-                _selectedLetter = value; ReadLetterPage = new ReadLetterPage(SelectedLetter);
+                _selectedLetter = value; 
+                ReadLetterPage = new ReadLetterPage(SelectedLetter);
                 ResponseReader = new ReplyReaderPage(SelectedLetter.Id);
                 OnPropertyChanged();
             }

@@ -66,14 +66,19 @@
                                 </Border.Effect>
                                 <StackPanel>
                                     <WrapPanel Margin="5,0">
-                                        <Image Width="50" Source="/refs/images/infoLetterIMG_1.jpg" />
+                                        <Image Width="35" Source="/refs/icons/profileIcon.png" />
                                         <TextBlock
-                                            Margin="10,0"
+                                            Margin="10,0,5,0"
+                                            VerticalAlignment="Center"
+                                            FontSize="18"
+                                            Text="Author:" />
+                                        <TextBlock
+                                            Margin="0,0,10,0"
                                             VerticalAlignment="Center"
                                             FontSize="18"
                                             Text="{Binding ReadNews.Sender}" />
                                         <TextBlock
-                                            Margin="10,0"
+                                            Margin="0"
                                             VerticalAlignment="Center"
                                             FontSize="18"
                                             Text="-" />
@@ -99,7 +104,10 @@
                                         IsReadOnly="True"
                                         Text="{Binding ReadNews.Description}"
                                         TextWrapping="Wrap" />
-                                    <Frame Content="{Binding AttachmentsPage}" NavigationUIVisibility="Hidden" Margin="0 20 0 0"/>
+                                    <Frame
+                                        Margin="0,20,0,0"
+                                        Content="{Binding AttachmentsPage}"
+                                        NavigationUIVisibility="Hidden" />
                                 </StackPanel>
                             </Border>
                         </DataTemplate>

@@ -304,6 +304,7 @@
     <Resource Include="refs\icons\Settings\settings-color.png" />
     <Resource Include="apartment.ico" />
     <Resource Include="refs\icons\list.png" />
+    <Resource Include="refs\icons\exit.png" />
     <Content Include="refs\TestIMG-1.jfif" />
   </ItemGroup>
   <ItemGroup>

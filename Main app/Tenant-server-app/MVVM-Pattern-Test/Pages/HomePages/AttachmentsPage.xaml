@@ -47,28 +47,18 @@
                 <ItemsControl ItemsSource="{Binding ImageSources}" TextOptions.TextFormattingMode="Display">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical" />
+                            <StackPanel Orientation="Horizontal" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel Orientation="Horizontal">
                                 <WrapPanel.ToolTip>
-                                    <StackPanel>
-                                        <Image Width="250" Source="{Binding}" />
-                                        <TextBlock
-                                            FontSize="18"
-                                            Text="Вложения найме"
-                                            TextWrapping="Wrap" />
-                                    </StackPanel>
+                                    <Image Width="300" Source="{Binding}" />
                                 </WrapPanel.ToolTip>
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    FontSize="18"
-                                    Text="Вложения name" />
                                 <Image
                                     x:Name="attachedImage"
-                                    Height="50"
+                                    Height="100"
                                     MouseEnter="attachedImage_MouseEnter"
                                     MouseLeave="attachedImage_MouseLeave"
                                     MouseLeftButtonDown="attachedImage_MouseLeftButtonDown"

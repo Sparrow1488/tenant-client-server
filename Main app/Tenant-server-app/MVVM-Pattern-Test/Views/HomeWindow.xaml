@@ -321,6 +321,35 @@
                 </Grid>
             </Button>
 
+
+            <Button
+                HorizontalContentAlignment="Left"
+                Command="{Binding ShowSettingsPage}"
+                Style="{StaticResource leftMenuBtn}" Click="ExitBtn_Click">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Grid.Column="0"
+                            Source="/refs\icons\exit.png"
+                            Style="{StaticResource iconLeftMenu}">
+                            <Image.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="-10"
+                                    Opacity="0.2"
+                                    RenderingBias="Quality"
+                                    ShadowDepth="2" />
+                            </Image.Effect>
+                        </Image>
+                        <TextBlock Text="Выход" />
+                    </StackPanel>
+                </Grid>
+            </Button>
+
         </StackPanel>
 
 

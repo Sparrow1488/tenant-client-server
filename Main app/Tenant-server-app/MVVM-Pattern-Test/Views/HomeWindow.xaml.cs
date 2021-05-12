@@ -1,19 +1,9 @@
 ﻿using MVVM_Pattern_Test.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using WpfApp1.Server.ServerMeta;
 
 namespace MVVM_Pattern_Test.Views
@@ -63,6 +53,16 @@ namespace MVVM_Pattern_Test.Views
         {
             var button = (ToggleButton)sender;
             button.Content = newName;
+        }
+
+        private void ExitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string tokenPath = "./token-auth.txt";
+            if (File.Exists(tokenPath))
+            {
+                File.Delete("./token-auth.txt");
+            }
+            Close();
         }
     }
 }

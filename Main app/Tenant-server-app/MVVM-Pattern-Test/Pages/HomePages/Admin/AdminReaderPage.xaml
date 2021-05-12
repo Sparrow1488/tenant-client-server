@@ -58,11 +58,6 @@
                                 <TextBlock
                                     Margin="5,0,5,0"
                                     FontSize="12"
-                                    Text="{Binding Path=LetterType}"
-                                    TextWrapping="Wrap" />
-                                <TextBlock
-                                    Margin="5,0,5,0"
-                                    FontSize="12"
                                     Text="{Binding Path=SenderLogin}"
                                     TextWrapping="Wrap" />
                             </StackPanel>

@@ -66,10 +66,6 @@
                     <TextBlock Text="Квартира: " />
                     <TextBlock Text="{Binding AuthUser.Room}" />
                 </WrapPanel>
-                <WrapPanel Style="{StaticResource textBlockStyle}">
-                    <TextBlock Text="Телефон: " />
-                    <TextBlock Text="{Binding AuthUser}" />
-                </WrapPanel>
                 <Button
                     Content="Редактировать профиль"
                     FontSize="24"

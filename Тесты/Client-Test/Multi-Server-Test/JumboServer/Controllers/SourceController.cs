@@ -8,12 +8,11 @@ namespace JumboServer.Controllers
 {
     public class SourceController : Controller
     {
-        public SourceController(string name, List<Model> controllerModel) : base(name, controllerModel) { }
+        public override string ControllerName => "Source";
 
-        public override void ExecuteRouting(string requestCommand, ref Package package, ref TcpClient sender)
+        public override void Execute(string requestCommand, Package package, TcpClient sender)
         {
-            var view = new DefaultAPI_View(ref sender);
-            CompleteDefaultControllerProcessing(requestCommand, package, view);
+
         }
     }
 }

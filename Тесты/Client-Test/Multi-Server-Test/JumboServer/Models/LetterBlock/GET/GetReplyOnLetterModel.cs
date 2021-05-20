@@ -7,13 +7,12 @@ using JumboServer.API;
 
 namespace JumboServer.Models.LetterBlock.GET
 {
-    public class GetReplyOnLetterModel : Model
+    public class GetReplyOnLetterModel
     {
         private ServerReportsModule serverEvents = new ServerReportsModule();
         private ServerFunctions serverFunctions = new ServerFunctions();
-        public GetReplyOnLetterModel(string modelAction, bool forOnlyAdmin) : base(modelAction, forOnlyAdmin) { }
 
-        public override byte[] CompleteAction(object reqObject)
+        public byte[] CompleteAction(object reqObject)
         {
             byte[] response = ServerMeta.Encoding.GetBytes("Неизвестная ошибка");
             try
@@ -22,7 +21,6 @@ namespace JumboServer.Models.LetterBlock.GET
                 var replyes = serverFunctions.GetReplyByLetterId(getLetter.Id);
                 if (replyes != null)
                 {
-                    serverEvents.BlockReport(this, "Ответы на письма получены", ConsoleColor.Green);
                     var replyJson = JsonConvert.SerializeObject(replyes);
                     response = ServerMeta.Encoding.GetBytes(replyJson);
                 }
@@ -31,7 +29,6 @@ namespace JumboServer.Models.LetterBlock.GET
             catch (Exception)
             {
                 var exMessage = "Неизвестная ошибка";
-                serverEvents.BlockReport(this, exMessage, ConsoleColor.Red);
                 return ServerMeta.Encoding.GetBytes(exMessage);
             }
         }

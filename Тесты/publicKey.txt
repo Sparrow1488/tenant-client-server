@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<RSAParameters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Exponent>AQAB</Exponent>
-  <Modulus>21xoT96zVh61sHY1+DJKzP8f3Nh1htne9sApEnqHnoiNAEaXzt2NMqiLz7Hd/j+6NpmKDpxrE1P/LK6AWhL9FX5wf5iwoKM8rsWrdQuacCMF3TqS+VM0Sy88Lwf2c1d/1FpkpB5w9th1w7NGCCPi3qknTn7fhEJG5OqmgedvXVE91zGqWQPByUIHuM8NkdRo+dcMUvkAVRZdnInGLiRMTTkHgXK++TK8aZJKZt9ARAELTUCIg8UY0n6pQDJklTdnkTQ8CdiRV5+teo8fQh4QnYmMgtRAc4ZlCSv3x2I2806b7m/34eYxyPoDnWGMt3byZ+GFbGPz61jPLAu4LeUCoQ==</Modulus>
-</RSAParameters>

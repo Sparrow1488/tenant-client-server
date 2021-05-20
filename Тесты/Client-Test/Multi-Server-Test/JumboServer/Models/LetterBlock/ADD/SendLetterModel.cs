@@ -6,18 +6,17 @@ using System;
 
 namespace JumboServer.Models.LetterBlock.ADD
 {
-    public class SendLetterModel : Model
+    public class SendLetterModel
     {
         private ServerReportsModule serverEvents = new ServerReportsModule();
         private ServerFunctions serverFunctions = new ServerFunctions();
-        public SendLetterModel(string modelAction, bool forOnlyAdmin) : base(modelAction, forOnlyAdmin) { }
-        public override byte[] CompleteAction(object reqObject)
+
+        public byte[] CompleteAction(object reqObject)
         {
             byte[] response = ServerMeta.Encoding.GetBytes("-1");
             try
             {
                 var getLetter = JsonConvert.DeserializeObject<Letter>(reqObject.ToString());
-                serverEvents.BlockReport(this, "Письмо успешно получено", ConsoleColor.Yellow);
                 Console.WriteLine(getLetter);
 
                 bool canInsertInDB = CheckValidation(getLetter);
@@ -28,13 +27,11 @@ namespace JumboServer.Models.LetterBlock.ADD
                     getLetter.SourcesTokens = existTokens;
 
                     int successInsert = serverFunctions.AddLetterInDB(getLetter);
-                    serverEvents.BlockReport(this, "Успешно добавлено писем: " + successInsert, ConsoleColor.Green);
                     MyServer.AddLetterInLocalStorage(getLetter);
                     response = ServerMeta.Encoding.GetBytes("1");
                 }
                 else
                 {
-                    serverEvents.BlockReport(this, "Ошибка валидации полученного письма: не добавлено в БД", ConsoleColor.Yellow);
                     response = ServerMeta.Encoding.GetBytes("0");
                 }
                 
@@ -42,7 +39,7 @@ namespace JumboServer.Models.LetterBlock.ADD
             }
             catch (Exception)
             {
-                serverEvents.BlockReport(this, "Неизвестная ошибка", ConsoleColor.Red);
+                serverEvents.BlockReport("SendLetters", "Неизвестная ошибка", ConsoleColor.Red);
                 return ServerMeta.Encoding.GetBytes("-1");
             }
         }

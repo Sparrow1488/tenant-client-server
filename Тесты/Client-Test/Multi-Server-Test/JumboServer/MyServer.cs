@@ -2,14 +2,6 @@
 using JumboServer.Controllers;
 using JumboServer.Functions;
 using JumboServer.Meta;
-using JumboServer.Models;
-using JumboServer.Models.Authorization;
-using JumboServer.Models.LetterBlock.ADD;
-using JumboServer.Models.LetterBlock.GET;
-using JumboServer.Models.NewsBlock.ADD;
-using JumboServer.Models.NewsBlock.GET;
-using JumboServer.Models.SourceBlock.ADD;
-using JumboServer.Models.SourceBlock.GET;
 using JumboServer.Packages;
 using Newtonsoft.Json;
 using System;
@@ -47,7 +39,7 @@ namespace JumboServer
 
         public TcpListener Listener = null;
         public static ServerMeta Meta = null;
-        public MainRouter MainRouter;
+        public Router MainRouter;
         #endregion
 
         #region LocalStorage
@@ -69,32 +61,24 @@ namespace JumboServer
         #endregion
 
         #region ServerMethods
-        public async void Start()
+        public async Task StartAsync()
         {
             Listener.Start();
-            #region SynchUsers
+            await SynchUsers();
+            await SynchLetters();
+            await SynchNews();
 
+            MainRouter = new Router();
+            modulEvents.BlockReport(this, "Server started!", ConsoleColor.Green);
+        }
+        private async Task SynchUsers()
+        {
             var allUsersOutDB = functions.GetAllUsersOutDB();
             allUsers = await synchronizator.SynchronizeCollection(allUsersOutDB, Meta.reservePath, Meta.reserveUsersTxt);
             Console.WriteLine("Пользователей синхронизированно: " + allUsers.Count);
-
-            #endregion
-
-            #region SynchNews
-
-            if (allUsers != null)
-            {
-                var allNewsOutDB = functions.GetAllNewsOutDB();
-                allNews = await synchronizator.SynchronizeCollection(allNewsOutDB, Meta.reservePath, Meta.reserveNewsCollectionTxt);
-                Console.WriteLine("Новостей синхронизированно: " + allNews.Count);
-            }
-            else
-                modulEvents.BlockReport(this, "Новости не могут быть получены, тк таблица с пользователями пуста", ConsoleColor.Red);
-
-            #endregion
-
-            #region SynchLetters
-
+        }
+        private async Task SynchLetters()
+        {
             if (allUsers != null)
             {
                 var allLettersOutDB = functions.GetAllLettersOutDB();
@@ -103,13 +87,19 @@ namespace JumboServer
             }
             else
                 modulEvents.BlockReport(this, "Письма не могут быть получены, поскольку таблица с отправителями пуста!", ConsoleColor.Red);
-
-            #endregion
-
-            MainRouter = CreateDefaultMVC();
-            modulEvents.BlockReport(this, "Server started!", ConsoleColor.Green);
         }
-        public void ServeAndResponseToClient()
+        private async Task SynchNews()
+        {
+            if (allUsers != null)
+            {
+                var allNewsOutDB = functions.GetAllNewsOutDB();
+                allNews = await synchronizator.SynchronizeCollection(allNewsOutDB, Meta.reservePath, Meta.reserveNewsCollectionTxt);
+                Console.WriteLine("Новостей синхронизированно: " + allNews.Count);
+            }
+            else
+                modulEvents.BlockReport(this, "Новости не могут быть получены, тк таблица с пользователями пуста", ConsoleColor.Red);
+        }
+        public void ProcessingClients()
         {
             while (true)
             {
@@ -123,11 +113,11 @@ namespace JumboServer
             var connectedClient = tcpClient as TcpClient;
             if (connectedClient.Connected)
             {
-                modulEvents.BlockReport(this, "Client connect", ConsoleColor.Green);
+                modulEvents.BlockReport(this, "Client was connected", ConsoleColor.Green);
                 var clientStream = connectedClient.GetStream();
                 string  receivedJsonPackage = GetDataFromStream(clientStream);
                 if (!string.IsNullOrWhiteSpace(receivedJsonPackage))
-                    RecieveAndRouting(receivedJsonPackage, ref connectedClient);
+                    RecieveAndRouting(receivedJsonPackage, connectedClient);
                 else
                     modulEvents.BlockReport(this, "Data package can not be recieved!", ConsoleColor.Red);
             }
@@ -173,59 +163,7 @@ namespace JumboServer
             noSynchLetters.Add(letter);
         }
 
-        private MainRouter CreateDefaultMVC()
-        {
-            #region CreatingModels
-
-            #region Letters
-            var letterModels = new List<Model>()
-            {
-                new SendLetterModel("send", false),
-                new GetAllLettersModel("get-all", true),
-                new LettersReplyModel("reply", true),
-                new GetReplyOnLetterModel("get-reply", false),
-                new GetMyLettersModel("get-my", false)
-            };
-            #endregion 
-
-            #region Users
-            var userModels = new List<Model>()
-            {
-                new AuthorizationModel("auth", false),
-                new AuthorizationForTokenModel("auth-token", false)
-            };
-            #endregion
-
-            #region News
-            var newsModels = new List<Model>()
-            {
-                new GetNewsCollectionModel("get", false),
-                new AddNewsModel("add", true)
-            };
-            #endregion
-
-            #region Source
-            var sourceModels = new List<Model>()
-            {
-                new AddSourceModel("add", false),
-                new GetSourceModel("get-token", false)
-            };
-            #endregion
-
-            #endregion
-
-            var createdControllers = new List<Controller>()
-            {
-                new UserController("User", userModels),
-                new NewsController("News", newsModels),
-                new LettersController("Letter", letterModels),
-                new SourceController("Source", sourceModels)
-            };
-
-            return new MainRouter(createdControllers);
-        }
-
-        private void RecieveAndRouting(string serializeDataPackage, ref TcpClient connectedClient)
+        private void RecieveAndRouting(string serializeDataPackage, TcpClient connectedClient)
         {
             var getPackage = JsonConvert.DeserializeObject<Package>(serializeDataPackage.ToString());
             Console.WriteLine(getPackage.SendingMeta);

@@ -16,8 +16,6 @@ using System.Linq;
 using Chairman_Client.Server.Packages.LettersDir;
 using WpfApp1.Server.Packages.SourceDir;
 using System.Security.Cryptography;
-using AesEncryptor;
-using RSAEncrypter;
 using MVVM_Pattern_Test.Server.Packages;
 
 namespace WpfApp1.Server.ServerMeta

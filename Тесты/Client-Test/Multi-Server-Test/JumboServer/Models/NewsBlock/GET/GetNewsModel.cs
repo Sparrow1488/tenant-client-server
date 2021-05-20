@@ -8,12 +8,9 @@ using JumboServer.API;
 
 namespace JumboServer.Models.NewsBlock.GET
 {
-    public class GetNewsCollectionModel : Model
+    public class GetNewsModel
     {
-        //private ServerModulEvents serverEvents = new ServerModulEvents();
-        public GetNewsCollectionModel(string modelAction, bool forOnlyAdmin) : base(modelAction, forOnlyAdmin) { }
-
-        public override byte[] CompleteAction(object reqObject)
+        public byte[] CompleteAction(object reqObject)
         {
             List<News> responseNewsCollection = new List<News>();
             responseNewsCollection = MyServer.allNews.OrderByDescending(news => news.DateTime).ToList();

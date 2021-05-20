@@ -12,12 +12,7 @@ namespace JumboServer.Functions
         {
             WriteOnConsole(message, color);
         }
-        public void BlockReport(Model model, string message, ConsoleColor color)
-        {
-            Console.Write(model.Action + "> ");
-            WriteOnConsole(message, color);
-        }
-        public void BlockReport(ViewModule module, string message, ConsoleColor color)
+        public void BlockReport(View module, string message, ConsoleColor color)
         {
             Console.Write(module.ViewName + "> ");
             WriteOnConsole(message, color);

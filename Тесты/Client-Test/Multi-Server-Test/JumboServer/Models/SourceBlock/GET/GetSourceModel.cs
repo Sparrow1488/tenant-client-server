@@ -6,13 +6,12 @@ using JumboServer.Functions;
 
 namespace JumboServer.Models.SourceBlock.GET
 {
-    public class GetSourceModel : Model
+    public class GetSourceModel
     {
         private ServerReportsModule serverEvents = new ServerReportsModule();
         private ServerFunctions serverFunctions = new ServerFunctions();
-        public GetSourceModel(string modelAction, bool forOnlyAdmin) : base(modelAction, forOnlyAdmin) { }
 
-        public override byte[] CompleteAction(object reqObject)
+        public byte[] CompleteAction(object reqObject)
         {
             byte[] response = ServerMeta.Encoding.GetBytes("Неизвестная ошибка");
             try
@@ -21,7 +20,6 @@ namespace JumboServer.Models.SourceBlock.GET
                 var source = serverFunctions.GetSourceByTokenOutDB(tokenRequest);
                 if(source != null)
                 {
-                    serverEvents.BlockReport(this, "Получен контент", ConsoleColor.Yellow);
                     response = ServerMeta.Encoding.GetBytes(JsonConvert.SerializeObject(source));
                 }
                 return response;
@@ -29,7 +27,7 @@ namespace JumboServer.Models.SourceBlock.GET
             catch (Exception)
             {
                 var exMessage = "Неизвестная ошибка";
-                serverEvents.BlockReport(this, exMessage, ConsoleColor.Red);
+                serverEvents.BlockReport("GetSource", exMessage, ConsoleColor.Red);
                 return ServerMeta.Encoding.GetBytes(exMessage);
             }
         }

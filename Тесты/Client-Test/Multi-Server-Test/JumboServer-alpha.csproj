@@ -14,19 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FireSharp" Version="2.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="AesEncryptor">
-      <HintPath>..\..\AesEncryptor.dll</HintPath>
-    </Reference>
-    <Reference Include="RSAEncrypter">
-      <HintPath>..\..\RSAEncrypter.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

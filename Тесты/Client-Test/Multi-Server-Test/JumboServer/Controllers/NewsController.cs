@@ -1,18 +1,15 @@
-﻿using JumboServer.Models;
-using JumboServer.Packages;
-using JumboServer.Views;
-using System.Collections.Generic;
+﻿using JumboServer.Packages;
 using System.Net.Sockets;
 
 namespace JumboServer.Controllers
 {
     public class NewsController : Controller
     {
-        public NewsController(string name, List<Model> controllerModel) : base(name, controllerModel) { }
-        public override void ExecuteRouting(string requestCommand, ref Package package, ref TcpClient sender)
+        public override string ControllerName => "News";
+
+        public override void Execute(string requestCommand, Package package, TcpClient sender)
         {
-            var view = new DefaultAPI_View(ref sender);
-            CompleteDefaultControllerProcessing(requestCommand, package, view);
+
         }
     }
 }

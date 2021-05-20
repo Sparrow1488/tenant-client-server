@@ -59,17 +59,6 @@ namespace JumboServer.Functions
                 return null;
             }
         }
-        //public T TryDeserialuze<T>(string json)
-        //{
-        //    T concreteObj;
-        //    try
-        //    {
-        //        concreteObj = JsonConvert.DeserializeObject<T>(json);
-        //        return concreteObj;
-        //    }
-        //    catch { }
-        //    return concreteObj;
-        //}
         public List<Letter> GetAllLettersOutDB()
         {
             var selectLetters = new List<Letter>();

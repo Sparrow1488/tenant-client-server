@@ -6,13 +6,12 @@ using System;
 
 namespace JumboServer.Models.NewsBlock.ADD
 {
-    public class AddNewsModel : Model
+    public class AddNewsModel
     {
         private ServerReportsModule serverEvents = new ServerReportsModule();
         private ServerFunctions serverFunctions = new ServerFunctions();
-        public AddNewsModel(string modelAction, bool forOnlyAdmin) : base(modelAction, forOnlyAdmin) { }
 
-        public override byte[] CompleteAction(object reqObject)
+        public byte[] CompleteAction(object reqObject)
         {
             string responseMessage = "-1";
             var jsonNews = JsonConvert.SerializeObject(reqObject);
@@ -28,18 +27,14 @@ namespace JumboServer.Models.NewsBlock.ADD
                     MyServer.allNews.Add(newsForInsert);
                     MyServer.noSynchNews.Add(newsForInsert);
 
-                    serverEvents.BlockReport(this, "Успешно выполнено запросов: " + success, ConsoleColor.Green);
                     responseMessage = "1";
                 }
                 else
-                {
-                    serverEvents.BlockReport(this, "Выполнено запросов: " + success, ConsoleColor.Red);
                     responseMessage = "-1";
-                }
             }
             else
             {
-                serverEvents.BlockReport(this, "Ошибка публикации: не пройдено валидацию\nУказания: возможно, текст слишком мал для публикации", ConsoleColor.Yellow);
+                serverEvents.BlockReport("AddNews", "Ошибка публикации: не пройдено валидацию\nУказания: возможно, текст слишком мал для публикации", ConsoleColor.Yellow);
                 responseMessage = "0";
             }
 

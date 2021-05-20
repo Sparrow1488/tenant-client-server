@@ -9,12 +9,13 @@ using JumboServer.API;
 
 namespace JumboServer.Models.Authorization
 {
-    public class AuthorizationModel : Model
+    public class AuthorizationModel
     {
-        public AuthorizationModel(string modelAction, bool forOnlyAdmin) : base(modelAction, forOnlyAdmin) { }
         private ServerReportsModule serverEvents = new ServerReportsModule();
         private ServerFunctions serverFunctions = new ServerFunctions();
-        public override byte[] CompleteAction(object reqObj)
+
+
+        public byte[] CompleteAction(object reqObj)
         {
             try
             {
@@ -29,20 +30,18 @@ namespace JumboServer.Models.Authorization
 
                     var jsonResponsePerson = JsonConvert.SerializeObject(authorizatePerson);
                     byte[] response = ServerMeta.Encoding.GetBytes(jsonResponsePerson);
-                    serverEvents.BlockReport(this, "Успешный вход", ConsoleColor.Green);
                     return response;
                 }
                 else
                 {
                     byte[] response = ServerMeta.Encoding.GetBytes("Не найдено ни одного совпадения");
-                    serverEvents.BlockReport(this, "Ошибка авторизации. Неверный пароль", ConsoleColor.Red);
                     return response;
                 }
             }
             catch (NullReferenceException)
             {
                 byte[] response = ServerMeta.Encoding.GetBytes("Ошибка авторизации");
-                serverEvents.BlockReport(this, "Пользователь не найден в базе данных", ConsoleColor.Red);
+                serverEvents.BlockReport("Auth", "Пользователь не найден в базе данных", ConsoleColor.Red);
                 return response;
             }
         }

@@ -9,13 +9,12 @@ using System.Linq;
 
 namespace JumboServer.Models.LetterBlock.GET
 {
-    public class GetMyLettersModel : Model
+    public class GetMyLettersModel
     {
         private ServerReportsModule serverEvents = new ServerReportsModule();
         private ServerFunctions serverFunctions = new ServerFunctions();
-        public GetMyLettersModel(string modelAction, bool forOnlyAdmin) : base(modelAction, forOnlyAdmin) { }
 
-        public override byte[] CompleteAction(object reqObject)
+        public byte[] CompleteAction(object reqObject)
         {
             var sortUserLetters = new List<Letter>();
             byte[] response = ServerMeta.Encoding.GetBytes("Неизвестная ошибка");
@@ -32,7 +31,7 @@ namespace JumboServer.Models.LetterBlock.GET
             catch (Exception)
             {
                 var exMessage = "Неизвестная ошибка";
-                serverEvents.BlockReport(this, exMessage, ConsoleColor.Red);
+                serverEvents.BlockReport("GetMyNews", exMessage, ConsoleColor.Red);
                 return ServerMeta.Encoding.GetBytes(exMessage);
             }
         }

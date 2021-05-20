@@ -9,18 +9,16 @@ using System.Linq;
 
 namespace JumboServer.Models.LetterBlock.GET
 {
-    public class GetAllLettersModel : Model
+    public class GetAllLettersModel
     {
         private ServerReportsModule serverEvents = new ServerReportsModule();
         private ServerFunctions serverFunctions = new ServerFunctions();
-        public GetAllLettersModel(string modelAction, bool forOnlyAdmin) : base(modelAction, forOnlyAdmin) { }
 
-        public override byte[] CompleteAction(object reqObject)
+        public byte[] CompleteAction(object reqObject)
         {
             try
             {
                 byte[] response;
-                serverEvents.BlockReport(this, "Запрос на получение новостей", ConsoleColor.Green);
                 List<Letter> lettersOutDB = serverFunctions.GetAllLettersOutDB();
 
                 if (lettersOutDB == null)

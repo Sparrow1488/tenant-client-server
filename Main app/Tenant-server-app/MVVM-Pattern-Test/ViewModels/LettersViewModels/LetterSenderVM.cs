@@ -1,15 +1,8 @@
-﻿using Microsoft.Win32;
+﻿using ExchangeSystem.Requests.Objects.Entities;
 using MVVM_Pattern_Test.Commands;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using WpfApp1.Server.Packages.Letters;
-using WpfApp1.Server.Packages.SourceDir;
-using WpfApp1.Server.ServerExceptions;
-using WpfApp1.Server.ServerMeta;
-using System.Collections.ObjectModel;
 using MVVM_Pattern_Test.MyApplication;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
 {
@@ -58,33 +51,33 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
                 return new MyCommand(async (obj) =>
                 {
                     string result = string.Empty;
-                    try
-                    {
-                        var tokensCollection = new List<string>(AttachmentsTokens);
-                        Letter sendLetter = null;
-                        if (AttachmentsTokens == null)
-                            sendLetter = new Letter(Title, Description, JumboServer.ActiveServer.ActiveUser.Id, 0);
-                        else sendLetter = new Letter(Title, Description, JumboServer.ActiveServer.ActiveUser.Id, tokensCollection.ToArray(), 0);
-                        
-                        var letterSender = JumboServer.ActiveServer.ActiveUser.Login;
-                        result = await TrySendLetter(sendLetter);
-                        if (result == "1")
-                        {
-                            Title = "";
-                            Description = "";
-                            AttachmentsTokens = new List<string>();
-                            Notice = "Письмо успешно доставлено";
-                        }
-                        else
-                        {
-                            Notice = "Возникла ошибка при получении письма";
-                        }
-                    }
-                    catch (JumboServerException ex)
-                    {
-                        Notice = ex.Message;
-                    }
-                }, (obj) => AttachWasAttached);
+                    //try
+                    //{
+                        //    var tokensCollection = new List<string>(AttachmentsTokens);
+                        //    Letter sendLetter = null;
+                        //    if (AttachmentsTokens == null)
+                        //        sendLetter = new Letter(Title, Description, JumboServer.ActiveServer.ActiveUser.Id, 0);
+                        //    else sendLetter = new Letter(Title, Description, JumboServer.ActiveServer.ActiveUser.Id, tokensCollection.ToArray(), 0);
+
+                        //    var letterSender = JumboServer.ActiveServer.ActiveUser.Login;
+                        //    result = await TrySendLetter(sendLetter);
+                        //    if (result == "1")
+                        //    {
+                        //        Title = "";
+                        //        Description = "";
+                        //        AttachmentsTokens = new List<string>();
+                        //        Notice = "Письмо успешно доставлено";
+                        //    }
+                        //    else
+                        //    {
+                        //        Notice = "Возникла ошибка при получении письма";
+                        //    }
+                        //}
+                        //catch (JumboServerException ex)
+                        //{
+                        //    Notice = ex.Message;
+                    //}
+                });
             }
         }
         public MyCommand AttachFile
@@ -93,27 +86,27 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
             {
                 return new MyCommand(async (obj) =>
                 {
-                    string base64Data = string.Empty;
-                    string fileExtension = string.Empty;
-                    funcs.OpenFile(out base64Data, out fileExtension);
-                    if (!string.IsNullOrWhiteSpace(base64Data))
-                    {
-                        var newSource = new Source(base64Data, JumboServer.ActiveServer.ActiveUser.Id, fileExtension);
-                        Notice = "Загрузка...";
-                        AttachWasAttached = false;
-                        var sourceToken = await JumboServer.ActiveServer.AddSource(newSource);
+                    //string base64Data = string.Empty;
+                    //string fileExtension = string.Empty;
+                    //funcs.OpenFile(out base64Data, out fileExtension);
+                    //if (!string.IsNullOrWhiteSpace(base64Data))
+                    //{
+                    //    var newSource = new Source(base64Data, JumboServer.ActiveServer.ActiveUser.Id, fileExtension);
+                    //    Notice = "Загрузка...";
+                    //    AttachWasAttached = false;
+                    //    var sourceToken = await JumboServer.ActiveServer.AddSource(newSource);
 
-                        if (!string.IsNullOrWhiteSpace(sourceToken))
-                        {
-                            AttachmentsTokens.Add(sourceToken);
-                            Notice = "Файл успешно добавлен";
-                        }
-                        else
-                            Notice = "Ошибка загрузки файла";
-                    }
-                    else
-                        Notice = "Не удалось закодировать данные";
-                    AttachWasAttached = true;
+                    //    if (!string.IsNullOrWhiteSpace(sourceToken))
+                    //    {
+                    //        AttachmentsTokens.Add(sourceToken);
+                    //        Notice = "Файл успешно добавлен";
+                    //    }
+                    //    else
+                    //        Notice = "Ошибка загрузки файла";
+                    //}
+                    //else
+                    //    Notice = "Не удалось закодировать данные";
+                    //AttachWasAttached = true;
                 }, (obj) => AttachmentsTokens.Count < 5 && AttachWasAttached);
             }
         }
@@ -122,8 +115,9 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
         #region Methods
         private async Task<string> TrySendLetter(Letter letter)
         {
-            string response = await JumboServer.ActiveServer.SendLetter(letter); //TODO: сделать нормальный ответ от сервера (прим.: 1-успешно, 2-ошибка и тд)
-            return response;
+            //string response = await JumboServer.ActiveServer.SendLetter(letter); //TODO: сделать нормальный ответ от сервера (прим.: 1-успешно, 2-ошибка и тд)
+            //return response;
+            return string.Empty;
         }
         #endregion
     }

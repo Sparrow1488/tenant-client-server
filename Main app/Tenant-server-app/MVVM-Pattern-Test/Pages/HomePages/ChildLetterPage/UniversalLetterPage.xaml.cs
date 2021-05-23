@@ -1,11 +1,10 @@
-﻿using MVVM_Pattern_Test.ViewModels.LettersViewModels;
-using System.Collections.Generic;
+﻿using ExchangeSystem.Requests.Objects.Entities;
+using MVVM_Pattern_Test.ViewModels.LettersViewModels;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using WpfApp1.Server.Packages.Letters;
-using System.Collections.ObjectModel;
 
 namespace WpfApp1.Pages.HomePages.ChildLetterPage
 {
@@ -26,16 +25,16 @@ namespace WpfApp1.Pages.HomePages.ChildLetterPage
             InitializeComponent();
 
             titleBox.Text = readLetter.Title;
-            descBox.Text = readLetter.Description;
+            descBox.Text = readLetter.Text;
 
-            sendBtn.IsEnabled = false;
-            sourceAttacherBtn.IsEnabled = false;
-            if(readLetter.SourcesTokens != null)
-            {
-                for (int i = 0; i < readLetter.SourcesTokens.Length; i++)
-                    if(readLetter.SourcesTokens[i] != null)
-                        AddInAttechedList(readLetter.SourcesTokens[i]);
-            }
+            //sendBtn.IsEnabled = false;
+            //sourceAttacherBtn.IsEnabled = false;
+            //if(readLetter.Sources != null)
+            //{
+            //    for (int i = 0; i < readLetter.Sources.Count; i++)
+            //        if(readLetter.Sources[i] != null)
+            //            AddInAttechedList(readLetter.SourcesTokens[i]);
+            //}
                 
         }
 

@@ -1,8 +1,8 @@
-﻿using MVVM_Pattern_Test.Commands;
+﻿using ExchangeSystem.Requests.Objects.Entities;
+using MVVM_Pattern_Test.Commands;
 using MVVM_Pattern_Test.Pages.HomePages;
 using MVVM_Pattern_Test.Pages.HomePages.Admin;
 using System.Windows.Controls;
-using WpfApp1.Server.Packages.Letters;
 
 namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
 {
@@ -60,7 +60,7 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
             {
                 return new MyCommand((obj) =>
                 {
-                    AttachPage = new AttachmentsPage(ReadLetter?.SourcesTokens);
+                    //AttachPage = new AttachmentsPage(ReadLetter?.SourcesTokens);
                 }, (obj) => ReadLetter != null);
             }
         }

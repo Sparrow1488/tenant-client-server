@@ -1,14 +1,10 @@
-﻿using ExchangeSystem.Requests.Packages.Default;
+﻿using ExchangeSystem.Requests.Objects.Entities;
+using ExchangeSystem.Requests.Packages.Default;
 using MVVM_Pattern_Test.ClientEntities;
 using MVVM_Pattern_Test.Commands;
 using MVVM_Pattern_Test.Views;
 using System;
-using System.Threading.Tasks;
 using System.Windows.Controls;
-using WpfApp1.Server;
-using WpfApp1.Server.Packages.PersonalDir;
-using WpfApp1.Server.ServerExceptions;
-using WpfApp1.Server.ServerMeta;
 
 namespace MVVM_Pattern_Test.ViewModels
 {
@@ -17,10 +13,10 @@ namespace MVVM_Pattern_Test.ViewModels
         #region Constructor
         public AuthorizationVM()
         {
-            //ServerFunctions = new JumboServer(new ServerConfig());
             LoginInput = "";
             PasswordInput = "";
 
+            SetActionForOpenWindow();
             AuthorizationWithToken.Execute(null);
         }
         #endregion
@@ -33,7 +29,7 @@ namespace MVVM_Pattern_Test.ViewModels
         }
 
         public Action CloseAuthWindow;
-        public Action OpenHomeWindow = new Action(() => new HomeWindow().Show());
+        public Action OpenHomeWindow;
         public string LoginInput
         {
             get { return _loginInput; }
@@ -52,6 +48,7 @@ namespace MVVM_Pattern_Test.ViewModels
             set { _authResult = value; OnPropertyChanged(); }
         }
         private bool _authResult = false;
+        public User AuthUser { get; private set; }
         
         #endregion
 
@@ -70,6 +67,7 @@ namespace MVVM_Pattern_Test.ViewModels
                     var response = await manager.Authorization(LoginInput, PasswordInput, true);
                     if (response.Status == ResponseStatus.Ok)
                     {
+                        AuthUser = response.ResponseData as User;
                         ShowAuthResult();
                         GoToHomeWindow();
                     }
@@ -82,9 +80,7 @@ namespace MVVM_Pattern_Test.ViewModels
             {
                 return new MyCommand(async (obj) =>
                 {
-                    //var token = ServerFunctions.DeserializeTokenByFileName("token-auth");
-                    //if(token != null)
-                    //    await TryAuthForToken(token);
+
                 });
             }
         }
@@ -141,6 +137,10 @@ namespace MVVM_Pattern_Test.ViewModels
                 return false;
             }
             return true;
+        }
+        private void SetActionForOpenWindow()
+        {
+            OpenHomeWindow = () => new HomeWindow(AuthUser).Show();
         }
         #endregion
     }

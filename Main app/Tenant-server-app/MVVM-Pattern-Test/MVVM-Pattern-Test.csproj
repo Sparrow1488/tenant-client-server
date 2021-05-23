@@ -141,7 +141,6 @@
     <Compile Include="Commands\MyCommand.cs" />
     <Compile Include="MyApplication\ClientFunctions.cs" />
     <Compile Include="MyApplication\PostStruct.cs" />
-    <Compile Include="MyApplication\UserInformation\User.cs" />
     <Compile Include="Pages\HomePages\Admin\AdminReaderPage.xaml.cs">
       <DependentUpon>AdminReaderPage.xaml</DependentUpon>
     </Compile>
@@ -178,42 +177,6 @@
     <Compile Include="Pages\HomePages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Server\Chairman\Functions\Functions.cs" />
-    <Compile Include="Server\Chairman\Packages\AddNewsPackage.cs" />
-    <Compile Include="Server\Chairman\Packages\GetLettersPackage.cs" />
-    <Compile Include="Server\Chairman\Packages\SendAnswerToLetterPackage.cs" />
-    <Compile Include="Server\Configuration\ServerConfig.cs" />
-    <Compile Include="Server\JumboServer.cs" />
-    <Compile Include="Server\Packages\LettersDir\ComplaintLetter.cs" />
-    <Compile Include="Server\Packages\LettersDir\GetMyLetters.cs" />
-    <Compile Include="Server\Packages\LettersDir\GetReplyLetterPackage.cs" />
-    <Compile Include="Server\Packages\LettersDir\Letter.cs" />
-    <Compile Include="Server\Packages\LettersDir\LettersCollection.cs" />
-    <Compile Include="Server\Packages\LettersDir\OfferLetter.cs" />
-    <Compile Include="Server\Packages\LettersDir\QuestionLetter.cs" />
-    <Compile Include="Server\Packages\LettersDir\ReplyToLetter.cs" />
-    <Compile Include="Server\Packages\LettersDir\SendLetterPackage.cs" />
-    <Compile Include="Server\Packages\Meta\PackageMeta.cs" />
-    <Compile Include="Server\Packages\NewsDir\AddNewsPackage.cs" />
-    <Compile Include="Server\Packages\NewsDir\News.cs" />
-    <Compile Include="Server\Packages\NewsDir\NewsCollection.cs" />
-    <Compile Include="Server\Packages\NewsDir\RecieveNewsPackage.cs" />
-    <Compile Include="Server\Packages\Package.cs" />
-    <Compile Include="Server\Packages\PackageInfo.cs" />
-    <Compile Include="Server\Packages\PersonalDir\AuthorizationByTokenPackage.cs" />
-    <Compile Include="Server\Packages\PersonalDir\AuthorizationPackage.cs" />
-    <Compile Include="Server\Packages\PersonalDir\Person.cs" />
-    <Compile Include="Server\Packages\PersonalDir\UserToken.cs" />
-    <Compile Include="Server\Packages\RequestObject.cs" />
-    <Compile Include="Server\Packages\SecretPackage.cs" />
-    <Compile Include="Server\Packages\SourceDir\AddNewSourcePackage.cs" />
-    <Compile Include="Server\Packages\SourceDir\GetSourceByTokenPackage.cs" />
-    <Compile Include="Server\Packages\SourceDir\Source.cs" />
-    <Compile Include="Server\ServerExceptions\ConnectionException.cs" />
-    <Compile Include="Server\ServerExceptions\GetResponseException.cs" />
-    <Compile Include="Server\ServerExceptions\JumboServerException.cs" />
-    <Compile Include="Server\ServerExceptions\SendRequestException.cs" />
-    <Compile Include="Server\ServerExceptions\UserNotExist.cs" />
     <Compile Include="ViewModels\Admin\AdminLettersVM.cs" />
     <Compile Include="ViewModels\Admin\AdminNewsVM.cs" />
     <Compile Include="ViewModels\Admin\AdminReplyerVM.cs" />

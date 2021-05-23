@@ -1,4 +1,5 @@
-﻿using MVVM_Pattern_Test.Commands;
+﻿using ExchangeSystem.Requests.Objects.Entities;
+using MVVM_Pattern_Test.Commands;
 using MVVM_Pattern_Test.Pages.HomePages;
 using MVVM_Pattern_Test.Pages.HomePages.Admin;
 using System.Windows.Controls;
@@ -9,9 +10,13 @@ namespace MVVM_Pattern_Test.ViewModels
     public class HomeVM : BaseVM
     {
         #region Constructor
-        public HomeVM()
+        public HomeVM(User user)
         {
-            ShowProfilePage.Execute(null);
+            if(user != null)
+            {
+                AuthUser = user;
+                ShowProfilePage.Execute(null);
+            }
         }
         #endregion
 
@@ -21,6 +26,11 @@ namespace MVVM_Pattern_Test.ViewModels
             get { return _infoMessage; }
             protected set { _infoMessage = value; OnPropertyChanged(); }
         }
+        public User AuthUser {
+            get { return _authUser; }
+            private set { _authUser = value; OnPropertyChanged(); }
+        }
+        private User _authUser;
 
         public Page ProfilePage
         {
@@ -52,6 +62,7 @@ namespace MVVM_Pattern_Test.ViewModels
             set { _settingsPage = value; OnPropertyChanged(); }
         }
         private Page _settingsPage;
+
 
         #region ADMIN_REGINON
         public Page AdminReaderPage
@@ -88,7 +99,7 @@ namespace MVVM_Pattern_Test.ViewModels
             {
                 return new MyCommand((obj) =>
                 {
-                    if (ProfilePage == null) ProfilePage = new ProfilePage();
+                    if (ProfilePage == null) ProfilePage = new ProfilePage(AuthUser);
                     ActivePage = ProfilePage;
                 });
             }

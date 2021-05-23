@@ -1,4 +1,5 @@
-﻿using MVVM_Pattern_Test.ViewModels;
+﻿using ExchangeSystem.Requests.Objects.Entities;
+using MVVM_Pattern_Test.ViewModels;
 using System.Windows.Controls;
 
 namespace WpfApp1.Pages.HomePages
@@ -8,10 +9,10 @@ namespace WpfApp1.Pages.HomePages
     /// </summary>
     public partial class ProfilePage : Page
     {
-        public ProfilePage()
+        public ProfilePage(User user)
         {
             InitializeComponent();
-            DataContext = new ProfileVM();
+            DataContext = new ProfileVM(user);
         }
     }
 }

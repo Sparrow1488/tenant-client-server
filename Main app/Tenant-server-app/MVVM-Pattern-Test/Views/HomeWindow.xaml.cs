@@ -1,10 +1,10 @@
-﻿using MVVM_Pattern_Test.ViewModels;
+﻿using ExchangeSystem.Requests.Objects.Entities;
+using MVVM_Pattern_Test.ViewModels;
 using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media.Animation;
-using WpfApp1.Server.ServerMeta;
 
 namespace MVVM_Pattern_Test.Views
 {
@@ -13,20 +13,20 @@ namespace MVVM_Pattern_Test.Views
     /// </summary>
     public partial class HomeWindow : Window
     {
-        public HomeWindow()
+        public HomeWindow(User user)
         {
             InitializeComponent();
-            DataContext = new HomeVM();
+            DataContext = new HomeVM(user);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var authUser = JumboServer.ActiveServer.ActiveUser;
-            if (authUser.AdminStatus != 1)
-            {
-                viewAllLettersBtn.Visibility = Visibility.Collapsed;
-                viewWriteNewsBtn.Visibility = Visibility.Collapsed;
-            }
+            //var authUser = JumboServer.ActiveServer.ActiveUser;
+            //if (authUser.AdminStatus != 1)
+            //{
+            //    viewAllLettersBtn.Visibility = Visibility.Collapsed;
+            //    viewWriteNewsBtn.Visibility = Visibility.Collapsed;
+            //}
         }
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {

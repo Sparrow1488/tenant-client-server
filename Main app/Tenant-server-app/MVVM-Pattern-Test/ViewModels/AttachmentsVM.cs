@@ -1,4 +1,5 @@
-﻿using MVVM_Pattern_Test.Commands;
+﻿using ExchangeSystem.Requests.Objects.Entities;
+using MVVM_Pattern_Test.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,9 +7,6 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using WpfApp1.Server.Packages.Letters;
-using WpfApp1.Server.Packages.SourceDir;
-using WpfApp1.Server.ServerMeta;
 
 namespace MVVM_Pattern_Test.ViewModels
 {
@@ -91,7 +89,7 @@ namespace MVVM_Pattern_Test.ViewModels
                             Directory.CreateDirectory(downloadArchivePath);
                             var rndNum = rnd.Next(10000, 60000);
                             string fileName = $"{downloadArchivePath}{source?.Extension.Replace('.', ' ').ToUpper()}_{rndNum}{source?.Extension}";
-                            File.WriteAllBytes(fileName, Convert.FromBase64String(source.Data));
+                            File.WriteAllBytes(fileName, Convert.FromBase64String(source.Base64Data));
                         }
                         Notice = "Файлы успешно загружены";
                     }
@@ -104,15 +102,15 @@ namespace MVVM_Pattern_Test.ViewModels
         #region Methods
         private async Task ReciveSourceByToken()
         {
-            foreach (var token in SourceTokens)
-            {
-                var source = await JumboServer.ActiveServer.GetSourceByToken(token);
-                if (source == null) continue;
-                byte[] sourceData = Convert.FromBase64String(source?.Data);
-                AttachmentsSource.Add(source);
-                try { ImageSources.Add(BitmapFrame.Create(new MemoryStream(sourceData))); }
-                catch { OtherDocuments.Add(source); }
-            }
+            //foreach (var token in SourceTokens)
+            //{
+            //    var source = await JumboServer.ActiveServer.GetSourceByToken(token);
+            //    if (source == null) continue;
+            //    byte[] sourceData = Convert.FromBase64String(source?.Data);
+            //    AttachmentsSource.Add(source);
+            //    try { ImageSources.Add(BitmapFrame.Create(new MemoryStream(sourceData))); }
+            //    catch { OtherDocuments.Add(source); }
+            //}
         }
         #endregion
     }

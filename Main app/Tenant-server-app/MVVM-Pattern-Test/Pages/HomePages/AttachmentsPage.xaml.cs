@@ -1,11 +1,8 @@
 ﻿using Microsoft.Win32;
 using MVVM_Pattern_Test.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
-using WpfApp1.Server.Packages.Letters;
 
 namespace MVVM_Pattern_Test.Pages.HomePages
 {
@@ -27,26 +24,10 @@ namespace MVVM_Pattern_Test.Pages.HomePages
         private double firstlyHeight = 60;
         private void attachedImage_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            //var image = (Image)sender;
-            //if (image.Height == firstlyHeight)
-            //{
-            //    var anim = new DoubleAnimation();
-            //    anim.From = firstlyHeight;
-            //    anim.To = firstlyHeight * 1.5;
-            //    anim.Duration = new Duration(TimeSpan.FromMilliseconds(200));
-            //    image.BeginAnimation(HeightProperty, anim);
-            //}
         }
 
         private void attachedImage_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            //var image = (Image)sender;
-
-            //var anim = new DoubleAnimation();
-            //anim.From = image.Height;
-            //anim.To = firstlyHeight;
-            //anim.Duration = new Duration(TimeSpan.FromMilliseconds(200));
-            //image.BeginAnimation(HeightProperty, anim);
         }
 
         private void attachedImage_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

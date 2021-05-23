@@ -1,14 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using ExchangeSystem.Requests.Objects.Entities;
 using MVVM_Pattern_Test.ViewModels.LettersViewModels;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using WpfApp1.Server.Packages.Letters;
 
 namespace MVVM_Pattern_Test.Pages.HomePages.ChildLetterPage
 {

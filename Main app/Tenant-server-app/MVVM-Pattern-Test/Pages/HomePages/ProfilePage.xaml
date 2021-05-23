@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:WpfApp1.Server.Packages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="ProfilePage"
     d:DesignHeight="800"
@@ -56,7 +55,7 @@
             <StackPanel x:Name="userInfo" Margin="10">
                 <WrapPanel Style="{StaticResource textBlockStyle}">
                     <TextBlock Text="Логин: " />
-                    <TextBlock Text="{Binding AuthUser.Login}" />
+                    <TextBlock Text="{Binding UserProfile.Passport.Login}" />
                 </WrapPanel>
                 <WrapPanel Style="{StaticResource textBlockStyle}">
                     <TextBlock Text="ФИО: " />
@@ -64,7 +63,7 @@
                 </WrapPanel>
                 <WrapPanel Style="{StaticResource textBlockStyle}">
                     <TextBlock Text="Квартира: " />
-                    <TextBlock Text="{Binding AuthUser.Room}" />
+                    <TextBlock Text="{Binding UserProfile.Room}" />
                 </WrapPanel>
                 <Button
                     Content="Редактировать профиль"

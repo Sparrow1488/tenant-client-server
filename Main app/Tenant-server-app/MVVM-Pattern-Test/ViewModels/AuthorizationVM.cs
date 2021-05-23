@@ -1,4 +1,6 @@
-﻿using MVVM_Pattern_Test.Commands;
+﻿using ExchangeSystem.Requests.Packages.Default;
+using MVVM_Pattern_Test.ClientEntities;
+using MVVM_Pattern_Test.Commands;
 using MVVM_Pattern_Test.Views;
 using System;
 using System.Threading.Tasks;
@@ -15,7 +17,7 @@ namespace MVVM_Pattern_Test.ViewModels
         #region Constructor
         public AuthorizationVM()
         {
-            ServerFunctions = new JumboServer(new ServerConfig());
+            //ServerFunctions = new JumboServer(new ServerConfig());
             LoginInput = "";
             PasswordInput = "";
 
@@ -32,12 +34,6 @@ namespace MVVM_Pattern_Test.ViewModels
 
         public Action CloseAuthWindow;
         public Action OpenHomeWindow = new Action(() => new HomeWindow().Show());
-        private JumboServer _serverFunctions;
-        public JumboServer ServerFunctions
-        {
-            get { return _serverFunctions; }
-            private set { _serverFunctions = value; OnPropertyChanged(); }
-        }
         public string LoginInput
         {
             get { return _loginInput; }
@@ -70,8 +66,13 @@ namespace MVVM_Pattern_Test.ViewModels
                     PasswordInput = passwordBox.Password;
                     Notice = "Отправка запроса на вход в систему...";
 
-                    var inputData = new Person(LoginInput, PasswordInput);
-                    await TryAuth(inputData);
+                    var manager = new ExSysManager();
+                    var response = await manager.Authorization(LoginInput, PasswordInput, true);
+                    if (response.Status == ResponseStatus.Ok)
+                    {
+                        ShowAuthResult();
+                        GoToHomeWindow();
+                    }
                 }, (obj) => CheckInputCondition());
             }
         }
@@ -81,9 +82,9 @@ namespace MVVM_Pattern_Test.ViewModels
             {
                 return new MyCommand(async (obj) =>
                 {
-                    var token = ServerFunctions.DeserializeTokenByFileName("token-auth");
-                    if(token != null)
-                        await TryAuthForToken(token);
+                    //var token = ServerFunctions.DeserializeTokenByFileName("token-auth");
+                    //if(token != null)
+                    //    await TryAuthForToken(token);
                 });
             }
         }
@@ -91,32 +92,32 @@ namespace MVVM_Pattern_Test.ViewModels
         #endregion
 
         #region Methods
-        private async Task TryAuthForToken(UserToken token)
-        {
-            //Notice = "Вход в систему...";
-            try
-            {
-                AuthResult = await ServerFunctions.AuthorizationByTokenAsync(token);
-                ShowAuthResult();
-                if (AuthResult)
-                    GoToHomeWindow();
-            }
-            catch (JumboServerException ex) { Notice = ex.Message; }
-            catch (Exception) { }
-        }
-        private async Task TryAuth(Person inputData)
-        {
-            Notice = "Вход в систему...";
-            try
-            {
-                AuthResult = await ServerFunctions.AuthorizationAsync(inputData, true);
-                ShowAuthResult();
-                if (AuthResult)
-                    GoToHomeWindow();
-            }
-            catch (JumboServerException ex) { Notice = ex.Message; }
-            catch (Exception) { }
-        }
+        //private async Task TryAuthForToken(UserToken token)
+        //{
+        //    //Notice = "Вход в систему...";
+        //    try
+        //    {
+        //        AuthResult = await ServerFunctions.AuthorizationByTokenAsync(token);
+        //        ShowAuthResult();
+        //        if (AuthResult)
+        //            GoToHomeWindow();
+        //    }
+        //    catch (JumboServerException ex) { Notice = ex.Message; }
+        //    catch (Exception) { }
+        //}
+        //private async Task TryAuth(Person inputData)
+        //{
+        //    Notice = "Вход в систему...";
+        //    try
+        //    {
+        //        AuthResult = await ServerFunctions.AuthorizationAsync(inputData, true);
+        //        ShowAuthResult();
+        //        if (AuthResult)
+        //            GoToHomeWindow();
+        //    }
+        //    catch (JumboServerException ex) { Notice = ex.Message; }
+        //    catch (Exception) { }
+        //}
         private void GoToHomeWindow()
         {
             OpenHomeWindow();

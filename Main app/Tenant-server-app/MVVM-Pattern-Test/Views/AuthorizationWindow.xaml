@@ -8,7 +8,6 @@
     Title="AuthorizationWindow"
     Width="450"
     Height="550"
-    Loaded="Window_Loaded"
     mc:Ignorable="d">
     <Window.Resources>
         <Style x:Key="defaultTextStyle">

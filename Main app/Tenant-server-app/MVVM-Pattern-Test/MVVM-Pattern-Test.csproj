@@ -137,6 +137,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ClientEntities\ExSysManager.cs" />
     <Compile Include="Commands\MyCommand.cs" />
     <Compile Include="MyApplication\ClientFunctions.cs" />
     <Compile Include="MyApplication\PostStruct.cs" />

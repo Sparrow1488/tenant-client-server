@@ -313,5 +313,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\2\open-close_exchange_system\Client-Server-API\ExchangeSystem\ExchangeSystem.csproj">
+      <Project>{690ad9dc-0264-47a1-9d5c-61c146501a48}</Project>
+      <Name>ExchangeSystem</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

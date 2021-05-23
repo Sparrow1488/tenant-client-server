@@ -1,6 +1,7 @@
 ﻿using JumboServer.Controllers;
 using JumboServer.Packages;
 using System.Net.Sockets;
+using System;
 
 namespace Multi_Server_Test.JumboServer.Controllers
 {
@@ -10,7 +11,7 @@ namespace Multi_Server_Test.JumboServer.Controllers
 
         public override void Execute(string requestCommand, Package package, TcpClient sender)
         {
-            System.Console.WriteLine("Test");
+            Console.WriteLine("Test");
         }
     }
 }

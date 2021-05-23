@@ -7,15 +7,6 @@ namespace JumboServer.Meta
 {
     public class ServerMeta
     {
-        #region Constructor
-        public ServerMeta()
-        {
-            Console.WriteLine("Meta creating...");
-            CreateSqlConnection();
-            Console.WriteLine("Meta created");
-        }
-        #endregion
-
         #region Props
         public string reservePath = "reserve_data";
         public string reserveNewsCollectionTxt = "NEWS_COLLECTION.txt";
@@ -23,14 +14,10 @@ namespace JumboServer.Meta
         public string reserveUsersTxt = "LETTERS_ALL.txt";
         public static Encoding Encoding = Encoding.UTF32;
         public string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\DOM\Desktop\ИЛЬЯ\HTML\C#\tenant-client-server\Тесты\Client-Test\Multi-Server-Test\JumboDataBase.mdf;Integrated Security=True";
-        
-        public string PublicRSAKey { get; set; }
-        public string PrivateRSAKey { get; set; }
-        public string AesKey { get; set; }
         #endregion
 
         #region Methods
-        private void CreateSqlConnection()
+        public void TestSqlConnection()
         {
             using (var testConnection = new SqlConnection(connectionString))
             {
@@ -38,7 +25,7 @@ namespace JumboServer.Meta
                 if (testConnection.State == ConnectionState.Open)
                     Console.WriteLine("Успешное подключение к СУБД");
                 else
-                    Console.WriteLine("ОШИБКА ПОДКЛЮЧЕНИЯ К СУБД");
+                    throw new ArgumentNullException("ОШИБКА ПОДКЛЮЧЕНИЯ К СУБД");
                 testConnection.Close();
             }
         }

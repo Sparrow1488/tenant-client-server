@@ -25,7 +25,6 @@ namespace JumboServer
                 PORT = port;
 
                 Listener = new TcpListener(IPAddress.Parse(HOST), PORT);
-                Meta = new ServerMeta();
             }
             else
                 throw new ArgumentException("Вы передали некорректные значения");
@@ -38,7 +37,7 @@ namespace JumboServer
         public readonly string serverName = "JumboServer";
 
         public TcpListener Listener = null;
-        public static ServerMeta Meta = null;
+        public ServerMeta Meta = null;
         public Router MainRouter;
         #endregion
 
@@ -63,13 +62,52 @@ namespace JumboServer
         #region ServerMethods
         public async Task StartAsync()
         {
-            Listener.Start();
+            CreateMeta();
             await SynchUsers();
             await SynchLetters();
             await SynchNews();
+            Listener.Start();
 
             MainRouter = new Router();
             modulEvents.BlockReport(this, "Server started!", ConsoleColor.Green);
+        }
+        public void ProcessingClients()
+        {
+            while (true)
+            {
+                modulEvents.BlockReport(this, "Ожидаю запроса.......", ConsoleColor.White);
+                var client = Listener.AcceptTcpClient();
+                Task.Factory.StartNew(() => ReplyToClient(client));
+
+                Task.Delay(150).Wait(); // давайте не будем нагружать ЦП, арррррррррр???
+            }
+        }
+        #endregion
+
+        #region AdditionalMethods
+        private void CreateMeta()
+        {
+            Console.WriteLine("Meta creating...");
+            Meta = new ServerMeta();
+            Console.WriteLine("Meta was created");
+        }
+        
+        public static void AddLetterInLocalStorage(Letter letter)
+        {
+            var funcs = new ServerFunctions();
+
+            if(letter.SourcesTokens != null)
+            {
+                var existLetterAttachs = funcs.ReturnExistTokens(letter.SourcesTokens);
+                letter.SourcesTokens = existLetterAttachs;
+            }
+            allLetters.Add(letter);
+            noSynchLetters.Add(letter);
+        }
+        private void RecieveAndRouting(string serializeDataPackage, TcpClient connectedClient)
+        {
+            
+            MainRouter.ExecuteRouting(getPackage, connectedClient);
         }
         private async Task SynchUsers()
         {
@@ -99,77 +137,18 @@ namespace JumboServer
             else
                 modulEvents.BlockReport(this, "Новости не могут быть получены, тк таблица с пользователями пуста", ConsoleColor.Red);
         }
-        public void ProcessingClients()
-        {
-            while (true)
-            {
-                modulEvents.BlockReport(this, "Ожидаю запроса.......", ConsoleColor.White);
-                var client = Listener.AcceptTcpClient();
-                Task.Factory.StartNew(() => ResponseToClient(client));
-            }
-        }
-        private void ResponseToClient(object tcpClient)
+        private void ReplyToClient(object tcpClient)
         {
             var connectedClient = tcpClient as TcpClient;
             if (connectedClient.Connected)
             {
                 modulEvents.BlockReport(this, "Client was connected", ConsoleColor.Green);
-                var clientStream = connectedClient.GetStream();
-                string  receivedJsonPackage = GetDataFromStream(clientStream);
+                var jsonPackage = MainRouter.ReceiveRequest(connectedClient);
                 if (!string.IsNullOrWhiteSpace(receivedJsonPackage))
                     RecieveAndRouting(receivedJsonPackage, connectedClient);
                 else
                     modulEvents.BlockReport(this, "Data package can not be recieved!", ConsoleColor.Red);
             }
-        }
-        #endregion
-
-        #region AdditionalMethods
-        private string GetDataFromStream(NetworkStream clientStream)
-        {
-            StringBuilder recievedData = new StringBuilder();
-            if (clientStream.CanRead)
-            {
-                byte[] buffer = new byte[1024];
-                recievedData = ReadStreamData(ref buffer, ref clientStream);
-            }
-            return recievedData.ToString();
-        }
-        private StringBuilder ReadStreamData(ref byte[] buffer, ref NetworkStream clientStream)
-        {
-            StringBuilder jsonPackage = new StringBuilder();
-            do
-            {
-                try
-                {
-                    int bytes = clientStream.Read(buffer, 0, buffer.Length);
-                    jsonPackage.Append(ServerMeta.Encoding.GetString(buffer, 0, bytes));
-                }
-                catch (IOException) { }
-            } 
-            while (clientStream.DataAvailable);
-            return jsonPackage;
-        }
-        public static void AddLetterInLocalStorage(Letter letter)
-        {
-            var funcs = new ServerFunctions();
-
-            if(letter.SourcesTokens != null)
-            {
-                var existLetterAttachs = funcs.ReturnExistTokens(letter.SourcesTokens);
-                letter.SourcesTokens = existLetterAttachs;
-            }
-            allLetters.Add(letter);
-            noSynchLetters.Add(letter);
-        }
-
-        private void RecieveAndRouting(string serializeDataPackage, TcpClient connectedClient)
-        {
-            var getPackage = JsonConvert.DeserializeObject<Package>(serializeDataPackage.ToString());
-            Console.WriteLine(getPackage.SendingMeta);
-
-            modulEvents.BlockReport(this, "Distribute request to handle in MainRouter controller...", ConsoleColor.Yellow);
-            MainRouter.ExecuteRouting(getPackage, connectedClient);
         }
         #endregion
     }

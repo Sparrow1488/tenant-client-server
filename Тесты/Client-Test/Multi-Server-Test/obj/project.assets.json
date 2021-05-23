@@ -612,9 +612,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\JumboServer-alpha.csproj",
-      "projectName": "JumboServer-alpha",
-      "projectPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\JumboServer-alpha.csproj",
+      "projectUniqueName": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\JumboServer.csproj",
+      "projectName": "JumboServer",
+      "projectPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\JumboServer.csproj",
       "packagesPath": "C:\\Users\\DOM\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\obj\\",
       "projectStyle": "PackageReference",

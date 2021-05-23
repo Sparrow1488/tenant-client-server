@@ -27,10 +27,5 @@ namespace MVVM_Pattern_Test.Views
             DataContext = authVM;
             authVM.CloseAuthWindow = new Action(this.Close);
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            //new HomeWindow().Show();
-        }
     }
 }

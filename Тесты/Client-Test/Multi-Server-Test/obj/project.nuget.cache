@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bak66MHrwxvQ/ULkgUJHdNxEfzPSV4yI6N1KX8AmFQtDumWI4bT3ctUw4M6OkPNjbkyXBw6+318J7JuJQLPz0A==",
+  "dgSpecHash": "9nZ3ByY7+IhtaK+koPcf2GOPeurJGMMCdzGlv64XNSR9wgYVzJJHrMi83LKLvv1I0qSqYsIGDlP9j17kHg6rqg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\JumboServer-alpha.csproj",
+  "projectFilePath": "C:\\Users\\DOM\\Desktop\\ИЛЬЯ\\HTML\\C#\\tenant-client-server\\Тесты\\Client-Test\\Multi-Server-Test\\JumboServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DOM\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\DOM\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

@@ -23,7 +23,7 @@ namespace JumboServer.Functions
         }
         public SqlConnection OpenSqlConnection()
         {
-            var testConnection = new SqlConnection(MyServer.Meta.connectionString);
+            var testConnection = new SqlConnection(new ServerMeta().connectionString);
             testConnection = TrySqlConnect(testConnection);
             if (testConnection.State == System.Data.ConnectionState.Open)
                 return testConnection;

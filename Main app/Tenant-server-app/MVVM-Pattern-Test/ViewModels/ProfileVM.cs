@@ -13,7 +13,7 @@ namespace MVVM_Pattern_Test.ViewModels
                 FullName = string.Format("{0} {1} {2}", UserProfile.LastName, UserProfile.Name, UserProfile.ParentName);
                 Name = UserProfile.Name;
             }
-
+            Notice = "Пользователь не найден";
         }
 
         #region 

@@ -76,7 +76,7 @@
                                             Margin="0,0,10,0"
                                             VerticalAlignment="Center"
                                             FontSize="18"
-                                            Text="{Binding ReadNews.Sender}" />
+                                            Text="{Binding ReadPublication.SenderId}" />
                                         <TextBlock
                                             Margin="0"
                                             VerticalAlignment="Center"
@@ -86,13 +86,13 @@
                                             Margin="10,0"
                                             VerticalAlignment="Center"
                                             FontSize="18"
-                                            Text="{Binding ReadNews.DateTime}" />
+                                            Text="{Binding ReadPublication.DateCreate}" />
                                     </WrapPanel>
                                     <TextBlock
                                         Margin="5,0"
                                         FontSize="20"
                                         FontWeight="DemiBold"
-                                        Text="{Binding ReadNews.Title}" />
+                                        Text="{Binding ReadPublication.Title}" />
                                     <StackPanel
                                         Height="1"
                                         Margin="5,5"
@@ -102,7 +102,7 @@
                                         BorderThickness="0"
                                         FontSize="20"
                                         IsReadOnly="True"
-                                        Text="{Binding ReadNews.Description}"
+                                        Text="{Binding ReadPublication.Text}"
                                         TextWrapping="Wrap" />
                                     <Frame
                                         Margin="0,20,0,0"

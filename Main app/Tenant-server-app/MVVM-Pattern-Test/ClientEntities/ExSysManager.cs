@@ -1,4 +1,5 @@
 ﻿using ExchangeSystem.Requests.Objects;
+using ExchangeSystem.Requests.Objects.Packages.Default;
 using ExchangeSystem.Requests.Packages.Default;
 using ExchangeSystem.Requests.Sendlers;
 using ExchangeSystem.Requests.Sendlers.Close;
@@ -27,6 +28,14 @@ namespace MVVM_Pattern_Test.ClientEntities
                 var sendler = new RequestSendler(_connectionSettings);
                 response = await sendler.SendRequest(pack);
             }
+            return response;
+        }
+        public async Task<ResponsePackage> GetPublications()
+        {
+            var pack = new ReceivePublications();
+            ResponsePackage response;
+            var sendler = new RequestSendler(_connectionSettings);
+            response = await sendler.SendRequest(pack);
             return response;
         }
     }

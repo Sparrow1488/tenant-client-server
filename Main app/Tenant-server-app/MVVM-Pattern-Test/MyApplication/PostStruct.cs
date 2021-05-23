@@ -6,11 +6,11 @@ namespace MVVM_Pattern_Test.MyApplication
 {
     public class PostStruct
     {
-        public Publication ReadNews { get; set; }
+        public Publication ReadPublication { get; set; }
         public Page AttachmentsPage { get; set; }
         public PostStruct(Publication news)
         {
-            ReadNews = news;
+            ReadPublication = news;
             ReceiveAttaches();
         }
         public void ReceiveAttaches()

@@ -6,7 +6,6 @@ using MVVM_Pattern_Test.MyApplication;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Controls;
 
 namespace MVVM_Pattern_Test.ViewModels.NewsViewModels
 {

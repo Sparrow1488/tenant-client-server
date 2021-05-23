@@ -61,15 +61,21 @@ namespace MVVM_Pattern_Test.ViewModels
                 {
                     var passwordBox = (PasswordBox)obj;
                     PasswordInput = passwordBox.Password;
-                    Notice = "Отправка запроса на вход в систему...";
-
-                    var manager = new ExSysManager();
-                    var response = await manager.Authorization(LoginInput, PasswordInput, true);
-                    if (response.Status == ResponseStatus.Ok)
+                    var inputValidData = CheckInputCondition();
+                    if (!inputValidData)
+                        ShowAuthResult("Введены не корректно логин или пароль");
+                    else
                     {
-                        AuthUser = response.ResponseData as User;
-                        ShowAuthResult();
-                        GoToHomeWindow();
+                        Notice = "Вход в систему...";
+                        var manager = new ExSysManager();
+                        var response = await manager.Authorization(LoginInput, PasswordInput, true);
+                        if (response != null && response.Status == ResponseStatus.Ok)
+                        {
+                            AuthUser = response.ResponseData as User;
+                            ShowAuthResult("Успешный вход в систему");
+                            GoToHomeWindow();
+                        }
+                        ShowAuthResult($"Возникла ошибка при авторизации в систему: {response?.ErrorMessage}");
                     }
                 }, (obj) => CheckInputCondition());
             }
@@ -119,12 +125,9 @@ namespace MVVM_Pattern_Test.ViewModels
             OpenHomeWindow();
             CloseAuthWindow();
         }
-        private void ShowAuthResult()
+        private void ShowAuthResult(string message)
         {
-            if (AuthResult)
-                Notice = "Успешная авторизация";
-            else
-                Notice = "Не удалось войти в систему. Проверьте правильность логина или пароля";
+            Notice = message;
         }
         #endregion
 

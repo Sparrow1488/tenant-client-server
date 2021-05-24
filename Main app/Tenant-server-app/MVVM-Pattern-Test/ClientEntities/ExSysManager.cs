@@ -1,4 +1,5 @@
 ﻿using ExchangeSystem.Requests.Objects;
+using ExchangeSystem.Requests.Objects.Entities;
 using ExchangeSystem.Requests.Objects.Packages.Default;
 using ExchangeSystem.Requests.Packages.Default;
 using ExchangeSystem.Requests.Sendlers;
@@ -40,13 +41,17 @@ namespace MVVM_Pattern_Test.ClientEntities
         }
         public async Task<ResponsePackage> TokenLogIn(string token)
         {
-            if (string.IsNullOrWhiteSpace(token))
-                throw new ArgumentException("Переданная вами строка не является токеном");
+            ResponsePackage response = new ResponsePackage("", ResponseStatus.Exception, "");
+            try
+            {
+                if (string.IsNullOrWhiteSpace(token))
+                    throw new ArgumentException("Переданная вами строка не является токеном");
 
-            ResponsePackage response;
-            var pack = new TokenAuthorization(new UserPassport("", "", token));
-            var sendler = new RequestSendler(_connectionSettings);
-            response = await sendler.SendRequest(pack);
+                var pack = new TokenAuthorization(new UserPassport("", "", token));
+                var sendler = new RequestSendler(_connectionSettings);
+                response = await sendler.SendRequest(pack);
+            }
+            catch { return response; }
             return response;
         }
         public async Task<ResponsePackage> GetPublications()
@@ -55,6 +60,28 @@ namespace MVVM_Pattern_Test.ClientEntities
             ResponsePackage response;
             var sendler = new RequestSendler(_connectionSettings);
             response = await sendler.SendRequest(pack);
+            return response;
+        }
+        public async Task<ResponsePackage> GetLetters(string token)
+        {
+            var pack = new ReceiveLetters();
+            pack.UserToken = token;
+            ResponsePackage response;
+            var sendler = new RequestSendler(_connectionSettings);
+            response = await sendler.SendRequest(pack);
+            return response;
+        }
+        public async Task<ResponsePackage> AddPublication(Publication post, string token)
+        {
+            ResponsePackage response = new ResponsePackage("", ResponseStatus.Exception, "Возникла ошибка при отправке публикации");
+            try
+            {
+                var pack = new NewPublication(post);
+                pack.UserToken = token;
+                var sendler = new RequestSendler(_connectionSettings);
+                response = await sendler.SendRequest(pack);
+            }
+            catch { return response; }
             return response;
         }
     }

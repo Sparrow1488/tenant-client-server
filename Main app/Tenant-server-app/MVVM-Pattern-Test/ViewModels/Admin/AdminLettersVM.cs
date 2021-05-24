@@ -1,7 +1,10 @@
 ﻿using ExchangeSystem.Requests.Objects.Entities;
+using ExchangeSystem.Requests.Packages.Default;
+using MVVM_Pattern_Test.ClientEntities;
 using MVVM_Pattern_Test.Commands;
 using MVVM_Pattern_Test.Pages.HomePages.ChildLetterPage;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -53,6 +56,18 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
             {
                 return new MyCommand(async (obj) =>
                 {
+                    AllLetters = new List<Letter>();
+                    var manager = new ExSysManager();
+                    var authToken = new FilesHelper().OpenTokenLocal();
+                    if (!string.IsNullOrWhiteSpace(authToken))
+                    {
+                        var response = await manager.GetLetters(authToken);
+                        if (response.Status == ResponseStatus.Ok)
+                        {
+                            var publications = response.ResponseData as ICollection<Letter>;
+                            AllLetters = publications.ToList();
+                        }
+                    }
                 });
             }
         }

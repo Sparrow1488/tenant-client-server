@@ -58,7 +58,7 @@
                                 <TextBlock
                                     Margin="5,0,5,0"
                                     FontSize="12"
-                                    Text="{Binding Path=SenderLogin}"
+                                    Text="{Binding Path=Type}"
                                     TextWrapping="Wrap" />
                             </StackPanel>
                         </DataTemplate>

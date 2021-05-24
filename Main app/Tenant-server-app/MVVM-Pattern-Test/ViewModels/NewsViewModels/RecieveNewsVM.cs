@@ -42,6 +42,7 @@ namespace MVVM_Pattern_Test.ViewModels.NewsViewModels
             {
                 return new MyCommand(async (obj) =>
                 {
+                    ClearPublications();
                     var manager = new ExSysManager();
                     var response = await manager.GetPublications();
                     if(response.Status == ResponseStatus.Ok)
@@ -62,6 +63,11 @@ namespace MVVM_Pattern_Test.ViewModels.NewsViewModels
                     RecievedNewsStruct.Add(new PostStruct(post));
                 }
             }
+        }
+        public void ClearPublications()
+        {
+            RecievedNewsStruct = new ObservableCollection<PostStruct>();
+            ReceivedPublications = new List<Publication>();
         }
         #endregion
     }

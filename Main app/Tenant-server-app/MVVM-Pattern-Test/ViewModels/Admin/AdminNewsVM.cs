@@ -1,4 +1,6 @@
 ﻿using ExchangeSystem.Requests.Objects.Entities;
+using ExchangeSystem.Requests.Packages.Default;
+using MVVM_Pattern_Test.ClientEntities;
 using MVVM_Pattern_Test.Commands;
 using MVVM_Pattern_Test.MyApplication;
 using System.Collections.Generic;
@@ -24,7 +26,6 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
         }
         private Publication _post;
         private ClientFunctions funcs = new ClientFunctions();
-        //public List<string> SourceTokens = new List<string>();
         #endregion
 
         #region Commands
@@ -34,9 +35,19 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
             {
                 return new MyCommand(async (obj) =>
                 {
-                    //NewPost.Sources = SourceTokens.ToArray();
-                    //    var requestResult = await functions.AddNews(NewPost);
-                    //    PrintServerResult(requestResult);
+                    string token = new FilesHelper().OpenTokenLocal();
+                    if (!string.IsNullOrWhiteSpace(token) && CheckValidation())
+                    {
+                        var manager = new ExSysManager();
+                        var response = await manager.AddPublication(NewPost, token);
+                        if (response.Status == ResponseStatus.Ok)
+                        {
+                            Notice = "Публикация успешно размещена";
+                            ToBaseForm();
+                        }
+                        else
+                            Notice = response.ErrorMessage;
+                    }
                 });
             }
         }
@@ -64,21 +75,15 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
         #endregion
 
         #region OtherMetods
-        public void PrintServerResult(string requestResult)
-        {
-            if (requestResult == "1")
-            {
-                Notice = "Новость успешно добавлена";
-                ToBaseForm();
-            }
-            else if (requestResult == "0")
-                Notice = "Ошибка публикации: не пройдено валидацию\nУказания: возможно, текст слишком мал для публикации";
-            else
-                Notice = "Неизвестная ошибка сервера";
-        }
         public void ToBaseForm()
         {
             NewPost = new Publication();
+        }
+        public bool CheckValidation()
+        {
+            if (string.IsNullOrWhiteSpace(NewPost.Text) || string.IsNullOrWhiteSpace(NewPost.Title))
+                return false;
+            return true;
         }
         #endregion
     }

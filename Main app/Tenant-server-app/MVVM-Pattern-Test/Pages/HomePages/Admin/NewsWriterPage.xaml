@@ -85,7 +85,7 @@
                             MaxHeight="220"
                             AcceptsReturn="True"
                             Style="{StaticResource textBoxStyle}"
-                            Text="{Binding NewPost.Description, Mode=TwoWay}"
+                            Text="{Binding NewPost.Text, Mode=TwoWay}"
                             TextWrapping="Wrap" />
                         <StackPanel Height="1" Background="Gray" />
                         <GroupBox Margin="0,10,0,0">

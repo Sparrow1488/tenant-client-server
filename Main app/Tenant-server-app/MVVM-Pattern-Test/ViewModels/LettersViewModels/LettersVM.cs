@@ -1,7 +1,10 @@
 ﻿using ExchangeSystem.Requests.Objects.Entities;
+using ExchangeSystem.Requests.Packages.Default;
+using MVVM_Pattern_Test.ClientEntities;
 using MVVM_Pattern_Test.Commands;
 using MVVM_Pattern_Test.Pages.HomePages.ChildLetterPage;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 using WpfApp1.Pages.HomePages.ChildLetterPage;
 
@@ -84,7 +87,7 @@ namespace MVVM_Pattern_Test.ViewModels.LettersViewModels
                 return new MyCommand(async (obj) =>
                 {
                     MyLetters = new List<Letter>();
-                    //MyLetters = await JumboServer.ActiveServer.GetMyLetters();
+                    
                 });
             }
         }

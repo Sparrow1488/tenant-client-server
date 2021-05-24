@@ -51,13 +51,13 @@
                 BorderThickness="0"
                 IsReadOnly="True"
                 Style="{StaticResource defaultTextStyle}"
-                Text="{Binding ReadLetter.SenderLogin}" />
+                Text="{Binding ReadLetter.Type}" />
             <TextBox
                 Name="dateSend"
                 BorderThickness="0"
                 IsReadOnly="True"
                 Style="{StaticResource defaultTextStyle}"
-                Text="{Binding ReadLetter.ShortDateCreate}" />
+                Text="{Binding ReadLetter.DateCreate}" />
             <StackPanel Height="1" Background="Black" />
         </StackPanel>
         <!--  СОНОВНОЙ КОНТЕНТ  -->
@@ -94,7 +94,7 @@
                             BorderThickness="0"
                             FontSize="20"
                             IsReadOnly="True"
-                            Text="{Binding ReadLetter.Description, Mode=OneWay}"
+                            Text="{Binding ReadLetter.Text, Mode=OneWay}"
                             TextWrapping="Wrap" />
                         <StackPanel
                             Height="1"

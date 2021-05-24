@@ -16,14 +16,14 @@ namespace MVVM_Pattern_Test.ClientEntities
         /// Авторизоваться в системе
         /// </summary>
         /// <returns>Null - возникла неизвестная ошибка</returns>
-        public async Task<ResponsePackage> Authorization(string login, string password, bool useAesRsa)
+        public async Task<ResponsePackage> LogIn(string login, string password, bool useAesRsa)
         {
             if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password))
                 throw new ArgumentException(string.Format("Логин: {0} или пароль: {1} являются не валидными!", nameof(login), nameof(password)));
             var pack = new Authorization(new UserPassport(login, password));
             ResponsePackage response;
-            //try
-            //{
+            try
+            {
                 if (useAesRsa)
                 {
                     var sendler = new AesRsaSendler(_connectionSettings);
@@ -34,8 +34,19 @@ namespace MVVM_Pattern_Test.ClientEntities
                     var sendler = new RequestSendler(_connectionSettings);
                     response = await sendler.SendRequest(pack);
                 }
-            //}
-            //catch { return null; }
+            }
+            catch { return null; }
+            return response;
+        }
+        public async Task<ResponsePackage> TokenLogIn(string token)
+        {
+            if (string.IsNullOrWhiteSpace(token))
+                throw new ArgumentException("Переданная вами строка не является токеном");
+
+            ResponsePackage response;
+            var pack = new TokenAuthorization(new UserPassport("", "", token));
+            var sendler = new RequestSendler(_connectionSettings);
+            response = await sendler.SendRequest(pack);
             return response;
         }
         public async Task<ResponsePackage> GetPublications()

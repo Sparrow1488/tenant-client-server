@@ -3,6 +3,7 @@ using ExchangeSystem.Requests.Packages.Default;
 using MVVM_Pattern_Test.ClientEntities;
 using MVVM_Pattern_Test.Commands;
 using MVVM_Pattern_Test.Views;
+using Newtonsoft.Json;
 using System;
 using System.Windows.Controls;
 
@@ -68,10 +69,11 @@ namespace MVVM_Pattern_Test.ViewModels
                     {
                         Notice = "Вход в систему...";
                         var manager = new ExSysManager();
-                        var response = await manager.Authorization(LoginInput, PasswordInput, true);
+                        var response = await manager.LogIn(LoginInput, PasswordInput, true);
                         if (response != null && response.Status == ResponseStatus.Ok)
                         {
                             AuthUser = response.ResponseData as User;
+                            new FilesHelper().SaveTokenLocal(AuthUser.Passport.Token);
                             ShowAuthResult("Успешный вход в систему");
                             GoToHomeWindow();
                         }
@@ -86,7 +88,18 @@ namespace MVVM_Pattern_Test.ViewModels
             {
                 return new MyCommand(async (obj) =>
                 {
-
+                    var token = new FilesHelper().OpenTokenLocal();
+                    if (!string.IsNullOrWhiteSpace(token))
+                    {
+                        var manager = new ExSysManager();
+                        var response = await manager.TokenLogIn(token);
+                        if(response.Status == ResponseStatus.Ok)
+                        {
+                            AuthUser = response.ResponseData as User;
+                            ShowAuthResult("Успешный вход в систему");
+                            GoToHomeWindow();
+                        }
+                    }
                 });
             }
         }
@@ -94,32 +107,6 @@ namespace MVVM_Pattern_Test.ViewModels
         #endregion
 
         #region Methods
-        //private async Task TryAuthForToken(UserToken token)
-        //{
-        //    //Notice = "Вход в систему...";
-        //    try
-        //    {
-        //        AuthResult = await ServerFunctions.AuthorizationByTokenAsync(token);
-        //        ShowAuthResult();
-        //        if (AuthResult)
-        //            GoToHomeWindow();
-        //    }
-        //    catch (JumboServerException ex) { Notice = ex.Message; }
-        //    catch (Exception) { }
-        //}
-        //private async Task TryAuth(Person inputData)
-        //{
-        //    Notice = "Вход в систему...";
-        //    try
-        //    {
-        //        AuthResult = await ServerFunctions.AuthorizationAsync(inputData, true);
-        //        ShowAuthResult();
-        //        if (AuthResult)
-        //            GoToHomeWindow();
-        //    }
-        //    catch (JumboServerException ex) { Notice = ex.Message; }
-        //    catch (Exception) { }
-        //}
         private void GoToHomeWindow()
         {
             OpenHomeWindow();

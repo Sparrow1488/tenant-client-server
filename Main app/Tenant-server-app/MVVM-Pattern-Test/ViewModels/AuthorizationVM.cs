@@ -73,7 +73,7 @@ namespace MVVM_Pattern_Test.ViewModels
                         if (response != null && response.Status == ResponseStatus.Ok)
                         {
                             AuthUser = response.ResponseData as User;
-                            new FilesHelper().SaveTokenLocal(AuthUser.Passport.Token);
+                            new FilesHelper().SaveTokenLocal(AuthUser.UserPassport.Token);
                             ShowAuthResult("Успешный вход в систему");
                             GoToHomeWindow();
                         }

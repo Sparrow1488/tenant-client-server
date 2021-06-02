@@ -3,6 +3,7 @@ using ExchangeSystem.Requests.Packages.Default;
 using MVVM_Pattern_Test.ClientEntities;
 using MVVM_Pattern_Test.Commands;
 using MVVM_Pattern_Test.MyApplication;
+using MVVM_Pattern_Test.Pages.HomePages;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -59,9 +60,7 @@ namespace MVVM_Pattern_Test.ViewModels.NewsViewModels
             if(ReceivedPublications != null && ReceivedPublications.Count > 0)
             {
                 foreach (var post in ReceivedPublications)
-                {
-                    RecievedNewsStruct.Add(new PostStruct(post));
-                }
+                    RecievedNewsStruct.Add(new PostStruct(post) {AttachmentsPage = new  AttachmentsPage(post.sourcesId)});
             }
         }
         public void ClearPublications()

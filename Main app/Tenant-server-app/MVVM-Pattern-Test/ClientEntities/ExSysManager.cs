@@ -5,7 +5,9 @@ using ExchangeSystem.Requests.Packages.Default;
 using ExchangeSystem.Requests.Sendlers;
 using ExchangeSystem.Requests.Sendlers.Close;
 using ExchangeSystem.Requests.Sendlers.Open;
+using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace MVVM_Pattern_Test.ClientEntities
@@ -56,10 +58,14 @@ namespace MVVM_Pattern_Test.ClientEntities
         }
         public async Task<ResponsePackage> GetPublications()
         {
-            var pack = new ReceivePublications();
-            ResponsePackage response;
-            var sendler = new RequestSendler(_connectionSettings);
-            response = await sendler.SendRequest(pack);
+            ResponsePackage response = new ResponsePackage("", ResponseStatus.Exception, "Возникла ошибка при получении публикаций (client)");
+            try
+            {
+                var pack = new ReceivePublications();
+                var sendler = new RequestSendler(_connectionSettings);
+                response = await sendler.SendRequest(pack);
+            }
+            catch { return response; }
             return response;
         }
         public async Task<ResponsePackage> GetLetters(string token)
@@ -84,5 +90,18 @@ namespace MVVM_Pattern_Test.ClientEntities
             catch { return response; }
             return response;
         }
+        public async Task<ResponsePackage> GetSource(int[] sourceIds)
+        {
+            var response = new ResponsePackage("", ResponseStatus.Exception, "Возникла ошибка при отправке запроса на сервер");
+            try
+            {
+                var pack = new ReceiveSource(new Publication() { sourcesId = sourceIds });
+                var sendler = new RequestSendler(_connectionSettings);
+                response = await sendler.SendRequest(pack);
+                return response;
+            }
+            catch { return response; }
+        }
+        
     }
 }

@@ -3,7 +3,10 @@ using ExchangeSystem.Requests.Packages.Default;
 using MVVM_Pattern_Test.ClientEntities;
 using MVVM_Pattern_Test.Commands;
 using MVVM_Pattern_Test.MyApplication;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MVVM_Pattern_Test.ViewModels.Admin
 {
@@ -25,7 +28,12 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
             set { _post = value; OnPropertyChanged(); }
         }
         private Publication _post;
-        private ClientFunctions funcs = new ClientFunctions();
+        public List<Source> Sources
+        {
+            get { return _sources; }
+            set { _sources = value; OnPropertyChanged(); }
+        }
+        private List<Source> _sources = new List<Source>();
         #endregion
 
         #region Commands
@@ -39,6 +47,7 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
                     if (!string.IsNullOrWhiteSpace(token) && CheckValidation())
                     {
                         var manager = new ExSysManager();
+                        NewPost.Sources = Sources.ToArray();
                         var response = await manager.AddPublication(NewPost, token);
                         if (response.Status == ResponseStatus.Ok)
                         {
@@ -55,20 +64,22 @@ namespace MVVM_Pattern_Test.ViewModels.Admin
         {
             get
             {
-                return new MyCommand(async (obj) =>
+                return new MyCommand((obj) =>
                 {
-                    //string base64Data = string.Empty;
-                    //string extensionFile = string.Empty;
-                    //funcs.OpenFile(out base64Data, out extensionFile);
-                    //if(!string.IsNullOrWhiteSpace(base64Data) && !string.IsNullOrWhiteSpace(extensionFile))
-                    //{
-                    //    var sourceToken = await JumboServer.ActiveServer.AddSource(new Source(base64Data, 
-                    //                                                                                                JumboServer.ActiveServer.ActiveUser.Id, 
-                    //                                                                                                extensionFile));
-                    //    if (!string.IsNullOrWhiteSpace(sourceToken))
-                    //        SourceTokens.Add(sourceToken);
-                    //    Notice = "Файл успешно прикреплен";
-                    //}
+                    string base64Data = string.Empty;
+                    string extensionFile = string.Empty;
+                    new FilesHelper().OpenFile(out base64Data, out extensionFile);
+                    if (!string.IsNullOrWhiteSpace(base64Data) && !string.IsNullOrWhiteSpace(extensionFile))
+                    {
+                        var source = new Source()
+                        {
+                            Base64Data = base64Data,
+                            Extension = extensionFile,
+                            DateCreate = DateTime.Now
+                        };
+                        Sources.Add(source);
+                        Notice = "Файл успешно добавлен";
+                    }
                 });
             }
         }

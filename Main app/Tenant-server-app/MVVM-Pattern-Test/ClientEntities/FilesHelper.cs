@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,6 +38,29 @@ namespace MVVM_Pattern_Test.ClientEntities
             var fileStream = File.CreateText($"./{_tokenFileName}.txt");
             fileStream.WriteLine(jsonToken);
             fileStream.Close();
+        }
+        /// <summary>
+        /// Открывает файл и переводит в кодировку Base64 
+        /// </summary>
+        /// <param name="base64"></param>
+        /// <param name="extension"></param>
+        public void OpenFile(out string base64, out string extension)
+        {
+            string base64Data = string.Empty;
+            string fileExtension = string.Empty;
+            OpenFileDialog dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                string filePath = dialog.FileName;
+                fileExtension = Path.GetExtension(filePath);
+                try { base64Data = Convert.ToBase64String(File.ReadAllBytes(filePath)); }
+                catch { }
+
+                extension = fileExtension;
+                base64 = base64Data;
+            }
+            base64 = base64Data;
+            extension = fileExtension;
         }
     }
 }

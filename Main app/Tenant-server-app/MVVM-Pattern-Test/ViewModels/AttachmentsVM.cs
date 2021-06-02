@@ -1,9 +1,12 @@
 ﻿using ExchangeSystem.Requests.Objects.Entities;
+using ExchangeSystem.Requests.Packages.Default;
+using MVVM_Pattern_Test.ClientEntities;
 using MVVM_Pattern_Test.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -13,20 +16,11 @@ namespace MVVM_Pattern_Test.ViewModels
     public class AttachmentsVM : BaseVM
     {
         #region Constructor
-        public AttachmentsVM(List<string> tokens)
+        public AttachmentsVM(int[] ids)
         {
-            if(tokens != null && tokens.Count > 0)
+            if (ids != null && ids.Length > 0)
             {
-                SourceTokens = tokens;
-                RecieveSource.Execute(null);
-            }
-        }
-        public AttachmentsVM(string[] tokens)
-        {
-            if (tokens != null && tokens.Length > 0)
-            {
-                foreach (var token in tokens)
-                    SourceTokens.Add(token);
+                SourceTokens = ids.ToList();
                 RecieveSource.Execute(null);
             }
         }
@@ -34,12 +28,12 @@ namespace MVVM_Pattern_Test.ViewModels
 
         #region Props
         public override string Notice { get { return _infoMessage; } protected set { _infoMessage = value; } }
-        public List<string> SourceTokens
+        public List<int> SourceTokens
         {
             get { return _sourceTokens; }
             set { _sourceTokens = value; OnPropertyChanged(); }
         }
-        private List<string> _sourceTokens = new List<string>();
+        private List<int> _sourceTokens = new List<int>();
         public ObservableCollection<ImageSource> ImageSources
         {
             get { return _imageSources; }
@@ -102,15 +96,26 @@ namespace MVVM_Pattern_Test.ViewModels
         #region Methods
         private async Task ReciveSourceByToken()
         {
-            //foreach (var token in SourceTokens)
-            //{
-            //    var source = await JumboServer.ActiveServer.GetSourceByToken(token);
-            //    if (source == null) continue;
-            //    byte[] sourceData = Convert.FromBase64String(source?.Data);
-            //    AttachmentsSource.Add(source);
-            //    try { ImageSources.Add(BitmapFrame.Create(new MemoryStream(sourceData))); }
-            //    catch { OtherDocuments.Add(source); }
-            //}
+            var manager = new ExSysManager();
+            
+            var response = await manager.GetSource(SourceTokens.ToArray());
+            if (response.Status == ResponseStatus.Ok)
+            {
+                var sources = response.ResponseData as Source[];
+                FilterSource(sources);
+            }
+        }
+        private List<string> Extensions = new List<string>() { ".png", ".jpg", ".jpeg" };
+        private void FilterSource(Source[] sources)
+        {
+            foreach (var source in sources)
+            {
+                if (source == null) continue;
+                byte[] sourceData = Convert.FromBase64String(source?.Base64Data);
+                AttachmentsSource.Add(source);
+                try { ImageSources.Add(BitmapFrame.Create(new MemoryStream(sourceData))); }
+                catch { OtherDocuments.Add(source); }
+            }
         }
         #endregion
     }

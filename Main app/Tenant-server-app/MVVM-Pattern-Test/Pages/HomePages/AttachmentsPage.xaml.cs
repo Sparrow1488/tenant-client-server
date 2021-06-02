@@ -11,15 +11,10 @@ namespace MVVM_Pattern_Test.Pages.HomePages
     /// </summary>
     public partial class AttachmentsPage : Page
     {
-        public AttachmentsPage(List<string> sourceTokens)
+        public AttachmentsPage(int[] sourceIds)
         {
             InitializeComponent();
-            DataContext = new AttachmentsVM(sourceTokens);
-        }
-        public AttachmentsPage(string[] sourceTokens)
-        {
-            InitializeComponent();
-            DataContext = new AttachmentsVM(sourceTokens);
+            DataContext = new AttachmentsVM(sourceIds);
         }
         private double firstlyHeight = 60;
         private void attachedImage_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)

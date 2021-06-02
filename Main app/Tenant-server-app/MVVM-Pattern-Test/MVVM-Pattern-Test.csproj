@@ -279,9 +279,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\2\open-close_exchange_system\Client-Server-API\ExchangeSystem\ExchangeSystem.csproj">
-      <Project>{690ad9dc-0264-47a1-9d5c-61c146501a48}</Project>
-      <Name>ExchangeSystem</Name>
+    <ProjectReference Include="..\..\..\..\2\open-close_exchange_system\Client-Server-API\ExchangeSystemFrame\ExchangeSystemFrame.csproj">
+      <Project>{774240a1-b4d0-4288-8871-5c32d8be45ff}</Project>
+      <Name>ExchangeSystemFrame</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

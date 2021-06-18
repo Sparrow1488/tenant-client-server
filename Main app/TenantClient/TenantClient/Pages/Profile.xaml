@@ -1,0 +1,98 @@
+﻿<Page
+    x:Class="TenantClient.Pages.Profile"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TenantClient.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Profile"
+    d:DesignHeight="800"
+    d:DesignWidth="1200"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="profileInfoPanels" TargetType="StackPanel">
+            <Setter Property="ItemsControl.Background" Value="Bisque" />
+        </Style>
+        <Style x:Key="profileInfoTextBlock" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5,5,5,0" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+    </Page.Resources>
+    <Grid Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="130" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel
+            x:Name="mainContentPanel"
+            Grid.Row="1"
+            Grid.Column="1"
+            Background="Gainsboro">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel
+                    x:Name="profileInfoPanel"
+                    Grid.Column="0"
+                    Margin="-80,120,40,0"
+                    Style="{StaticResource profileInfoPanels}">
+                    <TextBlock Style="{StaticResource profileInfoTextBlock}" Text="Логин: " />
+                    <TextBlock Style="{StaticResource profileInfoTextBlock}" Text="ФИО: " />
+                    <TextBlock Style="{StaticResource profileInfoTextBlock}" Text="Квартира: " />
+                </StackPanel>
+                <StackPanel
+                    x:Name="profileDescriptionPanel"
+                    Grid.Column="1"
+                    Margin="40,120,-80,0"
+                    Style="{StaticResource profileInfoPanels}">
+                    <TextBlock Style="{StaticResource profileInfoTextBlock}" Text="Описание данного профиля" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel
+            x:Name="header"
+            Grid.Row="0"
+            Grid.ColumnSpan="3">
+            <StackPanel.Background>
+                <ImageBrush
+                    x:Name="headerCover"
+                    ImageSource="/refs/BG-4_1920x1080.jpg"
+                    Stretch="UniformToFill" />
+            </StackPanel.Background>
+            <!--<StackPanel
+                Height="1"
+                VerticalAlignment="Bottom"
+                Background="Black" />-->
+        </StackPanel>
+        <Border
+            x:Name="profileImageBorder"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Width="180"
+            Height="180"
+            Margin="45"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            BorderBrush="Gray"
+            BorderThickness="1"
+            CornerRadius="100">
+            <Border.Background>
+                <ImageBrush
+                    x:Name="profileImage"
+                    ImageSource="/refs/gokhliaTheBest.jpg"
+                    Stretch="UniformToFill" />
+            </Border.Background>
+        </Border>
+
+
+    </Grid>
+</Page>

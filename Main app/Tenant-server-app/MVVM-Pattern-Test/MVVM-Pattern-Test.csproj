@@ -279,7 +279,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\2\open-close_exchange_system\Client-Server-API\ExchangeSystemFrame\ExchangeSystemFrame.csproj">
+    <ProjectReference Include="..\..\..\..\OCES\Main\ExchangeSystemFrame\ExchangeSystemFrame.csproj">
       <Project>{774240a1-b4d0-4288-8871-5c32d8be45ff}</Project>
       <Name>ExchangeSystemFrame</Name>
     </ProjectReference>

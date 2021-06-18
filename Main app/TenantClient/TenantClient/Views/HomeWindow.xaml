@@ -1,0 +1,91 @@
+﻿<Window
+    x:Class="TenantClient.Views.HomeWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TenantClient.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Главная"
+    Width="1200"
+    Height="800"
+    MinWidth="870"
+    MinHeight="550"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ControlTemplate x:Key="tabButton" TargetType="Button">
+            <Button
+                Margin="{TemplateBinding Margin}"
+                Padding="10,5"
+                HorizontalContentAlignment="Right"
+                Background="#2398AB"
+                Command="{Binding ShowPageByTag}"
+                CommandParameter="{TemplateBinding CommandParameter}"
+                FontSize="24"
+                Foreground="White"
+                MouseLeave="profile_MouseLeave"
+                MouseMove="profile_MouseMove">
+                <ContentControl Content="{TemplateBinding Content}" />
+            </Button>
+        </ControlTemplate>
+        <Style x:Key="tabButtonStyle">
+            <Setter Property="ItemsControl.Foreground" Value="White" />
+            <Setter Property="ItemsControl.FontSize" Value="24" />
+            <Setter Property="ItemsControl.HorizontalContentAlignment" Value="Left" />
+            <Setter Property="ItemsControl.VerticalContentAlignment" Value="Center" />
+            <Setter Property="ItemsControl.Background" Value="Coral" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="75" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1">
+            <Frame Content="{Binding SelectedPage, Mode=OneWay}" NavigationUIVisibility="Hidden" />
+        </StackPanel>
+
+        <StackPanel
+            x:Name="homeTabMenu"
+            Grid.Column="0"
+            Background="#2398AB"
+            Orientation="Vertical">
+            <!--<Button HorizontalContentAlignment="Left" Command="{Binding ShowProfilePage}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Grid.Column="0" Source="/refs\icons\profile\profile-color.png">
+                            <Image.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="2"
+                                    Opacity="0.2"
+                                    RenderingBias="Quality"
+                                    ShadowDepth="2" />
+                            </Image.Effect>
+                        </Image>
+                        <TextBlock
+                            Grid.Column="1"
+                            Foreground="White"
+                            Text="Профиль" />
+                    </StackPanel>
+                </Grid>
+            </Button>-->
+
+            <Button
+                Name="profile"
+                Padding="2"
+                CommandParameter="{Binding ElementName=profile}"
+                Tag="profile"
+                Template="{StaticResource tabButton}">
+                <Button.ToolTip>
+                    <TextBlock Text="Профиль" />
+                </Button.ToolTip>
+                <Image Width="50" Source="/refs\icons\profile\profile-color.png" />
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</Window>

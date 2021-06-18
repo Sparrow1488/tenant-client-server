@@ -62,6 +62,7 @@
     <Compile Include="Exceptions\ClientException.cs" />
     <Compile Include="Exceptions\FindPageException.cs" />
     <Compile Include="Exceptions\ParameterException.cs" />
+    <Compile Include="Exceptions\ShowProfileException.cs" />
     <Compile Include="Exceptions\TokenException.cs" />
     <Compile Include="Exceptions\WindowException.cs" />
     <Compile Include="Local\ClientTokenStorage.cs" />

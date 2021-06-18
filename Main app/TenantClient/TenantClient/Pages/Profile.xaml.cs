@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TenantClient.ViewModels;
 
 namespace TenantClient.Pages
 {
@@ -20,9 +21,18 @@ namespace TenantClient.Pages
     /// </summary>
     public partial class Profile : Page
     {
+        
+        private ProfileVm ProfileVm;
         public Profile()
         {
             InitializeComponent();
+            ProfileVm = new ProfileVm();
+            DataContext = ProfileVm;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ProfileVm.ShowAccount.Execute(null);
         }
     }
 }

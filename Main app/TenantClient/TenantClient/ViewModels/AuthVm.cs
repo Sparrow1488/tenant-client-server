@@ -53,6 +53,7 @@ namespace TenantClient.ViewModels
         {
             get => new MyCommand(async (obj)=>
             {
+                Task.Delay(1000).Wait();
                 var success = ClientTokenStorage.TryGet(out string clientToken);
                 if (success)
                 {

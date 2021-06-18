@@ -8,6 +8,7 @@
     Title="Profile"
     d:DesignHeight="800"
     d:DesignWidth="1200"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
     <Page.Resources>
         <Style x:Key="profileInfoPanels" TargetType="StackPanel">
@@ -44,9 +45,10 @@
                     Grid.Column="0"
                     Margin="-80,120,40,0"
                     Style="{StaticResource profileInfoPanels}">
-                    <TextBlock Style="{StaticResource profileInfoTextBlock}" Text="Логин: " />
-                    <TextBlock Style="{StaticResource profileInfoTextBlock}" Text="ФИО: " />
-                    <TextBlock Style="{StaticResource profileInfoTextBlock}" Text="Квартира: " />
+                    <TextBlock Style="{StaticResource profileInfoTextBlock}" Text="{Binding StringFormat=Логин: {0}, Path=Login}" />
+                    <TextBlock Style="{StaticResource profileInfoTextBlock}" Text="{Binding StringFormat=ФИО: {0}, Path=FullName}" />
+                    <TextBlock Style="{StaticResource profileInfoTextBlock}" Text="{Binding StringFormat=Квартира: {0}, Path=Account.Room}" />
+                    <TextBlock Style="{StaticResource profileInfoTextBlock}" Text="{Binding StringFormat=Статус: {0}, Path=Account.Status}" />
                 </StackPanel>
                 <StackPanel
                     x:Name="profileDescriptionPanel"

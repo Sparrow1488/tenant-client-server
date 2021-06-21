@@ -15,7 +15,7 @@
         <ControlTemplate x:Key="tabButton" TargetType="Button">
             <Button
                 Margin="{TemplateBinding Margin}"
-                Padding="10,5"
+                Padding="2"
                 HorizontalContentAlignment="Right"
                 Background="#2398AB"
                 Command="{Binding ShowPageByTag}"
@@ -27,6 +27,25 @@
                 <ContentControl Content="{TemplateBinding Content}" />
             </Button>
         </ControlTemplate>
+        <ControlTemplate x:Key="toolTipTmp" TargetType="ToolTip">
+            <ToolTip
+                Margin="20,0,0,0"
+                HorizontalAlignment="Center"
+                Content="{TemplateBinding Content}"
+                HorizontalOffset="16"
+                Placement="Right"
+                PlacementRectangle="60 0 0 0"
+                VerticalOffset="6" />
+        </ControlTemplate>
+        <Style x:Key="tabBtnToolTip" TargetType="ToolTip">
+            <Setter Property="Placement" Value="Right" />
+            <Setter Property="Margin" Value="20,0,0,0" />
+            <Setter Property="PlacementRectangle" Value="60 0 0 0" />
+            <Setter Property="HorizontalOffset" Value="16" />
+            <Setter Property="VerticalOffset" Value="6" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="Blue" />
+        </Style>
         <Style x:Key="tabButtonStyle">
             <Setter Property="ItemsControl.Foreground" Value="White" />
             <Setter Property="ItemsControl.FontSize" Value="24" />
@@ -34,20 +53,23 @@
             <Setter Property="ItemsControl.VerticalContentAlignment" Value="Center" />
             <Setter Property="ItemsControl.Background" Value="Coral" />
         </Style>
+
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="75" />
             <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>-->
 
-        <StackPanel Grid.Column="1">
+        <DockPanel Grid.Column="0" Margin="50,0,0,0">
             <Frame Content="{Binding SelectedPage, Mode=OneWay}" NavigationUIVisibility="Hidden" />
-        </StackPanel>
+        </DockPanel>
 
         <StackPanel
             x:Name="homeTabMenu"
             Grid.Column="0"
+            Width="50"
+            HorizontalAlignment="Left"
             Background="#2398AB"
             Orientation="Vertical">
             <!--<Button HorizontalContentAlignment="Left" Command="{Binding ShowProfilePage}">
@@ -80,10 +102,18 @@
                 CommandParameter="{Binding ElementName=profile}"
                 Tag="profile"
                 Template="{StaticResource tabButton}">
+                <Image Width="45" Source="/refs\icons\profile\profile-color.png" />
+            </Button>
+            <Button
+                Name="posts"
+                Padding="2"
+                CommandParameter="{Binding ElementName=posts}"
+                Tag="publications"
+                Template="{StaticResource tabButton}">
                 <Button.ToolTip>
-                    <TextBlock Text="Профиль" />
+                    <TextBlock Text="Публикации" />
                 </Button.ToolTip>
-                <Image Width="50" Source="/refs\icons\profile\profile-color.png" />
+                <Image Width="45" Source="/refs\icons\News\newspaper-color.png" />
             </Button>
         </StackPanel>
 

@@ -2,6 +2,7 @@
 using ExchangeSystem.v2.Packages;
 using ExchangeSystem.v2.Packages.Default;
 using ExchangeSystem.v2.Sendlers;
+using System;
 using System.Threading.Tasks;
 using TenantClient.Commands;
 using TenantClient.Exceptions;
@@ -74,7 +75,7 @@ namespace TenantClient.ViewModels
             if (response.Status == ResponseStatus.Ok)
                 Account = response.ResponseData as UserInfo;
             FullName = $"{Account?.LastName} {Account?.Name} {Account?.ParentName}";
-            Login = Account.login;
+            Login = Account?.login;
         }
         private async Task<ResponsePackage> SendRequest(BaseRequestPackage package)
         {

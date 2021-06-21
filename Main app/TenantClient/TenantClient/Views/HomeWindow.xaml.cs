@@ -16,17 +16,16 @@ namespace TenantClient.Views
             InitializeComponent();
             DataContext = new MainVm();
         }
-        private double _animateToProperty = 105;
-        private double _animateFromProperty = 0;
+        //private double _animateToProperty = 105;
+        //private double _animateFromProperty = 0;
         private void profile_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             var tabButton = sender as Button;
             tabButton.Margin = new Thickness(0, 0, -15, 0);
             //var anim = new DoubleAnimation();
             //anim.Duration = new Duration(TimeSpan.FromMilliseconds(200));
-            //_animateFromProperty = tabButton.ActualWidth;
-            //anim.From = _animateFromProperty;
-            //anim.To = _animateToProperty;
+            //anim.From = tabButton.ActualWidth;
+            //anim.To = tabButton.ActualWidth + 20;
             //tabButton.BeginAnimation(WidthProperty, anim);
         }
 
@@ -36,8 +35,8 @@ namespace TenantClient.Views
             tabButton.Margin = new Thickness(0);
             //var anim = new DoubleAnimation();
             //anim.Duration = new Duration(TimeSpan.FromMilliseconds(200));
-            //anim.From = _animateToProperty;
-            //anim.To = _animateFromProperty;
+            //anim.From = tabButton.ActualWidth;
+            //anim.To = tabButton.ActualWidth - 20;
             //tabButton.BeginAnimation(WidthProperty, anim);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Controls;
@@ -10,6 +11,7 @@ namespace TenantClient.ViewModels
 {
     public class MainVm : BaseVM
     {
+        private Dictionary<string, Page> _loadedPages = new Dictionary<string, Page>();
         public Page SelectedPage
         {
             get => _selectedPage;
@@ -24,11 +26,16 @@ namespace TenantClient.ViewModels
         {
             get => new MyCommand((obj) =>
             {
-                if (obj == null)
-                    throw  new ArgumentNullException($"В качестве аргумента был получен null. Ожидалось {typeof(Button).ToString()}");
-                var senderButton = obj as Button;
-                var pageName = senderButton.Tag.ToString();
-                SelectedPage = FindPageByTag(pageName);
+                if (string.IsNullOrWhiteSpace(obj as string))
+                    throw  new ArgumentNullException($"В качестве аргумента был получен null. Ожидался 'Button.Tag'");
+                var pageName = obj as string;
+                string validPageName = ValidatePageName(pageName);
+                var pageRetreived = ShowLoadedPageIfExist(validPageName);
+                if (!pageRetreived)
+                {
+                    SelectedPage = FindPageByTag(validPageName);
+                    InsertPageInLoadedPages(SelectedPage, validPageName);
+                }
             });
         }
         /// <summary>
@@ -44,12 +51,48 @@ namespace TenantClient.ViewModels
                                                     .Where(type => parent.IsAssignableFrom(type) &&
                                                         !type.IsInterface &&
                                                         !type.IsAbstract).ToArray()
-                                                            .Where(type => type.Name.ToLower() == tag.ToLower())
+                                                            .Where(type => ValidatePageName(type.Name) == ValidatePageName(tag))
                                                                 .FirstOrDefault();
             if (findType == null)
                 throw new FindPageException($"Не удалось найти страницу, исходя из заданного тега: {tag}");
             var page = findType.Assembly.CreateInstance(findType.FullName) as Page;
             return page;
+        }
+
+        private void InsertPageInLoadedPages(Page page, string pageName)
+        {
+            if (IsNull(page) || IsNull(pageName))
+                throw new ArgumentNullException($"Переданные параметры: {nameof(page)} и {nameof(pageName)} имели значение null");
+            var formatedPageName = pageName.ToLower();
+            var wasExist = _loadedPages.TryGetValue(formatedPageName, out Page existPage);
+            if (!wasExist)
+                _loadedPages.Add(formatedPageName, page);
+        }
+
+        private bool IsNull(object checkingObj)
+        {
+            if (checkingObj == null)
+                return true;
+            return false;
+        }
+
+        private string ValidatePageName(string pageName)
+        {
+            return pageName.ToLower();
+        }
+
+        /// <summary>
+        /// Отображает страницу, если таковая уже существует
+        /// </summary>
+        /// <returns>true - если страница была найдена и уже отображена</returns>
+        private bool ShowLoadedPageIfExist(string pageName)
+        {
+            var wasExist = _loadedPages.TryGetValue(pageName, out Page existPage);
+            if (wasExist)
+                SelectedPage = existPage;
+            else
+                return false;
+            return true;
         }
     }
 }

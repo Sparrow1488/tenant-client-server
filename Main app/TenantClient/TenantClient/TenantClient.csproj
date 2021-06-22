@@ -70,6 +70,7 @@
     <Compile Include="Exceptions\TokenException.cs" />
     <Compile Include="Exceptions\WindowException.cs" />
     <Compile Include="Local\ClientTokenStorage.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Pages\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>

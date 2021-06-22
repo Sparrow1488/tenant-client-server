@@ -18,8 +18,9 @@
                 Padding="2"
                 HorizontalContentAlignment="Right"
                 Background="#2398AB"
+                BorderThickness="0"
                 Command="{Binding ShowPageByTag}"
-                CommandParameter="{TemplateBinding CommandParameter}"
+                CommandParameter="{TemplateBinding Tag}"
                 FontSize="24"
                 Foreground="White"
                 MouseLeave="profile_MouseLeave"
@@ -99,15 +100,14 @@
             <Button
                 Name="profile"
                 Padding="2"
-                CommandParameter="{Binding ElementName=profile}"
                 Tag="profile"
-                Template="{StaticResource tabButton}">
+                Template="{StaticResource tabButton}"
+                ToolTip="че">
                 <Image Width="45" Source="/refs\icons\profile\profile-color.png" />
             </Button>
             <Button
                 Name="posts"
                 Padding="2"
-                CommandParameter="{Binding ElementName=posts}"
                 Tag="publications"
                 Template="{StaticResource tabButton}">
                 <Button.ToolTip>

@@ -48,17 +48,16 @@ namespace TenantClient.ViewModels
         }
         private async Task GetPublicationsFromServer(int[] postsId)
         {
-            //for (int i = 0; i < postsId.Length; i++)
-            //{
-                var sender = new RequestSendler(new ConnectionSettings("127.0.0.1", 80));
-                var getPostRequest = new GetPublicationsRange(postsId);
-                var serverResponse = await sender.SendRequest(getPostRequest);
+            var sender = new RequestSendler(new ConnectionSettings("127.0.0.1", 80));
+            var getPostRequest = new GetPublicationsRange(postsId);
+            var serverResponse = await sender.SendRequest(getPostRequest);
+            if(serverResponse.Status == ResponseStatus.Ok)
+            {
                 var jGetPosts = serverResponse.ResponseData as JArray;
                 var getPublications = jGetPosts.ToObject<ObservableCollection<Publication>>();
                 Publications = getPublications;
                 sender.Reset();
-                await Task.Delay(50);
-            //}
+            }
         }
     }
 }

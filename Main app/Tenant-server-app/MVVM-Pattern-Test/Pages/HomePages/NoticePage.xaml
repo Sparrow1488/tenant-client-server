@@ -12,7 +12,6 @@
     mc:Ignorable="d">
 
     <ScrollViewer
-        Grid.Column="1"
         Width="800"
         Margin="0,0,0,20"
         HorizontalAlignment="Center"

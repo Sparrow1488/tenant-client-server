@@ -75,7 +75,7 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Margin="0,0,10,0">
                             <TextBlock Text="Тип обращения" />
-                            <ComboBox ToolTip="Тип обращения">
+                            <ComboBox SelectedItem="{Binding SelectedLetterType}" ToolTip="Тип обращения">
                                 <ComboBoxItem Content="Жалоба" IsSelected="True" />
                                 <ComboBoxItem Content="Вопрос" />
                                 <ComboBoxItem Content="Предложение" />

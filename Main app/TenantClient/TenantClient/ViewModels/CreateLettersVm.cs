@@ -2,6 +2,7 @@
 using ExchangeSystem.v2.Packages.Default;
 using ExchangeSystem.v2.Sendlers;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using TenantClient.Commands;
 using TenantClient.Exceptions;
 using TenantClient.Local;
@@ -21,12 +22,14 @@ namespace TenantClient.ViewModels
         }
         private Letter _editLetter = new Letter() { To = 3 };
         private string _userToken = string.Empty;
+        public ComboBoxItem SelectedLetterType { get; set; }
 
         public MyCommand SendLetter
         {
             get => new MyCommand(async (obj) =>
             {
                 ResponsePackage response;
+                EditLetter.Type = SelectLetterTypeByInputItem();
                 if (EditLetterIsValid() && UserWasAuthorizate())
                 {
                     response = await SendRequest();
@@ -48,7 +51,7 @@ namespace TenantClient.ViewModels
         }
         private bool UserWasAuthorizate()
         {
-            var userWasAuth = ClientTokenStorage.TryGet(out _userToken); 
+            var userWasAuth = ClientTokenStorage.TryGet(out _userToken);
             if (userWasAuth)
                 return true;
             NoticeMessage = "Вы не можете отправлять письма, поскольку вы не вошли в систему";
@@ -67,12 +70,10 @@ namespace TenantClient.ViewModels
             var response = await sendler.SendRequest(package);
             return response;
         }
-
         private void ResetEditLetter()
         {
             EditLetter = new Letter() { To = 3 };
         }
-
         private bool SuccessInsert(ResponsePackage response)
         {
             if (response.Status == ResponseStatus.Ok)
@@ -82,7 +83,6 @@ namespace TenantClient.ViewModels
             }
             return false;
         }
-
         private void ShowErrorMessage(ResponsePackage response)
         {
             NoticeMessage = response.ErrorMessage;
@@ -91,6 +91,11 @@ namespace TenantClient.ViewModels
         {
             NoticeMessage = message;
         }
-
+        private LetterType SelectLetterTypeByInputItem()
+        {
+            var content = SelectedLetterType.Content as string;
+            LetterType.TryParse(content, out LetterType letterType);
+            return letterType;
+        }
     }
 }

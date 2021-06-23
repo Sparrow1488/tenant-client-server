@@ -11,7 +11,6 @@ namespace TenantClient
         private AuthVm AuthVm;
         public AuthorizationWindow()
         {
-            //using System.Windows.Interactivity;
             InitializeComponent();
             AuthVm = new AuthVm();
             AuthVm.SetCloseAuthWindowAction(() => Close());
@@ -20,7 +19,10 @@ namespace TenantClient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            AuthVm.LogInToken.Execute(null); //TODO: давайте не будем говнить MVVM, просто скачаем библу
+            //await Task.Run(()=>
+            //{
+            //    AuthVm.LogInToken.Execute(null); //TODO: давайте не будем говнить MVVM, просто скачаем библу
+            //});
         }
     }
 }

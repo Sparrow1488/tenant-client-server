@@ -17,7 +17,7 @@ namespace TenantClient.ViewModels
             set
             {
                 _editLetter = value;
-                OnPropertyChanged("NewLetter");
+                OnPropertyChanged("EditLetter");
             }
         }
         private Letter _editLetter = new Letter() { To = 3 };

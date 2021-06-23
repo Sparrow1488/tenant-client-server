@@ -9,7 +9,6 @@
     Width="450"
     Height="550"
     FontFamily="Calibri"
-    Loaded="Window_Loaded"
     mc:Ignorable="d">
     <Window.Resources>
         <Style x:Key="groupBox">
@@ -77,13 +76,16 @@
                         </TabItem>
                         <TabItem Header="По токену">
                             <StackPanel>
-                                <GroupBox Header="Токен авторизации" Style="{StaticResource groupBox}">
+                                <!--<GroupBox Header="Токен авторизации" Style="{StaticResource groupBox}">
                                     <TextBox
                                         Name="tokenBox"
                                         BorderBrush="Transparent"
                                         Style="{StaticResource textBoxStyle}" />
-                                </GroupBox>
-                                <Button Content="Войти" Style="{StaticResource mainButtonsStyle}" />
+                                </GroupBox>-->
+                                <Button
+                                    Command="{Binding LogInToken}"
+                                    Content="Войти"
+                                    Style="{StaticResource mainButtonsStyle}" />
                             </StackPanel>
                         </TabItem>
                     </TabControl>

@@ -12,19 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TenantClient.ViewModels;
 
 namespace TenantClient.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Letters.xaml
+    /// Логика взаимодействия для MyLetters.xaml
     /// </summary>
-    public partial class Letters : Page
+    public partial class MyLetters : Page
     {
-        public Letters()
+        public MyLetters()
         {
             InitializeComponent();
-            DataContext = new HomeLettersVm();
         }
     }
 }

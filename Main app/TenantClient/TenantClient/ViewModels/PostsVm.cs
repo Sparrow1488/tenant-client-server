@@ -14,7 +14,7 @@ using TenantClient.Commands;
 
 namespace TenantClient.ViewModels
 {
-    public class PostsVm : BaseVM
+    internal class PostsVm : BaseVM
     {
         public ObservableCollection<Publication> Publications
         {

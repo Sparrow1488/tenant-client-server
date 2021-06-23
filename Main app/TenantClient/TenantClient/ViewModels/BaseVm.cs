@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace TenantClient.ViewModels
 {
-    public abstract class BaseVM : INotifyPropertyChanged
+    internal abstract class BaseVM : INotifyPropertyChanged
     {
         public string NoticeMessage
         {

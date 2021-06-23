@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace TenantClient.ViewModels
 {
-    public class LettersVm : BaseVM
+    internal class HomeLettersVm : BaseHomeVm
     {
+        public HomeLettersVm()
+        {
+        }
     }
 }

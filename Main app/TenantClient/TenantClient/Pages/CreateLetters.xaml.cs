@@ -17,25 +17,14 @@ using TenantClient.ViewModels;
 namespace TenantClient.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Profile.xaml
+    /// Логика взаимодействия для CreateLetters.xaml
     /// </summary>
-    public partial class Profile : Page
+    public partial class CreateLetters : Page
     {
-        
-        private ProfileVm ProfileVm;
-        public Profile()
+        public CreateLetters()
         {
             InitializeComponent();
-            ProfileVm = new ProfileVm();
-            DataContext = ProfileVm;
-        }
-
-        bool accWasLoaded = false;
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            if(!accWasLoaded)
-                ProfileVm.ShowAccount.Execute(null);
-            accWasLoaded = true;
+            DataContext = new CreateLettersVm(); 
         }
     }
 }

@@ -16,28 +16,26 @@ namespace TenantClient.Views
             InitializeComponent();
             DataContext = new MainVm();
         }
-        //private double _animateToProperty = 105;
-        //private double _animateFromProperty = 0;
+        
         private void profile_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             var tabButton = sender as Button;
-            tabButton.Margin = new Thickness(0, 0, -15, 0);
-            //var anim = new DoubleAnimation();
-            //anim.Duration = new Duration(TimeSpan.FromMilliseconds(200));
-            //anim.From = tabButton.ActualWidth;
-            //anim.To = tabButton.ActualWidth + 20;
-            //tabButton.BeginAnimation(WidthProperty, anim);
+            PlayMarginAnimation(tabButton, 200, -15);
         }
 
         private void profile_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             var tabButton = sender as Button;
-            tabButton.Margin = new Thickness(0);
-            //var anim = new DoubleAnimation();
-            //anim.Duration = new Duration(TimeSpan.FromMilliseconds(200));
-            //anim.From = tabButton.ActualWidth;
-            //anim.To = tabButton.ActualWidth - 20;
-            //tabButton.BeginAnimation(WidthProperty, anim);
+            PlayMarginAnimation(tabButton, 200, 0);
+        }
+
+        private void PlayMarginAnimation(Button sendlerBtn, double millisDuration, double animTo)
+        {
+            var anim = new ThicknessAnimation();
+            anim.Duration = new Duration(TimeSpan.FromMilliseconds(millisDuration));
+            anim.From = sendlerBtn.BorderThickness;
+            anim.To = new Thickness(0, 0, animTo, 0);
+            sendlerBtn.BeginAnimation(MarginProperty, anim);
         }
     }
 }

@@ -25,3 +25,9 @@ C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Mai
 C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Main app\TenantClient\TenantClient\obj\Debug\Pages\Publications.g.cs
 C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Main app\TenantClient\TenantClient\obj\Debug\Pages\Publications.baml
 C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Main app\TenantClient\TenantClient\obj\Debug\TenantClient_Content.g.cs
+C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Main app\TenantClient\TenantClient\obj\Debug\Pages\Letters.g.cs
+C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Main app\TenantClient\TenantClient\obj\Debug\Pages\Letters.baml
+C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Main app\TenantClient\TenantClient\obj\Debug\Pages\CreateLetters.g.cs
+C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Main app\TenantClient\TenantClient\obj\Debug\Pages\MyLetters.g.cs
+C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Main app\TenantClient\TenantClient\obj\Debug\Pages\CreateLetters.baml
+C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Main app\TenantClient\TenantClient\obj\Debug\Pages\MyLetters.baml

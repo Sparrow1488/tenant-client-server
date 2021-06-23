@@ -5,6 +5,16 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TenantClient", "TenantClient\TenantClient.csproj", "{57F2E53C-8B0F-4FFB-AE8B-72337AD2877A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeSystem.v2", "..\..\..\OCES\Main\ExchangeSystem.v2\ExchangeSystem.v2.csproj", "{B6110F62-4B1C-4CDF-AC5B-A174933A7EFC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExchangeServer", "..\..\..\OCES\Main\SendDataTests\ExchangeServer.csproj", "{D77E33CB-3D9A-4A26-8A7F-8F102955C1C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowListView", "..\..\..\..\The-basis-of-CScharp\$XAML\1_Основа\3_ОТДЕЛЬНЫЕ_КОМПОНЕНТЫ\16_ListView\WindowListView\WindowListView\WindowListView.csproj", "{E73304D2-C2B5-4E46-BFCB-5B72D3A2A089}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowListBox", "..\..\..\..\The-basis-of-CScharp\$XAML\1_Основа\3_ОТДЕЛЬНЫЕ_КОМПОНЕНТЫ\14_ListBox\WindowListBox\WindowListBox\WindowListBox.csproj", "{48AA9336-60AC-4D1E-B7BC-DB800AA85D2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM-Pattern-Test", "..\Tenant-server-app\MVVM-Pattern-Test\MVVM-Pattern-Test.csproj", "{0155B793-387A-41CA-96EA-D986BA24FE0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +25,26 @@ Global
 		{57F2E53C-8B0F-4FFB-AE8B-72337AD2877A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57F2E53C-8B0F-4FFB-AE8B-72337AD2877A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57F2E53C-8B0F-4FFB-AE8B-72337AD2877A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6110F62-4B1C-4CDF-AC5B-A174933A7EFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6110F62-4B1C-4CDF-AC5B-A174933A7EFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6110F62-4B1C-4CDF-AC5B-A174933A7EFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6110F62-4B1C-4CDF-AC5B-A174933A7EFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D77E33CB-3D9A-4A26-8A7F-8F102955C1C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D77E33CB-3D9A-4A26-8A7F-8F102955C1C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D77E33CB-3D9A-4A26-8A7F-8F102955C1C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D77E33CB-3D9A-4A26-8A7F-8F102955C1C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E73304D2-C2B5-4E46-BFCB-5B72D3A2A089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E73304D2-C2B5-4E46-BFCB-5B72D3A2A089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E73304D2-C2B5-4E46-BFCB-5B72D3A2A089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E73304D2-C2B5-4E46-BFCB-5B72D3A2A089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48AA9336-60AC-4D1E-B7BC-DB800AA85D2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48AA9336-60AC-4D1E-B7BC-DB800AA85D2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48AA9336-60AC-4D1E-B7BC-DB800AA85D2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48AA9336-60AC-4D1E-B7BC-DB800AA85D2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0155B793-387A-41CA-96EA-D986BA24FE0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0155B793-387A-41CA-96EA-D986BA24FE0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0155B793-387A-41CA-96EA-D986BA24FE0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0155B793-387A-41CA-96EA-D986BA24FE0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

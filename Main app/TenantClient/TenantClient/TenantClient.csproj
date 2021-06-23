@@ -71,8 +71,14 @@
     <Compile Include="Exceptions\WindowException.cs" />
     <Compile Include="Local\ClientTokenStorage.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Pages\CreateLetters.xaml.cs">
+      <DependentUpon>CreateLetters.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Letters.xaml.cs">
       <DependentUpon>Letters.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MyLetters.xaml.cs">
+      <DependentUpon>MyLetters.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
@@ -80,7 +86,9 @@
     <Compile Include="Pages\Publications.xaml.cs">
       <DependentUpon>Publications.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\LettersVm.cs" />
+    <Compile Include="ViewModels\BaseHomeVm.cs" />
+    <Compile Include="ViewModels\CreateLettersVm.cs" />
+    <Compile Include="ViewModels\HomeLettersVm.cs" />
     <Compile Include="ViewModels\MainVm.cs" />
     <Compile Include="ViewModels\PostsVm.cs" />
     <Compile Include="ViewModels\ProfileVm.cs" />
@@ -121,7 +129,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Pages\CreateLetters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Letters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MyLetters.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

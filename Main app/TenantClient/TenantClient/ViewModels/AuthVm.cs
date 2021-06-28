@@ -57,12 +57,14 @@ namespace TenantClient.ViewModels
                 var success = ClientTokenStorage.TryGet(out string clientToken);
                 if (success)
                 {
+                    NoticeMessage = "Вход в систему...";
                     var tokenAuthPack = new TokenAuthorization(clientToken);
                     var response = await SendRequest(tokenAuthPack);
                     if (SuccessAuthorization(response))
                         CompleteEntrance();
+                    NoticeMessage = "Ошибка входа по токену";
                 }
-            }, (obj) => ClientTokenStorage.TokenWasExist());
+            });
         }
         private async Task<ResponsePackage> SendRequest(BaseRequestPackage package)
         {

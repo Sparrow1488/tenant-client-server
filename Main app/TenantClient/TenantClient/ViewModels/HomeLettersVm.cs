@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TenantClient.Pages;
 
 namespace TenantClient.ViewModels
 {
@@ -10,6 +11,7 @@ namespace TenantClient.ViewModels
     {
         public HomeLettersVm()
         {
+            SelectedPage = new MyLetters();
         }
     }
 }

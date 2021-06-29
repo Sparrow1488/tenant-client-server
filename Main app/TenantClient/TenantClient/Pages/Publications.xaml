@@ -8,11 +8,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Publications"
     Background="GhostWhite">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
+    <!--<i:Interaction.Triggers>
+        <i:EventTrigger EventName="Initialized">
             <i:InvokeCommandAction Command="{Binding GetAllPosts}" />
         </i:EventTrigger>
-    </i:Interaction.Triggers>
+    </i:Interaction.Triggers>-->
     <ScrollViewer
         Grid.Column="1"
         Width="800"

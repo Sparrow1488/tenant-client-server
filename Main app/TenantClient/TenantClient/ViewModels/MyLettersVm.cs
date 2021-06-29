@@ -5,9 +5,7 @@ using ExchangeSystem.v2.Sendlers;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using TenantClient.Commands;
 using TenantClient.Local;
 using TenantClient.Pages;
@@ -34,7 +32,7 @@ namespace TenantClient.ViewModels
                 _selectedLetter = value;
                 if(ReadLetterPage == null)
                     ReadLetterPage = new ReadLetter(SelectedLetter);
-                LetterSelected?.Invoke(SelectedLetter);
+                SelectedLetterChanged?.Invoke(SelectedLetter);
                 OnPropertyChanged("SelectedLetter");
             }
         }
@@ -46,12 +44,12 @@ namespace TenantClient.ViewModels
             {
                 _readLetterPage = value;
                 var vm = _readLetterPage.DataContext as ReadLetterVm;
-                vm.SetActionWhenSelectedLetterChanged(ref LetterSelected);
+                vm.SetActionWhenSelectedLetterChanged(ref SelectedLetterChanged);
                 OnPropertyChanged("ReadLetterPage");
             }
         }
         private ReadLetter _readLetterPage;
-        public event Action<Letter> LetterSelected;
+        public event Action<Letter> SelectedLetterChanged;
         private string _authToken;
         public MyCommand GetMyLetters
         {

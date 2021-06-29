@@ -2,13 +2,8 @@
 using ExchangeSystem.v2.Packages;
 using ExchangeSystem.v2.Packages.Default;
 using ExchangeSystem.v2.Sendlers;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TenantClient.Commands;
 
@@ -16,6 +11,13 @@ namespace TenantClient.ViewModels
 {
     internal class PostsVm : BaseVM
     {
+        /// <summary>
+        /// СРАЗУ ПРИ СОЗДАНИИ ПОЛУЧАЕТ СПИСОК ПУБЛИКАЦИЙ
+        /// </summary>
+        public PostsVm()
+        {
+            GetAllPosts?.Execute(null);
+        }
         public ObservableCollection<Publication> Publications
         {
             get => _posts;

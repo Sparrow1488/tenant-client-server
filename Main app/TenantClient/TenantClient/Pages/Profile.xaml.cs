@@ -30,9 +30,12 @@ namespace TenantClient.Pages
             DataContext = ProfileVm;
         }
 
+        bool accWasLoaded = false;
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            ProfileVm.ShowAccount.Execute(null);
+            if(!accWasLoaded)
+                ProfileVm.ShowAccount.Execute(null);
+            accWasLoaded = true;
         }
     }
 }

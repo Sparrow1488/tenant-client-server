@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="TenantClient.Pages.ReadLetter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TenantClient.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="ReadLetter"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Background="White"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="textBoxStyle" TargetType="TextBox">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style x:Key="textBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="0,0,10,0" />
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Border
+            Width="500"
+            MinWidth="300"
+            Margin="0,80,0,0"
+            Padding="5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            BorderBrush="Gray"
+            BorderThickness="1"
+            CornerRadius="5">
+            <StackPanel x:Name="basePanel">
+                <WrapPanel>
+                    <TextBlock Style="{StaticResource textBlockStyle}" Text="Sendler" />
+                    <TextBlock Style="{StaticResource textBlockStyle}" Text="{Binding Letter.DateCreate}" />
+                    <TextBlock Style="{StaticResource textBlockStyle}" Text="{Binding Letter.Type}" />
+                </WrapPanel>
+                <TextBox
+                    FontWeight="DemiBold"
+                    Style="{StaticResource textBoxStyle}"
+                    Text="{Binding Letter.Title}" />
+                <StackPanel
+                    Height="1"
+                    Margin="0,5"
+                    Background="Black" />
+                <TextBox Style="{StaticResource textBoxStyle}" Text="{Binding Letter.Text}" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

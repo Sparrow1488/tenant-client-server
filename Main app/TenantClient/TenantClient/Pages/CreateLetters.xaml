@@ -1,0 +1,118 @@
+﻿<Page
+    x:Class="TenantClient.Pages.CreateLetters"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TenantClient.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="CreateLetters"
+    d:DesignHeight="550"
+    d:DesignWidth="880"
+    Background="White"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="textBoxStyle" TargetType="TextBox">
+            <Setter Property="AcceptsReturn" Value="True" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FontFamily" Value="Calibri" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <ControlTemplate x:Key="btnTemp" TargetType="Button">
+            <Button
+                Margin="0,0,5,0"
+                Padding="5,2"
+                BorderBrush="Black"
+                BorderThickness="1"
+                Command="{TemplateBinding Command}"
+                Content="{TemplateBinding Content}"
+                FontSize="18" />
+        </ControlTemplate>
+    </Page.Resources>
+    <Grid>
+        <Border
+            Width="450"
+            Height="Auto"
+            Padding="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            BorderBrush="DarkSlateGray"
+            BorderThickness="1"
+            CornerRadius="10">
+            <StackPanel>
+
+                <!--  Main  -->
+
+                <GroupBox FontSize="12" Header="Заголовок">
+                    <TextBox
+                        FontWeight="DemiBold"
+                        Style="{StaticResource textBoxStyle}"
+                        Text="{Binding EditLetter.Title, Mode=TwoWay}"
+                        ToolTip="Заголовок письма" />
+                </GroupBox>
+                <StackPanel
+                    Height="1"
+                    Margin="0,2"
+                    Background="Black" />
+                <GroupBox Header="Текст обращения">
+                    <TextBox
+                        MinHeight="150"
+                        MaxHeight="300"
+                        AcceptsReturn="True"
+                        Style="{StaticResource textBoxStyle}"
+                        Text="{Binding EditLetter.Text, Mode=TwoWay}"
+                        ToolTip="Текст письма"
+                        VerticalScrollBarVisibility="Visible" />
+                </GroupBox>
+
+                <!--  Letter information  -->
+
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                            <TextBlock Text="Тип обращения" />
+                            <ComboBox SelectedItem="{Binding SelectedLetterType}" ToolTip="Тип обращения">
+                                <ComboBoxItem Content="Жалоба" IsSelected="True" />
+                                <ComboBoxItem Content="Вопрос" />
+                                <ComboBoxItem Content="Предложение" />
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                            <TextBlock Text="Адресант" />
+                            <ComboBox ToolTip="Кому письмо">
+                                <ComboBoxItem Content="Председателю" IsSelected="True" />
+                            </ComboBox>
+                        </StackPanel>
+
+                    </Grid>
+
+                    <TextBlock Text="{Binding StringFormat=Дата отправки {0}, Path=EditLetter.DateCreate}" />
+                </StackPanel>
+
+                <!--  Bottom  -->
+
+                <StackPanel
+                    Width="Auto"
+                    Height="1"
+                    Background="Black" />
+                <WrapPanel Margin="0,5">
+                    <Button
+                        Command="{Binding SendLetter}"
+                        Content="Отправить"
+                        Template="{StaticResource btnTemp}" />
+                    <Button Content="Прикрепить" Template="{StaticResource btnTemp}" />
+                </WrapPanel>
+                <TextBlock
+                    FontSize="18"
+                    Text="{Binding NoticeMessage}"
+                    TextWrapping="Wrap" />
+
+            </StackPanel>
+
+        </Border>
+    </Grid>
+</Page>

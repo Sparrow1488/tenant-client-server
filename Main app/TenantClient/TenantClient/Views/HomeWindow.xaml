@@ -23,8 +23,8 @@
                 CommandParameter="{TemplateBinding Tag}"
                 FontSize="24"
                 Foreground="White"
-                MouseLeave="profile_MouseLeave"
-                MouseMove="profile_MouseMove">
+                MouseEnter="profile_MouseMove"
+                MouseLeave="profile_MouseLeave">
                 <ContentControl Content="{TemplateBinding Content}" />
             </Button>
         </ControlTemplate>
@@ -54,7 +54,12 @@
             <Setter Property="ItemsControl.VerticalContentAlignment" Value="Center" />
             <Setter Property="ItemsControl.Background" Value="Coral" />
         </Style>
-
+        <Storyboard x:Key="marginAnim">
+            <ThicknessAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="Margin">
+                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0 0 0 0" />
+                <SplineThicknessKeyFrame KeyTime="00:00:03" Value="0 0 -20 0" />
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
     </Window.Resources>
     <Grid>
         <!--<Grid.ColumnDefinitions>
@@ -99,7 +104,6 @@
 
             <Button
                 Name="profile"
-                Padding="2"
                 Tag="profile"
                 Template="{StaticResource tabButton}"
                 ToolTip="че">
@@ -107,7 +111,6 @@
             </Button>
             <Button
                 Name="posts"
-                Padding="2"
                 Tag="publications"
                 Template="{StaticResource tabButton}">
                 <Button.ToolTip>
@@ -115,6 +118,10 @@
                 </Button.ToolTip>
                 <Image Width="45" Source="/refs\icons\News\newspaper-color.png" />
             </Button>
+            <Button Tag="letters" Template="{StaticResource tabButton}">
+                <Image Width="45" Source="/refs\icons\Write\write-letter-color.png" />
+            </Button>
+
         </StackPanel>
 
     </Grid>

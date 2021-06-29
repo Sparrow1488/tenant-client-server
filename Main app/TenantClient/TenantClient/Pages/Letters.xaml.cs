@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TenantClient.ViewModels;
 
 namespace TenantClient.Pages
 {
@@ -23,6 +24,7 @@ namespace TenantClient.Pages
         public Letters()
         {
             InitializeComponent();
+            DataContext = new HomeLettersVm();
         }
     }
 }

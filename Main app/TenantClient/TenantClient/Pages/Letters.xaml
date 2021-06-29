@@ -13,8 +13,11 @@
     <Page.Resources>
         <ControlTemplate x:Key="tabButton" TargetType="Button">
             <Button
+                Margin="0,0,0,2"
                 Padding="4,2"
                 BorderThickness="0"
+                Command="{Binding ShowPageByTag}"
+                CommandParameter="{TemplateBinding Tag}"
                 Content="{TemplateBinding Content}" />
         </ControlTemplate>
     </Page.Resources>
@@ -23,13 +26,22 @@
         <!--  Левая менюшка  -->
 
         <StackPanel Width="80" HorizontalAlignment="Left">
-            <Button Content="Написать" Template="{StaticResource tabButton}" />
-            <Button Content="Читать" Template="{StaticResource tabButton}" />
+            <Button
+                Content="Написать"
+                Tag="createLetters"
+                Template="{StaticResource tabButton}" />
+            <Button
+                Content="Читать"
+                Tag="myLetters"
+                Template="{StaticResource tabButton}" />
         </StackPanel>
 
         <!--  Главный фрейм  -->
 
-        <Frame Margin="80,0,0,0" NavigationUIVisibility="Hidden" />
+        <Frame
+            Margin="80,0,0,0"
+            Content="{Binding SelectedPage}"
+            NavigationUIVisibility="Hidden" />
 
     </Grid>
 </Page>

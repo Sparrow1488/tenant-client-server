@@ -12,7 +12,7 @@ using TenantClient.Views;
 
 namespace TenantClient.ViewModels
 {
-    public class AuthVm : BaseVM
+    internal class AuthVm : BaseVM
     {
         public string InputLogin { get; set; }
         public string InputPassword { get; set; }
@@ -57,17 +57,20 @@ namespace TenantClient.ViewModels
                 var success = ClientTokenStorage.TryGet(out string clientToken);
                 if (success)
                 {
+                    NoticeMessage = "Вход в систему...";
                     var tokenAuthPack = new TokenAuthorization(clientToken);
                     var response = await SendRequest(tokenAuthPack);
                     if (SuccessAuthorization(response))
                         CompleteEntrance();
+                    NoticeMessage = "Ошибка входа по токену";
                 }
-            }, (obj) => ClientTokenStorage.TokenWasExist());
+            });
         }
         private async Task<ResponsePackage> SendRequest(BaseRequestPackage package)
         {
             var sender = new RequestSendler(new ConnectionSettings("127.0.0.1", 80));
-            return await sender.SendRequest(package);
+            var response = await sender.SendRequest(package);
+            return response;
         }
         private bool IsInputDataValid()
         {

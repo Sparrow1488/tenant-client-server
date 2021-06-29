@@ -10,7 +10,7 @@ using TenantClient.Local;
 
 namespace TenantClient.ViewModels
 {
-    public class ProfileVm : BaseVM
+    internal class ProfileVm : BaseVM
     {
         private int _accountId;
         private string _userToken;

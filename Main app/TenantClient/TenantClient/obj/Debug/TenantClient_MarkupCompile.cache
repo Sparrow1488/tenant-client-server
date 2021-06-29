@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Main app\TenantClient\TenantClient\App.xaml
-42126972747
+51481571707
 1-722758860
-22-1839745459
+25-2032673493
 16-809132903
-Pages\Profile.xaml;Pages\Publications.xaml;Views\AuthorizationWindow.xaml;Views\HomeWindow.xaml;
+Pages\Letters.xaml;Pages\Profile.xaml;Pages\Publications.xaml;Views\AuthorizationWindow.xaml;Views\HomeWindow.xaml;
 
-False
+True
 

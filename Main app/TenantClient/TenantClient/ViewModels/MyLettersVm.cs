@@ -3,6 +3,7 @@ using ExchangeSystem.v2.Packages;
 using ExchangeSystem.v2.Packages.Default;
 using ExchangeSystem.v2.Sendlers;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -31,7 +32,9 @@ namespace TenantClient.ViewModels
             set
             {
                 _selectedLetter = value;
-                ReadLetterPage = new ReadLetter(SelectedLetter);
+                if(ReadLetterPage == null)
+                    ReadLetterPage = new ReadLetter(SelectedLetter);
+                LetterSelected?.Invoke(SelectedLetter);
                 OnPropertyChanged("SelectedLetter");
             }
         }
@@ -42,10 +45,13 @@ namespace TenantClient.ViewModels
             set
             {
                 _readLetterPage = value;
+                var vm = _readLetterPage.DataContext as ReadLetterVm;
+                vm.SetActionWhenSelectedLetterChanged(ref LetterSelected);
                 OnPropertyChanged("ReadLetterPage");
             }
         }
         private ReadLetter _readLetterPage;
+        public event Action<Letter> LetterSelected;
         private string _authToken;
         public MyCommand GetMyLetters
         {
@@ -57,13 +63,6 @@ namespace TenantClient.ViewModels
                     ResetLetters();
                     await GetLettersFromServer();
                 }
-            });
-        }
-        public MyCommand ReadLetter
-        {
-            get => new MyCommand((obj) =>
-            {
-                var sendler = obj as StackPanel;
             });
         }
         private void ResetLetters()

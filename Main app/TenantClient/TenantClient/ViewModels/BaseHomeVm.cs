@@ -26,7 +26,7 @@ namespace TenantClient.ViewModels
             get => new MyCommand((obj) =>
             {
                 if (string.IsNullOrWhiteSpace(obj as string))
-                    throw new ArgumentNullException($"В качестве аргумента был получен null. Ожидался 'Button.Tag'");
+                    throw new ArgumentNullException($"В качестве аргумента был получен null. Ожидался 'Tag'");
                 var pageName = obj as string;
                 string validPageName = ValidatePageName(pageName);
                 var pageRetreived = ShowLoadedPageIfExist(validPageName);
@@ -60,9 +60,10 @@ namespace TenantClient.ViewModels
 
         protected bool IsNull(object checkingObj)
         {
+            var isNull = false;
             if (checkingObj == null)
-                return true;
-            return false;
+                isNull = true;
+            return isNull;
         }
 
         protected string ValidatePageName(string pageName)
@@ -76,12 +77,16 @@ namespace TenantClient.ViewModels
         /// <returns>true - если страница была найдена и уже отображена</returns>
         protected bool ShowLoadedPageIfExist(string pageName)
         {
+            var pageWasExist = false;
             var wasExist = _loadedPages.TryGetValue(pageName, out Page existPage);
             if (wasExist)
+            {
                 SelectedPage = existPage;
+                pageWasExist = true;
+            }
             else
-                return false;
-            return true;
+                pageWasExist = false;
+            return pageWasExist;
         }
         protected void InsertPageInLoadedPages(Page page, string pageName)
         {

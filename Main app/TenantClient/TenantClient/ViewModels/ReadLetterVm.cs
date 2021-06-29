@@ -1,4 +1,5 @@
 ﻿using ExchangeSystem.v2.Entities;
+using System;
 using TenantClient.Commands;
 
 namespace TenantClient.ViewModels
@@ -26,7 +27,7 @@ namespace TenantClient.ViewModels
         }
         public ReadLetterVm(Letter letter)
         {
-            Letter = letter;
+            RetreiveLetter(letter);
         }
 
         public MyCommand GetLetterById
@@ -35,6 +36,14 @@ namespace TenantClient.ViewModels
             {
 
             });
+        }
+        public void RetreiveLetter(Letter letter)
+        {
+            Letter = letter;
+        }
+        public void SetActionWhenSelectedLetterChanged(ref Action<Letter> action)
+        {
+            action += (letter) => RetreiveLetter(letter);
         }
     }
 }

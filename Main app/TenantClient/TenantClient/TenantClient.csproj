@@ -92,6 +92,9 @@
     <Compile Include="Pages\Publications.xaml.cs">
       <DependentUpon>Publications.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ReadLetter.xaml.cs">
+      <DependentUpon>ReadLetter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BaseHomeVm.cs" />
     <Compile Include="ViewModels\CreateLettersVm.cs" />
     <Compile Include="ViewModels\HomeLettersVm.cs" />
@@ -99,6 +102,7 @@
     <Compile Include="ViewModels\MyLettersVm.cs" />
     <Compile Include="ViewModels\PostsVm.cs" />
     <Compile Include="ViewModels\ProfileVm.cs" />
+    <Compile Include="ViewModels\ReadLetterVm.cs" />
     <Compile Include="Views\HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
@@ -154,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Publications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ReadLetter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

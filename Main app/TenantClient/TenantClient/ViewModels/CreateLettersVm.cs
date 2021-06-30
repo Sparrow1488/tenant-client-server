@@ -29,6 +29,12 @@ namespace TenantClient.ViewModels
             get => new MyCommand(async (obj) =>
             {
                 ResponsePackage response;
+                NoticeMessage = "Отправляем письмо...";
+                if(SelectedLetterType == null)
+                {
+                    NoticeMessage = "Укажите тип обращения";
+                    return;
+                }
                 EditLetter.Type = SelectLetterTypeByInputItem();
                 if (EditLetterIsValid() && UserWasAuthorizate())
                 {

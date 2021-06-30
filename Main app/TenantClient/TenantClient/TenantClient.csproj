@@ -80,6 +80,9 @@
     <Compile Include="Pages\CreateLetters.xaml.cs">
       <DependentUpon>CreateLetters.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CreatePosts.xaml.cs">
+      <DependentUpon>CreatePosts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Letters.xaml.cs">
       <DependentUpon>Letters.xaml</DependentUpon>
     </Compile>
@@ -97,6 +100,7 @@
     </Compile>
     <Compile Include="ViewModels\BaseHomeVm.cs" />
     <Compile Include="ViewModels\CreateLettersVm.cs" />
+    <Compile Include="ViewModels\CreatePostsVm.cs" />
     <Compile Include="ViewModels\HomeLettersVm.cs" />
     <Compile Include="ViewModels\MainVm.cs" />
     <Compile Include="ViewModels\MyLettersVm.cs" />
@@ -142,6 +146,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Pages\CreateLetters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CreatePosts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

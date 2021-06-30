@@ -9,6 +9,7 @@
     d:DesignHeight="550"
     d:DesignWidth="880"
     Background="White"
+    FontFamily="Calibri"
     mc:Ignorable="d">
     <Page.Resources>
         <Style x:Key="textBoxStyle" TargetType="TextBox">

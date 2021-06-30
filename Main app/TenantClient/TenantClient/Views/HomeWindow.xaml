@@ -119,7 +119,10 @@
                 <Image Width="45" Source="/refs\icons\News\newspaper-color.png" />
             </Button>
             <Button Tag="letters" Template="{StaticResource tabButton}">
-                <Image Width="45" Source="/refs\icons\Write\write-letter-color.png" />
+                <Image Width="45" Source="/refs\icons\send\send-letter-color.png" />
+            </Button>
+            <Button Tag="createPosts" Template="{StaticResource tabButton}">
+                <Image Width="45" Source="/refs\icons\write/write-letter-color.png" />
             </Button>
 
         </StackPanel>

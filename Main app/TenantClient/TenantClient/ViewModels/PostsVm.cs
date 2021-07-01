@@ -32,14 +32,19 @@ namespace TenantClient.ViewModels
         {
             get => new MyCommand(async(obj) =>
             {
-                var pack = new GetAllPublications();
-                var response = await SendRequest(pack);
-                if (response.Status == ResponseStatus.Ok)
+                NoticeMessage = "Загружаем публикации...";
+                await Task.Run(() =>
                 {
-                    var jArrayPostsId = response.ResponseData as JArray;
-                    var publicationsId = jArrayPostsId.ToObject<int[]>();
-                    await GetPublicationsFromServer(publicationsId);
-                }
+                    var pack = new GetAllPublications();
+                    var response =  SendRequest(pack).Result;
+                    if (response.Status == ResponseStatus.Ok)
+                    {
+                        var jArrayPostsId = response.ResponseData as JArray;
+                        var publicationsId = jArrayPostsId.ToObject<int[]>();
+                        GetPublicationsFromServer(publicationsId);
+                    }
+                });
+                NoticeMessage = "";
             });
         }
         private async Task<ResponsePackage> SendRequest(BaseRequestPackage package)

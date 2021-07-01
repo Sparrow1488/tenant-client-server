@@ -37,6 +37,12 @@
                         <TextBlock Text="Обновить" />
                     </WrapPanel>
                 </Button>
+                <StackPanel>
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="22"
+                        Text="{Binding NoticeMessage}" />
+                </StackPanel>
                 <ItemsControl
                     x:Name="tStack"
                     Grid.Column="0"

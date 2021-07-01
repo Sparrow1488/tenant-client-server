@@ -1,10 +1,6 @@
 ﻿using ExchangeSystem.v2.Entities;
 using ExchangeSystem.v2.Packages.Default;
 using ExchangeSystem.v2.Sendlers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using TenantClient.Commands;

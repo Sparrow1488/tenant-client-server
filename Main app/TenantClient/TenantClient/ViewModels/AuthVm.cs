@@ -53,22 +53,31 @@ namespace TenantClient.ViewModels
         {
             get => new MyCommand(async (obj)=>
             {
-                Task.Delay(1000).Wait();
+                var authResult = await LogInTokenAsync();
+                if (SuccessAuthorization(authResult))
+                    CompleteEntrance();
+                NoticeMessage = "Ошибка входа по токену";
+            });
+        }
+        private async Task<ResponsePackage> LogInTokenAsync()
+        {
+            ResponsePackage response = new ResponsePackage(ResponseStatus.InsideError, "");
+            await Task.Run(() =>
+            {
+                Task.Delay(1200); // при запуске окна авторизации даем время отдышаться, чтобы не вылетало
                 var success = ClientTokenStorage.TryGet(out string clientToken);
                 if (success)
                 {
                     NoticeMessage = "Вход в систему...";
                     var tokenAuthPack = new TokenAuthorization(clientToken);
-                    var response = await SendRequest(tokenAuthPack);
-                    if (SuccessAuthorization(response))
-                        CompleteEntrance();
-                    NoticeMessage = "Ошибка входа по токену";
+                    response = SendRequest(tokenAuthPack).Result;
                 }
             });
+            return response;
         }
         private async Task<ResponsePackage> SendRequest(BaseRequestPackage package)
         {
-            var sender = new RequestSendler(new ConnectionSettings("127.0.0.1", 80));
+            var sender = new RequestSendler(new ConnectionSettings());
             var response = await sender.SendRequest(package);
             return response;
         }

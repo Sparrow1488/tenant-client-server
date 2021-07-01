@@ -32,9 +32,9 @@ namespace TenantClient.ViewModels
 
         public MyCommand GetLetterById
         {
-            get => new MyCommand(async (obj) =>
+            get => new MyCommand((obj) =>
             {
-
+                throw new NotImplementedException("Данный функционал еще не введен");
             });
         }
         public void RetreiveLetter(Letter letter)

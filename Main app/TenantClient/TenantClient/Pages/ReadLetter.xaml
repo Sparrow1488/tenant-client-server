@@ -47,7 +47,43 @@
                     Margin="0,5"
                     Background="Black" />
                 <TextBox Style="{StaticResource textBoxStyle}" Text="{Binding Letter.Text}" />
+
+                <!--  ПРОСМОТР ОТВЕТОВ  -->
+
+                <ItemsControl
+                    x:Name="tStack"
+                    Grid.Column="0"
+                    Margin="0,20,0,0"
+                    ItemsSource="{Binding Responses}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Expander Padding="5" Header="{Binding Title}">
+                                <StackPanel>
+                                    <TextBlock
+                                        Margin="10,0,5,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="18"
+                                        Text="{Binding Title}" />
+                                    <StackPanel Height="1" Background="Black" />
+                                    <TextBlock
+                                        Margin="10,0,5,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="18"
+                                        Text="{Binding Text}" />
+                                </StackPanel>
+                            </Expander>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
             </StackPanel>
+
         </Border>
+
     </Grid>
 </Page>

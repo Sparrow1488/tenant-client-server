@@ -49,13 +49,13 @@ namespace TenantClient.ViewModels
         }
         private async Task<ResponsePackage> SendRequest(BaseRequestPackage package)
         {
-            var sender = new RequestSendler(new ConnectionSettings("127.0.0.1", 80));
+            var sender = new RequestSendler(new ConnectionSettings());
             var response = await sender.SendRequest(package);
             return response;
         }
         private async Task GetPublicationsFromServer(int[] postsId)
         {
-            var sender = new RequestSendler(new ConnectionSettings("127.0.0.1", 80));
+            var sender = new RequestSendler(new ConnectionSettings());
             var getPostRequest = new GetPublicationsRange(postsId);
             var serverResponse = await sender.SendRequest(getPostRequest);
             if(serverResponse.Status == ResponseStatus.Ok)

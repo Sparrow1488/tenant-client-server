@@ -20,7 +20,7 @@ namespace TenantClient.ViewModels
                 OnPropertyChanged("EditLetter");
             }
         }
-        private Letter _editLetter = new Letter() { To = 3 };
+        private Letter _editLetter = new Letter() { To = 3, ResponseTo = 1 };
         private string _userToken = string.Empty;
         public ComboBoxItem SelectedLetterType { get; set; }
 

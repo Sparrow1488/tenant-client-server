@@ -62,19 +62,9 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Expander Padding="5" Header="{Binding Title}">
+                            <Expander Header="{Binding ReadLetter.Title}">
                                 <StackPanel>
-                                    <TextBlock
-                                        Margin="10,0,5,0"
-                                        VerticalAlignment="Center"
-                                        FontSize="18"
-                                        Text="{Binding Title}" />
-                                    <StackPanel Height="1" Background="Black" />
-                                    <TextBlock
-                                        Margin="10,0,5,0"
-                                        VerticalAlignment="Center"
-                                        FontSize="18"
-                                        Text="{Binding Text}" />
+                                    <Frame Content="{Binding Page}" NavigationUIVisibility="Hidden" />
                                 </StackPanel>
                             </Expander>
                         </DataTemplate>

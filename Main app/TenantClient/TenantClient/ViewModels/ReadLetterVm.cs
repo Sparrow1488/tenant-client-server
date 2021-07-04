@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using TenantClient.AdditionalStructs;
 using TenantClient.Commands;
 using TenantClient.Pages;
 
@@ -24,7 +25,7 @@ namespace TenantClient.ViewModels
             }
         }
         private Letter _letter;
-        public ObservableCollection<(Letter, ReadLetter)> Responses
+        public ObservableCollection<ReadLetterStruct> Responses
         {
             get => _responses;
             set
@@ -33,7 +34,7 @@ namespace TenantClient.ViewModels
                 _responses = value;
             }
         }
-        private ObservableCollection<(Letter, ReadLetter)> _responses = new ObservableCollection<(Letter, ReadLetter)>();
+        private ObservableCollection<ReadLetterStruct> _responses = new ObservableCollection<ReadLetterStruct>();
         /// <summary>
         /// Отобразит письмо, id которого был передан в конструктор
         /// </summary>
@@ -71,11 +72,22 @@ namespace TenantClient.ViewModels
             var request = new GetLetterResponses(Letter.Id);
             var sendler = new RequestSendler(new ConnectionSettings());
             var response = await sendler.SendRequest(request);
-            if(response.Status == ResponseStatus.Ok)
+            if (response.Status == ResponseStatus.Ok)
             {
                 var jArrayResponses = response.ResponseData as JArray;
-                var responses = jArrayResponses.ToObject<ObservableCollection<Letter>>();
+                var responses = jArrayResponses.ToObject<Letter[]>();
+
+                ObservableCollection<ReadLetterStruct> test = new ObservableCollection<ReadLetterStruct>();
+                foreach (var item in responses)
+                {
+                    //var readResponsePage = new ReadLetter(item);
+                    var struct1 = new ReadLetterStruct(item, null);
+                    test.Add(struct1);
+                }
+                Responses = test;
             }
+            else
+                Responses = new ObservableCollection<ReadLetterStruct>();
         }
         public void RetreiveLetter(Letter letter)
         {

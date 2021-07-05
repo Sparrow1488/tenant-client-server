@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using TenantClient.AdditionalStructs;
 using TenantClient.Commands;
@@ -25,6 +26,14 @@ namespace TenantClient.ViewModels
             }
         }
         private Letter _letter;
+        public string Sendler
+        {
+            get => Letter.sendler;
+            set
+            {
+                OnPropertyChanged("Letter");
+            }
+        }
         public ObservableCollection<ReadLetterStruct> Responses
         {
             get => _responses;
@@ -46,8 +55,8 @@ namespace TenantClient.ViewModels
         }
         public ReadLetterVm(Letter letter)
         {
-            RetreiveLetter(letter);
-            
+            if (letter != null)
+                RetreiveLetter(letter);
         }
 
         public MyCommand GetLetterById
@@ -67,6 +76,14 @@ namespace TenantClient.ViewModels
                 });
             });
         }
+        public MyCommand SelectResponse
+        {
+            get => new MyCommand((obj) =>
+            {
+                var response = obj as Letter;
+                RetreiveLetter(response);
+            });
+        }
         public async Task GetResponsesAsync()
         {
             var request = new GetLetterResponses(Letter.Id);
@@ -75,12 +92,11 @@ namespace TenantClient.ViewModels
             if (response.Status == ResponseStatus.Ok)
             {
                 var jArrayResponses = response.ResponseData as JArray;
-                var responses = jArrayResponses.ToObject<Letter[]>();
+                var responses = jArrayResponses.ToObject<Letter[]>().OrderBy(letter => letter.DateCreate);
 
                 ObservableCollection<ReadLetterStruct> test = new ObservableCollection<ReadLetterStruct>();
                 foreach (var item in responses)
                 {
-                    //var readResponsePage = new ReadLetter(item);
                     var struct1 = new ReadLetterStruct(item, null);
                     test.Add(struct1);
                 }
@@ -91,8 +107,11 @@ namespace TenantClient.ViewModels
         }
         public void RetreiveLetter(Letter letter)
         {
-            Letter = letter;
-            GetResponsesById?.Execute(null);
+            if(letter != null)
+            {
+                Letter = letter;
+                GetResponsesById?.Execute(null);
+            }
         }
         public void SetActionWhenSelectedLetterChanged(ref Action<Letter> action)
         {

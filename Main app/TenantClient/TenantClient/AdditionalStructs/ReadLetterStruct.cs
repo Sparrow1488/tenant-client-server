@@ -14,8 +14,10 @@ namespace TenantClient.AdditionalStructs
         {
             ReadLetter = letter;
             Page = page;
+            Sendler = ReadLetter.sendler;
         }
         public Letter ReadLetter { get; set; }
         public ReadLetter Page { get; set; }
+        public string Sendler { get; set; }
     }
 }

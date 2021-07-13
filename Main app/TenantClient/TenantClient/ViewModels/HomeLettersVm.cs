@@ -6,7 +6,7 @@ namespace TenantClient.ViewModels
     {
         public HomeLettersVm()
         {
-            SelectedPage = new MyLetters();
+            SetFirstPage(new MyLetters());
         }
     }
 }

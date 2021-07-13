@@ -39,3 +39,5 @@ C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Mai
 C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Main app\TenantClient\TenantClient\obj\Debug\Pages\ReadLetter.baml
 C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Main app\TenantClient\TenantClient\obj\Debug\Pages\CreatePosts.g.cs
 C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Main app\TenantClient\TenantClient\obj\Debug\Pages\CreatePosts.baml
+C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Main app\TenantClient\TenantClient\obj\Debug\Pages\SourceViewer.g.cs
+C:\Users\Dom\Desktop\Репозитории\Мой ЖК\tenant-client-server\Main app\TenantClient\TenantClient\obj\Debug\Pages\SourceViewer.baml

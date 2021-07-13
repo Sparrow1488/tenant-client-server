@@ -33,7 +33,7 @@ namespace TenantClient.ViewModels
                 if (!pageRetreived)
                 {
                     SelectedPage = FindPageByTag(validPageName);
-                    InsertPageInLoadedPages(SelectedPage, validPageName);
+                    SavePage(SelectedPage, validPageName);
                 }
             });
         }
@@ -57,7 +57,6 @@ namespace TenantClient.ViewModels
             var page = findType.Assembly.CreateInstance(findType.FullName) as Page;
             return page;
         }
-
         protected bool IsNull(object checkingObj)
         {
             var isNull = false;
@@ -65,19 +64,17 @@ namespace TenantClient.ViewModels
                 isNull = true;
             return isNull;
         }
-
         protected string ValidatePageName(string pageName)
         {
             return pageName.ToLower();
         }
-
         /// <summary>
         /// Отображает страницу, если таковая уже существует
         /// </summary>
         /// <returns>true - если страница была найдена и уже отображена</returns>
         protected bool ShowLoadedPageIfExist(string pageName)
         {
-            var pageWasExist = false;
+            bool pageWasExist;
             var wasExist = _loadedPages.TryGetValue(pageName, out Page existPage);
             if (wasExist)
             {
@@ -88,7 +85,7 @@ namespace TenantClient.ViewModels
                 pageWasExist = false;
             return pageWasExist;
         }
-        protected void InsertPageInLoadedPages(Page page, string pageName)
+        protected void SavePage(Page page, string pageName)
         {
             if (IsNull(page) || IsNull(pageName))
                 throw new ArgumentNullException($"Переданные параметры: {nameof(page)} и {nameof(pageName)} имели значение null");
@@ -97,6 +94,11 @@ namespace TenantClient.ViewModels
             if (!wasExist)
                 _loadedPages.Add(formatedPageName, page);
         }
-
+        protected void SetFirstPage(Page page)
+        {
+            SelectedPage = page;
+            var pageName = page.GetType().Name;
+            SavePage(page, pageName);
+        }
     }
 }

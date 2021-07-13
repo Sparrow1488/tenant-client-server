@@ -26,10 +26,10 @@ namespace TenantClient.Pages
         {
             InitializeComponent();
         }
-        public ReadLetter(int letterId) : this()
-        {
-            DataContext = new ReadLetterVm(letterId);
-        }
+        //public ReadLetter(int letterId) : this()
+        //{
+        //    DataContext = new ReadLetterVm(letterId);
+        //}
         public ReadLetter(Letter letter) : this()
         {
             DataContext = new ReadLetterVm(letter);

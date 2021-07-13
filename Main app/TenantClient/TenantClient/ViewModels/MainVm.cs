@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Windows.Controls;
-using TenantClient.Commands;
-using TenantClient.Exceptions;
-using TenantClient.Pages;
+﻿using TenantClient.Pages;
 
 namespace TenantClient.ViewModels
 {
@@ -13,7 +6,7 @@ namespace TenantClient.ViewModels
     {
         public MainVm()
         {
-            SelectedPage = new Profile();
+            SetFirstPage(new Profile());
         }
     }
 }

@@ -13,7 +13,6 @@ namespace TenantClient.ViewModels
 {
     internal class ReadLetterVm : BaseVM
     {
-        private int _letterId;
         public Letter Letter
         {
             get => _letter;
@@ -42,15 +41,6 @@ namespace TenantClient.ViewModels
             }
         }
         private ObservableCollection<ReadLetterStruct> _responses = new ObservableCollection<ReadLetterStruct>();
-        /// <summary>
-        /// Отобразит письмо, id которого был передан в конструктор
-        /// </summary>
-        /// <param name="letterId">Идентификатор письма</param>
-        public ReadLetterVm(int letterId)
-        {
-            throw new NotImplementedException("А че а почему");
-            _letterId = letterId;
-        }
         public ReadLetterVm(Letter letter)
         {
             if (letter != null)
@@ -68,7 +58,10 @@ namespace TenantClient.ViewModels
         {
             get => new MyCommand(async (obj)=>
             {
-                await GetResponsesAsync();
+                await Task.Run(() =>
+                {
+                    GetLetterResponsesAsync();
+                });
             });
         }
         public MyCommand SelectResponse
@@ -79,7 +72,7 @@ namespace TenantClient.ViewModels
                 RetreiveLetter(response);
             });
         }
-        public async Task GetResponsesAsync()
+        public async Task GetLetterResponsesAsync()
         {
             var request = new GetLetterResponses(Letter.Id);
             var sendler = new RequestSendler(new ConnectionSettings());
@@ -100,12 +93,13 @@ namespace TenantClient.ViewModels
             else
                 Responses = new ObservableCollection<ReadLetterStruct>();
         }
-        public void RetreiveLetter(Letter letter)
+        private void RetreiveLetter(Letter letter)
         {
             if(letter != null)
             {
+                NoticeMessage = "Загружаю...";
                 Letter = letter;
-                GetResponsesById?.Execute(null);
+                GetResponsesById?.Execute("");
             }
         }
         public void SetActionWhenSelectedLetterChanged(ref Action<Letter> action)

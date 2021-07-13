@@ -3,7 +3,6 @@ using ExchangeSystem.v2.Packages;
 using ExchangeSystem.v2.Packages.Default;
 using ExchangeSystem.v2.Sendlers;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,43 +24,54 @@ namespace TenantClient.ViewModels
             }
         }
         private List<Letter> _myLetters = new List<Letter>();
+        private Dictionary<Letter, ReadLetter> _retreivedPages = new Dictionary<Letter, ReadLetter>();
         public Letter SelectedLetter
         {
             get => _selectedLetter;
             set
             {
                 _selectedLetter = value;
-                if(ReadLetterPage == null)
-                    ReadLetterPage = new ReadLetter(SelectedLetter);
-                SelectedLetterChanged?.Invoke(SelectedLetter);
+                SelectIfExistsReadPage();
                 OnPropertyChanged("SelectedLetter");
             }
         }
         private Letter _selectedLetter;
+        private void SelectIfExistsReadPage()
+        {
+            var exists = _retreivedPages.TryGetValue(SelectedLetter, out ReadLetter readPage);
+            if (exists) {
+                ReadLetterPage = readPage;
+            }
+            else {
+                ReadLetterPage = new ReadLetter(SelectedLetter);
+                _retreivedPages.Add(SelectedLetter, ReadLetterPage);
+            }
+
+        }
         public ReadLetter ReadLetterPage
         {
             get => _readLetterPage;
             set
             {
                 _readLetterPage = value;
-                var vm = _readLetterPage.DataContext as ReadLetterVm;
-                vm.SetActionWhenSelectedLetterChanged(ref SelectedLetterChanged);
                 OnPropertyChanged("ReadLetterPage");
             }
         }
         private ReadLetter _readLetterPage;
-        public event Action<Letter> SelectedLetterChanged;
         private string _authToken;
         public MyCommand GetMyLetters
         {
             get => new MyCommand(async (obj) =>
             {
-                var tokenWasExist = ClientTokenStorage.TryGet(out _authToken);
-                if (tokenWasExist)
+                await Task.Run(() =>
                 {
-                    ResetLetters();
-                    await GetLettersFromServer();
-                }
+                    var tokenWasExist = ClientTokenStorage.TryGet(out _authToken);
+                    if (tokenWasExist)
+                    {
+                        ResetLetters();
+                        GetLettersFromServer();
+                    }
+                });
             });
         }
         private void ResetLetters()
@@ -82,7 +92,7 @@ namespace TenantClient.ViewModels
         }
         private async Task<ResponsePackage> SendRequest(BaseRequestPackage requestPackage)
         {
-            var sendler = new RequestSendler(new ConnectionSettings("127.0.0.1", 80));
+            var sendler = new RequestSendler(new ConnectionSettings());
             return await sendler.SendRequest(requestPackage);
         }
         private List<Letter> EncryptResponseAsLetters(ResponsePackage response)

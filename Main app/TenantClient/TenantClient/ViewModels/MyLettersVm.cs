@@ -5,6 +5,7 @@ using ExchangeSystem.v2.Sendlers;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TenantClient.Commands;
 using TenantClient.Local;
@@ -71,7 +72,7 @@ namespace TenantClient.ViewModels
         {
             var request = PrepareRequestPackage();
             var response = await SendRequest(request);
-            MyLetters = EncryptResponseAsLetters(response);
+            MyLetters = EncryptResponseAsLetters(response).OrderBy(letter => letter.DateCreate).ToList();
         }
         private GetMyLetters PrepareRequestPackage()
         {

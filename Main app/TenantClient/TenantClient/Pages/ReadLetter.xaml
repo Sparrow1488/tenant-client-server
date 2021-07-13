@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TenantClient.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:TenantClient.ViewModels"
     Title="ReadLetter"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -20,9 +21,9 @@
             <Setter Property="FontSize" Value="16" />
             <Setter Property="Margin" Value="0,0,10,0" />
         </Style>
-        <!--<ControlTemplate x:Key="responseBtnTmp" TargetType="Button">
-            <Button Command="{Binding SelectResponse}" Content="{TemplateBinding Content}" />
-        </ControlTemplate>-->
+        <ControlTemplate x:Key="responseBtnTmp" TargetType="Button">
+            <Button Command="{TemplateBinding Command}" Content="{TemplateBinding Content}" />
+        </ControlTemplate>
     </Page.Resources>
     <Grid>
         <Border
@@ -75,16 +76,12 @@
                                     <TextBox Style="{StaticResource textBoxStyle}" Text="{Binding ReadLetter.Title}" />
                                     <StackPanel Height="1" Background="Black" />
                                     <TextBox Style="{StaticResource textBoxStyle}" Text="{Binding ReadLetter.Text}" />
-                                    <Button Content="Перейти" />
-                                    <!--  сука ептвою мать а как биндить то нахуй  -->
                                 </StackPanel>
                             </Expander>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-
             </StackPanel>
-
         </Border>
 
     </Grid>

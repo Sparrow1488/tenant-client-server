@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="TenantClient.Pages.SourceViewer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TenantClient.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="SourceViewer"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Background="White"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Border
+            Margin="5"
+            BorderBrush="Black"
+            BorderThickness="2"
+            CornerRadius="2">
+            <StackPanel>
+                <WrapPanel>
+                    <Button Content="Скачать все" />
+                </WrapPanel>
+                <StackPanel />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

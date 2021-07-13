@@ -10,10 +10,10 @@ namespace TenantClient.AdditionalStructs
 {
     public class ReadLetterStruct
     {
-        public ReadLetterStruct(Letter letter, ReadLetter page)
+        public ReadLetterStruct(Letter letter)
         {
             ReadLetter = letter;
-            Page = page;
+            //Page = new ReadLetter(letter);
             Sendler = ReadLetter.sendler;
         }
         public Letter ReadLetter { get; set; }

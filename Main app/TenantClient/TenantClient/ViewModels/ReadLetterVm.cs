@@ -3,13 +3,11 @@ using ExchangeSystem.v2.Packages.Default;
 using ExchangeSystem.v2.Sendlers;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using TenantClient.AdditionalStructs;
 using TenantClient.Commands;
-using TenantClient.Pages;
 
 namespace TenantClient.ViewModels
 {
@@ -70,10 +68,7 @@ namespace TenantClient.ViewModels
         {
             get => new MyCommand(async (obj)=>
             {
-                await Task.Run(()=>
-                {
-                    GetResponsesAsync();
-                });
+                await GetResponsesAsync();
             });
         }
         public MyCommand SelectResponse
@@ -97,7 +92,7 @@ namespace TenantClient.ViewModels
                 ObservableCollection<ReadLetterStruct> test = new ObservableCollection<ReadLetterStruct>();
                 foreach (var item in responses)
                 {
-                    var struct1 = new ReadLetterStruct(item, null);
+                    var struct1 = new ReadLetterStruct(item);
                     test.Add(struct1);
                 }
                 Responses = test;
